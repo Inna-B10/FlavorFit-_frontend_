@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- =========================================================              -->
+<!-- ✅ README TEMPLATE FOR PORTFOLIO PROJECTS                              -->
+<!-- =========================================================              -->
+<!-- - Название скриншота: preview.png                                      -->
+<!-- - Блок Tech Stack обязателен!!!                                        -->
+<!-- - Граница блока: от 🧩 Tech Stack до <!-- end:tech-stack -->
+<!-- - Между ними — только теги (бейджи) и подзаголовки                    -->
+<!-- - Названия в [] бейджа отображаются в портфолио, соблюдай регистр!     -->
+<!-- - Раздели основной стек и вспомогательные библиотеки стоп-комментарием -->
+<!-- - Название самого файла должно быть README.md                          -->
+<!-- =========================================================              -->
 
-## Getting Started
+# Project name: FlavorFit
 
-First, run the development server:
+### Project Goal/Description
+
+<!-- [<img src="preview.png" height="250" align="right" style="margin-left:20px" />](preview.png) -->
+
+<!-- Здесь описание, скриншот перед этим -->
+
+### 🧩 Tech Stack/Built With
+
+#### **🖥️ Frontend**
+
+![Next.js](https://img.shields.io/badge/Next.js_16.1.4-424242?logo=nextdotjs)
+![React](https://img.shields.io/badge/React_19.2.3-424242?logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript_5-424242?logo=typescript&logoColor=3178C6)
+![TailwindCss](https://img.shields.io/badge/TailwindCss_4-424242?logo=tailwindcss&logoColor=06B6D4)
+
+<!-- #### **⚙️ Backend**
+
+![Node.js](https://img.shields.io/badge/Node.js_22.11.0-424242?logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB_7.0-424242?logo=mongodb)
+![Prisma](https://img.shields.io/badge/Prisma_6.17.1-424242?logo=prisma) -->
+
+<!-- end:tech-stack -->
+
+#### 🛠️ Libraries, Technologies, Tools & Others
+
+![react-dom](https://img.shields.io/badge/react--dom_19.2.3-424242?logo=react&logoColor=61DAFB)
+![@tailwindcss/postcss](https://img.shields.io/badge/%40tailwindcss%2Fpostcss_4-424242)
+
+<details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
+<summary><h4 style="display:inline; padding-left:6px;">🗃 Dependencies</h4></summary>
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+</details>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💎 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- {основная фича 1}
+- {основная фича 2}
+- {основная фича 3}
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 📋 TODOs:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ ] project structure
+- [ ] define the main functions
+- [ ] identify reusable components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
+<summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</details>
