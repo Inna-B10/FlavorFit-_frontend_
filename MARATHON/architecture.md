@@ -8,15 +8,15 @@ Apollo + GraphQL
 
 ---
 
-flow: Back-end -> Service -> Hooks -> UI (Component)
-Auth + roles
+flow: Back-end -> Service -> Hooks -> UI (Component) Auth + roles
 
 ## Проектирование/архитектура
 
 _Feature-Based Modular Architecture_
 
 <pre>
-┣ 📂RED WINTER (draft)
+┣ 📂MARATHON (draft and stuff)
+┣ 📂public
 ┗ 📂src
   ┣ 📂app
   ┣ 📂features

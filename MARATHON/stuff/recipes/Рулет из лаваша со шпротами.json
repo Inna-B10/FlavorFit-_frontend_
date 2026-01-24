@@ -1,0 +1,514 @@
+{
+	"id": -1,
+	"image": "https://www.povarenok.ru/data/cache/2025dec/14/19/3199890_68822-710x550.jpg",
+	"imageType": "jpg",
+	"title": "Рулет из лаваша со шпротами",
+	"readyInMinutes": null,
+	"servings": 1,
+	"sourceUrl": "https://www.povarenok.ru/recipes/show/183439/",
+	"vegetarian": false,
+	"vegan": false,
+	"glutenFree": false,
+	"dairyFree": false,
+	"veryHealthy": false,
+	"cheap": false,
+	"veryPopular": false,
+	"sustainable": false,
+	"lowFodmap": false,
+	"weightWatcherSmartPoints": 0,
+	"gaps": "no",
+	"preparationMinutes": null,
+	"cookingMinutes": null,
+	"aggregateLikes": 0,
+	"healthScore": 0,
+	"creditsText": "povarenok.ru",
+	"license": null,
+	"sourceName": "povarenok.ru",
+	"pricePerServing": 0,
+	"extendedIngredients": [
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "лаваш — шт",
+			"nameClean": "лаваш — шт",
+			"original": "Лаваш (армянский тонкий, ~40х38см) — 2 шт",
+			"originalName": "Лаваш (армянский тонкий, - 40х38см) — шт",
+			"amount": 2,
+			"unit": "",
+			"meta": ["(армянский тонкий, - 40х38см)"],
+			"measures": {
+				"us": {
+					"amount": 2,
+					"unitShort": "",
+					"unitLong": ""
+				},
+				"metric": {
+					"amount": 2,
+					"unitShort": "",
+					"unitLong": ""
+				}
+			}
+		},
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "сыр голландский — г",
+			"nameClean": "сыр голландский — г",
+			"original": "Сыр голландский — 150 г",
+			"originalName": "Сыр голландский — г",
+			"amount": 150,
+			"unit": "",
+			"meta": [],
+			"measures": {
+				"us": {
+					"amount": 150,
+					"unitShort": "",
+					"unitLong": ""
+				},
+				"metric": {
+					"amount": 150,
+					"unitShort": "",
+					"unitLong": ""
+				}
+			}
+		},
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "листья салата / салат — г",
+			"nameClean": "листья салата / салат — г",
+			"original": "Листья салата / Салат — 100 г",
+			"originalName": "Листья салата / Салат — г",
+			"amount": 100,
+			"unit": "",
+			"meta": [],
+			"measures": {
+				"us": {
+					"amount": 100,
+					"unitShort": "",
+					"unitLong": ""
+				},
+				"metric": {
+					"amount": 100,
+					"unitShort": "",
+					"unitLong": ""
+				}
+			}
+		},
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "яйцо куриное — шт",
+			"nameClean": "яйцо куриное — шт",
+			"original": "Яйцо куриное (сваренное вкрутую) — 4 шт",
+			"originalName": "Яйцо куриное (сваренное вкрутую) — шт",
+			"amount": 4,
+			"unit": "",
+			"meta": ["(сваренное вкрутую)"],
+			"measures": {
+				"us": {
+					"amount": 4,
+					"unitShort": "",
+					"unitLong": ""
+				},
+				"metric": {
+					"amount": 4,
+					"unitShort": "",
+					"unitLong": ""
+				}
+			}
+		},
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "шпроты — бан",
+			"nameClean": "шпроты — бан",
+			"original": "Шпроты — 1 бан.",
+			"originalName": "Шпроты — бан",
+			"amount": 1,
+			"unit": "",
+			"meta": [],
+			"measures": {
+				"us": {
+					"amount": 1,
+					"unitShort": "",
+					"unitLong": ""
+				},
+				"metric": {
+					"amount": 1,
+					"unitShort": "",
+					"unitLong": ""
+				}
+			}
+		},
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "огурец — шт",
+			"nameClean": "огурец — шт",
+			"original": "Огурец (средний) — 2 шт",
+			"originalName": "Огурец (средний) — шт",
+			"amount": 2,
+			"unit": "",
+			"meta": ["(средний)"],
+			"measures": {
+				"us": {
+					"amount": 2,
+					"unitShort": "",
+					"unitLong": ""
+				},
+				"metric": {
+					"amount": 2,
+					"unitShort": "",
+					"unitLong": ""
+				}
+			}
+		},
+		{
+			"id": -1,
+			"aisle": "?",
+			"image": null,
+			"consistency": "SOLID",
+			"name": "майонез — по вкусу",
+			"nameClean": "майонез — по вкусу",
+			"original": "Майонез — по вкусу",
+			"originalName": "Майонез — по вкусу",
+			"amount": 1,
+			"unit": "serving",
+			"meta": [],
+			"measures": {
+				"us": {
+					"amount": 1,
+					"unitShort": "serving",
+					"unitLong": "serving"
+				},
+				"metric": {
+					"amount": 1,
+					"unitShort": "serving",
+					"unitLong": "serving"
+				}
+			}
+		}
+	],
+	"nutrition": {
+		"nutrients": [
+			{
+				"name": "Calories",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Fat",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Saturated Fat",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Carbohydrates",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Net Carbohydrates",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Sugar",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Cholesterol",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Sodium",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			},
+			{
+				"name": "Alcohol %",
+				"amount": 0,
+				"unit": "%",
+				"percentOfDailyNeeds": 100
+			},
+			{
+				"name": "Protein",
+				"amount": 0,
+				"unit": "",
+				"percentOfDailyNeeds": 0
+			}
+		],
+		"properties": [
+			{
+				"name": "Glycemic Index",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Glycemic Load",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Inflammation Score",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Nutrition Score",
+				"amount": 0,
+				"unit": "%"
+			}
+		],
+		"flavonoids": [
+			{
+				"name": "Cyanidin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Petunidin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Delphinidin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Malvidin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Pelargonidin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Peonidin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Catechin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Epigallocatechin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Epicatechin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Epicatechin 3-gallate",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Epigallocatechin 3-gallate",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Theaflavin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Thearubigins",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Eriodictyol",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Hesperetin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Naringenin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Apigenin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Luteolin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Isorhamnetin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Kaempferol",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Myricetin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Quercetin",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Theaflavin-3,3'-digallate",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Theaflavin-3'-gallate",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Theaflavin-3-gallate",
+				"amount": 0,
+				"unit": ""
+			},
+			{
+				"name": "Gallocatechin",
+				"amount": 0,
+				"unit": ""
+			}
+		],
+		"ingredients": [],
+		"caloricBreakdown": {
+			"percentProtein": 0,
+			"percentFat": 0,
+			"percentCarbs": 0
+		},
+		"weightPerServing": {
+			"amount": 0,
+			"unit": "g"
+		}
+	},
+	"summary": "Рулет из лаваша со шпротами could be just the \u003Cb\u003Epaleolithic, primal, and whole 30\u003C/b\u003E recipe you've been looking for. This recipe serves null. Not a lot of people made this recipe, and 1 would say it hit the spot. From preparation to the plate, this recipe takes around \u003Cb\u003Earound 45 minutes\u003C/b\u003E. This recipe from requires лаваш — шт, огурец — шт, майонез — по вкусу, and яйцо куриное — шт. Similar recipes are .",
+	"cuisines": [],
+	"dishTypes": [],
+	"diets": ["paleolithic", "primal", "whole 30"],
+	"occasions": [],
+	"instructions": "Огурцы вымыть и нарезать тонкими слайсами.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Яйца очистить и натереть на крупной терке.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Сыр натереть на крупной терке.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Листья салата аккуратно сполоснуть и обсушить.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Лаваши уложить на стол так, чтобы их концы оказались внахлест, примерно на 5см, чтобы при сворачивании рулета он держал цельную форму. Затем всю поверхность лавашей смазать тонким слоем майонеза.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Из банки со шпротами слить масло. На самый край рулета, по его ширине, уложить ряд шпрот. Затем визуально разделить лаваш на 4 равные части. На первую четверть выложить тертые яйца. На вторую разложить листья салата. На третью четверть выложить тертый сыр, а на последнюю равномерно выложить слайсы огурца.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Затем аккуратно свернуть лаваш плотным рулетом.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Завернуть рулет в пищевую пленку.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          И убрать его в холодильник на 1ч, чтобы он пропитался и стал мягким.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Готовый рулет нарезать порционными кусочками, выложить на тарелку и подавать к столу.\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          Приятного аппетита!\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          *\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          *\n        \n      \n          \n                  \n            \n              \n            \n          \n          \n        \n        \n          *",
+	"analyzedInstructions": [
+		{
+			"name": "",
+			"steps": [
+				{
+					"number": 1,
+					"step": "Огурцы вымыть и нарезать тонкими слайсами.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 2,
+					"step": "Яйца очистить и натереть на крупной терке.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 3,
+					"step": "Сыр натереть на крупной терке.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 4,
+					"step": "Листья салата аккуратно сполоснуть и обсушить.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 5,
+					"step": "Лаваши уложить на стол так, чтобы их концы оказались внахлест, примерно на 5см, чтобы при сворачивании рулета он держал цельную форму. Затем всю поверхность лавашей смазать тонким слоем майонеза.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 6,
+					"step": "Из банки со шпротами слить масло. На самый край рулета, по его ширине, уложить ряд шпрот. Затем визуально разделить лаваш на 4 равные части. На первую четверть выложить тертые яйца. На вторую разложить листья салата. На третью четверть выложить тертый сыр, а на последнюю равномерно выложить слайсы огурца.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 7,
+					"step": "Затем аккуратно свернуть лаваш плотным рулетом.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 8,
+					"step": "Завернуть рулет в пищевую пленку.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 9,
+					"step": "И убрать его в холодильник на 1ч, чтобы он пропитался и стал мягким.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 10,
+					"step": "Готовый рулет нарезать порционными кусочками, выложить на тарелку и подавать к столу.",
+					"ingredients": [],
+					"equipment": []
+				},
+				{
+					"number": 11,
+					"step": "Приятного аппетита!",
+					"ingredients": [],
+					"equipment": []
+				}
+			]
+		}
+	],
+	"originalId": null,
+	"spoonacularScore": 0
+}

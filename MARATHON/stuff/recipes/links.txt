@@ -1,0 +1,4 @@
+https://api.spoonacular.com/recipes/random?number=2&include-tags=vegetarian&includeNutrition=true&apiKey=
+
+https://spoonacular.com/food-api/docs#Get-Random-Recipes
+
