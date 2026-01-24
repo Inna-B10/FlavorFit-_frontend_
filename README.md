@@ -10,9 +10,9 @@
 <!-- - Название самого файла должно быть README.md                          -->
 <!-- =========================================================              -->
 
-# Project name: FlavorFit
-
 # 🚧 Work in Progress 🚧
+
+# Project name: FlavorFit
 
 ### Project Goal/Description
 
