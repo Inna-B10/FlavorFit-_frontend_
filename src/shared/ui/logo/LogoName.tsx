@@ -2,7 +2,7 @@ interface ILogoWordmark {
 	className: string
 }
 
-export function LogoWordmark({ className }: ILogoWordmark) {
+export function LogoName({ className }: ILogoWordmark) {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'

@@ -50,7 +50,7 @@ experience.
 <summary><h4 style="display:inline; padding-left:6px;">🗃 Dependencies</h4></summary>
 
 ```bash
-
+npm install react-icons
 ```
 
 </details>
@@ -76,12 +76,16 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
-- [ ] define the main functions
-- [ ] identify reusable components
+- [ ] header
+- [ ] icons
+- [ ] routes/pages
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
-✔️ project structure
+- [x] logo
+- [x] define the main functions
+- [x] identify reusable components
+- [x] project structure
 
 </details>

@@ -1,0 +1,10 @@
+❄️День 8:
+
+[✔️] Сделать endpoint для получения новых токенов (рефреша)
+[✔️] Сделать endpoint для logout выход из системы (чистка рефреша)
+[ ] Добавить автогенерацию призмы в модели graphql nestjs
+
+Доп задачи для практики:
+[✔️] В консоли сделать полноценный log вывод как nestjs вместо не красивого "✅ Prisma connected to PostgreSQL" сделать формат как "[Nest] 54756  - 01/29/2026, 9:58:22 AM     LOG [RouterExplorer] Mapped {/, GET} route +1ms"
+
+[✔️] Заменить в prisma.service process.env на configService

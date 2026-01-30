@@ -2,6 +2,7 @@
 
 # user folders and files
 .vscode/
+MARATHON/reviews
 
 # dependencies
 /node_modules
