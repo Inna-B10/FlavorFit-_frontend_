@@ -5,7 +5,8 @@ class Page {
 	NUTRITION = '/nutrition'
 	ANALYTICS = '/analytics'
 	ORDER_GROCERIES = '/order-groceries'
-	RECIPES = '/recipes'
+	// RECIPES = '/recipes'
+	DASHBOARD = '/dashboard'
 	FORUM = '/forum'
 }
 
