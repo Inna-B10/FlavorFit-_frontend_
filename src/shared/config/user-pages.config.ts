@@ -4,6 +4,7 @@ class UserPage {
 	ANALYTICS = '/analytics'
 	ORDER_GROCERIES = '/order-groceries'
 	DASHBOARD = '/dashboard'
+	NOTIFICATION = '/notification'
 }
 
 export const USER_PAGE = new UserPage()

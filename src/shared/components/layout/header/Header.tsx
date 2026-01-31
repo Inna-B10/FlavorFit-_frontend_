@@ -1,11 +1,11 @@
 import { LogoIcon } from '@/shared/ui/logo/LogoIcon'
 import Link from 'next/link'
-import { Navbar } from '../navbar/Navbar'
+import { Navbar } from './navbar/Navbar'
 import { UserBlock } from './UserBlock'
 
 export function Header() {
 	//[TODO] isLoggedIn
-	const isLoggedIn = false
+	const isLoggedIn = true
 
 	return (
 		<header className='flex justify-between items-center gap-4 text-center'>
