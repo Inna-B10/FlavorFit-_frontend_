@@ -1,0 +1,27 @@
+import { LogoIcon } from '@/shared/ui/logo/LogoIcon'
+import Link from 'next/link'
+import { Navbar } from '../navbar/Navbar'
+import { UserBlock } from './UserBlock'
+
+export function Header() {
+	//[TODO] isLoggedIn
+	const isLoggedIn = false
+
+	return (
+		<header className='flex justify-between items-center gap-4 text-center'>
+			<div className='flex items-center gap-6'>
+				<Link
+					href='/'
+					title='Home'
+					aria-label='Go to homepage'
+					className='h-10 w-fit border border-violet rounded-full bg-violet p-2 mr-2'
+				>
+					<LogoIcon className='h-full w-auto text-white' />
+				</Link>
+				<Navbar isLoggedIn={isLoggedIn} />
+			</div>
+			{/* //#------------------------------- User Block */}
+			<UserBlock isLoggedIn={isLoggedIn} />
+		</header>
+	)
+}

@@ -1,25 +1,15 @@
-import { NAVBAR_DATA } from '@/shared/constants/navbar.data'
-import Link from 'next/link'
+import { NAVBAR_DATA, USER_NAVBAR_DATA } from '@/shared/constants/navbar.data'
+import { NavbarMenu } from './NavbarMenu'
 
-export function Navbar() {
+export function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 	return (
-		<nav className='flex gap-2 items-center'>
-			{NAVBAR_DATA.map((menuItem, idx) => (
-				<div
-					key={idx}
-					className='rounded-4xl bg-[#EBEBEB] py-2 px-4 hover:bg-foreground hover:text-background transition-colors duration-300 ease-in-out'
-				>
-					<Link
-						href={menuItem.link}
-						title={menuItem.label}
-						aria-label={`Go to ${menuItem.label} page`}
-						className='flex gap-1.5 justify-center items-center'
-					>
-						<menuItem.icon size={22} />
-						<span>{menuItem.label}</span>
-					</Link>
-				</div>
-			))}
+		<nav>
+			<ul className='flex gap-2 items-center'>
+				<NavbarMenu menu={NAVBAR_DATA} />
+
+				{/* //#-------------------------------- User Menu */}
+				{isLoggedIn && <NavbarMenu menu={USER_NAVBAR_DATA} />}
+			</ul>
 		</nav>
 	)
 }
