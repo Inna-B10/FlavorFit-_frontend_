@@ -5,9 +5,7 @@ export function Layout({ children }: PropsWithChildren<unknown>) {
 	return (
 		<div className='p-6 min-h-screen'>
 			<Header />
-			<main className='flex min-h-screen w-full items-center justify-center py-32 px-16'>
-				{children}
-			</main>
+			<main className='flex w-full items-center justify-center py-32 px-16'>{children}</main>
 		</div>
 	)
 }
