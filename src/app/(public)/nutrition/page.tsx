@@ -1,5 +1,3 @@
-interface Ipage {}
-
-export default function NutritionPage({}: Ipage) {
+export default function NutritionPage() {
 	return <div>Nutrition Page</div>
 }
