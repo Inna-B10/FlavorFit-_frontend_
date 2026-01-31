@@ -22,7 +22,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 				href={PAGE.CONTACT}
 				title='Contact'
 				aria-label='Go to contact form'
-				className='rounded-full bg-pale-white text-dark-gree p-3 hover:cursor-pointer hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out'
+				className='rounded-full bg-pale-white text-dark-green p-3 hover:cursor-pointer hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out'
 			>
 				<TfiHeadphoneAlt size={22} />
 			</Link>
@@ -35,7 +35,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 						href={USER_PAGE.PROFILE}
 						title='Profile'
 						aria-label='Go to profile'
-						className='flex gap-1 items-center text-2xl text-dark-gree hover:cursor-pointer'
+						className='flex gap-1 items-center text-2xl text-dark-green hover:cursor-pointer'
 					>
 						<PiUserCircleThin size={48} /> Jessica
 					</Link>
