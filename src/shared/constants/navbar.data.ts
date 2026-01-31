@@ -1,11 +1,5 @@
-import { BiBookBookmark } from 'react-icons/bi'
-import { FaNutritionix } from 'react-icons/fa'
-import { GiForkKnifeSpoon } from 'react-icons/gi'
-import { ImStatsBars } from 'react-icons/im'
-import { IoStorefrontOutline } from 'react-icons/io5'
-import { LuLayoutDashboard } from 'react-icons/lu'
-import { PiUsersFour } from 'react-icons/pi'
-import { PAGE } from '../config/pages'
+import { PAGE } from '../config/public-pages.config'
+import { USER_PAGE } from '../config/user-pages.config'
 import { INavbarItem } from '../types/navbar.types'
 
 export const NAVBAR_DATA: INavbarItem[] = [
@@ -16,43 +10,46 @@ export const NAVBAR_DATA: INavbarItem[] = [
 	// 	link: PAGE.HOME
 	// },
 	{
-		icon: BiBookBookmark, //PiBookOpenText, //MdMenuBook,
+		icon: 'recipes',
+		//PiBookOpenText, //MdMenuBook,
 		label: 'Recipes',
 		link: PAGE.HOME
 	},
 	{
-		icon: FaNutritionix,
+		icon: 'nutrition',
 		//BsCalendar3, //ImCalendar, //GiForkKnifeSpoon,
 		label: 'Nutrition',
 		link: PAGE.NUTRITION
 	},
 	{
-		icon: PiUsersFour,
+		icon: 'forum',
 		//PiUsersThree,
 		label: 'Forum',
 		link: PAGE.FORUM
-	},
+	}
+]
 
+export const USER_NAVBAR_DATA: INavbarItem[] = [
 	{
-		icon: GiForkKnifeSpoon,
+		icon: 'mealPlans',
 		//ImCalendar,
 		label: 'Meal plans',
-		link: PAGE.MEAL_PLANS
+		link: USER_PAGE.MEAL_PLANS
 	},
 	{
-		icon: ImStatsBars,
+		icon: 'analytics',
 		label: 'Analytics',
-		link: PAGE.ANALYTICS
+		link: USER_PAGE.ANALYTICS
 	},
 	{
-		icon: IoStorefrontOutline,
+		icon: 'orderGroceries',
 		//LiaStoreAltSolid, //IoStorefrontOutline
 		label: 'Order groceries',
-		link: PAGE.ORDER_GROCERIES
+		link: USER_PAGE.ORDER_GROCERIES
 	},
 	{
-		icon: LuLayoutDashboard,
+		icon: 'dashboard',
 		label: 'Dashboard',
-		link: PAGE.DASHBOARD
+		link: USER_PAGE.DASHBOARD
 	}
 ]

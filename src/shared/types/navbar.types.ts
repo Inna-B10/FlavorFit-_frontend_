@@ -1,7 +1,14 @@
-import { IconType } from 'react-icons'
+export type NavbarIcon =
+	| 'recipes'
+	| 'nutrition'
+	| 'forum'
+	| 'mealPlans'
+	| 'analytics'
+	| 'orderGroceries'
+	| 'dashboard'
 
 export interface INavbarItem {
-	icon: IconType
+	icon: NavbarIcon
 	label: string
 	link: string
 }

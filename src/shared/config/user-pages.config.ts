@@ -1,13 +1,9 @@
-class Page {
-	HOME = '/'
+class UserPage {
 	PROFILE = '/profile'
 	MEAL_PLANS = '/meal-plans'
-	NUTRITION = '/nutrition'
 	ANALYTICS = '/analytics'
 	ORDER_GROCERIES = '/order-groceries'
-	// RECIPES = '/recipes'
 	DASHBOARD = '/dashboard'
-	FORUM = '/forum'
 }
 
-export const PAGE = new Page()
+export const USER_PAGE = new UserPage()
