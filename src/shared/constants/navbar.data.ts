@@ -10,6 +10,12 @@ export const NAVBAR_DATA: INavbarItem[] = [
 	// 	link: PAGE.HOME
 	// },
 	{
+		icon: 'forum',
+		//PiUsersThree,
+		label: 'Forum',
+		link: PAGE.FORUM
+	},
+	{
 		icon: 'recipes',
 		//PiBookOpenText, //MdMenuBook,
 		label: 'Recipes',
@@ -20,12 +26,6 @@ export const NAVBAR_DATA: INavbarItem[] = [
 		//BsCalendar3, //ImCalendar, //GiForkKnifeSpoon,
 		label: 'Nutrition',
 		link: PAGE.NUTRITION
-	},
-	{
-		icon: 'forum',
-		//PiUsersThree,
-		label: 'Forum',
-		link: PAGE.FORUM
 	}
 ]
 
@@ -37,15 +37,15 @@ export const USER_NAVBAR_DATA: INavbarItem[] = [
 		link: USER_PAGE.MEAL_PLANS
 	},
 	{
-		icon: 'analytics',
-		label: 'Analytics',
-		link: USER_PAGE.ANALYTICS
-	},
-	{
 		icon: 'orderGroceries',
 		//LiaStoreAltSolid, //IoStorefrontOutline
 		label: 'Order groceries',
 		link: USER_PAGE.ORDER_GROCERIES
+	},
+	{
+		icon: 'analytics',
+		label: 'Analytics',
+		link: USER_PAGE.ANALYTICS
 	},
 	{
 		icon: 'dashboard',

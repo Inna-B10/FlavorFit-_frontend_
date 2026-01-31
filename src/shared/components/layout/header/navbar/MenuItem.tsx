@@ -32,14 +32,17 @@ export function MenuItem({ item, isActive }: IMenuItem) {
 				href={item.link}
 				title={item.label}
 				aria-label={`Go to ${item.label} page`}
-				className={cn('group flex gap-1.5 justify-center items-center rounded-4xl py-2 px-4', {
-					'bg-pale-white text-dark-green hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out':
-						!isActive,
-					'bg-light-green text-foreground hover:cursor-default': isActive
-				})}
+				className={cn(
+					'group flex lg:gap-0.5 xl:gap-1.5 justify-center items-center rounded-full p-2 text-sm lg:rounded-4xl lg:py-1 lg:px-3 xl:rounded-4xl xl:py-2 xl:px-4 shadow-sm ',
+					{
+						'bg-pale-white text-dark-green hover:bg-light-green hover:text-foreground transition-all duration-300 ease-in-out':
+							!isActive,
+						'bg-light-green text-foreground hover:cursor-default': isActive
+					}
+				)}
 			>
-				<Icon size={22} />
-				<span className='group-hover'>{item.label}</span>
+				<Icon className='size-[16] md:size-[18] xl:size-[22]' />
+				<span className='hidden lg:block group-hover text-nowrap'>{item.label}</span>
 			</Link>
 		</li>
 	)

@@ -77,7 +77,7 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
-- [ ] header
+- [ ] header + responsiveness
 - [ ] icons
 - [ ] user/default avatar
 - [ ] routes/pages
