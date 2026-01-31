@@ -33,7 +33,7 @@ export function MenuItem({ item, isActive }: IMenuItem) {
 				title={item.label}
 				aria-label={`Go to ${item.label} page`}
 				className={cn('group flex gap-1.5 justify-center items-center rounded-4xl py-2 px-4', {
-					'bg-pale-white text-dark-gree hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out':
+					'bg-pale-white text-dark-green hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out':
 						!isActive,
 					'bg-light-green text-foreground hover:cursor-default': isActive
 				})}
