@@ -14,9 +14,9 @@ export function Header() {
 					href='/'
 					title='Home'
 					aria-label='Go to homepage'
-					className='h-10 w-fit border border-violet rounded-full bg-violet p-2 mr-2'
+					className='h-16 w-fit rounded-full bg-dark-green p-3 mr-2'
 				>
-					<LogoIcon className='h-full w-auto text-white' />
+					<LogoIcon className='h-full w-auto text-pale-white' />
 				</Link>
 				<Navbar isLoggedIn={isLoggedIn} />
 			</div>
