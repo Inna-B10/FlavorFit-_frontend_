@@ -48,9 +48,18 @@ experience.
 <summary><h4 style="display:inline; padding-left:6px;">🗃 Dependencies</h4></summary>
 
 ```bash
-npm install react-icons
-npm install path-to-regexp
-npm install clsx
+npm i react-icons
+npm i path-to-regexp
+npm i clsx
+npm i @apollo/client
+npm i graphql
+npm i -D typescript @graphql-codegen/cli
+npm i -D @graphql-codegen/typescript
+npm i -D @graphql-codegen/typescript-operations
+npm i -D @graphql-codegen/typescript-react-apollo
+npm i -D @graphql-codegen/introspection
+npm i -D @parcel/watcher
+npm i -D dotenv
 
 ```
 
