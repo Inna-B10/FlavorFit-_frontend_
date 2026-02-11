@@ -1,6 +1,5 @@
-import { gql } from '@apollo/client';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -138,7 +137,7 @@ export type CreateRecipeInput = {
 };
 
 export type CreateRecipeStepInput = {
-  description: Scalars['String']['input'];
+  content: Scalars['String']['input'];
   stepNumber?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -500,7 +499,7 @@ export type RecipeModel = {
 
 export type RecipeStepModel = {
   __typename?: 'RecipeStepModel';
-  description: Scalars['String']['output'];
+  content: Scalars['String']['output'];
   recipeId: Scalars['String']['output'];
   recipeStepId: Scalars['String']['output'];
   stepNumber?: Maybe<Scalars['Int']['output']>;
@@ -621,7 +620,7 @@ export type UpdateRecipeInput = {
 };
 
 export type UpdateRecipeStepInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['String']['input']>;
   recipeStepId: Scalars['String']['input'];
   stepNumber?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -666,3 +665,8 @@ export type UserWithProfileModel = {
   userId: Scalars['String']['output'];
   userProfile?: Maybe<UserProfileModel>;
 };
+
+export type GetAllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __typename?: 'RecipeModel', title: string, description: string, recipeSteps?: Array<{ __typename?: 'RecipeStepModel', stepNumber?: number | null, content: string }> | null }> };

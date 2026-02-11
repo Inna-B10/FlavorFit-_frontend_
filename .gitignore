@@ -3,6 +3,7 @@
 # user folders and files
 .vscode/
 MARATHON/reviews
+MARATHON/tasks
 
 # dependencies
 /node_modules

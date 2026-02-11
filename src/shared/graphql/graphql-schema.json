@@ -1183,7 +1183,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "description",
+            "name": "content",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -4111,7 +4111,7 @@
         "isOneOf": null,
         "fields": [
           {
-            "name": "description",
+            "name": "content",
             "description": null,
             "args": [],
             "type": {
@@ -5257,7 +5257,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "description",
+            "name": "content",
             "description": null,
             "type": {
               "kind": "SCALAR",

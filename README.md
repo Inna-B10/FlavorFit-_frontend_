@@ -51,8 +51,8 @@ experience.
 npm i react-icons
 npm i path-to-regexp
 npm i clsx
-npm i @apollo/client
-npm i graphql
+npm i @apollo/client@latest
+npm i graphql@latest
 npm i -D typescript @graphql-codegen/cli
 npm i -D @graphql-codegen/typescript
 npm i -D @graphql-codegen/typescript-operations
@@ -94,6 +94,7 @@ progress visualization and adaptive recommendations
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
+- [x] Configure Apollo and graphql codegen
 - [x] logo
 - [x] define the main functions
 - [x] identify reusable components

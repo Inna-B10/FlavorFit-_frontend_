@@ -14,26 +14,38 @@ const config: CodegenConfig = {
 	documents: ['src/shared/graphql/**/*.graphql'],
 
 	generates: {
-		//should be a FILE, not a folder
-		'src/__generated__/graphql.ts': {
-			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+		//server-safe types (NO Apollo imports)
+		'src/__generated__/graphql.types.ts': {
+			plugins: ['typescript', 'typescript-operations'],
 			config: {
 				enumsAsTypes: true,
 				skipTypename: false,
 
+				useTypeImports: true
+			}
+		},
+
+		//2. client-only hooks (Apollo imports live here)
+		'src/__generated__/graphql.hooks.ts': {
+			plugins: ['typescript-react-apollo'],
+			config: {
 				//use Apollo v3 (modern)
-				apolloversion: 3,
+				reactApolloVersion: 3,
 
 				//generate React hooks only (no HOCs, no components)
 				withHooks: true,
 				withHOC: false,
 				withComponent: false,
 
-				//helps keep imports type-only where possible
+				// Apollo Client v4 exports hooks + skipToken from this entry
+				apolloReactHooksImportFrom: '@apollo/client/react',
+
 				useTypeImports: true,
 
+				withSuspense: false
+
 				//optional, but often nicer DX: consistent nullability
-				maybeValue: 'T | null'
+				// maybeValue: 'T | null'
 			}
 		},
 		'src/shared/graphql/graphql-schema.json': {
