@@ -1,5 +1,7 @@
+/* eslint-disable */
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
+export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -12,16 +14,19 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: { input: any; output: any; }
+  /** Decimal custom scalar type */
   Decimal: { input: any; output: any; }
 };
 
-export type ActivityLevel =
-  | 'ACTIVE'
-  | 'LIGHTLY_ACTIVE'
-  | 'MODERATELY_ACTIVE'
-  | 'SEDENTARY'
-  | 'VERY_ACTIVE';
+export enum ActivityLevel {
+  Active = 'ACTIVE',
+  LightlyActive = 'LIGHTLY_ACTIVE',
+  ModeratelyActive = 'MODERATELY_ACTIVE',
+  Sedentary = 'SEDENTARY',
+  VeryActive = 'VERY_ACTIVE'
+}
 
 export type AddManyItemsToCartInputInput = {
   listId: Scalars['String']['input'];
@@ -143,19 +148,21 @@ export type CreateRecipeStepInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Difficulty =
-  | 'EASY'
-  | 'HARD'
-  | 'MEDIUM';
+export enum Difficulty {
+  Easy = 'EASY',
+  Hard = 'HARD',
+  Medium = 'MEDIUM'
+}
 
-export type DishType =
-  | 'BAKING'
-  | 'DESSERT'
-  | 'DRINK'
-  | 'MAIN'
-  | 'SALAD'
-  | 'SNACK'
-  | 'SOUP';
+export enum DishType {
+  Baking = 'BAKING',
+  Dessert = 'DESSERT',
+  Drink = 'DRINK',
+  Main = 'MAIN',
+  Salad = 'SALAD',
+  Snack = 'SNACK',
+  Soup = 'SOUP'
+}
 
 export type FitnessProfileModel = {
   __typename?: 'FitnessProfileModel';
@@ -188,9 +195,10 @@ export type FullProfileUpdateInput = {
   user?: InputMaybe<UserUpdateInput>;
 };
 
-export type Gender =
-  | 'FEMALE'
-  | 'MALE';
+export enum Gender {
+  Female = 'FEMALE',
+  Male = 'MALE'
+}
 
 export type IngredientModel = {
   __typename?: 'IngredientModel';
@@ -374,10 +382,11 @@ export type NutritionFactsModel = {
   recipeId: Scalars['String']['output'];
 };
 
-export type NutritionGoal =
-  | 'GAIN_MUSCLE'
-  | 'LOSE_WEIGHT'
-  | 'MAINTAIN';
+export enum NutritionGoal {
+  GainMuscle = 'GAIN_MUSCLE',
+  LoseWeight = 'LOSE_WEIGHT',
+  Maintain = 'MAINTAIN'
+}
 
 export type OrderItemModel = {
   __typename?: 'OrderItemModel';
@@ -408,12 +417,13 @@ export type OrderModel = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
-export type OrderStatus =
-  | 'CANCELED'
-  | 'COMPLETED'
-  | 'ON_WAY'
-  | 'PENDING'
-  | 'PROCESSING';
+export enum OrderStatus {
+  Canceled = 'CANCELED',
+  Completed = 'COMPLETED',
+  OnWay = 'ON_WAY',
+  Pending = 'PENDING',
+  Processing = 'PROCESSING'
+}
 
 export type ProductModel = {
   __typename?: 'ProductModel';
@@ -528,17 +538,18 @@ export type RecipeTagModel = {
   tagName: Scalars['String']['output'];
 };
 
-export type RecipeUnit =
-  | 'CLOVES'
-  | 'GRAM'
-  | 'KILOGRAM'
-  | 'LITER'
-  | 'MILLILITER'
-  | 'PIECE'
-  | 'PINCH'
-  | 'SLICE'
-  | 'TABLESPOON'
-  | 'TEASPOON';
+export enum RecipeUnit {
+  Cloves = 'CLOVES',
+  Gram = 'GRAM',
+  Kilogram = 'KILOGRAM',
+  Liter = 'LITER',
+  Milliliter = 'MILLILITER',
+  Piece = 'PIECE',
+  Pinch = 'PINCH',
+  Slice = 'SLICE',
+  Tablespoon = 'TABLESPOON',
+  Teaspoon = 'TEASPOON'
+}
 
 export type RecipesQueryInput = {
   difficulty?: InputMaybe<Difficulty>;
@@ -554,12 +565,13 @@ export type RemoveCartItemInput = {
   cartItemId: Scalars['String']['input'];
 };
 
-export type SaleUnit =
-  | 'GRAM'
-  | 'KILOGRAM'
-  | 'LITER'
-  | 'MILLILITER'
-  | 'PIECE';
+export enum SaleUnit {
+  Gram = 'GRAM',
+  Kilogram = 'KILOGRAM',
+  Liter = 'LITER',
+  Milliliter = 'MILLILITER',
+  Piece = 'PIECE'
+}
 
 export type ShoppingListItemForCartModel = {
   __typename?: 'ShoppingListItemForCartModel';
@@ -706,3 +718,7 @@ export type GetAllRecipesQueryVariables = Exact<{
 
 
 export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __typename?: 'RecipeModel', title: string, slug: string, author?: { __typename?: 'UserModel', email: string } | null }> };
+
+
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AuthInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const GetAllRecipesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllRecipes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RecipesQueryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allRecipes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllRecipesQuery, GetAllRecipesQueryVariables>;
