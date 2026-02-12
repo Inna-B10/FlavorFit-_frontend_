@@ -37,15 +37,15 @@ export function AuthForm({type}: IAuthForm) {
 
 
   return (
-  <>
-    <h1>
+  <div className='w-full m-auto flex flex-col items-center gap-4'>
+    <h2 className='text-center text-2xl font-bold'>
       {type === 'register' ? 'Sign up' : 'Sign in'}
-    </h1>
-    <form onSubmit={onSubmit}>
+    </h2>
+    <form onSubmit={onSubmit} className='w-full max-w-2/3 flex flex-col gap-6 mb-8'>
       <Input type="email" name="email" placeholder="Email" required />
       <Input type="password" name="password" placeholder="Password" required />
-      <Button type="submit" disabled={loading}>{loading? 'Loading...' : type === 'register' ? 'Sign up' : 'Sign in'}</Button>
+      <Button type="submit" disabled={loading} className='bg-accent text-foreground m-auto text-lg'>{loading? 'Loading...' : type === 'register' ? 'Sign up' : 'Sign in'}</Button>
     </form>
-  </>
+  </div>
   )
 }

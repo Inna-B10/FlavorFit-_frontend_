@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Aclonica, Geist, Geist_Mono, Oleo_Script, Sansita, Sonsie_One } from 'next/font/google'
 import './globals.css'
 import { Provider } from './providers/Provider'
 
@@ -11,6 +11,27 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
 	variable: '--font-geist-mono',
 	subsets: ['latin']
+})
+
+const aclonica = Aclonica({
+	variable: '--font-aclonica',
+	subsets: ['latin'],
+	weight: '400'
+})
+const sonsie = Sonsie_One({
+	variable: '--font-sonsie',
+	subsets: ['latin'],
+	weight: '400'
+})
+const oleo = Oleo_Script({
+	variable: '--font-oleo',
+	subsets: ['latin'],
+	weight: '400'
+})
+const sansita = Sansita({
+	variable: '--font-sansita',
+	subsets: ['latin'],
+	weight: ['400', '700', '800', '900']
 })
 
 export const metadata: Metadata = {
@@ -25,7 +46,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			<body
+				className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} antialiased`}
+			>
 				<Provider>{children}</Provider>
 			</body>
 		</html>
