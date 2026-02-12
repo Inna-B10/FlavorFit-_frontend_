@@ -1,4 +1,4 @@
-import { LogoIcon } from '@/shared/ui/logo/LogoIcon'
+import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 import Link from 'next/link'
 import { Navbar } from './navbar/Navbar'
 import { UserBlock } from './UserBlock'
@@ -14,7 +14,7 @@ export function Header() {
 					href='/'
 					title='Home'
 					aria-label='Go to homepage'
-					className='h-10 xl:h-14 w-fit rounded-full bg-dark-green p-2.5 mr-2 xl:mr-1 shadow-md hover:scale-105 transition-all duration-300 ease-in-out'
+					className='h-10 xl:h-14 w-fit rounded-full bg-dark-green p-3 mr-2 xl:mr-1 shadow-md hover:scale-105 transition-all duration-300 ease-in-out'
 				>
 					<LogoIcon className='h-full w-auto text-pale-white' />
 				</Link>

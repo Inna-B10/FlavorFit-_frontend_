@@ -57,9 +57,19 @@ npm i -D typescript @graphql-codegen/cli
 npm i -D @graphql-codegen/typescript
 npm i -D @graphql-codegen/typescript-operations
 npm i -D @graphql-codegen/typescript-react-apollo
+npm i -D @graphql-codegen/client-preset
 npm i -D @graphql-codegen/introspection
 npm i -D @parcel/watcher
 npm i -D dotenv
+npm i -D @trivago/prettier-plugin-sort-imports
+npm i -D prettier-plugin-tailwindcss
+npm i -D prettier
+npm i react-hook-form
+npx shadcn@latest init
+
+
+# npx shadcn@latest add button
+# npx shadcn@latest add input
 
 ```
 

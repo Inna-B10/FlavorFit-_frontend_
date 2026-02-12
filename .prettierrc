@@ -1,7 +1,7 @@
 {
 	"trailingComma": "none",
 	"tabWidth": 2,
-	"useTabs": true,
+	"useTabs": false,
 	"semi": false,
 	"singleQuote": true,
 	"jsxSingleQuote": true,
@@ -9,5 +9,27 @@
 	"singleAttributePerLine": true,
 	"printWidth": 100,
 	"proseWrap": "always",
-	"bracketSpacing": true
+	"bracketSpacing": true,
+	"importOrder": [
+		"^(react/(.*)$)|^(react$)",
+		"^(next/(.*)$)|^(next$)",
+		"<THIRD_PARTY_MODULES>",
+		"^@/app/(.*)$",
+		"^@/features/(.*)$",
+		"^@/shared/components/(.*)$",
+		"^@/shared/components/ui/(.*)$",
+		"^@/shared/config/(.*)$",
+		"^@/shared/constants/(.*)$",
+		"^@/shared/graphql/(.*)$",
+		"^@/shared/hooks/(.*)$",
+		"^@/shared/types/(.*)$",
+		"^@/shared/lib/(.*)$",
+		"^@/shared/utils/(.*)$",
+		"^@/shared/api/(.*)$",
+		"^@/__generated__/(.*)$",
+		"^../(.*)",
+		"^./(.*)"
+	],
+	"importOrderSortSpecifiers": true,
+	"plugins": ["@trivago/prettier-plugin-sort-imports, prettier-plugin-tailwindcss"]
 }
