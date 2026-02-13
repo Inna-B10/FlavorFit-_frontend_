@@ -20,14 +20,15 @@ export type Scalars = {
   Decimal: { input: any; output: any; }
 };
 
-export enum ActivityLevel {
-  Active = 'ACTIVE',
-  LightlyActive = 'LIGHTLY_ACTIVE',
-  ModeratelyActive = 'MODERATELY_ACTIVE',
-  Sedentary = 'SEDENTARY',
-  VeryActive = 'VERY_ACTIVE'
-}
+export const ActivityLevel = {
+  Active: 'ACTIVE',
+  LightlyActive: 'LIGHTLY_ACTIVE',
+  ModeratelyActive: 'MODERATELY_ACTIVE',
+  Sedentary: 'SEDENTARY',
+  VeryActive: 'VERY_ACTIVE'
+} as const;
 
+export type ActivityLevel = typeof ActivityLevel[keyof typeof ActivityLevel];
 export type AddManyItemsToCartInputInput = {
   listId: Scalars['String']['input'];
 };
@@ -148,22 +149,24 @@ export type CreateRecipeStepInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export enum Difficulty {
-  Easy = 'EASY',
-  Hard = 'HARD',
-  Medium = 'MEDIUM'
-}
+export const Difficulty = {
+  Easy: 'EASY',
+  Hard: 'HARD',
+  Medium: 'MEDIUM'
+} as const;
 
-export enum DishType {
-  Baking = 'BAKING',
-  Dessert = 'DESSERT',
-  Drink = 'DRINK',
-  Main = 'MAIN',
-  Salad = 'SALAD',
-  Snack = 'SNACK',
-  Soup = 'SOUP'
-}
+export type Difficulty = typeof Difficulty[keyof typeof Difficulty];
+export const DishType = {
+  Baking: 'BAKING',
+  Dessert: 'DESSERT',
+  Drink: 'DRINK',
+  Main: 'MAIN',
+  Salad: 'SALAD',
+  Snack: 'SNACK',
+  Soup: 'SOUP'
+} as const;
 
+export type DishType = typeof DishType[keyof typeof DishType];
 export type FitnessProfileModel = {
   __typename?: 'FitnessProfileModel';
   activityLevel?: Maybe<ActivityLevel>;
@@ -195,11 +198,12 @@ export type FullProfileUpdateInput = {
   user?: InputMaybe<UserUpdateInput>;
 };
 
-export enum Gender {
-  Female = 'FEMALE',
-  Male = 'MALE'
-}
+export const Gender = {
+  Female: 'FEMALE',
+  Male: 'MALE'
+} as const;
 
+export type Gender = typeof Gender[keyof typeof Gender];
 export type IngredientModel = {
   __typename?: 'IngredientModel';
   ingredientId: Scalars['String']['output'];
@@ -382,12 +386,13 @@ export type NutritionFactsModel = {
   recipeId: Scalars['String']['output'];
 };
 
-export enum NutritionGoal {
-  GainMuscle = 'GAIN_MUSCLE',
-  LoseWeight = 'LOSE_WEIGHT',
-  Maintain = 'MAINTAIN'
-}
+export const NutritionGoal = {
+  GainMuscle: 'GAIN_MUSCLE',
+  LoseWeight: 'LOSE_WEIGHT',
+  Maintain: 'MAINTAIN'
+} as const;
 
+export type NutritionGoal = typeof NutritionGoal[keyof typeof NutritionGoal];
 export type OrderItemModel = {
   __typename?: 'OrderItemModel';
   goodsCount: Scalars['Decimal']['output'];
@@ -417,14 +422,15 @@ export type OrderModel = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
-export enum OrderStatus {
-  Canceled = 'CANCELED',
-  Completed = 'COMPLETED',
-  OnWay = 'ON_WAY',
-  Pending = 'PENDING',
-  Processing = 'PROCESSING'
-}
+export const OrderStatus = {
+  Canceled: 'CANCELED',
+  Completed: 'COMPLETED',
+  OnWay: 'ON_WAY',
+  Pending: 'PENDING',
+  Processing: 'PROCESSING'
+} as const;
 
+export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 export type ProductModel = {
   __typename?: 'ProductModel';
   iconUrl?: Maybe<Scalars['String']['output']>;
@@ -538,19 +544,20 @@ export type RecipeTagModel = {
   tagName: Scalars['String']['output'];
 };
 
-export enum RecipeUnit {
-  Cloves = 'CLOVES',
-  Gram = 'GRAM',
-  Kilogram = 'KILOGRAM',
-  Liter = 'LITER',
-  Milliliter = 'MILLILITER',
-  Piece = 'PIECE',
-  Pinch = 'PINCH',
-  Slice = 'SLICE',
-  Tablespoon = 'TABLESPOON',
-  Teaspoon = 'TEASPOON'
-}
+export const RecipeUnit = {
+  Cloves: 'CLOVES',
+  Gram: 'GRAM',
+  Kilogram: 'KILOGRAM',
+  Liter: 'LITER',
+  Milliliter: 'MILLILITER',
+  Piece: 'PIECE',
+  Pinch: 'PINCH',
+  Slice: 'SLICE',
+  Tablespoon: 'TABLESPOON',
+  Teaspoon: 'TEASPOON'
+} as const;
 
+export type RecipeUnit = typeof RecipeUnit[keyof typeof RecipeUnit];
 export type RecipesQueryInput = {
   difficulty?: InputMaybe<Difficulty>;
   dishType?: InputMaybe<DishType>;
@@ -565,14 +572,15 @@ export type RemoveCartItemInput = {
   cartItemId: Scalars['String']['input'];
 };
 
-export enum SaleUnit {
-  Gram = 'GRAM',
-  Kilogram = 'KILOGRAM',
-  Liter = 'LITER',
-  Milliliter = 'MILLILITER',
-  Piece = 'PIECE'
-}
+export const SaleUnit = {
+  Gram: 'GRAM',
+  Kilogram: 'KILOGRAM',
+  Liter: 'LITER',
+  Milliliter: 'MILLILITER',
+  Piece: 'PIECE'
+} as const;
 
+export type SaleUnit = typeof SaleUnit[keyof typeof SaleUnit];
 export type ShoppingListItemForCartModel = {
   __typename?: 'ShoppingListItemForCartModel';
   listItemId: Scalars['String']['output'];
@@ -710,7 +718,14 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', accessToken: string, user: { __typename?: 'UserModel', email: string, role: string } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', accessToken: string, user: { __typename?: 'UserModel', email: string } } };
+
+export type RegisterMutationVariables = Exact<{
+  data: AuthInput;
+}>;
+
+
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', accessToken: string } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;
@@ -720,5 +735,6 @@ export type GetAllRecipesQueryVariables = Exact<{
 export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __typename?: 'RecipeModel', title: string, slug: string, author?: { __typename?: 'UserModel', email: string } | null }> };
 
 
-export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AuthInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AuthInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AuthInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
 export const GetAllRecipesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllRecipes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RecipesQueryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allRecipes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllRecipesQuery, GetAllRecipesQueryVariables>;

@@ -4,6 +4,7 @@
 .vscode/
 MARATHON/reviews
 MARATHON/tasks
+MARATHON/design/images
 
 # dependencies
 /node_modules

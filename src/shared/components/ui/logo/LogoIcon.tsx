@@ -16,7 +16,6 @@ export function LogoIcon({ className }: ILogoIcon) {
 				style={{ fill: 'currentColor' }}
 				transform='matrix(1, 0, 0, 1, -46.697715759277344, -101.7657699584961)'
 			>
-				<title>1F</title>
 			</path>
 		</svg>
 	)

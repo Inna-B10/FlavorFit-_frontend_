@@ -1,5 +1,5 @@
-import { PAGE } from '@/shared/config/public-pages.config'
-import { USER_PAGE } from '@/shared/config/user-pages.config'
+
+import { PUBLIC_PAGES, USER_PAGES } from '@/shared/config/pages.config'
 import Link from 'next/link'
 import { FaRegBell } from 'react-icons/fa'
 import { PiUserCircleDuotone } from 'react-icons/pi'
@@ -10,7 +10,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 		<div className='flex items-center gap-2'>
 			{isLoggedIn && (
 				<Link
-					href={USER_PAGE.NOTIFICATION}
+					href={USER_PAGES.NOTIFICATION}
 					title='Notification'
 					aria-label='Check notification'
 					className='rounded-full bg-pale-white text-dark-green shadow-sm p-2 xl:p-3 hover:cursor-pointer hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out'
@@ -19,7 +19,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 				</Link>
 			)}
 			<Link
-				href={PAGE.CONTACT}
+				href={PUBLIC_PAGES.CONTACT}
 				title='Contact'
 				aria-label='Go to contact form'
 				className='rounded-full bg-pale-white text-dark-green p-2 shadow-sm xl:p-3 hover:cursor-pointer hover:bg-light-green hover:text-foreground transition-colors duration-300 ease-in-out'
@@ -31,7 +31,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 			{/* //[TODO] Login/Registration page      */}
 			{isLoggedIn ? (
 				<Link
-					href={USER_PAGE.PROFILE}
+					href={USER_PAGES.PROFILE}
 					title='Profile'
 					aria-label='Go to profile'
 					className='-m-1 text-sm xl:text-2xl hover:cursor-pointer'
@@ -45,9 +45,9 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 				</Link>
 			) : (
 				<Link
-					href='/auth'
-					title='Login/Register'
-					aria-label='Go to login/registration page'
+					href={PUBLIC_PAGES.LOGIN}
+					title='Login/Registration'
+					aria-label='Go to authentication page'
 					className='-m-1 text-sm xl:text-2xl hover:cursor-pointer'
 				>
 					<PiUserCircleDuotone

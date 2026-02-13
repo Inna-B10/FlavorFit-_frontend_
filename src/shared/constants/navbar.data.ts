@@ -1,5 +1,5 @@
-import { PAGE } from '../config/public-pages.config'
-import { USER_PAGE } from '../config/user-pages.config'
+
+import { PUBLIC_PAGES, USER_PAGES } from '../config/pages.config'
 import { INavbarItem } from '../types/navbar.types'
 
 export const NAVBAR_DATA: INavbarItem[] = [
@@ -13,19 +13,19 @@ export const NAVBAR_DATA: INavbarItem[] = [
 		icon: 'forum',
 		//PiUsersThree,
 		label: 'Forum',
-		link: PAGE.FORUM
+		link: PUBLIC_PAGES.FORUM
 	},
 	{
 		icon: 'recipes',
 		//PiBookOpenText, //MdMenuBook,
 		label: 'Recipes',
-		link: PAGE.HOME
+		link: PUBLIC_PAGES.HOME
 	},
 	{
 		icon: 'nutrition',
 		//BsCalendar3, //ImCalendar, //GiForkKnifeSpoon,
 		label: 'Nutrition',
-		link: PAGE.NUTRITION
+		link: PUBLIC_PAGES.NUTRITION
 	}
 ]
 
@@ -34,22 +34,22 @@ export const USER_NAVBAR_DATA: INavbarItem[] = [
 		icon: 'mealPlans',
 		//ImCalendar,
 		label: 'Meal plans',
-		link: USER_PAGE.MEAL_PLANS
+		link: USER_PAGES.MEAL_PLANS
 	},
 	{
 		icon: 'orderGroceries',
 		//LiaStoreAltSolid, //IoStorefrontOutline
 		label: 'Order groceries',
-		link: USER_PAGE.ORDER_GROCERIES
+		link: USER_PAGES.ORDER_GROCERIES
 	},
 	{
 		icon: 'analytics',
 		label: 'Analytics',
-		link: USER_PAGE.ANALYTICS
+		link: USER_PAGES.ANALYTICS
 	},
 	{
 		icon: 'dashboard',
 		label: 'Dashboard',
-		link: USER_PAGE.DASHBOARD
+		link: USER_PAGES.DASHBOARD
 	}
 ]

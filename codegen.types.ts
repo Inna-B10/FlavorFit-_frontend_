@@ -19,9 +19,12 @@ const config: CodegenConfig = {
       preset: 'client',
       presetConfig: {
         skipTypename: true,
+				fragmentMasking: false
       },
       config: {
-        useTypeImports: true
+        useTypeImports: true,
+				enumsAsConst: true,
+				// skipTypename: false,
       }
     },
 
@@ -29,7 +32,7 @@ const config: CodegenConfig = {
 		'src/__generated__/graphql.types.ts': {
 			plugins: ['typescript', 'typescript-operations'],
 			config: {
-				enumsAsTypes: true,
+				enumsAsConst: true,
 				skipTypename: false,
 				useTypeImports: true
 			}
