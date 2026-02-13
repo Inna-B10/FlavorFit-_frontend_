@@ -1,11 +1,14 @@
+'use client'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
+import { IS_CLIENT } from '@/shared/constants/app.constants'
 import Link from 'next/link'
 import { Navbar } from './navbar/Navbar'
 import { UserBlock } from './UserBlock'
 
 export function Header() {
 	//[TODO] isLoggedIn
-	const isLoggedIn = true
+	const token = IS_CLIENT ? localStorage.getItem('accessToken'): null
+	const isLoggedIn = token !== null
 
 	return (
 		<header className='flex justify-between items-center gap-4 text-center'>

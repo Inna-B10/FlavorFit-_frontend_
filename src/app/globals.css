@@ -11,7 +11,7 @@
   --accent: #feb249;
 
   --dark-green: #285430;
-  --pale-white: #f2f2f2;
+  --pale-white: #fafafa;
   --light-green: #a4be7b;
   /* --accent: oklch(0.967 0.001 286.375); */
   /* --accent: #e28935; */
@@ -65,6 +65,8 @@
   --font-sonsie: var(--font-sonsie);
   --font-oleo: var(--font-oleo);
   --font-sansita: var(--font-sansita);
+  --font-inter: var(--font-inter);
+  --font-inter-tight: var(--font-inter-tight);
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -159,5 +161,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }

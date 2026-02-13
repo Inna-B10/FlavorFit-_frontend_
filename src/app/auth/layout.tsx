@@ -1,15 +1,16 @@
 import { LogoName } from '@/shared/components/ui/logo/LogoName'
+import Image from 'next/image'
+import Link from 'next/link'
 import { PropsWithChildren } from 'react'
 
 export default function AuthLayout({ children }: PropsWithChildren<unknown>) {
 		return (
-				<main className='w-full content-center min-h-screen'>
-					<div className='m-auto lg:max-w-1/2 flex flex-col gap-8 bg-pale-white rounded-2xl shadow-md p-6'>
-						<div className='self-start'>
-							<LogoName className='text-dark-green' />
-						</div>
+				<main className='w-full h-full flex flex-col gap-8 sm:grow items-center justify-center'>
+					<Link href='/' title='Homepage' className='sm:self-start sm:ml-6 sm:mt-4 hover:scale-102 transition-all duration-300 ease-in-out'>
+						<LogoName className='text-dark-green h-auto w-42 md:w-62 xl:w-72' />
+					</Link>
 						{children}
-					</div>
-					</main>
+							<Image src='/bg-images/vegetables.png' alt='auth-background' width={626} height={522} className='w-40 md:w-60 h-auto sm:self-end -mb-6' />
+				</main>
 		)
 }

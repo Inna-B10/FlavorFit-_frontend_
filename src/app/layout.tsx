@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Aclonica, Geist, Geist_Mono, Oleo_Script, Sansita, Sonsie_One } from 'next/font/google'
+import { Aclonica, Geist, Geist_Mono, Inter, Inter_Tight, Oleo_Script, Sansita, Sonsie_One } from 'next/font/google'
 import './globals.css'
 import { Provider } from './providers/Provider'
 
@@ -13,6 +13,16 @@ const geistMono = Geist_Mono({
 	subsets: ['latin']
 })
 
+const inter = Inter({
+	variable: '--font-inter',
+	subsets: ['latin'],
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+})
+const interTight = Inter_Tight({
+	variable: '--font-inter-tight',
+	subsets: ['latin'],
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+})
 const aclonica = Aclonica({
 	variable: '--font-aclonica',
 	subsets: ['latin'],
@@ -47,7 +57,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} antialiased flex flex-col w-full h-full min-h-screen p-8 gap-8`}
 			>
 				<Provider>{children}</Provider>
 			</body>
