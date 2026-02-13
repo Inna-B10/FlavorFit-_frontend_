@@ -14,13 +14,13 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "mutation Login($data: AuthInput!) {\n  login(data: $data) {\n    accessToken\n    user {\n      email\n    }\n  }\n}": typeof types.LoginDocument,
-    "mutation Register($data: AuthInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}": typeof types.RegisterDocument,
+    "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    accessToken\n  }\n}": typeof types.LoginDocument,
+    "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}": typeof types.RegisterDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    title\n    slug\n    author {\n      email\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
 };
 const documents: Documents = {
-    "mutation Login($data: AuthInput!) {\n  login(data: $data) {\n    accessToken\n    user {\n      email\n    }\n  }\n}": types.LoginDocument,
-    "mutation Register($data: AuthInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}": types.RegisterDocument,
+    "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    accessToken\n  }\n}": types.LoginDocument,
+    "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}": types.RegisterDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    title\n    slug\n    author {\n      email\n    }\n  }\n}": types.GetAllRecipesDocument,
 };
 
@@ -41,11 +41,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation Login($data: AuthInput!) {\n  login(data: $data) {\n    accessToken\n    user {\n      email\n    }\n  }\n}"): (typeof documents)["mutation Login($data: AuthInput!) {\n  login(data: $data) {\n    accessToken\n    user {\n      email\n    }\n  }\n}"];
+export function graphql(source: "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    accessToken\n  }\n}"): (typeof documents)["mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    accessToken\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation Register($data: AuthInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}"): (typeof documents)["mutation Register($data: AuthInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}"];
+export function graphql(source: "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}"): (typeof documents)["mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

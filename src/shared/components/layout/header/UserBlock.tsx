@@ -40,7 +40,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 						className='size-[40] xl:size-[54]'
 						fill='#285430'
 						strokeWidth={4}
-						stroke='#e5d9b6'
+						stroke='#F2E7BD'
 					/>
 				</Link>
 			) : (
@@ -54,7 +54,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
 						className='size-[40] xl:size-[54]'
 						fill='#285430'
 						strokeWidth={4}
-						stroke='#e5d9b6'
+						stroke='#F2E7BD'
 					/>
 				</Link>
 			)}

@@ -42,7 +42,7 @@ export function MenuItem({ item, isActive }: IMenuItem) {
 				)}
 			>
 				<Icon className='size-[16] md:size-[18] xl:size-[22]' />
-				<span className='hidden lg:block group-hover text-nowrap'>{item.label}</span>
+				<span className='hidden lg:block group-hover text-nowrap font-inter-tight'>{item.label}</span>
 			</Link>
 		</li>
 	)

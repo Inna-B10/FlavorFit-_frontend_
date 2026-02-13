@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Aclonica, Geist, Geist_Mono, Inter, Inter_Tight, Oleo_Script, Sansita, Sonsie_One } from 'next/font/google'
+import { Aclonica, Geist, Geist_Mono, Inter, Inter_Tight, Oleo_Script, Poppins, Sansita, Sonsie_One } from 'next/font/google'
 import './globals.css'
 import { Provider } from './providers/Provider'
 
@@ -20,6 +20,11 @@ const inter = Inter({
 })
 const interTight = Inter_Tight({
 	variable: '--font-inter-tight',
+	subsets: ['latin'],
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+})
+const poppins = Poppins({
+	variable: '--font-poppins',
 	subsets: ['latin'],
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 })
@@ -57,7 +62,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} antialiased flex flex-col w-full h-full min-h-screen p-8 gap-8`}
+				className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} ${poppins.variable} antialiased flex flex-col w-full h-full min-h-screen px-3 py-6 sm:p-6 gap-8`}
 			>
 				<Provider>{children}</Provider>
 			</body>

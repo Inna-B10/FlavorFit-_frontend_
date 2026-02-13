@@ -33,11 +33,6 @@ export type AddOneItemToCartInput = {
   listItemId: Scalars['String']['input'];
 };
 
-export type AuthInput = {
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-};
-
 export type AuthResponse = {
   __typename?: 'AuthResponse';
   accessToken: Scalars['String']['output'];
@@ -210,6 +205,11 @@ export type IngredientModel = {
   recipeUnit: RecipeUnit;
 };
 
+export type LoginInput = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addManyItemsToCartInput: CartModel;
@@ -303,7 +303,7 @@ export type MutationDeleteRecipeArgs = {
 
 
 export type MutationLoginArgs = {
-  data: AuthInput;
+  data: LoginInput;
 };
 
 
@@ -313,7 +313,7 @@ export type MutationRefreshRecipeInShoppingListArgs = {
 
 
 export type MutationRegisterArgs = {
-  data: AuthInput;
+  data: RegisterInput;
 };
 
 
@@ -564,6 +564,12 @@ export type RecipesQueryInput = {
   tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type RegisterInput = {
+  email: Scalars['String']['input'];
+  firstName: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
 export type RemoveCartItemInput = {
   cartItemId: Scalars['String']['input'];
 };
@@ -673,7 +679,7 @@ export type UserModel = {
   __typename?: 'UserModel';
   avatarUrl?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
-  firstName?: Maybe<Scalars['String']['output']>;
+  firstName: Scalars['String']['output'];
   role: Scalars['String']['output'];
   userId: Scalars['String']['output'];
 };
@@ -702,7 +708,7 @@ export type UserWithProfileModel = {
   __typename?: 'UserWithProfileModel';
   avatarUrl?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
-  firstName?: Maybe<Scalars['String']['output']>;
+  firstName: Scalars['String']['output'];
   fitnessProfile?: Maybe<FitnessProfileModel>;
   role: Scalars['String']['output'];
   userId: Scalars['String']['output'];
@@ -710,14 +716,14 @@ export type UserWithProfileModel = {
 };
 
 export type LoginMutationVariables = Exact<{
-  data: AuthInput;
+  data: LoginInput;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', accessToken: string, user: { __typename?: 'UserModel', email: string } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', accessToken: string } };
 
 export type RegisterMutationVariables = Exact<{
-  data: AuthInput;
+  data: RegisterInput;
 }>;
 
 

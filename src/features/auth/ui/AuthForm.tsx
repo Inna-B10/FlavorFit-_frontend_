@@ -50,28 +50,30 @@ export function AuthForm({type}: IAuthForm) {
 
 
   return (
-  <div className='w-[80vw] sm:max-w-md m-auto flex flex-col items-center justify-center gap-4 bg-pale-white rounded-2xl shadow-md p-6'>
+  <div className='max-w-md m-auto flex flex-col items-center justify-center gap-4 bg-pale-white rounded-2xl shadow-md p-6'>
     <h2 className='text-center text-4xl font-bold font-sansita italic my-4'>
       {isLogin ? 'Sign in' : 'Sign up'}
     </h2>
     <form onSubmit={onSubmit} className='w-full sm:max-w-2/3 space-y-4'>
       <Input type="email" name="email" placeholder="Email" required />
       <Input type="password" name="password" placeholder="Password" required />
+      {!isLogin && <Input type="text" name="firstName" placeholder="First name" required />}
       <Button type="submit" disabled={loading} className='w-full bg-accent text-foreground text-md mt-4'>{loading? 'Loading...' : isLogin ? 'Sign in' : 'Sign up'}</Button>
     </form>
       <div className='my-2'>
-        <div className='h-8'>{error && <p className='text-destructive'>{error.message}</p>}</div>
-        {isLogin ?(
-          <>
-            <span  className='text-xs'>Don&apos;t have an account?</span>{" "}
-            <Link href={PUBLIC_PAGES.REGISTRATION} className='text-sm underline'>Sign up</Link>
-          </>
-        ):(
-          <>
-            <span className='text-xs'>Already have an account?</span>{" "}
-            <Link href={PUBLIC_PAGES.LOGIN} className='text-sm underline'>Sign in</Link>
-          </>
-          )}
+        <div className='h-8'>
+          {error && <p className='text-destructive text-xs'>{error.message}</p>}</div>
+          {isLogin ?(
+            <>
+              <span  className='text-xs'>Don&apos;t have an account?</span>{" "}
+              <Link href={PUBLIC_PAGES.REGISTRATION} className='text-sm underline text-nowrap'>Sign up</Link>
+            </>
+          ):(
+            <>
+              <span className='text-xs'>Already have an account?</span>{" "}
+              <Link href={PUBLIC_PAGES.LOGIN} className='text-sm underline text-nowrap'>Sign in</Link>
+            </>
+            )}
       </div>
   </div>
   )
