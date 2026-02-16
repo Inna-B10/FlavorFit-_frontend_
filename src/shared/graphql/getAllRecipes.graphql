@@ -2,7 +2,7 @@ query GetAllRecipes($input: RecipesQueryInput!) {
 	allRecipes(input: $input) {
 		title
 		slug
-		author {
+		user {
 			email
 		}
 	}

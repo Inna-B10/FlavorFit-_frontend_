@@ -1,5 +1,5 @@
-import { IS_CLIENT } from '@/shared/constants/app.constants'
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client'
+import { IS_CLIENT } from '@/shared/constants/app.constants'
 import { httpLink } from './links/apollo-http.link'
 
 //used for refresh token

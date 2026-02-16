@@ -66,6 +66,7 @@ npm i -D prettier-plugin-tailwindcss
 npm i -D prettier
 npm i react-hook-form
 npx shadcn@latest init
+npm i react-hot-toast
 
 
 # npx shadcn@latest add button

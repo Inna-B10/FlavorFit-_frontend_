@@ -71,12 +71,12 @@ export type CartModel = {
 
 export type CommentModel = {
   __typename?: 'CommentModel';
-  authorId: Scalars['String']['output'];
   commentId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   message: Scalars['String']['output'];
   recipeId: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
 };
 
 export type CourierModel = {
@@ -92,7 +92,7 @@ export type CreateCommentInput = {
 };
 
 export type CreateIngredientInput = {
-  note?: InputMaybe<Scalars['String']['input']>;
+  ingredientNote?: InputMaybe<Scalars['String']['input']>;
   productIconUrl?: InputMaybe<Scalars['String']['input']>;
   productId?: InputMaybe<Scalars['String']['input']>;
   productName?: InputMaybe<Scalars['String']['input']>;
@@ -107,17 +107,17 @@ export type CreateOrderInput = {
 
 export type CreateProductInput = {
   iconUrl?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
   productVariants?: InputMaybe<Array<CreateProductVariantInput>>;
   recipeUnit: RecipeUnit;
 };
 
 export type CreateProductVariantInput = {
   label: Scalars['String']['input'];
-  note?: InputMaybe<Scalars['String']['input']>;
   price: Scalars['Decimal']['input'];
   pricingAmount: Scalars['Decimal']['input'];
   pricingUnit: SaleUnit;
+  variantNote?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateRecipeInput = {
@@ -163,11 +163,12 @@ export type FitnessProfileModel = {
   activityLevel?: Maybe<ActivityLevel>;
   armCm?: Maybe<Scalars['Int']['output']>;
   chestCm?: Maybe<Scalars['Int']['output']>;
-  currentWeight?: Maybe<Scalars['Int']['output']>;
+  currentWeight?: Maybe<Scalars['Decimal']['output']>;
   heightCm?: Maybe<Scalars['Int']['output']>;
   nutritionGoal?: Maybe<NutritionGoal>;
   targetWeight?: Maybe<Scalars['Int']['output']>;
   thighCm?: Maybe<Scalars['Int']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
   waistCm?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -175,7 +176,7 @@ export type FitnessProfileUpdateInput = {
   activityLevel?: InputMaybe<ActivityLevel>;
   armCm?: InputMaybe<Scalars['Int']['input']>;
   chestCm?: InputMaybe<Scalars['Int']['input']>;
-  currentWeight?: InputMaybe<Scalars['Int']['input']>;
+  currentWeight?: InputMaybe<Scalars['Decimal']['input']>;
   heightCm?: InputMaybe<Scalars['Int']['input']>;
   nutritionGoal?: InputMaybe<NutritionGoal>;
   targetWeight?: InputMaybe<Scalars['Int']['input']>;
@@ -186,7 +187,6 @@ export type FitnessProfileUpdateInput = {
 export type FullProfileUpdateInput = {
   fitnessProfile?: InputMaybe<FitnessProfileUpdateInput>;
   profile?: InputMaybe<UserProfileUpdateInput>;
-  user?: InputMaybe<UserUpdateInput>;
 };
 
 export const Gender = {
@@ -198,7 +198,7 @@ export type Gender = typeof Gender[keyof typeof Gender];
 export type IngredientModel = {
   __typename?: 'IngredientModel';
   ingredientId: Scalars['String']['output'];
-  note?: Maybe<Scalars['String']['output']>;
+  ingredientNote?: Maybe<Scalars['String']['output']>;
   product: ProductModel;
   productId: Scalars['String']['output'];
   quantity: Scalars['Decimal']['output'];
@@ -220,10 +220,11 @@ export type Mutation = {
   createProductVariant: ProductVariantModel;
   createRecipe: RecipeModel;
   deleteComment: CommentModel;
-  deleteOrderById: Scalars['Boolean']['output'];
+  deleteOrder: Scalars['Boolean']['output'];
   deleteProduct: ProductModel;
   deleteProductVariant: ProductVariantModel;
   deleteRecipe: RecipeModel;
+  deleteUser: Scalars['Boolean']['output'];
   login: AuthResponse;
   logout: Scalars['Boolean']['output'];
   refreshRecipeInShoppingList: ShoppingListModel;
@@ -238,6 +239,7 @@ export type Mutation = {
   updateProduct: ProductModel;
   updateProductVariant: ProductVariantModel;
   updateRecipe: RecipeModel;
+  updateUser: UserModel;
 };
 
 
@@ -282,7 +284,7 @@ export type MutationDeleteCommentArgs = {
 };
 
 
-export type MutationDeleteOrderByIdArgs = {
+export type MutationDeleteOrderArgs = {
   orderId: Scalars['String']['input'];
 };
 
@@ -299,6 +301,11 @@ export type MutationDeleteProductVariantArgs = {
 
 export type MutationDeleteRecipeArgs = {
   recipeId: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteUserArgs = {
+  userId: Scalars['String']['input'];
 };
 
 
@@ -363,6 +370,11 @@ export type MutationUpdateProductVariantArgs = {
 export type MutationUpdateRecipeArgs = {
   input: UpdateRecipeInput;
   recipeId: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateUserArgs = {
+  input: UserUpdateInput;
 };
 
 export type NutritionFactsInput = {
@@ -430,8 +442,9 @@ export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 export type ProductModel = {
   __typename?: 'ProductModel';
   iconUrl?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
+  isActive: Scalars['Boolean']['output'];
   productId: Scalars['String']['output'];
+  productName: Scalars['String']['output'];
   productVariants?: Maybe<Array<ProductVariantModel>>;
   recipeUnit: RecipeUnit;
 };
@@ -439,34 +452,45 @@ export type ProductModel = {
 export type ProductVariantModel = {
   __typename?: 'ProductVariantModel';
   label: Scalars['String']['output'];
-  note?: Maybe<Scalars['String']['output']>;
   price: Scalars['Decimal']['output'];
   pricingAmount: Scalars['Decimal']['output'];
   pricingUnit: SaleUnit;
   productVariantId: Scalars['String']['output'];
+  variantNote?: Maybe<Scalars['String']['output']>;
 };
 
 export type Query = {
   __typename?: 'Query';
   adminAllRecipes: Array<RecipeModel>;
   adminRecipeById: RecipeModel;
+  allOrders: Array<OrderModel>;
+  allOrdersByUserId: Array<OrderModel>;
   allProductVariants: Array<ProductVariantModel>;
   allProducts: Array<ProductModel>;
   allRecipes: Array<RecipeModel>;
   allUsers: Array<UserModel>;
   fullProfile: UserWithProfileModel;
-  getOrderById: OrderModel;
-  getOrderByReference: OrderModel;
-  getOrdersByUserId: Array<OrderModel>;
+  getAllShoppingLists: Array<ShoppingListModel>;
+  getCartByUserId: CartModel;
   newTokens: AuthResponse;
+  orderById: OrderModel;
+  orderByReference: OrderModel;
   productById: ProductModel;
+  productsWithoutVariants: Array<ProductModel>;
   recipeBySlug: RecipeModel;
+  userByEmail: UserModel;
   userById: UserModel;
+  variantById: ProductVariantModel;
 };
 
 
 export type QueryAdminRecipeByIdArgs = {
   recipeId: Scalars['String']['input'];
+};
+
+
+export type QueryAllOrdersByUserIdArgs = {
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -480,13 +504,15 @@ export type QueryAllRecipesArgs = {
 };
 
 
-export type QueryGetOrderByIdArgs = {
+export type QueryOrderByIdArgs = {
   orderId: Scalars['String']['input'];
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryGetOrderByReferenceArgs = {
+export type QueryOrderByReferenceArgs = {
   orderReference: Scalars['String']['input'];
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -499,6 +525,21 @@ export type QueryRecipeBySlugArgs = {
   slug: Scalars['String']['input'];
 };
 
+
+export type QueryUserByEmailArgs = {
+  email: Scalars['String']['input'];
+};
+
+
+export type QueryUserByIdArgs = {
+  userId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryVariantByIdArgs = {
+  variantId: Scalars['String']['input'];
+};
+
 export type RecipeInShoppingListInput = {
   listId: Scalars['String']['input'];
   recipeId: Scalars['String']['input'];
@@ -506,8 +547,6 @@ export type RecipeInShoppingListInput = {
 
 export type RecipeModel = {
   __typename?: 'RecipeModel';
-  author?: Maybe<UserModel>;
-  authorId: Scalars['String']['output'];
   calories?: Maybe<Scalars['Int']['output']>;
   comments?: Maybe<Array<CommentModel>>;
   cookingTime?: Maybe<Scalars['Int']['output']>;
@@ -523,8 +562,18 @@ export type RecipeModel = {
   slug: Scalars['String']['output'];
   tags: Array<RecipeTagModel>;
   title: Scalars['String']['output'];
+  user?: Maybe<UserModel>;
+  userId: Scalars['String']['output'];
 };
 
+export const RecipeSort = {
+  CookingTime: 'COOKING_TIME',
+  New: 'NEW',
+  Popular: 'POPULAR',
+  Recommended: 'RECOMMENDED'
+} as const;
+
+export type RecipeSort = typeof RecipeSort[keyof typeof RecipeSort];
 export type RecipeStepModel = {
   __typename?: 'RecipeStepModel';
   content: Scalars['String']['output'];
@@ -560,7 +609,7 @@ export type RecipesQueryInput = {
   limit?: Scalars['Int']['input'];
   page?: Scalars['Int']['input'];
   searchTerm?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<RecipeSort>;
   tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
@@ -601,9 +650,9 @@ export type ShoppingListItemModel = {
 
 export type ShoppingListItemSourceModel = {
   __typename?: 'ShoppingListItemSourceModel';
-  amount: Scalars['Decimal']['output'];
+  ingredientNote?: Maybe<Scalars['String']['output']>;
   ingredientsVersionUsed: Scalars['Int']['output'];
-  note?: Maybe<Scalars['String']['output']>;
+  quantity: Scalars['Decimal']['output'];
   recipe: RecipeModel;
   recipeId: Scalars['String']['output'];
   recipeUnit: RecipeUnit;
@@ -631,23 +680,23 @@ export type UpdateCartItemPurchaseInput = {
 
 export type UpdateIngredientInput = {
   ingredientId: Scalars['String']['input'];
-  note?: InputMaybe<Scalars['String']['input']>;
+  ingredientNote?: InputMaybe<Scalars['String']['input']>;
   quantity?: InputMaybe<Scalars['Decimal']['input']>;
   recipeUnit?: InputMaybe<RecipeUnit>;
 };
 
 export type UpdateProductInput = {
   iconUrl?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+  productName?: InputMaybe<Scalars['String']['input']>;
   recipeUnit?: InputMaybe<RecipeUnit>;
 };
 
 export type UpdateProductVariantInput = {
   label?: InputMaybe<Scalars['String']['input']>;
-  note?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Decimal']['input']>;
   pricingAmount?: InputMaybe<Scalars['Decimal']['input']>;
   pricingUnit?: InputMaybe<SaleUnit>;
+  variantNote?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateRecipeInput = {
@@ -706,12 +755,7 @@ export type UserUpdateInput = {
 
 export type UserWithProfileModel = {
   __typename?: 'UserWithProfileModel';
-  avatarUrl?: Maybe<Scalars['String']['output']>;
-  email: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
   fitnessProfile?: Maybe<FitnessProfileModel>;
-  role: Scalars['String']['output'];
-  userId: Scalars['String']['output'];
   userProfile?: Maybe<UserProfileModel>;
 };
 
@@ -734,4 +778,4 @@ export type GetAllRecipesQueryVariables = Exact<{
 }>;
 
 
-export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __typename?: 'RecipeModel', title: string, slug: string, author?: { __typename?: 'UserModel', email: string } | null }> };
+export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __typename?: 'RecipeModel', title: string, slug: string, user?: { __typename?: 'UserModel', email: string } | null }> };
