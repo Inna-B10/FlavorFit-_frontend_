@@ -95,6 +95,7 @@ export function AuthForm({ type }: IAuthFormType) {
 
     await apolloClient.resetStore()
 
+    localStorage.setItem('isLoggedIn', 'true')
     router.replace(PUBLIC_PAGES.HOME)
   }
 
