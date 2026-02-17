@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useApolloClient, useMutation } from '@apollo/client/react'
@@ -35,7 +36,7 @@ export function AuthForm({ type }: IAuthFormType) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, submitCount },
     getValues,
     setError,
     clearErrors
@@ -48,6 +49,10 @@ export function AuthForm({ type }: IAuthFormType) {
       firstName: ''
     }
   })
+
+  useEffect(() => {
+    clearErrors('root')
+  }, [type, clearErrors])
 
   const [login, loginState] = useMutation<LoginMutation, LoginMutationVariables>(LoginDocument)
   const [registerUser, registerState] = useMutation<RegisterMutation, RegisterMutationVariables>(
@@ -93,7 +98,7 @@ export function AuthForm({ type }: IAuthFormType) {
     router.replace(PUBLIC_PAGES.HOME)
   }
 
-  const serverMessage = errors.root?.message
+  const serverMessage = submitCount > 0 ? errors.root?.message : undefined
 
   return (
     <div className='bg-pale-white relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>
