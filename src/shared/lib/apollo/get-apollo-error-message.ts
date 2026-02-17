@@ -5,11 +5,19 @@ import {
   UnconventionalError
 } from '@apollo/client/errors'
 
+type OriginalErrorShape = { message?: unknown }
+
+function hasMessage(value: unknown): value is OriginalErrorShape {
+  return typeof value === 'object' && value !== null && 'message' in value
+}
+
 export function getApolloErrorMessage(error: unknown): string {
   // 1) GraphQL errors
   if (CombinedGraphQLErrors.is(error)) {
     const first = error.errors[0]
-    const originalMsg = first?.extensions?.originalError?.message
+
+    const originalError = first?.extensions?.originalError
+    const originalMsg = hasMessage(originalError) ? originalError.message : undefined
 
     // Nest ValidationPipe: message: string[]
     if (Array.isArray(originalMsg) && originalMsg.length) return String(originalMsg[0])
