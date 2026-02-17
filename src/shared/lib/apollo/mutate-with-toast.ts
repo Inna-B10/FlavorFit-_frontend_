@@ -1,38 +1,33 @@
 import { toast } from 'react-hot-toast'
-import { extractGqlMessage } from '@/shared/utils/extract-gql-message'
+import { getApolloErrorMessage } from './get-apollo-error-message'
 
 type MutateFn<TData> = () => Promise<{ data?: TData }>
 
 export async function mutateWithToast<TData>(
-	mutate: MutateFn<TData>,
-	options?: {
-		successMessage?: string
-		errorMessage?: string
-	}
-): Promise<TData | null> {
-	try {
-		const res = await mutate()
+  mutate: MutateFn<TData>,
+  options?: {
+    successMessage?: string
+    errorMessage?: string
+  }
+): Promise<{ data: TData | null; errorMessage?: string }> {
+  try {
+    const res = await mutate()
 
-		if (!res.data) {
-			throw new Error(options?.errorMessage ?? 'Operation failed')
-		}
+    if (!res.data) {
+      const msg = options?.errorMessage ?? 'Operation failed'
+      toast.error(msg)
+      return { data: null, errorMessage: msg }
+    }
 
-		if (options?.successMessage) {
-			toast.success(options.successMessage)
-		}
+    if (options?.successMessage) {
+      toast.success(options.successMessage)
+    }
 
-		return res.data
-	} catch (e) {
-		const message = extractGqlMessage(e)
-		// typeof e === 'object' && e && 'message' in e
-		// 	? String((e as unknown as Error).message)
-		// 	: (options?.errorMessage ?? 'Request failed')
+    return { data: res.data }
+  } catch (e) {
+    const message = getApolloErrorMessage(e)
 
-		const prettyMsg = message.includes('Failed to fetch')
-			? 'Server is unavailable.\nPlease try again later.'
-			: message
-
-		toast.error(prettyMsg)
-		throw e
-	}
+    toast.error(message)
+    return { data: null, errorMessage: message }
+  }
 }

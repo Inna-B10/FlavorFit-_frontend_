@@ -1,14 +1,15 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useApolloClient, useMutation } from '@apollo/client/react'
 import { useForm } from 'react-hook-form'
 import { Field } from '@/shared/components/ui/Field'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
+import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
-import { extractGqlMessage } from '@/shared/utils/extract-gql-message'
 import {
   LoginDocument,
   LoginMutation,
@@ -35,7 +36,7 @@ export function AuthForm({ type }: IAuthFormType) {
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
-    watch,
+    getValues,
     setError,
     clearErrors
   } = useForm<IAuthForm>({
@@ -48,8 +49,6 @@ export function AuthForm({ type }: IAuthFormType) {
     }
   })
 
-  const password = watch('password')
-
   const [login, loginState] = useMutation<LoginMutation, LoginMutationVariables>(LoginDocument)
   const [registerUser, registerState] = useMutation<RegisterMutation, RegisterMutationVariables>(
     RegisterDocument
@@ -58,9 +57,8 @@ export function AuthForm({ type }: IAuthFormType) {
 
   const handleAuth = async (form: IAuthForm) => {
     clearErrors('root')
-    try {
-      if (isLogin) {
-        await mutateWithToast(
+    const result = isLogin
+      ? await mutateWithToast(
           () =>
             login({
               variables: { data: { email: form.email, password: form.password } }
@@ -70,9 +68,7 @@ export function AuthForm({ type }: IAuthFormType) {
             errorMessage: 'Login failed'
           }
         )
-      } else {
-        // register
-        await mutateWithToast(
+      : await mutateWithToast(
           () =>
             registerUser({
               variables: {
@@ -84,24 +80,31 @@ export function AuthForm({ type }: IAuthFormType) {
             errorMessage: 'Registration failed'
           }
         )
-      }
 
-      await apolloClient.resetStore()
-      router.replace(PUBLIC_PAGES.HOME)
-    } catch (e) {
-      setError('root', { type: 'server', message: 'Something went wrong' })
+    if (!result.data) {
+      if (result.errorMessage) {
+        setError('root', { type: 'server', message: result.errorMessage })
+      }
+      return
     }
+
+    await apolloClient.resetStore()
+
+    router.replace(PUBLIC_PAGES.HOME)
   }
-  const authError = extractGqlMessage(loginState.error || registerState.error || errors.root)
-  const serverMessage =
-    authError ||
-    loginState.error?.message ||
-    registerState.error?.message ||
-    errors.root?.message ||
-    undefined
+
+  const serverMessage = errors.root?.message
 
   return (
-    <div className='bg-pale-white m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>
+    <div className='bg-pale-white relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>
+      <Link
+        href='/'
+        title='Homepage'
+        aria-label='Go to homepage'
+        className='bg-dark-green absolute top-8 left-7 h-14 w-fit rounded-full p-2.5 shadow-md transition-all duration-300 ease-in-out hover:scale-105 sm:hidden'
+      >
+        <LogoIcon className='text-pale-white h-full w-auto' />
+      </Link>
       <h2 className='font-sansita my-4 text-center text-4xl font-bold italic'>
         {isLogin ? 'Sign in' : 'Sign up'}
       </h2>
@@ -146,7 +149,7 @@ export function AuthForm({ type }: IAuthFormType) {
               <Input
                 {...register('confirmPassword', {
                   required: 'Password confirmation is required',
-                  validate: value => value === password || 'Passwords don`t match!'
+                  validate: value => value === getValues('password') || 'Passwords don`t match!'
                 })}
                 placeholder='Password confirmation'
                 type='password'
