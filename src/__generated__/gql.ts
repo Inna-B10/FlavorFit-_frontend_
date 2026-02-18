@@ -16,12 +16,12 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 type Documents = {
     "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    accessToken\n  }\n}": typeof types.LoginDocument,
     "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}": typeof types.RegisterDocument,
-    "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    title\n    slug\n    user {\n      email\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
+    "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
 };
 const documents: Documents = {
     "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    accessToken\n  }\n}": types.LoginDocument,
     "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    accessToken\n  }\n}": types.RegisterDocument,
-    "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    title\n    slug\n    user {\n      email\n    }\n  }\n}": types.GetAllRecipesDocument,
+    "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": types.GetAllRecipesDocument,
 };
 
 /**
@@ -49,7 +49,7 @@ export function graphql(source: "mutation Register($data: RegisterInput!) {\n  r
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    title\n    slug\n    user {\n      email\n    }\n  }\n}"): (typeof documents)["query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    title\n    slug\n    user {\n      email\n    }\n  }\n}"];
+export function graphql(source: "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}"): (typeof documents)["query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

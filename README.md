@@ -97,6 +97,11 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
+- [ ] verification email
+- [ ] **auth page:**
+  - [ ] login/register form
+  - [ ] validation, messages
+  - [ ] errors
 - [ ] header + responsiveness
 - [ ] icons
 - [ ] user/default avatar

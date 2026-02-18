@@ -1,4 +1,8 @@
 картинки
+
+https://www.freepik.com/serie/31260435
+
+
 https://www.freepik.com/free-vector/set-food-isolated_10803680.htm
 
 реалистичные 
@@ -15,6 +19,18 @@ https://www.figma.com/design/nzV3JGLDKt7VEjZDcWKZKa/Fresh---Vibrant-3D--Vegetabl
 https://www.figma.com/design/ngkhwU5KHg7lbcGTAjpNOf/Vibrant-3D-Fruit-Icons-Set--Community-?node-id=0-1&p=f&t=c3kicLLNw82rDKFy-0
 
 https://www.figma.com/files/team/1300813608126587713/resources/community/@a1a91bee_9743_4?fuid=1300808883285612631
+
+****************************************************
+API https://spoonacular.com/food-api
+
+Recipes:
+
+https://spoonacular.com/grilled-chicken-banh-mi-645634
+
+https://www.foodista.com/recipe/2Q34KBV6/grilled-chicken-banh-mi
+
+https://www.onegreenplanet.org/vegan-recipe/warm-potato-salad-with-spinach-and-chickpeas/
+
 
 
 
