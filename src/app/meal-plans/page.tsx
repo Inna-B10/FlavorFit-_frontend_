@@ -1,3 +1,3 @@
 export default function MealPlansPage() {
-	return <div>MealPlans Page</div>
+  return <div>MealPlans Page</div>
 }

@@ -10,13 +10,13 @@ const endpoint = process.env.GRAPHQL_ENDPOINT
 if (!endpoint) throw new Error('GRAPHQL_ENDPOINT is not defined')
 
 const config: CodegenConfig = {
-	overwrite: true,
-	schema: endpoint,
-	generates: {
-		'src/shared/graphql/graphql-schema.json': {
-			plugins: ['introspection']
-		}
-	}
+  overwrite: true,
+  schema: endpoint,
+  generates: {
+    'src/shared/graphql/graphql-schema.json': {
+      plugins: ['introspection']
+    }
+  }
 }
 
 export default config

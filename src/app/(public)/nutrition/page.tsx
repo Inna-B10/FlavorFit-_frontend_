@@ -1,3 +1,3 @@
 export default function NutritionPage() {
-	return <div>Nutrition Page</div>
+  return <div>Nutrition Page</div>
 }

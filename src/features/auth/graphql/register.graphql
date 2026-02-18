@@ -1,5 +1,5 @@
-mutation Register($data:RegisterInput!){
-  register(data:$data){
+mutation Register($data: RegisterInput!) {
+  register(data: $data) {
     accessToken
   }
 }

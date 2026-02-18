@@ -1,10 +1,19 @@
 query GetAllRecipes($input: RecipesQueryInput!) {
-	allRecipes(input: $input) {
-		title
-		slug
-		user {
-			email
-		}
-	}
+  allRecipes(input: $input) {
+    calories
+    cookingTime
+    description
+    difficulty
+    dishType
+    ingredientsVersion
+    likesCount
+    recipeId
+    slug
+    title
+    userId
+    user {
+      avatarUrl
+      firstName
+    }
+  }
 }
-

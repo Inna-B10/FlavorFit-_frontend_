@@ -1,14 +1,14 @@
 export type NavbarIcon =
-	| 'recipes'
-	| 'nutrition'
-	| 'forum'
-	| 'mealPlans'
-	| 'analytics'
-	| 'orderGroceries'
-	| 'dashboard'
+  | 'recipes'
+  | 'nutrition'
+  | 'forum'
+  | 'mealPlans'
+  | 'analytics'
+  | 'orderGroceries'
+  | 'dashboard'
 
 export interface INavbarItem {
-	icon: NavbarIcon
-	label: string
-	link: string
+  icon: NavbarIcon
+  label: string
+  link: string
 }
