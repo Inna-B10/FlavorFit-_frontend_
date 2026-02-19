@@ -35,9 +35,9 @@ export function MenuItem({ item, isActive }: IMenuItem) {
         className={cn(
           'group flex items-center justify-center rounded-full p-2 text-sm shadow-sm lg:gap-0.5 lg:rounded-4xl lg:px-3 lg:py-1 xl:gap-1.5 xl:rounded-4xl xl:px-4 xl:py-2',
           {
-            'bg-pale-white text-dark-green hover:bg-light-green hover:text-foreground transition-all duration-300 ease-in-out':
+            'bg-gradient-white-pale text-green-dark hover:bg-gradient-green-light hover:text-foreground transition-all duration-300 ease-in-out':
               !isActive,
-            'bg-light-green text-foreground hover:cursor-default': isActive
+            'bg-gradient-green-light text-foreground hover:cursor-default': isActive
           }
         )}
       >

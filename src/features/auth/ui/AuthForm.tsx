@@ -102,14 +102,14 @@ export function AuthForm({ type }: IAuthFormType) {
   const serverMessage = submitCount > 0 ? errors.root?.message : undefined
 
   return (
-    <div className='bg-pale-white relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>
+    <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>
       <Link
         href='/'
         title='Homepage'
         aria-label='Go to homepage'
-        className='bg-dark-green absolute top-8 left-7 h-14 w-fit rounded-full p-2.5 shadow-md transition-all duration-300 ease-in-out hover:scale-105 sm:hidden'
+        className='bg-green-dark absolute top-8 left-7 h-14 w-fit rounded-full p-2.5 shadow-md transition-all duration-300 ease-in-out hover:scale-105 sm:hidden'
       >
-        <LogoIcon className='text-pale-white h-full w-auto' />
+        <LogoIcon className='text-white-pale h-full w-auto' />
       </Link>
       <h2 className='font-sansita my-4 text-center text-4xl font-bold italic'>
         {isLogin ? 'Sign in' : 'Sign up'}

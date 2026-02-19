@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: PropsWithChildren<unknown>) {
         aria-label='Go to homepage'
         className='hidden transition-all duration-300 ease-in-out hover:scale-102 sm:mt-4 sm:block sm:self-start'
       >
-        <LogoName className='text-dark-green mb-6 h-auto w-30 sm:w-42 md:mb-10 md:w-62 xl:w-72' />
+        <LogoName className='text-green-dark mb-6 h-auto w-30 sm:w-42 md:mb-10 md:w-62 xl:w-72' />
       </Link>
       {children}
 

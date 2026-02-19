@@ -17,9 +17,9 @@ export function Header() {
           href='/'
           title='Homepage'
           aria-label='Go to homepage'
-          className='bg-dark-green mr-2 h-10 w-fit rounded-full p-3 shadow-md transition-all duration-300 ease-in-out hover:scale-105 xl:mr-1 xl:h-14'
+          className='bg-gradient-green-dark mr-2 h-10 w-fit rounded-full p-3 shadow-md transition-all duration-300 ease-in-out hover:scale-105 xl:mr-1 xl:h-14'
         >
-          <LogoIcon className='text-pale-white h-full w-auto' />
+          <LogoIcon className='text-white-pale h-full w-auto' />
         </Link>
         <Navbar isLoggedIn={isLoggedIn} />
       </div>

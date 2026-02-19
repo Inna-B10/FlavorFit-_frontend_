@@ -12,7 +12,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
           href={USER_PAGES.NOTIFICATION}
           title='Notification'
           aria-label='Check notification'
-          className='bg-pale-white text-dark-green hover:bg-light-green hover:text-foreground rounded-full p-2 shadow-sm transition-colors duration-300 ease-in-out hover:cursor-pointer xl:p-3'
+          className='bg-gradient-white-pale text-green-dark hover:text-foreground hover:bg-gradient-green-light rounded-full p-2 shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer xl:p-3'
         >
           <FaRegBell className='size-[16] md:size-[18] xl:size-[22]' />
         </Link>
@@ -21,7 +21,7 @@ export function UserBlock({ isLoggedIn }: { isLoggedIn: boolean }) {
         href={PUBLIC_PAGES.CONTACT}
         title='Contact'
         aria-label='Go to contact form'
-        className='bg-pale-white text-dark-green hover:bg-light-green hover:text-foreground rounded-full p-2 shadow-sm transition-colors duration-300 ease-in-out hover:cursor-pointer xl:p-3'
+        className='bg-gradient-white-pale text-green-dark hover:text-foreground hover:bg-gradient-green-light rounded-full p-2 shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer xl:p-3'
       >
         <TfiHeadphoneAlt className='size-[16] md:size-[18] xl:size-[22]' />
       </Link>

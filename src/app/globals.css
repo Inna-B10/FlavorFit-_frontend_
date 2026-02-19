@@ -5,15 +5,20 @@
 :root {
 
   /* --background: #e8f7d3; */
+  /* --background: #EBF0B3; */
   /* --background: #F0F0F0; */
   /* --background: #F8F8F8; */
   --background: #F2E7BD;
   --foreground: #171717;
+  /* --foreground: #474748; */
   --accent: #feb249;
 
-  --dark-green: #285430;
-  --pale-white: #fafafa;
-  --light-green: #a4be7b;
+  --green-dark: #285430;
+  --green-light: #a4be7b;
+  --white-pale: #fafafa;
+  --gradient-white-pale: linear-gradient(to top, #E3E3E3, #ffffff);
+  --gradient-green-dark: linear-gradient(to top, #285430, #385E0160);
+  --gradient-green-light: linear-gradient(to top, #a4be7b, #B2D48080);
   /* --accent: oklch(0.967 0.001 286.375); */
   /* --accent: #e28935; */
   /* --accent: #f6ad72; */
@@ -58,11 +63,15 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-dark-green: var(--dark-green);
-  --color-pale-white: var(--pale-white);
-  --color-light-green: var(--light-green);
+  --color-green-dark: var(--green-dark);
+  --color-white-pale: var(--white-pale);
+  --color-green-light: var(--green-light);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --background-image-gradient-green-dark: var(--gradient-green-dark);
+  --background-image-gradient-green-light: var(--gradient-green-light);
+  --background-image-gradient-white-pale: var(--gradient-white-pale);
+
 
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
@@ -140,6 +149,7 @@ body {
   scroll-behavior: smooth;
 }
 
+
 html {
   font-size: 16px;
 }
@@ -152,8 +162,53 @@ button:disabled {
   cursor: default;
 }
 
+
+.hit-the-floor {
+  color: var(--color-white-pale);
+  font-weight: bold;
+  font-family: var(--font-poppins), sans-serif;
+  text-shadow:
+    0 .005em 0 #ccc,
+    0 .01em 0 #c9c9c9,
+    0 .015em 0 #bbb,
+    0 .02em 0 #b9b9b9,
+    0 .025em 0 #aaa,
+    0 .03em .005em rgba(0, 0, 0, .1),
+    0 0 .025em rgba(0, 0, 0, .1),
+    0 .005em .015em rgba(0, 0, 0, .3),
+    0 .015em .025em rgba(0, 0, 0, .2),
+    0 .025em .05em rgba(0, 0, 0, .25),
+    0 .05em .05em rgba(0, 0, 0, .2),
+    0 .1em .1em rgba(0, 0, 0, .15);
+}
+
 /* input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 } */
+
+/* ------------------------------- Collage 404 ------------------------------ */
+.collageWrap {
+  container-type: inline-size;
+  container-name: collage;
+  width: 150px;
+  min-width: 50px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.collageStage {
+  position: absolute;
+  inset: 0;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.piece {
+  position: absolute;
+  border-radius: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
