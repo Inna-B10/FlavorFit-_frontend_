@@ -114,26 +114,19 @@ const items = [
 ]
 export default function NotFoundPage() {
   return (
-    <div className='flex h-full w-full grow flex-col items-center gap-20'>
+    <div className='flex h-full w-full grow flex-col items-center justify-center'>
       <Link
         href='/'
         title='Homepage'
         aria-label='Go to homepage'
-        className='hidden transition-all duration-300 ease-in-out hover:scale-102 sm:mt-4 sm:block sm:self-start'
+        className='absolute top-5 left-8 hidden transition-all duration-300 ease-in-out hover:scale-102 sm:mt-4 sm:block sm:self-start'
       >
-        <LogoName className='text-green-dark mb-6 h-auto w-30 sm:w-42 md:mb-10 md:w-62 xl:w-72' />
+        <LogoName className='text-green-dark h-auto w-30 sm:w-42 md:w-62' />
       </Link>
-      {/* <div className='full w-full text-center'>
-        <h2 className='hit-the-floor text-9xl'>
-          404
-          <div className='text-6xl text-nowrap'>Page not found!</div>
-        </h2>
-      </div> */}
-
-      <div className='flex h-full w-full grow flex-col items-center justify-center gap-4 text-[#385E01] text-shadow-md'>
-        <div className='flex h-full w-full items-center justify-center gap-2'>
+      <div className='space-y-2 text-[#474747] text-shadow-md'>
+        <div className='flex h-full w-full items-center justify-center gap-3'>
           <span className='font-sonsie text-[10rem]'>4</span>
-          <div className='collageWrap flex justify-center'>
+          <div className='collageWrap'>
             <div
               className='collageStage w-full'
               aria-hidden='true'
@@ -163,7 +156,7 @@ export default function NotFoundPage() {
               ))}
             </div>
           </div>
-          <span className='font-sonsie -ml-3 text-[10rem]'>4</span>
+          <span className='font-sonsie -ml-2 text-[10rem]'>4</span>
         </div>
         <h2 className='font-poppins text-2xl italic'>
           You&apos;ve trespassed into the no-produce zone.

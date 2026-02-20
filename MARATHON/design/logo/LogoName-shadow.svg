@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.664 76.508" width="168.664px" height="71.5076px" xmlns:bx="https://boxy-svg.com">
   <defs>
-    <filter id="drop-shadow-filter-0" bx:preset="drop-shadow 1 1 1 1 0.2 #000" color-interpolation-filters="sRGB" x="-50%" y="-50%" width="200%" height="200%">
+    <filter id="drop-shadow-filter-0" 
       <title>Drop shadow</title>
       <feGaussianBlur in="SourceAlpha" stdDeviation="1"></feGaussianBlur>
       <feOffset dx="1" dy="1"></feOffset>
       <feComponentTransfer result="offsetblur">
-        <feFuncA id="spread-ctrl" type="linear" slope="0.4"></feFuncA>
+        <feFuncA id="spread-ctrl" type="linear" slope="0.5"></feFuncA>
       </feComponentTransfer>
-      <feFlood flood-color="#000"></feFlood>
+      <feFlood flood-color="#00000080"></feFlood>
       <feComposite in2="offsetblur" operator="in"></feComposite>
       <feMerge>
         <feMergeNode></feMergeNode>
@@ -31,7 +31,7 @@
     <linearGradient id="color-0-8" href="#color-0" gradientUnits="userSpaceOnUse" x1="454.012" y1="78.413" x2="454.012" y2="105.713"></linearGradient>
     <linearGradient id="color-0-9" href="#color-0" gradientUnits="userSpaceOnUse" x1="480.352" y1="77.993" x2="480.352" y2="105.713"></linearGradient>
     <linearGradient id="color-0-10" href="#color-0" gradientUnits="userSpaceOnUse" x1="502.762" y1="78.413" x2="502.762" y2="105.173"></linearGradient>
-    <linearGradient id="gradient-0" x1="331.36" x2="331.36" y1="121.848" y2="193.356" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.936212, 0.351436, -0.469456, 1.250612, 86.920992, -163.899714)">
+    <linearGradient id="gradient-0" x1="331.36" x2="331.36" y1="121.848" y2="203.356" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.936212, 0.351436, -0.469456, 1.250612, 86.920992, -163.899714)">
       <stop style="stop-color: rgba(56, 94, 1, 0.376);" offset="0"></stop>
       <stop style="stop-color: rgb(40, 84, 48);" offset="0.263"></stop>
     </linearGradient>

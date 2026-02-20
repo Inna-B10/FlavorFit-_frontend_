@@ -73,15 +73,7 @@ export function LogoName({ className }: ILogoWordmark) {
       className={className}
     >
       <defs>
-        <filter
-          id='drop-shadow-filter-0'
-          filter='drop-shadow 1 1 1 1 0.2 #000'
-          colorInterpolationFilters='sRGB'
-          x='-50%'
-          y='-50%'
-          width='200%'
-          height='200%'
-        >
+        <filter id='drop-shadow-filter-0'>
           <title>Drop shadow</title>
           <feGaussianBlur
             in='SourceAlpha'
@@ -95,10 +87,10 @@ export function LogoName({ className }: ILogoWordmark) {
             <feFuncA
               id='spread-ctrl'
               type='linear'
-              slope='0.4'
+              slope='0.5'
             ></feFuncA>
           </feComponentTransfer>
-          <feFlood floodColor='#000'></feFlood>
+          <feFlood floodColor='#00000080'></feFlood>
           <feComposite
             in2='offsetblur'
             operator='in'
@@ -213,7 +205,7 @@ export function LogoName({ className }: ILogoWordmark) {
           x1='331.36'
           x2='331.36'
           y1='121.848'
-          y2='193.356'
+          y2='203.356'
           gradientUnits='userSpaceOnUse'
           gradientTransform='matrix(0.936212, 0.351436, -0.469456, 1.250612, 86.920992, -163.899714)'
         >
