@@ -1,4 +1,4 @@
-export type NavbarIcon =
+export type TNavbarIcon =
   | 'recipes'
   | 'nutrition'
   | 'forum'
@@ -8,7 +8,7 @@ export type NavbarIcon =
   | 'dashboard'
 
 export interface INavbarItem {
-  icon: NavbarIcon
+  icon: TNavbarIcon
   label: string
   link: string
 }

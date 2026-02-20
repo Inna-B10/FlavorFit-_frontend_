@@ -8,14 +8,14 @@ import { ImStatsBars } from 'react-icons/im'
 import { IoStorefrontOutline } from 'react-icons/io5'
 import { LuLayoutDashboard } from 'react-icons/lu'
 import { PiUsersFour } from 'react-icons/pi'
-import type { INavbarItem, NavbarIcon } from '@/shared/types/navbar.types'
+import type { INavbarItem, TNavbarIcon } from '@/shared/types/navbar.types'
 
 interface IMenuItem {
   item: INavbarItem
   isActive: boolean
 }
 
-const ICONS: Record<NavbarIcon, IconType> = {
+const ICONS: Record<TNavbarIcon, IconType> = {
   recipes: BiBookBookmark,
   nutrition: FaNutritionix,
   forum: PiUsersFour,
