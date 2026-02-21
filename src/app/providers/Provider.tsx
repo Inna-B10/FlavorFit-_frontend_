@@ -13,14 +13,20 @@ export function Provider({ children }: { children: React.ReactNode }) {
       {children}
       <Toaster
         position='top-center'
-        // toastOptions={{
-        // 	style: {
-        // 		backgroundColor: '#3f3f46',
-        // 		// backgroundColor: '#202937',
-        // 		color: 'white'
-        // 	},
-        // 	className: 'border border-white/20 text-nowrap shadow-lg'
+        // containerStyle={{
+        //   position: 'absolute',
+        //   top: '10vh',
+        //   left: '0'
         // }}
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: '#a4be7b',
+              secondary: '#285430'
+            }
+          },
+          className: 'mt-20 border border-green-dark/50 text-nowrap shadow-lg'
+        }}
       />
     </ApolloProvider>
   )
