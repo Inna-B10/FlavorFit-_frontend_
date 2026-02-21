@@ -16,19 +16,19 @@ class PublicPages {
 export const PUBLIC_PAGES = new PublicPages()
 
 class UserPages {
-  readonly PROFILE = '/profile'
-  readonly ACCOUNT = '/account'
-  readonly MEAL_PLANS = '/meal-plans'
-  readonly ANALYTICS = '/analytics'
-  readonly ORDER_GROCERIES = '/order-groceries' //Cart?
-  readonly DASHBOARD = '/dashboard'
-  readonly SHOPPING_LIST = '/shopping-list'
+  readonly PROFILE = '/user/profile'
+  readonly ACCOUNT = '/user/account'
+  readonly MEAL_PLANS = '/user/meal-plans'
+  readonly ANALYTICS = '/user/analytics'
+  readonly ORDER_GROCERIES = '/user/order-groceries' //Cart?
+  readonly DASHBOARD = '/user/dashboard'
+  readonly SHOPPING_LIST = '/user/shopping-list'
   // readonly CART = '/cart'
 
   ORDERS(path?: string) {
-    return `/orders${path ? `/${path}` : ''}`
+    return `/user/orders${path ? `/${path}` : ''}`
   }
-  readonly NOTIFICATION = '/notification'
+  readonly NOTIFICATION = '/user/notification'
 }
 
 export const USER_PAGES = new UserPages()
