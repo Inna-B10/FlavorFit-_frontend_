@@ -100,7 +100,6 @@ export type CreateIngredientInput = {
   productIconUrl?: InputMaybe<Scalars['String']['input']>;
   productId?: InputMaybe<Scalars['String']['input']>;
   productName?: InputMaybe<Scalars['String']['input']>;
-  productRecipeUnit?: InputMaybe<RecipeUnit>;
   quantity: Scalars['Decimal']['input'];
   recipeUnit: RecipeUnit;
 };
@@ -232,10 +231,11 @@ export type Mutation = {
   login: AuthResponse;
   logout: Scalars['Boolean']['output'];
   refreshRecipeInShoppingList: ShoppingListModel;
-  register: AuthResponse;
+  register: RegisterResponse;
   removeAllCartItems: CartModel;
   removeCartItem: CartModel;
   removeRecipeFromShoppingList: ShoppingListModel;
+  resendVerification: Scalars['Boolean']['output'];
   toggleLike: ToggleLikeResponse;
   updateCartItemPurchase: CartModel;
   updateComment: CommentModel;
@@ -244,6 +244,7 @@ export type Mutation = {
   updateProductVariant: ProductVariantModel;
   updateRecipe: RecipeModel;
   updateUser: UserModel;
+  verifyEmail: AuthResponse;
 };
 
 
@@ -338,6 +339,11 @@ export type MutationRemoveRecipeFromShoppingListArgs = {
 };
 
 
+export type MutationResendVerificationArgs = {
+  email: Scalars['String']['input'];
+};
+
+
 export type MutationToggleLikeArgs = {
   recipeId: Scalars['String']['input'];
 };
@@ -381,11 +387,17 @@ export type MutationUpdateUserArgs = {
   input: UserUpdateInput;
 };
 
+
+export type MutationVerifyEmailArgs = {
+  token: Scalars['String']['input'];
+};
+
 export type NutritionFactsInput = {
   carbohydrates?: InputMaybe<Scalars['Decimal']['input']>;
   fats?: InputMaybe<Scalars['Decimal']['input']>;
   fiber?: InputMaybe<Scalars['Decimal']['input']>;
   protein?: InputMaybe<Scalars['Decimal']['input']>;
+  sugar?: InputMaybe<Scalars['Decimal']['input']>;
 };
 
 export type NutritionFactsModel = {
@@ -396,6 +408,7 @@ export type NutritionFactsModel = {
   fiber?: Maybe<Scalars['Decimal']['output']>;
   protein?: Maybe<Scalars['Decimal']['output']>;
   recipeId: Scalars['String']['output'];
+  sugar?: Maybe<Scalars['Decimal']['output']>;
 };
 
 export const NutritionGoal = {
@@ -595,6 +608,7 @@ export type RecipeTagModel = {
 
 export const RecipeUnit = {
   Cloves: 'CLOVES',
+  Cup: 'CUP',
   Gram: 'GRAM',
   Kilogram: 'KILOGRAM',
   Liter: 'LITER',
@@ -621,6 +635,11 @@ export type RegisterInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+export type RegisterResponse = {
+  __typename?: 'RegisterResponse';
+  user: UserModel;
 };
 
 export type RemoveCartItemInput = {
@@ -735,6 +754,7 @@ export type UserModel = {
   firstName: Scalars['String']['output'];
   role: Scalars['String']['output'];
   userId: Scalars['String']['output'];
+  verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserProfileModel = {
@@ -775,7 +795,21 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', accessToken: string } };
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'RegisterResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, userId: string, role: string } } };
+
+export type ResendVerificationMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+}>;
+
+
+export type ResendVerificationMutation = { __typename?: 'Mutation', resendVerification: boolean };
+
+export type VerifyEmailMutationVariables = Exact<{
+  token: Scalars['String']['input'];
+}>;
+
+
+export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', accessToken: string, user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;
@@ -786,5 +820,7 @@ export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __t
 
 
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const ResendVerificationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ResendVerification"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resendVerification"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}]}}]} as unknown as DocumentNode<ResendVerificationMutation, ResendVerificationMutationVariables>;
+export const VerifyEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"VerifyEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"token"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifyEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"token"},"value":{"kind":"Variable","name":{"kind":"Name","value":"token"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"verificationToken"}}]}}]}}]}}]} as unknown as DocumentNode<VerifyEmailMutation, VerifyEmailMutationVariables>;
 export const GetAllRecipesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllRecipes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RecipesQueryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allRecipes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"calories"}},{"kind":"Field","name":{"kind":"Name","value":"cookingTime"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"dishType"}},{"kind":"Field","name":{"kind":"Name","value":"ingredientsVersion"}},{"kind":"Field","name":{"kind":"Name","value":"likesCount"}},{"kind":"Field","name":{"kind":"Name","value":"recipeId"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllRecipesQuery, GetAllRecipesQueryVariables>;

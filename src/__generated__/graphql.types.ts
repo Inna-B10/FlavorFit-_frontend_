@@ -96,7 +96,6 @@ export type CreateIngredientInput = {
   productIconUrl?: InputMaybe<Scalars['String']['input']>;
   productId?: InputMaybe<Scalars['String']['input']>;
   productName?: InputMaybe<Scalars['String']['input']>;
-  productRecipeUnit?: InputMaybe<RecipeUnit>;
   quantity: Scalars['Decimal']['input'];
   recipeUnit: RecipeUnit;
 };
@@ -228,10 +227,11 @@ export type Mutation = {
   login: AuthResponse;
   logout: Scalars['Boolean']['output'];
   refreshRecipeInShoppingList: ShoppingListModel;
-  register: AuthResponse;
+  register: RegisterResponse;
   removeAllCartItems: CartModel;
   removeCartItem: CartModel;
   removeRecipeFromShoppingList: ShoppingListModel;
+  resendVerification: Scalars['Boolean']['output'];
   toggleLike: ToggleLikeResponse;
   updateCartItemPurchase: CartModel;
   updateComment: CommentModel;
@@ -240,6 +240,7 @@ export type Mutation = {
   updateProductVariant: ProductVariantModel;
   updateRecipe: RecipeModel;
   updateUser: UserModel;
+  verifyEmail: AuthResponse;
 };
 
 
@@ -334,6 +335,11 @@ export type MutationRemoveRecipeFromShoppingListArgs = {
 };
 
 
+export type MutationResendVerificationArgs = {
+  email: Scalars['String']['input'];
+};
+
+
 export type MutationToggleLikeArgs = {
   recipeId: Scalars['String']['input'];
 };
@@ -377,11 +383,17 @@ export type MutationUpdateUserArgs = {
   input: UserUpdateInput;
 };
 
+
+export type MutationVerifyEmailArgs = {
+  token: Scalars['String']['input'];
+};
+
 export type NutritionFactsInput = {
   carbohydrates?: InputMaybe<Scalars['Decimal']['input']>;
   fats?: InputMaybe<Scalars['Decimal']['input']>;
   fiber?: InputMaybe<Scalars['Decimal']['input']>;
   protein?: InputMaybe<Scalars['Decimal']['input']>;
+  sugar?: InputMaybe<Scalars['Decimal']['input']>;
 };
 
 export type NutritionFactsModel = {
@@ -392,6 +404,7 @@ export type NutritionFactsModel = {
   fiber?: Maybe<Scalars['Decimal']['output']>;
   protein?: Maybe<Scalars['Decimal']['output']>;
   recipeId: Scalars['String']['output'];
+  sugar?: Maybe<Scalars['Decimal']['output']>;
 };
 
 export const NutritionGoal = {
@@ -591,6 +604,7 @@ export type RecipeTagModel = {
 
 export const RecipeUnit = {
   Cloves: 'CLOVES',
+  Cup: 'CUP',
   Gram: 'GRAM',
   Kilogram: 'KILOGRAM',
   Liter: 'LITER',
@@ -617,6 +631,11 @@ export type RegisterInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+export type RegisterResponse = {
+  __typename?: 'RegisterResponse';
+  user: UserModel;
 };
 
 export type RemoveCartItemInput = {
@@ -731,6 +750,7 @@ export type UserModel = {
   firstName: Scalars['String']['output'];
   role: Scalars['String']['output'];
   userId: Scalars['String']['output'];
+  verificationToken?: Maybe<Scalars['String']['output']>;
 };
 
 export type UserProfileModel = {
@@ -771,7 +791,21 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', accessToken: string } };
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'RegisterResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, userId: string, role: string } } };
+
+export type ResendVerificationMutationVariables = Exact<{
+  email: Scalars['String']['input'];
+}>;
+
+
+export type ResendVerificationMutation = { __typename?: 'Mutation', resendVerification: boolean };
+
+export type VerifyEmailMutationVariables = Exact<{
+  token: Scalars['String']['input'];
+}>;
+
+
+export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', accessToken: string, user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;
