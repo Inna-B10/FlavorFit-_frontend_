@@ -1,14 +1,13 @@
 'use client'
 import Link from 'next/link'
+import { useIsLoggedIn } from '@/features/auth/hooks/useIsLoggedIn'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
-import { IS_CLIENT } from '@/shared/constants/app.constants'
 import { UserBlock } from './UserBlock'
 import { Navbar } from './navbar/Navbar'
 
 export function Header() {
-  //[TODO] isLoggedIn
-  const token = IS_CLIENT ? localStorage.getItem('isLoggedIn') : null
-  const isLoggedIn = token !== null
+  //[TODO] delete it
+  const isLoggedIn = useIsLoggedIn()
 
   return (
     <header className='flex items-center justify-between gap-4 text-center'>

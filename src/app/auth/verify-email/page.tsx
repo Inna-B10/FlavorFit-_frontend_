@@ -45,10 +45,8 @@ export default function VerifyEmail() {
         }
 
         toast.error('Verification failed.')
-        // router.replace('/auth/check-email')
       } catch (error) {
         toast.error('Invalid or expired verification link.')
-        // router.replace('/auth/check-email')
       }
 
       setLoading(false)

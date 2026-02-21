@@ -19,6 +19,7 @@ import {
   RegisterMutation,
   RegisterMutationVariables
 } from '@/__generated__/graphql'
+import { setLoggedInFlag } from '../hooks/useIsLoggedIn'
 import { IRegisterForm } from '../types/auth-form.types'
 import { isValidEmail } from '../utils/isValidEmail'
 import { AuthChangeTypeForm } from './AuthChangeTypeForm'
@@ -95,7 +96,8 @@ export function AuthForm({ type }: IAuthFormType) {
 
     await apolloClient.resetStore()
 
-    localStorage.setItem('isLoggedIn', 'true')
+    //[TODO] delete it
+    setLoggedInFlag()
 
     if (isLogin) {
       router.replace(USER_PAGES.DASHBOARD)
