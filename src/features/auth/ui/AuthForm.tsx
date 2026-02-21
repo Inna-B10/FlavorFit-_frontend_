@@ -9,7 +9,7 @@ import { Field } from '@/shared/components/ui/Field'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
-import { PUBLIC_PAGES } from '@/shared/config/pages.config'
+import { USER_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
 import {
   LoginDocument,
@@ -19,7 +19,7 @@ import {
   RegisterMutation,
   RegisterMutationVariables
 } from '@/__generated__/graphql'
-import { IAuthForm } from '../types/auth-form.types'
+import { IRegisterForm } from '../types/auth-form.types'
 import { isValidEmail } from '../utils/isValidEmail'
 import { AuthChangeTypeForm } from './AuthChangeTypeForm'
 
@@ -40,7 +40,7 @@ export function AuthForm({ type }: IAuthFormType) {
     getValues,
     setError,
     clearErrors
-  } = useForm<IAuthForm>({
+  } = useForm<IRegisterForm>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -60,7 +60,7 @@ export function AuthForm({ type }: IAuthFormType) {
   )
   const loading = loginState.loading || registerState.loading
 
-  const handleAuth = async (form: IAuthForm) => {
+  const handleAuth = async (form: IRegisterForm) => {
     clearErrors('root')
     const result = isLogin
       ? await mutateWithToast(
@@ -96,7 +96,12 @@ export function AuthForm({ type }: IAuthFormType) {
     await apolloClient.resetStore()
 
     localStorage.setItem('isLoggedIn', 'true')
-    router.replace(PUBLIC_PAGES.HOME)
+
+    if (isLogin) {
+      router.replace(USER_PAGES.DASHBOARD)
+      return
+    }
+    router.replace(`/auth/check-email?email=${encodeURIComponent(form.email)}`)
   }
 
   const serverMessage = submitCount > 0 ? errors.root?.message : undefined
