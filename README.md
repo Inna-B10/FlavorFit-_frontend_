@@ -97,19 +97,24 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
+- [ ] middleware, secure user pages, redirect after logout
+- [ ] 404 page
 - [ ] verification email
 - [ ] **auth page:**
-  - [ ] login/register form
-  - [ ] validation, messages
-  - [ ] errors
-- [ ] header + responsiveness
-- [ ] icons
+  - [ ] verification email
+  - [ ] cookies
 - [ ] user/default avatar
-- [ ] routes/pages
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
+- [x] header + responsiveness
+- [x] icons
+- [x] routes/pages
+- [ ] **auth page:**
+  - [x] login/register form
+  - [x] validation, messages
+  - [x] errors
 - [x] Configure Apollo and graphql codegen
 - [x] logo
 - [x] define the main functions
