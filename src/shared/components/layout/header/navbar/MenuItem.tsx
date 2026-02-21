@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import cn from 'clsx'
 import type { IconType } from 'react-icons'
-import { BiBookBookmark } from 'react-icons/bi'
+import { BiHome } from 'react-icons/bi'
 import { FaNutritionix } from 'react-icons/fa'
 import { GiForkKnifeSpoon } from 'react-icons/gi'
 import { ImStatsBars } from 'react-icons/im'
@@ -16,7 +16,7 @@ interface IMenuItem {
 }
 
 const ICONS: Record<TNavbarIcon, IconType> = {
-  recipes: BiBookBookmark,
+  home: BiHome,
   nutrition: FaNutritionix,
   forum: PiUsersFour,
   mealPlans: GiForkKnifeSpoon,

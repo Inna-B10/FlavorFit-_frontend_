@@ -1,5 +1,5 @@
 export type TNavbarIcon =
-  | 'recipes'
+  | 'home'
   | 'nutrition'
   | 'forum'
   | 'mealPlans'

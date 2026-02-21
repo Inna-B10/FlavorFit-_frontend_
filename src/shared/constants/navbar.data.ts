@@ -9,15 +9,9 @@ export const NAVBAR_DATA: INavbarItem[] = [
   // 	link: PAGE.HOME
   // },
   {
-    icon: 'forum',
-    //PiUsersThree,
-    label: 'Forum',
-    link: PUBLIC_PAGES.FORUM
-  },
-  {
-    icon: 'recipes',
+    icon: 'home',
     //PiBookOpenText, //MdMenuBook,
-    label: 'Recipes',
+    label: 'Home',
     link: PUBLIC_PAGES.HOME
   },
   {
@@ -25,6 +19,12 @@ export const NAVBAR_DATA: INavbarItem[] = [
     //BsCalendar3, //ImCalendar, //GiForkKnifeSpoon,
     label: 'Nutrition',
     link: PUBLIC_PAGES.NUTRITION
+  },
+  {
+    icon: 'forum',
+    //PiUsersThree,
+    label: 'Forum',
+    link: PUBLIC_PAGES.FORUM
   }
 ]
 

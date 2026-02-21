@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useApolloClient, useMutation } from '@apollo/client/react'
 import toast from 'react-hot-toast'
+import { setLoggedInFlag } from '@/features/auth/hooks/useIsLoggedIn'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
 import {
@@ -37,6 +38,9 @@ export function VerifyEmail() {
 
         if (res.data?.verifyEmail?.accessToken) {
           toast.success('Email successfully verified!')
+
+          //[TODO] delete it
+          setLoggedInFlag()
           router.replace(PUBLIC_PAGES.HOME)
 
           await apolloClient.resetStore()
