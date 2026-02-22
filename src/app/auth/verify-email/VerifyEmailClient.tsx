@@ -8,11 +8,7 @@ import toast from 'react-hot-toast'
 import { setLoggedInFlag } from '@/features/auth/hooks/useIsLoggedIn'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
-import {
-  VerifyEmailDocument,
-  VerifyEmailMutation,
-  VerifyEmailMutationVariables
-} from '@/__generated__/graphql'
+import { VerifyEmailDocument } from '@/__generated__/graphql'
 
 export function VerifyEmail() {
   const [loading, setLoading] = useState(true)
@@ -21,9 +17,7 @@ export function VerifyEmail() {
   const token = useSearchParams().get('token')
   const apolloClient = useApolloClient()
 
-  const [verifyEmail] = useMutation<VerifyEmailMutation, VerifyEmailMutationVariables>(
-    VerifyEmailDocument
-  )
+  const [verifyEmail] = useMutation(VerifyEmailDocument)
 
   useEffect(() => {
     if (!token) {
@@ -61,11 +55,11 @@ export function VerifyEmail() {
 
   if (loading)
     return (
-      <div className='fixed inset-0 z-50 grid place-items-center bg-black/60 backdrop-blur-sm'>
-        <div className='w-full max-w-sm rounded-2xl bg-white/10 p-6 text-center shadow-lg ring-1 ring-white/15'>
-          <div className='mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-2 border-white/30 border-t-white' />
-          <p className='text-base text-white'>Verifying your email…</p>
-          <p className='mt-1 text-sm text-white/70'>This usually takes a moment.</p>
+      <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-xs'>
+        <div className='bg-white-pale w-full max-w-sm rounded-2xl p-6 text-center shadow-lg ring-1 ring-white/15'>
+          <div className='border-muted-foreground/50 border-t-foreground mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-2' />
+          <p className='text-base'>Verifying your email…</p>
+          <p className='text-muted-foreground mt-1 text-sm'>This usually takes a moment.</p>
         </div>
       </div>
     )
