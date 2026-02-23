@@ -6,8 +6,6 @@ import { UserBlock } from './UserBlock'
 import { Navbar } from './navbar/Navbar'
 
 export function Header() {
-  //[TODO] delete it
-  // const isLoggedIn = useIsLoggedIn()
   const { user, isLoggedIn } = useAuth()
 
   return (

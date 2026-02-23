@@ -28,8 +28,6 @@ export function VerifyEmail() {
       setLoading(true)
 
       const result = await mutateWithToast(() => verifyEmail({ variables: { token } }), {
-        loadingMessage: 'Verifying email...',
-        loadingId: 'verify-email-loading',
         successMessage: 'Email successfully verified!',
         successId: 'verify-email-success',
         errorId: 'verify-email-error'
@@ -44,8 +42,6 @@ export function VerifyEmail() {
             me: user
           }
         })
-        // //[TODO] delete it
-        // setLoggedInFlag()
 
         router.replace(PUBLIC_PAGES.HOME)
         return

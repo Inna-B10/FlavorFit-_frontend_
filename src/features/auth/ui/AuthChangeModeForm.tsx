@@ -6,7 +6,7 @@ interface IAuthChangeTypeForm {
   errorMessage?: string
 }
 
-export function AuthChangeTypeForm({ isLogin, errorMessage }: IAuthChangeTypeForm) {
+export function AuthChangeModeForm({ isLogin, errorMessage }: IAuthChangeTypeForm) {
   return (
     <div className='my-2'>
       <div className='h-8'>
@@ -17,7 +17,7 @@ export function AuthChangeTypeForm({ isLogin, errorMessage }: IAuthChangeTypeFor
           <span className='text-xs'>Don&apos;t have an account?</span>{' '}
           <Link
             href={PUBLIC_PAGES.REGISTRATION}
-            className='text-sm text-nowrap underline'
+            className='text-sm text-nowrap underline-offset-2'
           >
             Sign up
           </Link>
@@ -27,7 +27,7 @@ export function AuthChangeTypeForm({ isLogin, errorMessage }: IAuthChangeTypeFor
           <span className='text-xs'>Already have an account?</span>{' '}
           <Link
             href={PUBLIC_PAGES.LOGIN}
-            className='text-sm text-nowrap underline'
+            className='text-sm text-nowrap underline-offset-2'
           >
             Sign in
           </Link>

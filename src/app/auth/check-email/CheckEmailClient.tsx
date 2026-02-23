@@ -43,7 +43,7 @@ export default function CheckEmail() {
           </p>
 
           <p className='text-muted-foreground mt-2 text-sm'>
-            Don’t see it? Check Spam or Promotions.
+            Don&apos;t see it? Check Spam or Promotions.
           </p>
         </>
       ) : (
