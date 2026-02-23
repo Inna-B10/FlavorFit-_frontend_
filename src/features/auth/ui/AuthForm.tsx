@@ -1,22 +1,14 @@
-'use client'
-
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { Field } from '@/shared/components/ui/Field'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
-import { IAuthFormInput, Mode } from '../types/auth-form.types'
+import { IAuthFormInput, TAuthFormData } from '../types/auth-form.types'
 import { isValidEmail } from '../utils/isValidEmail'
-import { AuthChangeTypeForm } from './AuthChangeTypeForm'
+import { AuthChangeModeForm } from './AuthChangeModeForm'
 
-type Props = {
-  mode: Mode
-  loading: boolean
-  onSubmit: (values: IAuthFormInput) => Promise<void>
-}
-
-export function AuthForm({ mode, loading, onSubmit }: Props) {
+export function AuthForm({ mode, loading, onSubmit, serverMessage }: TAuthFormData) {
   const isLogin = mode === 'login'
 
   const {
@@ -25,7 +17,6 @@ export function AuthForm({ mode, loading, onSubmit }: Props) {
     formState: { errors, isValid, isSubmitting, submitCount },
     getValues,
     setError,
-    reset,
     clearErrors
   } = useForm<IAuthFormInput>({
     mode: 'onChange',
@@ -37,11 +28,6 @@ export function AuthForm({ mode, loading, onSubmit }: Props) {
     }
   })
 
-  // useEffect(() => {
-  //   clearErrors('root')
-  //   reset()
-  // }, [mode, clearErrors, reset])
-
   const handleAuth = async (values: IAuthFormInput) => {
     clearErrors('root')
     try {
@@ -51,10 +37,7 @@ export function AuthForm({ mode, loading, onSubmit }: Props) {
     }
   }
 
-  const serverMessage = submitCount > 0 ? errors.root?.message : undefined
-
-  // //[TODO] delete it
-  // setLoggedInFlag()
+  const rootMessage = submitCount > 0 ? errors.root?.message || serverMessage : undefined
 
   return (
     <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>
@@ -140,9 +123,9 @@ export function AuthForm({ mode, loading, onSubmit }: Props) {
           {loading ? 'Loading...' : isLogin ? 'Sign in' : 'Sign up'}
         </Button>
       </form>
-      <AuthChangeTypeForm
+      <AuthChangeModeForm
         isLogin={isLogin}
-        errorMessage={serverMessage}
+        errorMessage={rootMessage}
       />
     </div>
   )

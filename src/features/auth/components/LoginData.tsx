@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
 import { USER_PAGES } from '@/shared/config/pages.config'
@@ -10,30 +11,17 @@ import { AuthForm } from '../ui/AuthForm'
 
 export function LoginData() {
   const router = useRouter()
+  const [serverMessage, setServerMessage] = useState('')
 
   const [loginUser, { loading }] = useMutation(LoginDocument, {
     refetchQueries: [MeDocument],
     awaitRefetchQueries: true
-
-    //     update: (cache, { data }) => {
-    //       const user = data?.login?.user
-    //       if (!user) return
-    //
-    //       cache.writeQuery({
-    //         query: MeDocument,
-    //         data: {
-    //           me: user
-    //         }
-    //       })
-    //     }
   })
 
   const onSubmit = async (form: IAuthFormInput) => {
     const result = await mutateWithToast(
       () => loginUser({ variables: { data: { email: form.email, password: form.password } } }),
       {
-        loadingMessage: 'Logging in...',
-        loadingId: 'login-loading',
         successMessage: 'Successfully signed in',
         successId: 'login-success',
         errorMessage: 'Login failed',
@@ -42,22 +30,21 @@ export function LoginData() {
     )
 
     if (!result.data?.login?.user) {
+      if (result.errorMessage) {
+        setServerMessage(result.errorMessage)
+      }
       return
     }
 
     router.replace(USER_PAGES.DASHBOARD)
   }
 
-  //
-  //     //[TODO] delete it
-  //     setLoggedInFlag()
-  //
-
   return (
     <AuthForm
       mode='login'
       loading={loading}
       onSubmit={onSubmit}
+      serverMessage={serverMessage}
     />
   )
 }

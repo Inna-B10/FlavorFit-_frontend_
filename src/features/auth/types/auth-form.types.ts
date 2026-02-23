@@ -5,3 +5,10 @@ export interface IAuthFormInput {
   confirmPassword?: string
   firstName?: string
 }
+
+export type TAuthFormData = {
+  mode: Mode
+  loading: boolean
+  onSubmit: (values: IAuthFormInput) => Promise<void>
+  serverMessage?: string
+}

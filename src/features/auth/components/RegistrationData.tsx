@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
 import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
@@ -9,6 +10,7 @@ import { AuthForm } from '../ui/AuthForm'
 
 export function RegistrationData() {
   const router = useRouter()
+  const [serverMessage, setServerMessage] = useState('')
 
   const [registerUser, { loading }] = useMutation(RegisterDocument)
 
@@ -21,8 +23,6 @@ export function RegistrationData() {
           }
         }),
       {
-        loadingMessage: 'Creating account...',
-        loadingId: 'register-loading',
         successMessage: 'Successfully registered',
         successId: 'register-success',
         errorMessage: 'Registration failed',
@@ -30,12 +30,14 @@ export function RegistrationData() {
       }
     )
 
-    if (!result.data?.register?.user) return
+    if (!result.data?.register?.user) {
+      if (result.errorMessage) {
+        setServerMessage(result.errorMessage)
+      }
+      return
+    }
 
     router.replace(`/auth/check-email?email=${encodeURIComponent(form.email)}`)
-
-    // //[TODO] delete it
-    // setLoggedInFlag()
   }
 
   return (
@@ -43,6 +45,7 @@ export function RegistrationData() {
       mode='register'
       loading={loading}
       onSubmit={onSubmit}
+      serverMessage={serverMessage}
     />
   )
 }
