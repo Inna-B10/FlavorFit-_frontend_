@@ -1,8 +1,7 @@
-export interface IAuthFormData {
+export type Mode = 'login' | 'register'
+export interface IAuthFormInput {
   email: string
   password: string
-}
-export interface IRegisterForm extends IAuthFormData {
-  confirmPassword: string
-  firstName: string
+  confirmPassword?: string
+  firstName?: string
 }

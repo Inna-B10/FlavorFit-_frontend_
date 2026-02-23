@@ -6,6 +6,7 @@ mutation Register($data: RegisterInput!) {
       firstName
       userId
       role
+      verificationToken
     }
   }
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { AuthForm } from '@/features/auth/ui/AuthForm'
+import { RegistrationData } from '@/features/auth/components/RegistrationData'
 import { NO_INDEX_PAGE } from '@/shared/constants/seo.constants'
 
 export const metadata: Metadata = {
@@ -7,6 +7,6 @@ export const metadata: Metadata = {
   ...NO_INDEX_PAGE
 }
 
-export default function RegisterPage() {
-  return <AuthForm type='register' />
+export default function RegistrationPage() {
+  return <RegistrationData />
 }

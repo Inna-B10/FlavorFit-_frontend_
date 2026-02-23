@@ -35,7 +35,6 @@ export type AddOneItemToCartInput = {
 
 export type AuthResponse = {
   __typename?: 'AuthResponse';
-  accessToken: Scalars['String']['output'];
   user: UserModel;
 };
 
@@ -227,7 +226,7 @@ export type Mutation = {
   login: AuthResponse;
   logout: Scalars['Boolean']['output'];
   refreshRecipeInShoppingList: ShoppingListModel;
-  register: RegisterResponse;
+  register: AuthResponse;
   removeAllCartItems: CartModel;
   removeCartItem: CartModel;
   removeRecipeFromShoppingList: ShoppingListModel;
@@ -485,6 +484,7 @@ export type Query = {
   fullProfile: UserWithProfileModel;
   getAllShoppingLists: Array<ShoppingListModel>;
   getCartByUserId: CartModel;
+  me: UserModel;
   newTokens: AuthResponse;
   orderById: OrderModel;
   orderByReference: OrderModel;
@@ -545,7 +545,7 @@ export type QueryUserByEmailArgs = {
 
 
 export type QueryUserByIdArgs = {
-  userId?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
 };
 
 
@@ -604,7 +604,6 @@ export type RecipeTagModel = {
 
 export const RecipeUnit = {
   Cloves: 'CLOVES',
-  Cup: 'CUP',
   Gram: 'GRAM',
   Kilogram: 'KILOGRAM',
   Liter: 'LITER',
@@ -612,6 +611,7 @@ export const RecipeUnit = {
   Piece: 'PIECE',
   Pinch: 'PINCH',
   Slice: 'SLICE',
+  Stalk: 'STALK',
   Tablespoon: 'TABLESPOON',
   Teaspoon: 'TEASPOON'
 } as const;
@@ -631,11 +631,6 @@ export type RegisterInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
   password: Scalars['String']['input'];
-};
-
-export type RegisterResponse = {
-  __typename?: 'RegisterResponse';
-  user: UserModel;
 };
 
 export type RemoveCartItemInput = {
@@ -784,14 +779,19 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', accessToken: string } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } };
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'RegisterResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, userId: string, role: string } } };
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, userId: string, role: string, verificationToken?: string | null } } };
 
 export type ResendVerificationMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -805,7 +805,7 @@ export type VerifyEmailMutationVariables = Exact<{
 }>;
 
 
-export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', accessToken: string, user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
+export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;

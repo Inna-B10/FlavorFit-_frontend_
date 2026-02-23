@@ -1,38 +1,23 @@
 'use client'
 
-import { useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useApolloClient, useMutation } from '@apollo/client/react'
 import { useForm } from 'react-hook-form'
 import { Field } from '@/shared/components/ui/Field'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
-import { USER_PAGES } from '@/shared/config/pages.config'
-import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
-import {
-  LoginDocument,
-  LoginMutation,
-  LoginMutationVariables,
-  RegisterDocument,
-  RegisterMutation,
-  RegisterMutationVariables
-} from '@/__generated__/graphql'
-import { setLoggedInFlag } from '../hooks/useIsLoggedIn'
-import { IRegisterForm } from '../types/auth-form.types'
+import { IAuthFormInput, Mode } from '../types/auth-form.types'
 import { isValidEmail } from '../utils/isValidEmail'
 import { AuthChangeTypeForm } from './AuthChangeTypeForm'
 
-interface IAuthFormType {
-  type: 'login' | 'register'
+type Props = {
+  mode: Mode
+  loading: boolean
+  onSubmit: (values: IAuthFormInput) => Promise<void>
 }
 
-export function AuthForm({ type }: IAuthFormType) {
-  const isLogin = type === 'login'
-  const router = useRouter()
-
-  const apolloClient = useApolloClient()
+export function AuthForm({ mode, loading, onSubmit }: Props) {
+  const isLogin = mode === 'login'
 
   const {
     register,
@@ -40,8 +25,9 @@ export function AuthForm({ type }: IAuthFormType) {
     formState: { errors, isValid, isSubmitting, submitCount },
     getValues,
     setError,
+    reset,
     clearErrors
-  } = useForm<IRegisterForm>({
+  } = useForm<IAuthFormInput>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -51,62 +37,24 @@ export function AuthForm({ type }: IAuthFormType) {
     }
   })
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   clearErrors('root')
+  //   reset()
+  // }, [mode, clearErrors, reset])
+
+  const handleAuth = async (values: IAuthFormInput) => {
     clearErrors('root')
-  }, [type, clearErrors])
-
-  const [login, loginState] = useMutation<LoginMutation, LoginMutationVariables>(LoginDocument)
-  const [registerUser, registerState] = useMutation<RegisterMutation, RegisterMutationVariables>(
-    RegisterDocument
-  )
-  const loading = loginState.loading || registerState.loading
-
-  const handleAuth = async (form: IRegisterForm) => {
-    clearErrors('root')
-    const result = isLogin
-      ? await mutateWithToast(
-          () =>
-            login({
-              variables: { data: { email: form.email, password: form.password } }
-            }),
-          {
-            successMessage: 'Successfully signed in',
-            errorMessage: 'Login failed'
-          }
-        )
-      : await mutateWithToast(
-          () =>
-            registerUser({
-              variables: {
-                data: { email: form.email, password: form.password, firstName: form.firstName! }
-              }
-            }),
-          {
-            successMessage: 'Successfully registered',
-            errorMessage: 'Registration failed'
-          }
-        )
-
-    if (!result.data) {
-      if (result.errorMessage) {
-        setError('root', { type: 'server', message: result.errorMessage })
-      }
-      return
+    try {
+      await onSubmit(values)
+    } catch (e) {
+      setError('root', { type: 'server', message: 'Something went wrong' })
     }
-
-    await apolloClient.resetStore()
-
-    //[TODO] delete it
-    setLoggedInFlag()
-
-    if (isLogin) {
-      router.replace(USER_PAGES.DASHBOARD)
-      return
-    }
-    router.replace(`/auth/check-email?email=${encodeURIComponent(form.email)}`)
   }
 
   const serverMessage = submitCount > 0 ? errors.root?.message : undefined
+
+  // //[TODO] delete it
+  // setLoggedInFlag()
 
   return (
     <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-md'>

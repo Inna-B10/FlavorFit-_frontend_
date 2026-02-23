@@ -4,11 +4,10 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useApolloClient, useMutation } from '@apollo/client/react'
-import toast from 'react-hot-toast'
-import { setLoggedInFlag } from '@/features/auth/hooks/useIsLoggedIn'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
-import { VerifyEmailDocument } from '@/__generated__/graphql'
+import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
+import { MeDocument, VerifyEmailDocument } from '@/__generated__/graphql'
 
 export function VerifyEmail() {
   const [loading, setLoading] = useState(true)
@@ -27,24 +26,33 @@ export function VerifyEmail() {
 
     const run = async () => {
       setLoading(true)
-      try {
-        const res = await verifyEmail({ variables: { token } })
 
-        if (res.data?.verifyEmail?.accessToken) {
-          toast.success('Email successfully verified!')
+      const result = await mutateWithToast(() => verifyEmail({ variables: { token } }), {
+        loadingMessage: 'Verifying email...',
+        loadingId: 'verify-email-loading',
+        successMessage: 'Email successfully verified!',
+        successId: 'verify-email-success',
+        errorId: 'verify-email-error'
+      })
 
-          //[TODO] delete it
-          setLoggedInFlag()
-          router.replace(PUBLIC_PAGES.HOME)
+      const user = result.data?.verifyEmail?.user
 
-          await apolloClient.resetStore()
+      if (user) {
+        apolloClient.cache.writeQuery({
+          query: MeDocument,
+          data: {
+            me: user
+          }
+        })
+        // //[TODO] delete it
+        // setLoggedInFlag()
 
-          return
-        }
+        router.replace(PUBLIC_PAGES.HOME)
+        return
+      }
 
-        toast.error('Verification failed.')
-      } catch (error) {
-        toast.error('Invalid or expired verification link.')
+      if (result.errorMessage) {
+        router.replace('/auth/check-email')
       }
 
       setLoading(false)

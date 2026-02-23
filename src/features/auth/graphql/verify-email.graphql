@@ -1,6 +1,5 @@
 mutation VerifyEmail($token: String!) {
   verifyEmail(token: $token) {
-    accessToken
     user {
       avatarUrl
       email

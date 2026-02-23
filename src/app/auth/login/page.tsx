@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { AuthForm } from '@/features/auth/ui/AuthForm'
+import { LoginData } from '@/features/auth/components/LoginData'
 import { NO_INDEX_PAGE } from '@/shared/constants/seo.constants'
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function LoginPage() {
-  return <AuthForm type='login' />
+  return <LoginData />
 }

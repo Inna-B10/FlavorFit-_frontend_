@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client/react'
 import { Button } from '@/shared/components/ui/button'
-import {
-  ResendVerificationDocument,
-  ResendVerificationMutation,
-  ResendVerificationMutationVariables
-} from '@/__generated__/graphql'
+import { ResendVerificationDocument } from '@/__generated__/graphql'
 
 export function ResendVerificationButton({
   email,
@@ -16,10 +12,7 @@ export function ResendVerificationButton({
 }) {
   const [countdown, setCountdown] = useState(0)
 
-  const [resendVerification, { loading }] = useMutation<
-    ResendVerificationMutation,
-    ResendVerificationMutationVariables
-  >(ResendVerificationDocument)
+  const [resendVerification, { loading }] = useMutation(ResendVerificationDocument)
 
   useEffect(() => {
     if (countdown <= 0) return
