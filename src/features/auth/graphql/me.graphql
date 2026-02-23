@@ -1,0 +1,10 @@
+query Me {
+  me {
+    avatarUrl
+    email
+    firstName
+    role
+    userId
+    verificationToken
+  }
+}

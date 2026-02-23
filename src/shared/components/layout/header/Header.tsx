@@ -1,13 +1,14 @@
 'use client'
 import Link from 'next/link'
-import { useIsLoggedIn } from '@/features/auth/hooks/useIsLoggedIn'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 import { UserBlock } from './UserBlock'
 import { Navbar } from './navbar/Navbar'
 
 export function Header() {
   //[TODO] delete it
-  const isLoggedIn = useIsLoggedIn()
+  // const isLoggedIn = useIsLoggedIn()
+  const { user, isLoggedIn } = useAuth()
 
   return (
     <header className='flex items-center justify-between gap-4 text-center'>
@@ -23,7 +24,10 @@ export function Header() {
         <Navbar isLoggedIn={isLoggedIn} />
       </div>
       {/* //#------------------------------- User Block */}
-      <UserBlock isLoggedIn={isLoggedIn} />
+      <UserBlock
+        isLoggedIn={isLoggedIn}
+        user={user}
+      />
     </header>
   )
 }
