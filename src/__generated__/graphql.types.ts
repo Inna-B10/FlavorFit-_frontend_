@@ -781,6 +781,11 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
