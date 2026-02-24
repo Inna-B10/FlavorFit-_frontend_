@@ -1,7 +1,7 @@
 import { PUBLIC_PAGES, USER_PAGES } from '../config/pages.config'
 import { INavbarItem } from '../types/navbar.types'
 
-export const LEFT_NAVBAR_DATA: INavbarItem[] = [
+export const NAVBAR_PUBLIC_DATA: INavbarItem[] = [
   // {
   // 	icon: RxHome,
   // 	//BiHome, //HiOutlineHome, //TiHomeOutline, //RxHome,
@@ -28,7 +28,7 @@ export const LEFT_NAVBAR_DATA: INavbarItem[] = [
   }
 ]
 
-export const RIGHT_NAVBAR_DATA: INavbarItem[] = [
+export const NAVBAR_USER_DATA: INavbarItem[] = [
   {
     icon: 'mealPlans',
     //ImCalendar,
@@ -52,3 +52,9 @@ export const RIGHT_NAVBAR_DATA: INavbarItem[] = [
     link: USER_PAGES.DASHBOARD
   }
 ]
+
+// export const USER_MENU_DATA = [
+//   icon: 'profile',
+//   label: 'Profile',
+//   link: USER_PAGES.PROFILE
+// ]

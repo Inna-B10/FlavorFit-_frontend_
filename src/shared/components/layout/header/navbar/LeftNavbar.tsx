@@ -1,14 +1,14 @@
-import { LEFT_NAVBAR_DATA, RIGHT_NAVBAR_DATA } from '@/shared/constants/menu.data'
+import { NAVBAR_PUBLIC_DATA, NAVBAR_USER_DATA } from '@/shared/constants/menu.data'
 import { NavbarMenu } from './NavbarMenu'
 
 export function LeftNavbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <nav>
       <ul className='flex items-center gap-2'>
-        <NavbarMenu menu={LEFT_NAVBAR_DATA} />
+        <NavbarMenu menu={NAVBAR_PUBLIC_DATA} />
 
         {/* //#-------------------------------- User Menu */}
-        {isLoggedIn && <NavbarMenu menu={RIGHT_NAVBAR_DATA} />}
+        {isLoggedIn && <NavbarMenu menu={NAVBAR_USER_DATA} />}
       </ul>
     </nav>
   )

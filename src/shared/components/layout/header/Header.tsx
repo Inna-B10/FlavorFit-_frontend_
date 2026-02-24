@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
-import { RightNavbar } from './RightNavbar'
 import { LeftNavbar } from './navbar/LeftNavbar'
+import { RightNavbar } from './navbar/RightNavbar'
 
 export function Header() {
   const { user, isLoggedIn } = useAuth()

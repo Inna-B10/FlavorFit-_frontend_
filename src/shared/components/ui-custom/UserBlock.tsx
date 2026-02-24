@@ -1,11 +1,9 @@
 import Link from 'next/link'
-import { BadgeCheckIcon, BellIcon, LogOutIcon, ShoppingCart } from 'lucide-react'
-import { CgProfile } from 'react-icons/cg'
-import { LuUserRound } from 'react-icons/lu'
+import { BellIcon, BookUser, LogOutIcon, ShoppingCart, UserRoundCog } from 'lucide-react'
 import { TbShoppingBagCheck } from 'react-icons/tb'
 import { USER_PAGES } from '@/shared/config/pages.config'
 import { UserModel } from '@/__generated__/graphql'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { Avatar, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -15,34 +13,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
+import { DefaultAvatar } from './DefaultAvatar'
 import { LogoutButton } from './LogoutButton'
 
 export function UserBlock({ user }: { user: UserModel }) {
-  //[TODO] default avatar for user
-  // const avatar = 'https://cdn-icons-png.flaticon.com/512/706/706816.png'
-  const avatar = user.avatarUrl || ''
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant='ghost'
-          size='icon-xl'
-          className='bg-gradient-white-pale text-green-dark hover:text-foreground hover:bg-gradient-green-light rounded-full p-2 shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer xl:p-3'
+          size='responsive'
+          className='bg-gradient-white-pale hover:bg-gradient-green-light text-green-dark hover:text-foreground rounded-full shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer hover:opacity-80'
           aria-label='Open user menu'
           title='Open user menu'
         >
-          <Avatar size='xl'>
-            <AvatarImage
-              src={avatar}
-              alt={user.firstName}
-              width={40}
-              height={40}
-              className='rounded-full'
-            />
-            <AvatarFallback>
-              <LuUserRound className='size-[40] xl:size-[26]' />
-            </AvatarFallback>
+          <Avatar className='flex h-full w-full items-center justify-center'>
+            {user.avatarUrl ? (
+              <AvatarImage
+                src={user.avatarUrl}
+                alt={user.firstName}
+                width={40}
+                height={40}
+              />
+            ) : (
+              <DefaultAvatar className='size-7' />
+            )}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -59,7 +54,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             aria-label='Go to account page'
           >
             <DropdownMenuItem className='px-4'>
-              <BadgeCheckIcon className='text-foreground' />
+              <UserRoundCog className='text-foreground' />
               Account
             </DropdownMenuItem>
           </Link>
@@ -70,7 +65,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             aria-label='Go to profile page'
           >
             <DropdownMenuItem className='px-4'>
-              <CgProfile className='text-foreground' />
+              <BookUser className='text-foreground' />
               Profile
             </DropdownMenuItem>
           </Link>
@@ -105,7 +100,7 @@ export function UserBlock({ user }: { user: UserModel }) {
           >
             <DropdownMenuItem className='px-4'>
               <TbShoppingBagCheck className='text-foreground' />
-              My orders
+              Orders
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>

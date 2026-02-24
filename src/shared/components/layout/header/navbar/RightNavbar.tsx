@@ -3,7 +3,7 @@ import { LuUserRound } from 'react-icons/lu'
 import { TfiHeadphoneAlt } from 'react-icons/tfi'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { UserModel } from '@/__generated__/graphql.types'
-import { UserBlock } from '../../ui-custom/UserBlock'
+import { UserBlock } from '../../../ui-custom/UserBlock'
 
 export function RightNavbar({ isLoggedIn, user }: { isLoggedIn: boolean; user: UserModel | null }) {
   return (
@@ -26,7 +26,7 @@ export function RightNavbar({ isLoggedIn, user }: { isLoggedIn: boolean; user: U
           aria-label='Go to authentication page'
           className='bg-gradient-white-pale text-green-dark hover:text-foreground hover:bg-gradient-green-light rounded-full p-2 shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer xl:p-2.5'
         >
-          <LuUserRound className='size-[40] xl:size-[26]' />
+          <LuUserRound className='size-[16] md:size-[18] xl:size-[26]' />
         </Link>
       )}
     </div>
