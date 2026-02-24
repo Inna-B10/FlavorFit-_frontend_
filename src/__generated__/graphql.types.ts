@@ -774,6 +774,11 @@ export type UserWithProfileModel = {
   userProfile?: Maybe<UserProfileModel>;
 };
 
+export type GetNewTokensQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNewTokensQuery = { __typename?: 'Query', newTokens: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string } } };
+
 export type LoginMutationVariables = Exact<{
   data: LoginInput;
 }>;

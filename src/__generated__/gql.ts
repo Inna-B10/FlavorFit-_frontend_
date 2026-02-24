@@ -14,6 +14,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "query GetNewTokens {\n  newTokens {\n    user {\n      userId\n    }\n  }\n}": typeof types.GetNewTokensDocument,
     "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    user {\n      avatarUrl\n      email\n      firstName\n      role\n      userId\n      verificationToken\n    }\n  }\n}": typeof types.LoginDocument,
     "mutation Logout {\n  logout\n}": typeof types.LogoutDocument,
     "query Me {\n  me {\n    avatarUrl\n    email\n    firstName\n    role\n    userId\n    verificationToken\n  }\n}": typeof types.MeDocument,
@@ -23,6 +24,7 @@ type Documents = {
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
 };
 const documents: Documents = {
+    "query GetNewTokens {\n  newTokens {\n    user {\n      userId\n    }\n  }\n}": types.GetNewTokensDocument,
     "mutation Login($data: LoginInput!) {\n  login(data: $data) {\n    user {\n      avatarUrl\n      email\n      firstName\n      role\n      userId\n      verificationToken\n    }\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout\n}": types.LogoutDocument,
     "query Me {\n  me {\n    avatarUrl\n    email\n    firstName\n    role\n    userId\n    verificationToken\n  }\n}": types.MeDocument,
@@ -46,6 +48,10 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetNewTokens {\n  newTokens {\n    user {\n      userId\n    }\n  }\n}"): (typeof documents)["query GetNewTokens {\n  newTokens {\n    user {\n      userId\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
