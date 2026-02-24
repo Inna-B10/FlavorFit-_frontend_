@@ -2,8 +2,8 @@
 import Link from 'next/link'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
-import { UserBlock } from './UserBlock'
-import { Navbar } from './navbar/Navbar'
+import { RightNavbar } from './RightNavbar'
+import { LeftNavbar } from './navbar/LeftNavbar'
 
 export function Header() {
   const { user, isLoggedIn } = useAuth()
@@ -19,10 +19,10 @@ export function Header() {
         >
           <LogoIcon className='text-white-pale h-full w-auto' />
         </Link>
-        <Navbar isLoggedIn={isLoggedIn} />
+        <LeftNavbar isLoggedIn={isLoggedIn} />
       </div>
-      {/* //#------------------------------- User Block */}
-      <UserBlock
+
+      <RightNavbar
         isLoggedIn={isLoggedIn}
         user={user}
       />
