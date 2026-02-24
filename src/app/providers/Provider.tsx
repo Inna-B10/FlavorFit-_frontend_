@@ -13,11 +13,6 @@ export function Provider({ children }: { children: React.ReactNode }) {
       {children}
       <Toaster
         position='top-center'
-        // containerStyle={{
-        //   position: 'absolute',
-        //   top: '10vh',
-        //   left: '0'
-        // }}
         toastOptions={{
           success: {
             iconTheme: {
@@ -25,7 +20,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
               secondary: '#285430'
             }
           },
-          className: 'mt-20 border border-green-dark/50 text-nowrap shadow-lg'
+          className: 'mt-20 border border-green-dark/50 text-nowrap shadow-lg font-dmMono text-sm'
         }}
       />
     </ApolloProvider>

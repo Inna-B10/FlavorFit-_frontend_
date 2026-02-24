@@ -18,8 +18,9 @@ import {
 import { LogoutButton } from './LogoutButton'
 
 export function UserBlock({ user }: { user: UserModel }) {
-  const avatar = 'https://cdn-icons-png.flaticon.com/512/706/706816.png'
-  // const avatar = user.avatarUrl || ''
+  //[TODO] default avatar for user
+  // const avatar = 'https://cdn-icons-png.flaticon.com/512/706/706816.png'
+  const avatar = user.avatarUrl || ''
 
   return (
     <DropdownMenu>
@@ -29,7 +30,7 @@ export function UserBlock({ user }: { user: UserModel }) {
           size='icon-xl'
           className='bg-gradient-white-pale text-green-dark hover:text-foreground hover:bg-gradient-green-light rounded-full p-2 shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer xl:p-3'
           aria-label='Open user menu'
-          title={`Hello, ${user.firstName}`}
+          title='Open user menu'
         >
           <Avatar size='xl'>
             <AvatarImage
@@ -47,11 +48,9 @@ export function UserBlock({ user }: { user: UserModel }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align='end'
-        // className='relative -top-6 right-6'
+        className='from-green-light to-white-pale rounded-xl border-0 bg-linear-to-b to-20% p-0'
       >
-        <div className='from-green-light rounded-t bg-linear-to-b to-white p-2'>
-          Hello {user.firstName}!
-        </div>
+        <div className='p-4 pb-2 font-semibold'>Hello {user.firstName}!</div>
         <DropdownMenuGroup>
           <Link
             href={USER_PAGES.ACCOUNT}
@@ -59,7 +58,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             title='Account'
             aria-label='Go to account page'
           >
-            <DropdownMenuItem>
+            <DropdownMenuItem className='px-4'>
               <BadgeCheckIcon className='text-foreground' />
               Account
             </DropdownMenuItem>
@@ -70,7 +69,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             title='Profile'
             aria-label='Go to profile page'
           >
-            <DropdownMenuItem>
+            <DropdownMenuItem className='px-4'>
               <CgProfile className='text-foreground' />
               Profile
             </DropdownMenuItem>
@@ -81,7 +80,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             title='Notifications'
             aria-label='Go to notifications page'
           >
-            <DropdownMenuItem>
+            <DropdownMenuItem className='px-4'>
               <BellIcon className='text-foreground' />
               Notifications
             </DropdownMenuItem>
@@ -93,7 +92,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             title='My cart'
             aria-label='Open my cart'
           >
-            <DropdownMenuItem>
+            <DropdownMenuItem className='px-4'>
               <ShoppingCart className='text-foreground' />
               Cart
             </DropdownMenuItem>
@@ -104,7 +103,7 @@ export function UserBlock({ user }: { user: UserModel }) {
             title='My orders'
             aria-label='Go to my orders'
           >
-            <DropdownMenuItem>
+            <DropdownMenuItem className='px-4'>
               <TbShoppingBagCheck className='text-foreground' />
               My orders
             </DropdownMenuItem>
@@ -114,7 +113,7 @@ export function UserBlock({ user }: { user: UserModel }) {
         <LogoutButton className='w-full'>
           <DropdownMenuItem
             variant='destructive'
-            className='w-full'
+            className='w-full px-4'
           >
             <LogOutIcon className='text-destructive/80' />
             Sign out

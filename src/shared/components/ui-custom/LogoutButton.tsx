@@ -17,13 +17,11 @@ export function LogoutButton({
   const onLogout = async () => {
     try {
       await logoutRequest(apolloClient)
-      router.push(PUBLIC_PAGES.HOME)
-      router.refresh()
+      router.replace(PUBLIC_PAGES.LOGIN)
     } catch (e) {
       //logout should be resilient; even if mutation fails, clear local state.
       await apolloClient.clearStore()
-      router.push(PUBLIC_PAGES.HOME)
-      router.refresh()
+      router.replace(PUBLIC_PAGES.LOGIN)
     }
   }
 

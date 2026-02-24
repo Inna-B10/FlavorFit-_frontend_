@@ -31,6 +31,7 @@
   --green-light: #a4be7b;
 
   --gradient-white-pale: linear-gradient(to top, #E3E3E3, #ffffff);
+  --gradient-white-double: linear-gradient(to top, #ffffff, #E3E3E3, #ffffff);
   --gradient-green-dark: linear-gradient(to top, #285430, #385E0195);
   --gradient-green-light: linear-gradient(to top, #a4be7b, #B2D48080);
 
@@ -79,9 +80,11 @@
   --background-image-gradient-green-dark: var(--gradient-green-dark);
   --background-image-gradient-green-light: var(--gradient-green-light);
   --background-image-gradient-white-pale: var(--gradient-white-pale);
+  --background-image-gradient-white-double: var(--gradient-white-double);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-dmMono: var(--font-dm-mono);
 
   --font-aclonica: var(--font-aclonica);
   --font-sonsie: var(--font-sonsie);

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import {
   Aclonica,
+  DM_Mono,
   Geist,
   Geist_Mono,
   Inter,
@@ -24,6 +25,11 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
+const dmMono = DM_Mono({
+  variable: '--font-dm-mono',
+  subsets: ['latin'],
+  weight: ['300', '400', '500']
+})
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
@@ -77,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} ${poppins.variable} flex h-full min-h-screen w-full flex-col gap-8 px-3! py-6! antialiased sm:p-6!`}
+        className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} ${poppins.variable} ${dmMono.variable} flex h-full min-h-screen w-full flex-col gap-8 px-3! py-6! antialiased sm:p-6!`}
       >
         <Provider>{children}</Provider>
       </body>
