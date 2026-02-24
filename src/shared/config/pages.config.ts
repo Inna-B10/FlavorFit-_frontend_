@@ -23,7 +23,7 @@ class UserPages {
   readonly ORDER_GROCERIES = '/user/order-groceries' //Cart?
   readonly DASHBOARD = '/user/dashboard'
   readonly SHOPPING_LIST = '/user/shopping-list'
-  // readonly CART = '/cart'
+  readonly CART = '/user/cart'
 
   ORDERS(path?: string) {
     return `/user/orders${path ? `/${path}` : ''}`
