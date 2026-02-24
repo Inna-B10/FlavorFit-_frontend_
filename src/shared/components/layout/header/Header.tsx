@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useAuth } from '@/features/auth/hooks/useAuth'
-import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
+import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { UserBlock } from './UserBlock'
 import { Navbar } from './navbar/Navbar'
 

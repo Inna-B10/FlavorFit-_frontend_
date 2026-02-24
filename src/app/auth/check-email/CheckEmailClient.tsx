@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { ResendVerificationButton } from '@/features/auth/ui/ResendVerificationButton'
 import { isValidEmail } from '@/features/auth/utils/isValidEmail'
+import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
-import { LogoIcon } from '@/shared/components/ui/logo/LogoIcon'
 
 export default function CheckEmail() {
   const searchParams = useSearchParams()

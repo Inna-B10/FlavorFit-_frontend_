@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { LogoName } from '@/shared/components/ui/logo/LogoName'
+import { LogoName } from '@/shared/components/ui-custom/logo/LogoName'
 import { COLLAGE } from '@/shared/constants/404-collage.constants'
 import { TQuad } from '@/shared/types/404-page.types'
 import { applyAutoDeltasCqiSmart } from '@/shared/utils/404/404-page.utils'

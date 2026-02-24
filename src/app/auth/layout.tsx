@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { LogoName } from '@/shared/components/ui/logo/LogoName'
+import { LogoName } from '@/shared/components/ui-custom/logo/LogoName'
 
 export default function AuthLayout({ children }: PropsWithChildren<unknown>) {
   return (

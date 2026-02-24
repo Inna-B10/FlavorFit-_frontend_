@@ -71,6 +71,7 @@ npm i react-hot-toast
 
 # npx shadcn@latest add button
 # npx shadcn@latest add input
+# npx shadcn@latest add dropdown-menu
 
 ```
 
@@ -97,13 +98,18 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
-- [ ] middleware, secure user pages, redirect after logout
-- [ ] 404 page
-- [ ] verification email
-- [ ] **auth page:**
-  - [ ] verification email
-  - [ ] cookies
+- [ ] page recipes (home)
+- [ ] page profile
+- [ ] page account
+- [ ] **userMenu:**
+  - [ ] links account,profile, orders
+  - [ ] logout
+  - [ ] ?shopping list, ?cart, ?notifications
+- [ ] (middleware) proxy, secure user pages, redirect after logout
 - [ ] user/default avatar
+- [ ] **auth page:**
+  - [ ] ? reset password
+  - [ ] logout
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
@@ -111,10 +117,13 @@ progress visualization and adaptive recommendations
 - [x] header + responsiveness
 - [x] icons
 - [x] routes/pages
-- [ ] **auth page:**
-  - [x] login/register form
-  - [x] validation, messages
+- [x] 404 page
+- [x] **auth page:**
+  - [x] verification email
+  - [x] cookies
   - [x] errors
+  - [x] validation, messages
+  - [x] login/register form
 - [x] Configure Apollo and graphql codegen
 - [x] logo
 - [x] define the main functions
