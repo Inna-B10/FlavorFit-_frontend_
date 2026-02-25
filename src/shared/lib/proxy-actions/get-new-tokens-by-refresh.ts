@@ -21,6 +21,7 @@ export async function getNewTokensByRefresh(
         //NB forward cookies from the incoming request
         cookie: request.headers.get('cookie') ?? ''
       },
+      credentials: 'include',
       body: JSON.stringify({
         query: `
 				query GetNewTokens {
