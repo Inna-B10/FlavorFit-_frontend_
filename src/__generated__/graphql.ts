@@ -641,6 +641,12 @@ export type RemoveCartItemInput = {
   cartItemId: Scalars['String']['input'];
 };
 
+export const Role = {
+  Admin: 'ADMIN',
+  User: 'USER'
+} as const;
+
+export type Role = typeof Role[keyof typeof Role];
 export const SaleUnit = {
   Gram: 'GRAM',
   Kilogram: 'KILOGRAM',
@@ -747,7 +753,7 @@ export type UserModel = {
   avatarUrl?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
-  role: Scalars['String']['output'];
+  role: Role;
   userId: Scalars['String']['output'];
   verificationToken?: Maybe<Scalars['String']['output']>;
 };
@@ -788,7 +794,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: Role, userId: string, verificationToken?: string | null } } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -798,14 +804,14 @@ export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } };
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: Role, userId: string, verificationToken?: string | null } };
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, userId: string, role: string, verificationToken?: string | null } } };
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, userId: string, role: Role, verificationToken?: string | null } } };
 
 export type ResendVerificationMutationVariables = Exact<{
   email: Scalars['String']['input'];
@@ -819,7 +825,7 @@ export type VerifyEmailMutationVariables = Exact<{
 }>;
 
 
-export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: string, userId: string, verificationToken?: string | null } } };
+export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', avatarUrl?: string | null, email: string, firstName: string, role: Role, userId: string, verificationToken?: string | null } } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;

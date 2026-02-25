@@ -43,7 +43,7 @@ export function UserBlock({ user }: { user: UserModel }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align='end'
-        className='from-green-light to-white-pale rounded-xl border-0 bg-linear-to-b to-20% p-0'
+        className='from-green-light to-white-pale min-w-44 rounded-xl border-0 bg-linear-to-b to-20% p-0 pb-1'
       >
         <div className='p-4 pb-2 font-semibold'>Hello {user.firstName}!</div>
         <DropdownMenuGroup>
