@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PUBLIC_PAGES, USER_PAGES } from './shared/config/pages.config'
+import { USER_PAGES } from './shared/config/pages.config'
 import { getNewTokensByRefresh } from './shared/lib/proxy-actions/get-new-tokens-by-refresh'
 import { getTokensFromRequest } from './shared/lib/proxy-actions/get-tokens-from-request'
 import { jwtVerifyServer } from './shared/lib/proxy-actions/jwt-verify'
@@ -11,10 +11,6 @@ import {
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-
-  // Allow auth pages
-  if (pathname === PUBLIC_PAGES.LOGIN || pathname === PUBLIC_PAGES.REGISTRATION)
-    return NextResponse.next()
 
   const isUserRoute = pathname.startsWith('/user')
   const isAuthRoute = pathname.startsWith('/auth')
