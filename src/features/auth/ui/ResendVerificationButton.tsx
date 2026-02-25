@@ -3,6 +3,8 @@ import { useMutation } from '@apollo/client/react'
 import { Button } from '@/shared/components/ui/button'
 import { ResendVerificationDocument } from '@/__generated__/graphql'
 
+const WAIT_SECONDS = 60
+
 export function ResendVerificationButton({
   email,
   isEmailValid
@@ -21,12 +23,17 @@ export function ResendVerificationButton({
   }, [countdown])
 
   const handleResend = async () => {
+    if (loading) return
+    if (!isEmailValid) return
+    if (countdown > 0) return
+
     try {
       await resendVerification({ variables: { email } })
 
       const { toast } = await import('react-hot-toast')
       toast.success('The verification link has been sent.\nCheck your email.', { duration: 6000 })
-      setCountdown(60)
+
+      setCountdown(WAIT_SECONDS)
     } catch (error) {
       console.error(error)
 

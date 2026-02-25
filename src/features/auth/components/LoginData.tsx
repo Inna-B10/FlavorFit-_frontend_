@@ -14,7 +14,7 @@ export function LoginData() {
   const [serverMessage, setServerMessage] = useState('')
 
   const [loginUser, { loading }] = useMutation(LoginDocument, {
-    refetchQueries: [MeDocument],
+    refetchQueries: [{ query: MeDocument }],
     awaitRefetchQueries: true
   })
 

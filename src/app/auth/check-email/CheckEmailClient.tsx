@@ -55,6 +55,7 @@ export default function CheckEmail() {
 
           <Input
             value={localEmail}
+            name='email'
             onChange={e => (setLocalEmail(e.target.value), setTouched(true))}
             placeholder='Enter your email'
             type='email'
