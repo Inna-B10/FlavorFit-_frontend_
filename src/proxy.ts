@@ -1,55 +1,75 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PUBLIC_PAGES, USER_PAGES } from './shared/config/pages.config'
-import { getTokensFromRequest } from './shared/lib/server-actions/get-tokens-from-request'
-import { jwtVerifyServer } from './shared/lib/server-actions/jwt-verify.service'
+import { getNewTokensByRefresh } from './shared/lib/proxy-actions/get-new-tokens-by-refresh'
+import { getTokensFromRequest } from './shared/lib/proxy-actions/get-tokens-from-request'
+import { jwtVerifyServer } from './shared/lib/proxy-actions/jwt-verify'
+import {
+  nextWithRefreshedCookies,
+  redirectToLogin,
+  redirectWithRefreshedCookies
+} from './shared/lib/proxy-actions/proxy-helpers'
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const tokens = await getTokensFromRequest(request)
 
+  // Allow auth pages
   if (pathname === PUBLIC_PAGES.LOGIN || pathname === PUBLIC_PAGES.REGISTRATION)
     return NextResponse.next()
 
-  // protect all routes starting with /user
-  if (pathname.includes('/user')) {
-    if (!tokens) return NextResponse.redirect(new URL(PUBLIC_PAGES.LOGIN, request.url))
+  const isUserRoute = pathname.startsWith('/user')
+  const isAuthRoute = pathname.startsWith('/auth')
 
+  if (!isUserRoute && !isAuthRoute) return NextResponse.next()
+
+  const tokens = await getTokensFromRequest(request)
+
+  //# protect all routes starting with /user
+  if (isUserRoute) {
+    if (!tokens) return redirectToLogin(request)
+
+    // Access token was missing but refreshed
     if ('isRefreshedToken' in tokens) {
-      const response = NextResponse.next()
-
-      if (tokens.setCookie) {
-        response.headers.set('set-cookie', tokens.setCookie)
-      }
-      return response
+      return nextWithRefreshedCookies(tokens)
     }
-    const verifiedData = await jwtVerifyServer(tokens.accessToken)
 
-    if (!verifiedData) return NextResponse.redirect(new URL(PUBLIC_PAGES.LOGIN, request.url))
+    // Verify existing access token
+    const verified = await jwtVerifyServer(tokens.accessToken)
 
-    return NextResponse.next()
+    if (verified.ok) return NextResponse.next()
+
+    // If expired → try refresh
+    if (verified.expired) {
+      const refreshed = await getNewTokensByRefresh(request)
+      if (refreshed) return nextWithRefreshedCookies(refreshed)
+    }
+
+    return redirectToLogin(request)
   }
 
-  // if user has tokens redirect from auth pages to dashboard
-  if (pathname.includes('/auth')) {
+  //# if user is authenticated -> redirect from auth pages to dashboard
+  if (isAuthRoute) {
     if (!tokens) return NextResponse.next()
 
     if ('isRefreshedToken' in tokens) {
-      const response = NextResponse.next()
-
-      if (tokens.setCookie) {
-        response.headers.set('set-cookie', tokens.setCookie)
-      }
-      return response
+      return redirectWithRefreshedCookies(request, tokens, USER_PAGES.DASHBOARD)
     }
 
-    const verifiedData = await jwtVerifyServer(tokens.accessToken)
+    const verified = await jwtVerifyServer(tokens.accessToken)
 
-    if (!verifiedData) return NextResponse.next()
+    if (verified.ok) {
+      return NextResponse.redirect(new URL(USER_PAGES.DASHBOARD, request.url))
+    }
 
-    return NextResponse.redirect(new URL(USER_PAGES.DASHBOARD, request.url))
+    if (verified.expired) {
+      const refreshed = await getNewTokensByRefresh(request)
+      if (refreshed) return redirectWithRefreshedCookies(request, refreshed, USER_PAGES.DASHBOARD)
+    }
+
+    // Not authenticated → stay on auth pages
+    return NextResponse.next()
   }
 
-  // return NextResponse.next()
+  return NextResponse.next()
 }
 export const config = {
   matcher: ['/user/:path*', '/auth/:path*']
