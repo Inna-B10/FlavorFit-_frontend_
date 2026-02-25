@@ -1,3 +1,5 @@
+'use server'
+
 import { NextRequest, NextResponse } from 'next/server'
 import { EnumTokens } from '@/features/auth/types/auth.types'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'

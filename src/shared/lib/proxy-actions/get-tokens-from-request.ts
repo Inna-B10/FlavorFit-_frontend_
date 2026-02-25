@@ -1,3 +1,5 @@
+'use server'
+
 import type { NextRequest } from 'next/server'
 import { EnumTokens } from '@/features/auth/types/auth.types'
 import { getNewTokensByRefresh } from './get-new-tokens-by-refresh'
