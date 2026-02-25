@@ -67,6 +67,7 @@ npm i -D prettier
 npm i react-hook-form
 npx shadcn@latest init
 npm i react-hot-toast
+npm i jose
 
 
 # npx shadcn@latest add button
@@ -99,18 +100,22 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
-- [ ] page recipes (home)
-- [ ] page profile
-- [ ] page account
+- [ ] page recipes (home):
+- [ ] page profile:
+- [ ] page account:
+- [x] user/default avatar
 - [ ] **userMenu:**
-  - [ ] links account,profile, orders
-  - [ ] logout
+  - [x] links account, profile, orders
+  - [x] logout
   - [ ] ?shopping list, ?cart, ?notifications
-- [ ] (middleware) proxy, secure user pages, redirect after logout
-- [ ] user/default avatar
+- [ ] captcha
+- [ ] **middleware/proxy:**
+  - [ ] secure user pages
+  - [ ] redirect after login
+  - [ ] redirect after logout
 - [ ] **auth page:**
   - [ ] ? reset password
-  - [ ] logout
+  - [x] logout
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
