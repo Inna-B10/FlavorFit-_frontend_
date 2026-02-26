@@ -18,10 +18,12 @@ export function LogoutButton({
     try {
       await authService.logout()
       await apolloClient.clearStore()
+      router.refresh()
       router.replace(PUBLIC_PAGES.LOGIN)
     } finally {
       // Always clear local state, even if network fails
       await apolloClient.clearStore()
+      router.refresh()
       router.replace(PUBLIC_PAGES.LOGIN)
     }
   }
