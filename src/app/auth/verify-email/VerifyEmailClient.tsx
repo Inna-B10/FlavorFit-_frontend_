@@ -35,13 +35,8 @@ export function VerifyEmail() {
       const user = result.data?.verifyEmail?.user
 
       if (user) {
-        await apolloClient.clearStore()
-        apolloClient.cache.writeQuery({
-          query: MeDocument,
-          data: {
-            me: user
-          }
-        })
+        await apolloClient.resetStore()
+        await apolloClient.refetchQueries({ include: [MeDocument] })
 
         router.replace(PUBLIC_PAGES.HOME)
         return

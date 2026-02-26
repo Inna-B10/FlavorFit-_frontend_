@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { GRAPHQL_API_URL } from '@/shared/config/api.config'
+import { BACKEND_GRAPHQL_URL } from '@/shared/config/api-config/api.server'
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 
 export const runtime = 'nodejs'
@@ -7,7 +7,7 @@ export const runtime = 'nodejs'
 export async function POST(request: Request) {
   const { email } = await request.json()
 
-  const backendRes = await fetch(GRAPHQL_API_URL, {
+  const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     cache: 'no-store',

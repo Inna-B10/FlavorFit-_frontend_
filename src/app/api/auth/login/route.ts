@@ -1,20 +1,15 @@
 import { NextResponse } from 'next/server'
-import { GRAPHQL_API_URL } from '@/shared/config/api.config'
+import { BACKEND_GRAPHQL_URL } from '@/shared/config/api-config/api.server'
 import { applyBackendSetCookies } from '@/shared/lib/auth/cookies/apply-backend-set-cookies'
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 
 export const runtime = 'nodejs'
 
-type GraphQLResponse<T> = {
-  data?: T
-  errors?: Array<{ message: string; extensions?: { code?: string } }>
-}
-
 export async function POST(request: Request) {
   const body = await request.json()
   const { email, password } = body as { email: string; password: string }
 
-  const backendRes = await fetch(GRAPHQL_API_URL, {
+  const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     cache: 'no-store',

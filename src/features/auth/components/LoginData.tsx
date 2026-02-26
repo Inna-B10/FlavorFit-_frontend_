@@ -35,8 +35,8 @@ export function LoginData() {
     }
 
     // Refresh Apollo state after cookies are set:
-    await apolloClient.clearStore()
-    apolloClient.cache.writeQuery({ query: MeDocument, data: { me: user } })
+    await apolloClient.resetStore()
+    await apolloClient.refetchQueries({ include: [MeDocument] })
 
     router.replace(USER_PAGES.DASHBOARD)
 

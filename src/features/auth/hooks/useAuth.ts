@@ -3,7 +3,7 @@ import { MeDocument } from '@/__generated__/graphql'
 
 export function useAuth() {
   const { data, loading } = useQuery(MeDocument, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first'
   })
 

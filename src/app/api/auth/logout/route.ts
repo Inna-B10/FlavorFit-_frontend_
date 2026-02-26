@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { GRAPHQL_API_URL } from '@/shared/config/api.config'
+import { BACKEND_GRAPHQL_URL } from '@/shared/config/api-config/api.server'
 import { clearAuthCookies } from '@/shared/lib/auth/cookies/apply-backend-set-cookies'
 
 export const runtime = 'nodejs'
@@ -7,7 +7,7 @@ export const runtime = 'nodejs'
 export async function POST(request: Request) {
   const cookie = request.headers.get('cookie') ?? ''
 
-  await fetch(GRAPHQL_API_URL, {
+  await fetch(BACKEND_GRAPHQL_URL!, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

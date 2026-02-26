@@ -1,12 +1,10 @@
 import { HttpLink } from '@apollo/client'
-import { GRAPHQL_API_URL } from '@/shared/config/api.config'
+import { FRONTEND_GRAPHQL_URL } from '@/shared/config/api-config/api.client'
 
 export const httpLink = new HttpLink({
-  uri: GRAPHQL_API_URL,
+  uri: FRONTEND_GRAPHQL_URL,
   credentials: 'include',
   fetchOptions: {
-    next: {
-      revalidate: 60
-    }
+    cache: 'no-store'
   }
 })

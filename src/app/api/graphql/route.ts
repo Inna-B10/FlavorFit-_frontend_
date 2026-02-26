@@ -7,22 +7,16 @@ export const runtime = 'nodejs'
 
 export async function POST(request: Request) {
   const cookie = request.headers.get('cookie') ?? ''
+  const body = await request.text()
 
   const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      // forward Vercel-domain cookies to backend so it can read refreshToken
       cookie
     },
-    cache: 'no-store',
-    body: JSON.stringify({
-      query: `
-        query GetNewTokens {
-          newTokens { user { userId } }
-        }
-      `
-    })
+    body,
+    cache: 'no-store'
   })
 
   const text = await backendRes.text()

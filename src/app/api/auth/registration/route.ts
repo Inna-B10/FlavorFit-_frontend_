@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { GRAPHQL_API_URL } from '@/shared/config/api.config'
+import { BACKEND_GRAPHQL_URL } from '@/shared/config/api-config/api.server'
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 
 export const runtime = 'nodejs'
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     firstName: string
   }
 
-  const backendRes = await fetch(GRAPHQL_API_URL, {
+  const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     cache: 'no-store',
@@ -55,9 +55,6 @@ export async function POST(request: Request) {
     status: backendRes.status,
     headers: { 'Content-Type': 'application/json' }
   })
-
-  // Critical: move backend cookies onto the Vercel domain
-  // applyBackendSetCookiesToNextResponse(res, backendRes.headers.get('set-cookie'))
 
   return res
 }
