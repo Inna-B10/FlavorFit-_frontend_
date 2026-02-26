@@ -28,6 +28,8 @@ export function RegistrationData() {
 
     const user = result.data?.register?.user
 
+    setLoading(false)
+
     if (!user) {
       if (result.errorMessage) {
         setServerMessage(result.errorMessage)
@@ -36,8 +38,6 @@ export function RegistrationData() {
     }
 
     router.replace(`/auth/check-email?email=${encodeURIComponent(form.email)}`)
-
-    setLoading(false)
   }
 
   return (

@@ -27,6 +27,8 @@ export function LoginData() {
 
     const user = result.data?.login?.user
 
+    setLoading(false)
+
     if (!user) {
       if (result.errorMessage) {
         setServerMessage(result.errorMessage)
@@ -39,8 +41,6 @@ export function LoginData() {
     await apolloClient.refetchQueries({ include: [MeDocument] })
 
     router.replace(USER_PAGES.DASHBOARD)
-
-    setLoading(false)
   }
 
   return (

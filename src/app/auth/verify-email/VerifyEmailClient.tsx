@@ -34,6 +34,8 @@ export function VerifyEmail() {
 
       const user = result.data?.verifyEmail?.user
 
+      setLoading(false)
+
       if (user) {
         await apolloClient.resetStore()
         await apolloClient.refetchQueries({ include: [MeDocument] })
@@ -45,8 +47,6 @@ export function VerifyEmail() {
       if (result.errorMessage) {
         router.replace('/auth/check-email')
       }
-
-      setLoading(false)
     }
 
     run()
