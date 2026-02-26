@@ -103,29 +103,31 @@ progress visualization and adaptive recommendations
 - [ ] page recipes (home):
 - [ ] page profile:
 - [ ] page account:
-- [x] user/default avatar
 - [ ] **userMenu:**
   - [x] links account, profile, orders
   - [x] logout
   - [ ] ?shopping list, ?cart, ?notifications
 - [ ] captcha
-- [ ] **middleware/proxy:**
-  - [ ] secure user pages
-  - [ ] redirect after login
-  - [ ] redirect after logout
+- [ ] ? middleware/proxy in case when front and backend on different domains
 - [ ] **auth page:**
   - [ ] ? reset password
-  - [x] logout
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
+- [x] user/default avatar
 - [x] header + responsiveness
 - [x] icons
 - [x] routes/pages
 - [x] 404 page
+- [x] **middleware/proxy:**
+  - [x] secure user pages
+  - [x] redirect from auth pages if authenticated
+  - [x] redirect after login
+  - [x] redirect after logout
 - [x] **auth page:**
   - [x] verification email
+  - [x] logout
   - [x] cookies
   - [x] errors
   - [x] validation, messages
