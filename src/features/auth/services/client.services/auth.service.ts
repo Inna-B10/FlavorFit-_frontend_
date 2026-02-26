@@ -37,6 +37,7 @@ class AuthService {
     })
   }
 
+  //* -------------------------------- Refresh --------------------------------- */
   async refresh() {
     const res = await fetch(`${this._AUTH}/refresh`, {
       method: 'POST',

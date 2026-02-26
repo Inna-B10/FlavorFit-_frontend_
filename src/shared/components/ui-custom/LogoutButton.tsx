@@ -17,6 +17,7 @@ export function LogoutButton({
   const onLogout = async () => {
     try {
       await authService.logout()
+      await apolloClient.clearStore()
       router.replace(PUBLIC_PAGES.LOGIN)
     } finally {
       // Always clear local state, even if network fails
