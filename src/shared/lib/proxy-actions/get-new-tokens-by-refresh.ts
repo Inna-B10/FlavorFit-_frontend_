@@ -1,7 +1,4 @@
-'use server'
-
 import { NextRequest } from 'next/server'
-import { GRAPHQL_API_URL } from '@/shared/config/api.config'
 
 type GraphQLResponse<T> = { data?: T; errors?: Array<{ message: string; extensions?: any }> }
 
@@ -13,24 +10,17 @@ export type RefreshedTokensResult = {
 export async function getNewTokensByRefresh(
   request: NextRequest
 ): Promise<RefreshedTokensResult | null> {
+  const refreshUrl = new URL('/api/auth/refresh', request.url)
+
   try {
-    const refreshResponse = await fetch(GRAPHQL_API_URL, {
+    const refreshResponse = await fetch(refreshUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         //NB forward cookies from the incoming request
         cookie: request.headers.get('cookie') ?? ''
       },
       credentials: 'include',
-      body: JSON.stringify({
-        query: `
-				query GetNewTokens {
-					newTokens {
-						user { userId }
-					}
-				}
-			`
-      })
+      cache: 'no-store'
     })
 
     // if (isDev()) {

@@ -2,39 +2,43 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useMutation } from '@apollo/client/react'
+import { useApolloClient } from '@apollo/client/react'
 import { USER_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
-import { LoginDocument, MeDocument } from '@/__generated__/graphql'
+import { MeDocument } from '@/__generated__/graphql'
+import { authService } from '../services/client.services/auth.service'
 import { IAuthFormInput } from '../types/auth-form.types'
 import { AuthForm } from '../ui/AuthForm'
 
 export function LoginData() {
   const router = useRouter()
   const [serverMessage, setServerMessage] = useState('')
+  const apolloClient = useApolloClient()
 
-  const [loginUser, { loading }] = useMutation(LoginDocument, {
-    refetchQueries: [{ query: MeDocument }],
-    awaitRefetchQueries: true
-  })
+  // const [loginUser, { loading }] = useMutation(LoginDocument, {
+  //   refetchQueries: [{ query: MeDocument }],
+  //   awaitRefetchQueries: true
+  // })
 
   const onSubmit = async (form: IAuthFormInput) => {
-    const result = await mutateWithToast(
-      () => loginUser({ variables: { data: { email: form.email, password: form.password } } }),
-      {
-        successMessage: 'Successfully signed in',
-        successId: 'login-success',
-        errorMessage: 'Login failed',
-        errorId: 'login-error'
-      }
-    )
+    const result = await mutateWithToast(() => authService.login(form.email, form.password), {
+      successMessage: 'Successfully signed in',
+      successId: 'login-success',
+      errorMessage: 'Login failed',
+      errorId: 'login-error'
+    })
 
-    if (!result.data?.login?.user) {
+    const user = result.data?.login?.user
+
+    if (!user) {
       if (result.errorMessage) {
         setServerMessage(result.errorMessage)
       }
       return
     }
+
+    // Refresh Apollo state after cookies are set:
+    apolloClient.cache.writeQuery({ query: MeDocument, data: { me: user } })
 
     router.replace(USER_PAGES.DASHBOARD)
   }
@@ -42,7 +46,7 @@ export function LoginData() {
   return (
     <AuthForm
       mode='login'
-      loading={loading}
+      loading={false}
       onSubmit={onSubmit}
       serverMessage={serverMessage}
     />

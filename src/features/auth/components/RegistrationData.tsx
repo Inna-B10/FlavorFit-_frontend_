@@ -23,6 +23,8 @@ export function RegistrationData() {
           }
         }),
       {
+        loadingMessage: 'Processing...',
+        loadingId: 'register-loading',
         successMessage: 'Successfully registered',
         successId: 'register-success',
         errorMessage: 'Registration failed',
