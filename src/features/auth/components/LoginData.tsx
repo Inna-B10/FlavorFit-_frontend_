@@ -11,16 +11,13 @@ import { IAuthFormInput } from '../types/auth-form.types'
 import { AuthForm } from '../ui/AuthForm'
 
 export function LoginData() {
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const [serverMessage, setServerMessage] = useState('')
   const apolloClient = useApolloClient()
 
-  // const [loginUser, { loading }] = useMutation(LoginDocument, {
-  //   refetchQueries: [{ query: MeDocument }],
-  //   awaitRefetchQueries: true
-  // })
-
   const onSubmit = async (form: IAuthFormInput) => {
+    setLoading(true)
     const result = await mutateWithToast(() => authService.login(form.email, form.password), {
       successMessage: 'Successfully signed in',
       successId: 'login-success',
@@ -38,15 +35,18 @@ export function LoginData() {
     }
 
     // Refresh Apollo state after cookies are set:
+    await apolloClient.clearStore()
     apolloClient.cache.writeQuery({ query: MeDocument, data: { me: user } })
 
     router.replace(USER_PAGES.DASHBOARD)
+
+    setLoading(false)
   }
 
   return (
     <AuthForm
       mode='login'
-      loading={false}
+      loading={loading}
       onSubmit={onSubmit}
       serverMessage={serverMessage}
     />

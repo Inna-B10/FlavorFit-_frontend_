@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
-import { applyBackendSetCookiesToNextResponse, clearAuthCookies } from '../server/cookies-actions'
+import { applyBackendSetCookies, clearAuthCookies } from '../cookies/apply-backend-set-cookies'
 
 export function redirectToLogin(request: NextRequest) {
   const res = NextResponse.redirect(new URL(PUBLIC_PAGES.LOGIN, request.url))
@@ -15,7 +15,7 @@ export function nextWithRefreshedCookies(tokens: {
   setCookie: string | null
 }) {
   const res = NextResponse.next()
-  applyBackendSetCookiesToNextResponse(res, tokens.setCookie)
+  applyBackendSetCookies(res, tokens.setCookie)
   return res
 }
 
@@ -25,6 +25,6 @@ export function redirectWithRefreshedCookies(
   to: string
 ) {
   const res = NextResponse.redirect(new URL(to, request.url))
-  applyBackendSetCookiesToNextResponse(res, tokens.setCookie)
+  applyBackendSetCookies(res, tokens.setCookie)
   return res
 }

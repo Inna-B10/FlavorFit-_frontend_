@@ -1,11 +1,11 @@
 mutation Register($data: RegisterInput!) {
   register(data: $data) {
     user {
-      avatarUrl
+      userId
       email
       firstName
-      userId
       role
+      avatarUrl
       verificationToken
     }
   }

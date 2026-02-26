@@ -1,11 +1,11 @@
 mutation VerifyEmail($token: String!) {
   verifyEmail(token: $token) {
     user {
-      avatarUrl
+      userId
       email
       firstName
       role
-      userId
+      avatarUrl
       verificationToken
     }
   }

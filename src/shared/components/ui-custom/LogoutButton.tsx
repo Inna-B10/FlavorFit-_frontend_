@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client/react'
-import { logoutRequest } from '@/features/auth/services/logout.service'
+import { authService } from '@/features/auth/services/client.services/auth.service'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { cn } from '@/shared/utils/utils'
 
@@ -16,10 +16,10 @@ export function LogoutButton({
 
   const onLogout = async () => {
     try {
-      await logoutRequest(apolloClient)
+      await authService.logout()
       router.replace(PUBLIC_PAGES.LOGIN)
-    } catch (e) {
-      //logout should be resilient; even if mutation fails, clear local state.
+    } finally {
+      // Always clear local state, even if network fails
       await apolloClient.clearStore()
       router.replace(PUBLIC_PAGES.LOGIN)
     }

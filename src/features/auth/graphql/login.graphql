@@ -1,11 +1,11 @@
 mutation Login($data: LoginInput!) {
   login(data: $data) {
     user {
-      avatarUrl
+      userId
       email
       firstName
       role
-      userId
+      avatarUrl
       verificationToken
     }
   }

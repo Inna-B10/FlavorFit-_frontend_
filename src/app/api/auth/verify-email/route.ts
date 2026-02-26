@@ -5,28 +5,29 @@ import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 
 export const runtime = 'nodejs'
 
-type GraphQLResponse<T> = {
-  data?: T
-  errors?: Array<{ message: string; extensions?: { code?: string } }>
-}
-
 export async function POST(request: Request) {
-  const cookie = request.headers.get('cookie') ?? ''
+  const { token } = await request.json()
 
   const backendRes = await fetch(GRAPHQL_API_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // forward Vercel-domain cookies to backend so it can read refreshToken
-      cookie
-    },
+    headers: { 'Content-Type': 'application/json' },
     cache: 'no-store',
     body: JSON.stringify({
       query: `
-        query GetNewTokens {
-          newTokens { user { userId } }
+        mutation VerifyEmail($token: String!) {
+          verifyEmail(token: $token) {
+            user {
+              userId
+              email
+              firstName
+              role
+              avatarUrl
+              verificationToken
+            }
+          }
         }
-      `
+      `,
+      variables: { token }
     })
   })
 

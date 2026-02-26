@@ -74,10 +74,7 @@ function parseCookieString(cookieStr: string): {
   return { name, value, options }
 }
 
-export function applyBackendSetCookiesToNextResponse(
-  res: NextResponse,
-  backendSetCookieHeader: string | null
-) {
+export function applyBackendSetCookies(res: NextResponse, backendSetCookieHeader: string | null) {
   if (!backendSetCookieHeader) return
 
   const cookies = splitSetCookieHeader(backendSetCookieHeader)

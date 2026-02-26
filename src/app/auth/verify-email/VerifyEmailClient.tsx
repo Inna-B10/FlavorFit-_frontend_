@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useApolloClient, useMutation } from '@apollo/client/react'
+import { useApolloClient } from '@apollo/client/react'
+import { authService } from '@/features/auth/services/client.services/auth.service'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
-import { MeDocument, VerifyEmailDocument } from '@/__generated__/graphql'
+import { MeDocument } from '@/__generated__/graphql'
 
 export function VerifyEmail() {
   const [loading, setLoading] = useState(true)
@@ -15,8 +16,6 @@ export function VerifyEmail() {
 
   const token = useSearchParams().get('token')
   const apolloClient = useApolloClient()
-
-  const [verifyEmail] = useMutation(VerifyEmailDocument)
 
   useEffect(() => {
     if (!token) {
@@ -27,7 +26,7 @@ export function VerifyEmail() {
     const run = async () => {
       setLoading(true)
 
-      const result = await mutateWithToast(() => verifyEmail({ variables: { token } }), {
+      const result = await mutateWithToast(() => authService.verifyEmail(token), {
         successMessage: 'Email successfully verified!',
         successId: 'verify-email-success',
         errorId: 'verify-email-error'
@@ -36,6 +35,7 @@ export function VerifyEmail() {
       const user = result.data?.verifyEmail?.user
 
       if (user) {
+        await apolloClient.clearStore()
         apolloClient.cache.writeQuery({
           query: MeDocument,
           data: {
@@ -55,7 +55,7 @@ export function VerifyEmail() {
     }
 
     run()
-  }, [token, verifyEmail, router, apolloClient])
+  }, [token, router, apolloClient])
 
   if (loading)
     return (

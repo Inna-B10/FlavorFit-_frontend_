@@ -1,10 +1,10 @@
 query Me {
   me {
-    avatarUrl
+    userId
     email
     firstName
     role
-    userId
+    avatarUrl
     verificationToken
   }
 }

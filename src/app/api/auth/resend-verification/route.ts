@@ -1,32 +1,23 @@
 import { NextResponse } from 'next/server'
 import { GRAPHQL_API_URL } from '@/shared/config/api.config'
-import { applyBackendSetCookies } from '@/shared/lib/auth/cookies/apply-backend-set-cookies'
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 
 export const runtime = 'nodejs'
 
-type GraphQLResponse<T> = {
-  data?: T
-  errors?: Array<{ message: string; extensions?: { code?: string } }>
-}
-
 export async function POST(request: Request) {
-  const cookie = request.headers.get('cookie') ?? ''
+  const { email } = await request.json()
 
   const backendRes = await fetch(GRAPHQL_API_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // forward Vercel-domain cookies to backend so it can read refreshToken
-      cookie
-    },
+    headers: { 'Content-Type': 'application/json' },
     cache: 'no-store',
     body: JSON.stringify({
       query: `
-        query GetNewTokens {
-          newTokens { user { userId } }
+        mutation ResendVerification($email: String!) {
+          resendVerification(email: $email)
         }
-      `
+      `,
+      variables: { email }
     })
   })
 
@@ -46,12 +37,8 @@ export async function POST(request: Request) {
     })
   }
 
-  const res = new NextResponse(text, {
+  return new NextResponse(text, {
     status: backendRes.status,
     headers: { 'Content-Type': 'application/json' }
   })
-
-  applyBackendSetCookies(res, backendRes.headers.get('set-cookie'))
-
-  return res
 }

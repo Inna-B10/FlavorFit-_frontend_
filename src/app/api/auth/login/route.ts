@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server'
 import { GRAPHQL_API_URL } from '@/shared/config/api.config'
-import { applyBackendSetCookiesToNextResponse } from '@/shared/lib/server/cookies-actions'
+import { applyBackendSetCookies } from '@/shared/lib/auth/cookies/apply-backend-set-cookies'
+import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 
 export const runtime = 'nodejs'
+
+type GraphQLResponse<T> = {
+  data?: T
+  errors?: Array<{ message: string; extensions?: { code?: string } }>
+}
 
 export async function POST(request: Request) {
   const body = await request.json()
@@ -33,6 +39,20 @@ export async function POST(request: Request) {
 
   const text = await backendRes.text()
 
+  if (!backendRes.ok) {
+    return new NextResponse(text, {
+      status: backendRes.status,
+      headers: { 'Content-Type': 'application/json' }
+    })
+  }
+
+  const normalized = normalizeGqlText<any>(text)
+  if (!normalized.ok) {
+    return NextResponse.json(normalized.json ?? { errors: [{ message: normalized.message }] }, {
+      status: normalized.status
+    })
+  }
+
   //return the same JSON body as backend (so UI can keep working with "data.login.user")
   const res = new NextResponse(text, {
     status: backendRes.status,
@@ -40,7 +60,7 @@ export async function POST(request: Request) {
   })
 
   // Critical: move backend cookies onto the Vercel domain
-  applyBackendSetCookiesToNextResponse(res, backendRes.headers.get('set-cookie'))
+  applyBackendSetCookies(res, backendRes.headers.get('set-cookie'))
 
   return res
 }

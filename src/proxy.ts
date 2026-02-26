@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { USER_PAGES } from './shared/config/pages.config'
-import { getNewTokensByRefresh } from './shared/lib/proxy-actions/get-new-tokens-by-refresh'
-import { getTokensFromRequest } from './shared/lib/proxy-actions/get-tokens-from-request'
-import { jwtVerifyServer } from './shared/lib/proxy-actions/jwt-verify'
+import { getNewTokensByRefresh } from './shared/lib/auth/middleware/get-new-tokens-by-refresh'
+import { getTokensFromRequest } from './shared/lib/auth/middleware/get-tokens-from-request'
+import { jwtVerifyServer } from './shared/lib/auth/middleware/jwt-verify'
 import {
   nextWithRefreshedCookies,
   redirectToLogin,
   redirectWithRefreshedCookies
-} from './shared/lib/proxy-actions/proxy-helpers'
+} from './shared/lib/auth/middleware/proxy-helpers'
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -67,6 +67,7 @@ export async function proxy(request: NextRequest) {
 
   return NextResponse.next()
 }
+
 export const config = {
   matcher: ['/user/:path*', '/auth/:path*']
 }
