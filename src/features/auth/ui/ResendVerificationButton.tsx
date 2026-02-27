@@ -31,7 +31,7 @@ export function ResendVerificationButton({
       await resendVerification({ variables: { email } })
 
       const { toast } = await import('react-hot-toast')
-      toast.success('The verification link has been sent.\nCheck your email.', { duration: 6000 })
+      toast.success('The link has been sent.\nCheck your email.', { duration: 6000 })
 
       setCountdown(WAIT_SECONDS)
     } catch (error) {

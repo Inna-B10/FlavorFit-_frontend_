@@ -20,7 +20,7 @@ export default function CheckEmail() {
   const showError = touched && !isEmailValid
 
   return (
-    <div className='bg-white-pale m-auto flex min-h-60 w-full max-w-md grow flex-col items-center justify-center gap-6 rounded-2xl p-10 shadow-md'>
+    <div className='bg-white-pale m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl p-10 shadow-md'>
       <Link
         href='/'
         title='Homepage'
@@ -48,9 +48,9 @@ export default function CheckEmail() {
         </>
       ) : (
         <>
-          <p className='w-full text-pretty'>
-            Please enter the email used during registration and we&apos;ll send a new verification
-            link.
+          <p>
+            Please enter the email used during registration.
+            <br /> A new verification link will be sent to this email.
           </p>
 
           <Input

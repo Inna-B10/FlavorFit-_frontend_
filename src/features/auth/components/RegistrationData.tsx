@@ -19,7 +19,7 @@ export function RegistrationData() {
       {
         loadingMessage: 'Processing...',
         loadingId: 'register-loading',
-        successMessage: 'Account created. Verify your email.',
+        successMessage: 'Account created.\nPlease verify your email.',
         successId: 'register-success',
         errorMessage: 'Registration failed',
         errorId: 'register-error'
