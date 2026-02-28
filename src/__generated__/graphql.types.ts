@@ -230,7 +230,9 @@ export type Mutation = {
   removeAllCartItems: CartModel;
   removeCartItem: CartModel;
   removeRecipeFromShoppingList: ShoppingListModel;
-  resendVerification: Scalars['Boolean']['output'];
+  requestPasswordReset: Scalars['Boolean']['output'];
+  requestVerificationEmail: Scalars['Boolean']['output'];
+  resetPassword: Scalars['Boolean']['output'];
   toggleLike: ToggleLikeResponse;
   updateCartItemPurchase: CartModel;
   updateComment: CommentModel;
@@ -334,8 +336,18 @@ export type MutationRemoveRecipeFromShoppingListArgs = {
 };
 
 
-export type MutationResendVerificationArgs = {
-  email: Scalars['String']['input'];
+export type MutationRequestPasswordResetArgs = {
+  data: RequestEmailActionsInput;
+};
+
+
+export type MutationRequestVerificationEmailArgs = {
+  data: RequestEmailActionsInput;
+};
+
+
+export type MutationResetPasswordArgs = {
+  data: ResetPasswordInput;
 };
 
 
@@ -637,6 +649,15 @@ export type RemoveCartItemInput = {
   cartItemId: Scalars['String']['input'];
 };
 
+export type RequestEmailActionsInput = {
+  email: Scalars['String']['input'];
+};
+
+export type ResetPasswordInput = {
+  newPassword: Scalars['String']['input'];
+  token: Scalars['String']['input'];
+};
+
 export const Role = {
   Admin: 'ADMIN',
   User: 'USER'
@@ -809,12 +830,26 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
 
-export type ResendVerificationMutationVariables = Exact<{
-  email: Scalars['String']['input'];
+export type RequestPasswordResetMutationVariables = Exact<{
+  data: RequestEmailActionsInput;
 }>;
 
 
-export type ResendVerificationMutation = { __typename?: 'Mutation', resendVerification: boolean };
+export type RequestPasswordResetMutation = { __typename?: 'Mutation', requestPasswordReset: boolean };
+
+export type RequestVerificationEmailMutationVariables = Exact<{
+  data: RequestEmailActionsInput;
+}>;
+
+
+export type RequestVerificationEmailMutation = { __typename?: 'Mutation', requestVerificationEmail: boolean };
+
+export type ResetPasswordMutationVariables = Exact<{
+  data: ResetPasswordInput;
+}>;
+
+
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword: boolean };
 
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String']['input'];

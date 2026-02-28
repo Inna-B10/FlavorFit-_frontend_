@@ -1,0 +1,3 @@
+mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {
+  requestVerificationEmail(data: $data)
+}

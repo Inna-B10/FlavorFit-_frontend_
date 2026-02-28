@@ -19,7 +19,9 @@ type Documents = {
     "mutation Logout {\n  logout\n}": typeof types.LogoutDocument,
     "query Me {\n  me {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}": typeof types.MeDocument,
     "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": typeof types.RegisterDocument,
-    "mutation ResendVerification($email: String!) {\n  resendVerification(email: $email)\n}": typeof types.ResendVerificationDocument,
+    "mutation RequestPasswordReset($data: RequestEmailActionsInput!) {\n  requestPasswordReset(data: $data)\n}": typeof types.RequestPasswordResetDocument,
+    "mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {\n  requestVerificationEmail(data: $data)\n}": typeof types.RequestVerificationEmailDocument,
+    "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
     "mutation VerifyEmail($token: String!) {\n  verifyEmail(token: $token) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": typeof types.VerifyEmailDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
 };
@@ -29,7 +31,9 @@ const documents: Documents = {
     "mutation Logout {\n  logout\n}": types.LogoutDocument,
     "query Me {\n  me {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}": types.MeDocument,
     "mutation Register($data: RegisterInput!) {\n  register(data: $data) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": types.RegisterDocument,
-    "mutation ResendVerification($email: String!) {\n  resendVerification(email: $email)\n}": types.ResendVerificationDocument,
+    "mutation RequestPasswordReset($data: RequestEmailActionsInput!) {\n  requestPasswordReset(data: $data)\n}": types.RequestPasswordResetDocument,
+    "mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {\n  requestVerificationEmail(data: $data)\n}": types.RequestVerificationEmailDocument,
+    "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
     "mutation VerifyEmail($token: String!) {\n  verifyEmail(token: $token) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": types.VerifyEmailDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": types.GetAllRecipesDocument,
 };
@@ -71,7 +75,15 @@ export function graphql(source: "mutation Register($data: RegisterInput!) {\n  r
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation ResendVerification($email: String!) {\n  resendVerification(email: $email)\n}"): (typeof documents)["mutation ResendVerification($email: String!) {\n  resendVerification(email: $email)\n}"];
+export function graphql(source: "mutation RequestPasswordReset($data: RequestEmailActionsInput!) {\n  requestPasswordReset(data: $data)\n}"): (typeof documents)["mutation RequestPasswordReset($data: RequestEmailActionsInput!) {\n  requestPasswordReset(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {\n  requestVerificationEmail(data: $data)\n}"): (typeof documents)["mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {\n  requestVerificationEmail(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}"): (typeof documents)["mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
