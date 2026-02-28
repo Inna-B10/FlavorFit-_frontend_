@@ -19,7 +19,7 @@ export default function RequestEmailActions({ mode }: { mode: Mode }) {
   const showError = touched && !isEmailValid
 
   return (
-    <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl px-15 py-10 shadow-md'>
+    <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl px-8 py-10 shadow-md sm:px-15'>
       <Link
         href='/'
         title='Homepage'
@@ -29,7 +29,9 @@ export default function RequestEmailActions({ mode }: { mode: Mode }) {
         <LogoIcon className='text-white-pale h-full w-auto' />
       </Link>
 
-      <h2 className='font-sansita mb-2 text-center text-3xl font-bold italic'>{title}</h2>
+      <h2 className='font-sansita mb-2 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
+        {title}
+      </h2>
 
       <>
         <p>

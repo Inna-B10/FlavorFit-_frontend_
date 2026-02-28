@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
 import { Button } from '@/shared/components/ui/button'
+import { AUTH_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
 import { ResetPasswordDocument } from '@/__generated__/graphql'
 
@@ -16,6 +18,7 @@ export function NewPasswordButton({
   token: string
 }) {
   const [countdown, setCountdown] = useState(0)
+  const router = useRouter()
 
   const [newPasswordMutation, { loading }] = useMutation(ResetPasswordDocument)
 
@@ -44,6 +47,8 @@ export function NewPasswordButton({
 
     if (result.data?.resetPassword) {
       setCountdown(WAIT_SECONDS)
+
+      router.replace(AUTH_PAGES.LOGIN)
     }
   }
 

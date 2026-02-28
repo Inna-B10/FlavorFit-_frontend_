@@ -46,12 +46,12 @@ export function LoginData() {
   }
 
   return (
-    <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center gap-4 rounded-2xl p-6 shadow-md'>
+    <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-6 rounded-2xl p-6 shadow-md'>
       <Link
         href='/'
         title='Homepage'
         aria-label='Go to homepage'
-        className='bg-green-dark absolute top-8 left-7 h-14 w-fit rounded-full p-2.5 shadow-md transition-all duration-300 ease-in-out hover:scale-105 sm:hidden'
+        className='bg-green-dark absolute -top-4 -left-1 h-14 w-fit rounded-full p-2.5 shadow-md transition-all duration-300 ease-in-out hover:scale-105 sm:hidden'
       >
         <LogoIcon className='text-white-pale h-full w-auto' />
       </Link>

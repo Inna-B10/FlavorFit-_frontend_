@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
+import { AUTH_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
 import { UserModel } from '@/__generated__/graphql'
 import { authService } from '../services/client.services/auth.service'
@@ -41,7 +42,7 @@ export function RegistrationData() {
   }
 
   return (
-    <div className='bg-white-pale relative m-auto flex min-h-90 w-full max-w-lg flex-col items-center gap-4 rounded-2xl p-6 shadow-md'>
+    <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-6 rounded-2xl p-6 shadow-md'>
       <Link
         href='/'
         title='Homepage'
@@ -70,7 +71,7 @@ export function RegistrationData() {
             <p className='text-muted-foreground my-4 text-xs'>
               Need a new verification link?{' '}
               <Link
-                href='/auth/request-verification-email'
+                href={AUTH_PAGES.REQUEST_VERIFICATION_EMAIL}
                 className='underline-offset-2'
               >
                 Click here!

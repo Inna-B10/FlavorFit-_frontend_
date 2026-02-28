@@ -1,11 +1,11 @@
 'use server'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { PUBLIC_PAGES } from '@/shared/config/pages.config'
+import { AUTH_PAGES } from '@/shared/config/pages.config'
 import { applyBackendSetCookies, clearAuthCookies } from '../cookies/apply-backend-set-cookies'
 
 export function redirectToLogin(request: NextRequest) {
-  const res = NextResponse.redirect(new URL(PUBLIC_PAGES.LOGIN, request.url))
+  const res = NextResponse.redirect(new URL(AUTH_PAGES.LOGIN, request.url))
   clearAuthCookies(res)
   return res
 }

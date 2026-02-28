@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { LuUserRound } from 'react-icons/lu'
 import { TfiHeadphoneAlt } from 'react-icons/tfi'
-import { PUBLIC_PAGES } from '@/shared/config/pages.config'
+import { AUTH_PAGES, PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { UserModel } from '@/__generated__/graphql.types'
 import { UserBlock } from '../../../ui-custom/UserBlock'
 
@@ -21,7 +21,7 @@ export function RightNavbar({ isLoggedIn, user }: { isLoggedIn: boolean; user: U
         <UserBlock user={user} />
       ) : (
         <Link
-          href={PUBLIC_PAGES.LOGIN}
+          href={AUTH_PAGES.LOGIN}
           title='Login/Registration'
           aria-label='Go to authentication page'
           className='bg-gradient-white-pale text-green-dark hover:text-foreground hover:bg-gradient-green-light rounded-full p-2 shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer xl:p-2.5'

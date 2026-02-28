@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
 import { Button } from '@/shared/components/ui/button'
+import { AUTH_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
 import {
   RequestPasswordResetDocument,
@@ -19,6 +21,7 @@ export function RequestEmailButton({
   mode: 'verify-email' | 'reset-password'
 }) {
   const [countdown, setCountdown] = useState(0)
+  const router = useRouter()
 
   const [requestVerificationEmail, verifyState] = useMutation(RequestVerificationEmailDocument)
   const [requestPasswordReset, resetState] = useMutation(RequestPasswordResetDocument)
@@ -48,6 +51,8 @@ export function RequestEmailButton({
 
       if (result.data?.requestVerificationEmail) {
         setCountdown(WAIT_SECONDS)
+
+        router.replace(AUTH_PAGES.LOGIN)
       }
 
       return
@@ -67,6 +72,8 @@ export function RequestEmailButton({
 
     if (result.data?.requestPasswordReset) {
       setCountdown(WAIT_SECONDS)
+
+      router.replace(AUTH_PAGES.LOGIN)
     }
   }
 

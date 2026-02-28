@@ -8,6 +8,7 @@ import { NewPasswordButton } from '@/features/auth/components/NewPasswordButton'
 import { isValidPassword } from '@/features/auth/utils/is-valid-check'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
+import { AUTH_PAGES } from '@/shared/config/pages.config'
 
 export function ResetPasswordClient() {
   const searchParams = useSearchParams()
@@ -24,7 +25,7 @@ export function ResetPasswordClient() {
       toast.error('Invalid token', { duration: 6000 })
 
       setTimeout(() => {
-        router.replace('/auth/request-reset-password')
+        router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
       }, 6000)
     }
   })
@@ -43,7 +44,7 @@ export function ResetPasswordClient() {
     )
 
   return (
-    <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl px-20 py-15 shadow-md'>
+    <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl px-8 py-10 shadow-md sm:px-15'>
       <Link
         href='/'
         title='Homepage'
@@ -65,10 +66,10 @@ export function ResetPasswordClient() {
           placeholder='Enter your new password'
           type='text'
         />
-        <p className='text-sm'>
+        <p className='w-[95%] text-sm'>
           Please note that your new password must meet the following requirements:
         </p>
-        <ul className='text-muted-foreground list-disc text-sm'>
+        <ul className='text-muted-foreground list-disc px-6 text-sm'>
           <li>At least 8 characters long</li>
           <li>Contains at least one uppercase letter</li>
           <li>Contains at least one lowercase letter</li>
