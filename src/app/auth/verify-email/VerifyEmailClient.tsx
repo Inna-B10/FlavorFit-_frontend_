@@ -7,7 +7,7 @@ import { useApolloClient } from '@apollo/client/react'
 import { authService } from '@/features/auth/services/client.services/auth.service'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
-import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
+import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
 import { MeDocument } from '@/__generated__/graphql'
 
 export function VerifyEmail() {
@@ -19,10 +19,11 @@ export function VerifyEmail() {
 
   useEffect(() => {
     if (!token) {
-      router.replace('/auth/check-email')
+      router.replace('/auth/request-verification-email')
       return
     }
 
+    let alive = true
     const run = async () => {
       setLoading(true)
 
@@ -34,27 +35,28 @@ export function VerifyEmail() {
 
       const user = result.data?.verifyEmail?.user
 
-      setLoading(false)
+      if (!alive) return
 
       if (user) {
-        await apolloClient.resetStore()
         await apolloClient.refetchQueries({ include: [MeDocument] })
+
+        if (!alive) return
 
         router.replace(PUBLIC_PAGES.HOME)
         return
       }
 
-      if (result.errorMessage) {
-        router.replace('/auth/check-email')
-      }
+      if (alive) setLoading(false)
     }
-
     run()
+    return () => {
+      alive = false
+    }
   }, [token, router, apolloClient])
 
   if (loading)
     return (
-      <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-xs'>
+      <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-md'>
         <div className='bg-white-pale w-full max-w-sm rounded-2xl p-6 text-center shadow-lg ring-1 ring-white/15'>
           <div className='border-muted-foreground/50 border-t-foreground mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-2' />
           <p className='text-base'>Verifying your email…</p>
@@ -76,7 +78,9 @@ export function VerifyEmail() {
       <h2 className='font-sansita my-4 text-center text-3xl font-bold italic'>
         Email verification
       </h2>
-      <p className='text-muted-foreground mt-3 text-sm'>This link is invalid or already used</p>
+      <p className='text-muted-foreground mt-3 text-sm'>
+        This link is invalid, expired or already used .
+      </p>
       <div className='text-muted-foreground mt-3 flex gap-2 text-center text-sm'>
         Try to{' '}
         <Link
@@ -89,12 +93,12 @@ export function VerifyEmail() {
         </Link>
         or
         <Link
-          href='/auth/check-email'
+          href='/auth/request-verification-email'
           title='Resend email'
           aria-label='Resend email'
           className='text-foreground font-medium underline'
         >
-          Resend verification link
+          Resend verification email
         </Link>
       </div>
     </div>

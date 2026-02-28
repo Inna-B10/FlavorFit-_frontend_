@@ -1,38 +1,40 @@
 import Link from 'next/link'
 import { PUBLIC_PAGES } from '@/shared/config/pages.config'
 
-interface IAuthChangeTypeForm {
-  isLogin: boolean
-  errorMessage?: string
-}
+export function AuthChangeModeForm({ isLogin }: { isLogin: boolean }) {
+  const link = isLogin ? PUBLIC_PAGES.REGISTRATION : PUBLIC_PAGES.LOGIN
+  const linkText = isLogin ? 'Sign up' : 'Sign in'
+  const label = isLogin ? 'Already have an account?' : "Don't have an account?"
 
-export function AuthChangeModeForm({ isLogin, errorMessage }: IAuthChangeTypeForm) {
   return (
-    <div className='my-2'>
-      <div className='h-8'>
-        {errorMessage && <p className='text-destructive text-xs'>{errorMessage}</p>}
-      </div>
-      {isLogin ? (
-        <>
-          <span className='text-xs'>Don&apos;t have an account?</span>{' '}
+    <>
+      {isLogin && (
+        <div className='text-muted-foreground mb-6 flex items-center justify-center gap-2 text-sm text-nowrap'>
           <Link
-            href={PUBLIC_PAGES.REGISTRATION}
-            className='text-sm text-nowrap underline-offset-2'
+            href='/auth/request-verification-email'
+            aria-label='Get a new verification link'
+            className='hover:text-foreground no-underline'
           >
-            Sign up
-          </Link>
-        </>
-      ) : (
-        <>
-          <span className='text-xs'>Already have an account?</span>{' '}
+            Resend verification email
+          </Link>{' '}
+          |{' '}
           <Link
-            href={PUBLIC_PAGES.LOGIN}
-            className='text-sm text-nowrap underline-offset-2'
+            href='/auth/request-reset-password'
+            aria-label='Forgot password'
+            className='hover:text-foreground no-underline'
           >
-            Sign in
+            Forgot password
           </Link>
-        </>
+        </div>
       )}
-    </div>
+      <span className='text-xs'>{label}</span>{' '}
+      <Link
+        href={link}
+        title={linkText}
+        className='text-sm text-nowrap underline-offset-2'
+      >
+        {linkText}
+      </Link>
+    </>
   )
 }
