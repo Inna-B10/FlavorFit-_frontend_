@@ -45,8 +45,8 @@ export function RequestEmailButton({
     if (result?.data) {
       const resultData =
         'requestPasswordReset' in result.data
-          ? result.data.requestPasswordReset
-          : result.data.requestVerificationEmail
+          ? result.data?.requestPasswordReset
+          : result.data?.requestVerificationEmail
 
       if (resultData) {
         setCountdown(WAIT_SECONDS)
