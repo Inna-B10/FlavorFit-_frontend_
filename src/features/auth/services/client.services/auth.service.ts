@@ -129,46 +129,6 @@ class AuthService {
 
     return json
   }
-
-  //   async forgotPassword(email: string) {
-  //     const res = await fetch(`${this._AUTH}/forgot-password`, {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ email })
-  //     })
-  //
-  //     const json = (await res.json()) as GraphQLResponse<{ forgotPassword?: { user?: UserModel } }>
-  //
-  //     if (!res.ok) {
-  //       const msg = json?.errors?.[0]?.message ?? 'Forgot password failed'
-  //       throw new Error(msg)
-  //     }
-  //     if (json.errors?.length) {
-  //       throw new Error(json.errors[0]?.message ?? 'Forgot password failed')
-  //     }
-  //
-  //     return json
-  //   }
-  //
-  //   async resetPassword(token: string, password: string) {
-  //     const res = await fetch(`${this._AUTH}/reset-password`, {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({ token, password })
-  //     })
-  //
-  //     const json = (await res.json()) as GraphQLResponse<{ resetPassword?: { user?: UserModel } }>
-  //
-  //     if (!res.ok) {
-  //       const msg = json?.errors?.[0]?.message ?? 'Reset password failed'
-  //       throw new Error(msg)
-  //     }
-  //     if (json.errors?.length) {
-  //       throw new Error(json.errors[0]?.message ?? 'Reset password failed')
-  //     }
-  //
-  //     return json
-  //   }
 }
 
 export const authService = new AuthService()

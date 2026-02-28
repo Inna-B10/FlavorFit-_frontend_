@@ -1,5 +1,5 @@
 import { toast } from 'react-hot-toast'
-import { getApolloErrorMessage } from './get-apollo-error-message'
+import { getApolloErrorMessage } from './apollo/get-apollo-error-message'
 
 type MutateFn<TData> = () => Promise<{ data?: TData }>
 
@@ -13,6 +13,8 @@ export async function mutateWithToast<TData>(
     loadingMessage?: string
     successMessage?: string
     errorMessage?: string
+
+    duration?: number
 
     afterSuccess?: (data: TData) => Promise<void> | void
     afterError?: (message: string) => Promise<void> | void
