@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useApolloClient } from '@apollo/client/react'
 import { authService } from '@/features/auth/services/client.services/auth.service'
+import { Overlay } from '@/shared/components/ui-custom/Overlay'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { AUTH_PAGES, PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
@@ -56,13 +57,10 @@ export function VerifyEmail() {
 
   if (loading)
     return (
-      <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-md'>
-        <div className='bg-white-pale w-[90%] max-w-sm rounded-2xl p-6 text-center shadow-lg ring-1 ring-white/15'>
-          <div className='border-muted-foreground/50 border-t-foreground mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-2' />
-          <p className='text-base'>Verifying your email…</p>
-          <p className='text-muted-foreground mt-1 text-sm'>This usually takes a moment.</p>
-        </div>
-      </div>
+      <Overlay>
+        <p className='text-base'>Verifying your email…</p>
+        <p className='text-muted-foreground mt-1 text-sm'>This usually takes a moment.</p>
+      </Overlay>
     )
 
   return (

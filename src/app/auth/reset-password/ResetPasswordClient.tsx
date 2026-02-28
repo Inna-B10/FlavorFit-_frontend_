@@ -1,50 +1,70 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useQuery } from '@apollo/client/react'
-import { NewPasswordButton } from '@/features/auth/components/NewPasswordButton'
+import { useResetPassword } from '@/features/auth/hooks/useResetPassword'
+import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
 import { isValidPassword } from '@/features/auth/utils/is-valid-check'
+import { Overlay } from '@/shared/components/ui-custom/Overlay'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
 import { AUTH_PAGES } from '@/shared/config/pages.config'
-import { ValidateResetTokenDocument } from '@/__generated__/graphql'
+import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
 
 export function ResetPasswordClient() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get('token') ?? ''
 
-  const [password, setPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
   const [touched, setTouched] = useState(false)
-  const isValidPass = isValidPassword(password)
+  const isValidPass = isValidPassword(newPassword)
   const showError = touched && !isValidPass
 
-  const { data, loading, error } = useQuery(ValidateResetTokenDocument, {
-    variables: { token },
-    skip: !token,
-    fetchPolicy: 'no-cache'
-  })
+  const { tokenStatus, resetPassword, mutateLoading } = useResetPassword(token)
 
-  if (!token || (!data?.validateResetToken && !loading)) {
-    setTimeout(() => {
-      router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
-    }, 3000)
+  // redirect if invalid/missing
+  useEffect(() => {
+    if (tokenStatus === 'missing' || tokenStatus === 'invalid') {
+      const t = setTimeout(() => {
+        router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
+      }, 3000)
+
+      return () => clearTimeout(t)
+    }
+  }, [tokenStatus, router])
+
+  // mutation handler
+  const onSubmit = async () => {
+    if (mutateLoading || !isValidPass || tokenStatus !== 'valid') return
+
+    const result = await mutateWithToast(() => resetPassword(newPassword), {
+      successMessage: 'Your password has been reset.',
+      successId: 'reset-password-success',
+      errorId: 'reset-password-error'
+    })
+
+    if (result.data?.resetPassword) {
+      router.replace(AUTH_PAGES.LOGIN)
+    }
   }
 
-  // invalid token screen
-  if (!data?.validateResetToken && !loading) {
+  //** ----------------------------- Render ----------------------------- */
+  if (tokenStatus === 'checking') {
     return (
-      <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-md'>
-        <div className='bg-white-pale flex min-h-60 w-full max-w-sm flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-lg ring-1 ring-white/15'>
-          <div className='border-muted-foreground/50 border-t-foreground mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-2' />
-          <p className='text-base'>Your token is invalid or expired</p>
-          <p className='text-muted-foreground mt-1 text-sm'>
-            You need a new request. Redirecting...
-          </p>
-        </div>
-      </div>
+      <Overlay>
+        <p className='text-muted-foreground'>Validating token…</p>
+      </Overlay>
+    )
+  }
+
+  if (tokenStatus === 'missing' || tokenStatus === 'invalid') {
+    return (
+      <Overlay>
+        <p className='text-base'>Your token is invalid or expired</p>
+        <p className='text-muted-foreground mt-1 text-sm'>You need a new request. Redirecting...</p>
+      </Overlay>
     )
   }
 
@@ -65,9 +85,15 @@ export function ResetPasswordClient() {
 
       <>
         <Input
-          value={password}
+          value={newPassword}
           name='password'
-          onChange={e => (setPassword(e.target.value), setTouched(true))}
+          onChange={e => (setNewPassword(e.target.value), setTouched(true))}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              onSubmit()
+            }
+          }}
           placeholder='Enter your new password'
           type='text'
         />
@@ -86,15 +112,13 @@ export function ResetPasswordClient() {
         {showError && <p className='text-destructive text-xs'>Invalid password format</p>}
       </div>
 
-      <NewPasswordButton
-        token={token}
-        newPassword={password}
-        isValidPass={isValidPass}
+      <AuthActionButton
+        isValid={isValidPass}
+        loading={mutateLoading}
+        onSubmit={onSubmit}
+        buttonText='Reset'
+        loadingText='Sending...'
       />
-
-      <span className='text-muted-foreground text-xs'>
-        You can request a new link once per minute.
-      </span>
     </div>
   )
 }

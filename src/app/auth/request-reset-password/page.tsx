@@ -1,5 +1,5 @@
-import RequestEmailActions from '@/features/auth/ui/RequestEmailActions'
+import AuthRequestActions from '@/features/auth/components/AuthRequestActions'
 
 export default function RequestResetPasswordPage() {
-  return <RequestEmailActions mode='reset-password' />
+  return <AuthRequestActions mode='reset-password' />
 }

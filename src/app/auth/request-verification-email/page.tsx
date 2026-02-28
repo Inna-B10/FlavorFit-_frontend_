@@ -1,5 +1,5 @@
-import RequestEmailActions from '@/features/auth/ui/RequestEmailActions'
+import AuthRequestActions from '@/features/auth/components/AuthRequestActions'
 
 export default function RequestVerificationEmailPage() {
-  return <RequestEmailActions mode='verify-email' />
+  return <AuthRequestActions mode='verify-email' />
 }

@@ -109,7 +109,7 @@ progress visualization and adaptive recommendations
   - [ ] ?shopping list, ?cart, ?notifications
 - [ ] captcha
 - [ ] ? middleware/proxy in case when front and backend on different domains
-- [ ] ? access to pages /auth/**check-email** and auth/**verify-email**
+- [ ] ? access to pages /auth/**request-verification-email** and auth/**verify-email**
 - [ ] **auth page:**
   - [ ] ? reset password
 
