@@ -1,0 +1,3 @@
+query ValidateResetToken($token: String!) {
+  validateResetToken(token: $token)
+}

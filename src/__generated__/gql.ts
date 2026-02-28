@@ -22,6 +22,7 @@ type Documents = {
     "mutation RequestPasswordReset($data: RequestEmailActionsInput!) {\n  requestPasswordReset(data: $data)\n}": typeof types.RequestPasswordResetDocument,
     "mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {\n  requestVerificationEmail(data: $data)\n}": typeof types.RequestVerificationEmailDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
+    "query ValidateResetToken($token: String!) {\n  validateResetToken(token: $token)\n}": typeof types.ValidateResetTokenDocument,
     "mutation VerifyEmail($token: String!) {\n  verifyEmail(token: $token) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": typeof types.VerifyEmailDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
 };
@@ -34,6 +35,7 @@ const documents: Documents = {
     "mutation RequestPasswordReset($data: RequestEmailActionsInput!) {\n  requestPasswordReset(data: $data)\n}": types.RequestPasswordResetDocument,
     "mutation RequestVerificationEmail($data: RequestEmailActionsInput!) {\n  requestVerificationEmail(data: $data)\n}": types.RequestVerificationEmailDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
+    "query ValidateResetToken($token: String!) {\n  validateResetToken(token: $token)\n}": types.ValidateResetTokenDocument,
     "mutation VerifyEmail($token: String!) {\n  verifyEmail(token: $token) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": types.VerifyEmailDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": types.GetAllRecipesDocument,
 };
@@ -84,6 +86,10 @@ export function graphql(source: "mutation RequestVerificationEmail($data: Reques
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}"): (typeof documents)["mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query ValidateResetToken($token: String!) {\n  validateResetToken(token: $token)\n}"): (typeof documents)["query ValidateResetToken($token: String!) {\n  validateResetToken(token: $token)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

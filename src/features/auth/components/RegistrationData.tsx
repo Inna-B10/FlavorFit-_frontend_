@@ -42,7 +42,7 @@ export function RegistrationData() {
   }
 
   return (
-    <div className='bg-white-pale relative m-auto flex w-full max-w-md flex-col items-center justify-center gap-6 rounded-2xl p-6 shadow-md'>
+    <div className='bg-white-pale relative m-auto flex w-full max-w-lg flex-col items-center justify-center gap-6 rounded-2xl p-6 shadow-md'>
       <Link
         href='/'
         title='Homepage'
@@ -53,16 +53,16 @@ export function RegistrationData() {
       </Link>
       {user ? (
         <>
-          <h2 className='font-sansita my-4 text-center text-3xl font-bold italic'>
+          <h2 className='font-sansita my-4 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
             Email verification
           </h2>
-          <div className='flex w-full grow-2 flex-col items-center justify-around gap-6 sm:text-center'>
-            <p className=''>A verification link has been sent to</p>
-            <p className='text-foreground -mt-6 text-center font-medium text-nowrap'>
-              {user.email}
-            </p>
+          <div className='flex w-full grow-2 flex-col items-center justify-around gap-4 sm:p-2 sm:text-center'>
+            <p>A verification link has been sent to</p>
+            <p className='text-chart-2 text-center font-medium text-nowrap'>{user.email}</p>
             <p>Open the email and click the link to finish signing up.</p>
-            <p>You won&apos;t be able to log in until your email is verified.</p>
+            <p className='text-chart-2'>
+              You won&apos;t be able to log in until your email is verified.
+            </p>
 
             <p className='text-muted-foreground text-sm'>
               Didn&apos;t receive the email? Check your Spam or Promotions folder.

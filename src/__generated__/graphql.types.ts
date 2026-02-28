@@ -505,6 +505,7 @@ export type Query = {
   recipeBySlug: RecipeModel;
   userByEmail: UserModel;
   userById: UserModel;
+  validateResetToken: Scalars['Boolean']['output'];
   variantById: ProductVariantModel;
 };
 
@@ -558,6 +559,11 @@ export type QueryUserByEmailArgs = {
 
 export type QueryUserByIdArgs = {
   userId: Scalars['String']['input'];
+};
+
+
+export type QueryValidateResetTokenArgs = {
+  token: Scalars['String']['input'];
 };
 
 
@@ -850,6 +856,13 @@ export type ResetPasswordMutationVariables = Exact<{
 
 
 export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword: boolean };
+
+export type ValidateResetTokenQueryVariables = Exact<{
+  token: Scalars['String']['input'];
+}>;
+
+
+export type ValidateResetTokenQuery = { __typename?: 'Query', validateResetToken: boolean };
 
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String']['input'];

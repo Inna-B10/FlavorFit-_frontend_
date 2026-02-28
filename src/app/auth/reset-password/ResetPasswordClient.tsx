@@ -1,47 +1,52 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import toast from 'react-hot-toast'
+import { useQuery } from '@apollo/client/react'
 import { NewPasswordButton } from '@/features/auth/components/NewPasswordButton'
 import { isValidPassword } from '@/features/auth/utils/is-valid-check'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
 import { AUTH_PAGES } from '@/shared/config/pages.config'
+import { ValidateResetTokenDocument } from '@/__generated__/graphql'
 
 export function ResetPasswordClient() {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get('token') ?? ''
-  const router = useRouter()
 
   const [password, setPassword] = useState('')
   const [touched, setTouched] = useState(false)
   const isValidPass = isValidPassword(password)
   const showError = touched && !isValidPass
 
-  useEffect(() => {
-    if (!token) {
-      toast.error('Invalid token', { duration: 6000 })
-
-      setTimeout(() => {
-        router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
-      }, 6000)
-    }
+  const { data, loading, error } = useQuery(ValidateResetTokenDocument, {
+    variables: { token },
+    skip: !token,
+    fetchPolicy: 'no-cache'
   })
 
-  if (!token)
+  if (!token || (!data?.validateResetToken && !loading)) {
+    setTimeout(() => {
+      router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
+    }, 3000)
+  }
+
+  // invalid token screen
+  if (!data?.validateResetToken && !loading) {
     return (
       <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-md'>
-        <div className='bg-white-pale w-full max-w-sm rounded-2xl p-6 text-center shadow-lg ring-1 ring-white/15'>
+        <div className='bg-white-pale flex min-h-60 w-full max-w-sm flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-lg ring-1 ring-white/15'>
           <div className='border-muted-foreground/50 border-t-foreground mx-auto mb-3 h-10 w-10 animate-spin rounded-full border-2' />
           <p className='text-base'>Your token is invalid or expired</p>
           <p className='text-muted-foreground mt-1 text-sm'>
-            Redirecting you to request a new token
+            You need a new request. Redirecting...
           </p>
         </div>
       </div>
     )
+  }
 
   return (
     <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl px-8 py-10 shadow-md sm:px-15'>
