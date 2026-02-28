@@ -20,37 +20,53 @@ export function RequestEmailButton({
 }) {
   const [countdown, setCountdown] = useState(0)
 
-  const [sendEmail, { loading }] = useMutation(
-    mode === 'verify-email' ? RequestVerificationEmailDocument : RequestPasswordResetDocument
-  )
+  const [requestVerificationEmail, verifyState] = useMutation(RequestVerificationEmailDocument)
+  const [requestPasswordReset, resetState] = useMutation(RequestPasswordResetDocument)
+
+  const loading = mode === 'verify-email' ? verifyState.loading : resetState.loading
 
   useEffect(() => {
     if (countdown <= 0) return
-    const timer = setTimeout(() => setCountdown(countdown - 1), 1000)
-
+    const timer = setTimeout(() => setCountdown(c => c - 1), 1000)
     return () => clearTimeout(timer)
   }, [countdown])
 
   const onSubmit = async () => {
     if (loading || !isEmailValid || countdown > 0) return
 
-    const result = await mutateWithToast(() => sendEmail({ variables: { data: { email } } }), {
-      successMessage: 'The link has been sent.\nCheck your email.',
-      successId: 'request-email-success',
-      errorMessage: 'Error sending email',
-      errorId: 'request-email-error',
-      duration: 6000
-    })
+    if (mode === 'verify-email') {
+      const result = await mutateWithToast(
+        () => requestVerificationEmail({ variables: { data: { email } } }),
+        {
+          successMessage: 'The link has been sent.\nCheck your email.',
+          successId: 'request-email-success',
+          errorMessage: 'Error sending email',
+          errorId: 'request-email-error',
+          duration: 6000
+        }
+      )
 
-    if (result?.data) {
-      const resultData =
-        'requestPasswordReset' in result.data
-          ? result.data?.requestPasswordReset
-          : result.data?.requestVerificationEmail
-
-      if (resultData) {
+      if (result.data?.requestVerificationEmail) {
         setCountdown(WAIT_SECONDS)
       }
+
+      return
+    }
+
+    // mode === 'reset-password'
+    const result = await mutateWithToast(
+      () => requestPasswordReset({ variables: { data: { email } } }),
+      {
+        successMessage: 'The link has been sent.\nCheck your email.',
+        successId: 'request-email-success',
+        errorMessage: 'Error sending email',
+        errorId: 'request-email-error',
+        duration: 6000
+      }
+    )
+
+    if (result.data?.requestPasswordReset) {
+      setCountdown(WAIT_SECONDS)
     }
   }
 

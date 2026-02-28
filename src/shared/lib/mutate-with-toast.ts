@@ -1,7 +1,9 @@
+import { ApolloLink } from '@apollo/client'
 import { toast } from 'react-hot-toast'
 import { getApolloErrorMessage } from './apollo/get-apollo-error-message'
 
-type MutateFn<TData> = () => Promise<{ data?: TData }>
+type MutationResult<TData> = ApolloLink.Result<TData>
+type MutateFn<TData> = () => Promise<MutationResult<TData>>
 
 export async function mutateWithToast<TData>(
   mutate: MutateFn<TData>,
@@ -16,7 +18,7 @@ export async function mutateWithToast<TData>(
 
     duration?: number
 
-    afterSuccess?: (data: TData) => Promise<void> | void
+    afterSuccess?: (data: NonNullable<TData>) => Promise<void> | void
     afterError?: (message: string) => Promise<void> | void
   }
 ): Promise<{ data: TData | null; errorMessage?: string }> {
@@ -25,10 +27,12 @@ export async function mutateWithToast<TData>(
   if (options?.loadingMessage) {
     toast.loading(options.loadingMessage, { id: loadingId })
   }
+
   try {
     const res = await mutate()
+    const data = (res.data ?? null) as TData | null
 
-    if (!res.data) {
+    if (!data) {
       const msg = options?.errorMessage ?? 'Operation failed'
       toast.error(msg, { id: options?.errorId })
       if (loadingId) toast.dismiss(loadingId)
@@ -39,18 +43,22 @@ export async function mutateWithToast<TData>(
     if (loadingId) toast.dismiss(loadingId)
 
     if (options?.successMessage) {
-      toast.success(options.successMessage, { id: options?.successId })
+      toast.success(options.successMessage, { id: options?.successId, duration: options?.duration })
     }
 
-    await options?.afterSuccess?.(res.data)
+    await options?.afterSuccess?.(data as NonNullable<TData>)
 
-    return { data: res.data }
+    return { data }
   } catch (e) {
     if (loadingId) toast.dismiss(loadingId)
 
     const message = getApolloErrorMessage(e)
 
-    toast.error(options?.errorMessage ?? message, { id: options?.errorId })
+    toast.error(options?.errorMessage ?? message, {
+      id: options?.errorId,
+      duration: options?.duration
+    })
+
     await options?.afterError?.(message)
     return { data: null, errorMessage: message }
   }
