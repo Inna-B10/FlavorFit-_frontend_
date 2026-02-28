@@ -29,7 +29,7 @@ export function ResetPasswordClient() {
     if (tokenStatus === 'missing' || tokenStatus === 'invalid') {
       const t = setTimeout(() => {
         router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
-      }, 3000)
+      }, 8000)
 
       return () => clearTimeout(t)
     }
