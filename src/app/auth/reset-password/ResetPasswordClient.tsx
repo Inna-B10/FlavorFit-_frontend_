@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
+import { TurnstileInstance } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast'
 import { useResetPassword } from '@/features/auth/hooks/useResetPassword'
 import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
 import { isValidPassword } from '@/features/auth/utils/is-valid-check'
+import { TurnstileCaptcha } from '@/shared/components/TurnstileCaptcha'
 import { Overlay } from '@/shared/components/ui-custom/Overlay'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
@@ -26,15 +27,6 @@ export function ResetPasswordClient() {
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const ref = useRef<TurnstileInstance | null>(null)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = async () => {
-      if (typeof window !== 'undefined' && window.matchMedia('(max-width: 390px)').matches)
-        setIsMobile(true)
-    }
-    checkMobile()
-  }, [])
 
   const { tokenStatus, resetPassword, mutateLoading } = useResetPassword(token, captchaToken ?? '')
 
@@ -131,38 +123,16 @@ export function ResetPasswordClient() {
           {/* <li>Contains at least one special character</li> */}
         </ul>
       </>
-      <div className='mx-auto w-full pt-2'>
-        {isMobile ? (
-          <Turnstile
-            ref={ref}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-            onSuccess={captchaToken => setCaptchaToken(captchaToken)}
-            onExpire={() => setCaptchaToken(null)}
-            className='mx-auto'
-            options={{
-              size: 'compact',
-              theme: 'light',
-              language: 'en'
-            }}
-          />
-        ) : (
-          <Turnstile
-            ref={ref}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-            onSuccess={captchaToken => setCaptchaToken(captchaToken)}
-            onExpire={() => setCaptchaToken(null)}
-            className='mx-auto'
-            options={{
-              size: 'flexible',
-              theme: 'light',
-              language: 'en'
-            }}
-          />
-        )}
-      </div>
+
+      <TurnstileCaptcha
+        ref={ref}
+        setCaptchaToken={setCaptchaToken}
+      />
+
       <div className='h-4!'>
         {showError && <p className='text-destructive text-xs'>Invalid password format</p>}
       </div>
+
       <AuthActionButton
         isValid={isValidPass}
         loading={mutateLoading}

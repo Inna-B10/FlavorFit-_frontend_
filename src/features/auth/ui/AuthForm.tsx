@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Turnstile } from '@marsidev/react-turnstile'
 import { useForm } from 'react-hook-form'
+import { TurnstileCaptcha } from '@/shared/components/TurnstileCaptcha'
 import { Field } from '@/shared/components/ui-custom/Field'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
@@ -17,16 +16,6 @@ export function AuthForm({
   ref
 }: TAuthFormData) {
   const isLogin = mode === 'login'
-
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = async () => {
-      if (typeof window !== 'undefined' && window.matchMedia('(max-width: 390px)').matches)
-        setIsMobile(true)
-    }
-    checkMobile()
-  }, [])
 
   const {
     register,
@@ -125,35 +114,10 @@ export function AuthForm({
           </>
         )}
 
-        <div className='mx-auto'>
-          {isMobile ? (
-            <Turnstile
-              ref={ref}
-              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-              onSuccess={token => setCaptchaToken(token)}
-              onExpire={() => setCaptchaToken(null)}
-              className='mx-auto'
-              options={{
-                size: 'compact',
-                theme: 'light',
-                language: 'en'
-              }}
-            />
-          ) : (
-            <Turnstile
-              ref={ref}
-              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-              onSuccess={token => setCaptchaToken(token)}
-              onExpire={() => setCaptchaToken(null)}
-              className='mx-auto'
-              options={{
-                size: 'flexible',
-                theme: 'light',
-                language: 'en'
-              }}
-            />
-          )}
-        </div>
+        <TurnstileCaptcha
+          ref={ref}
+          setCaptchaToken={setCaptchaToken}
+        />
         <div className='h-9! place-content-center pt-2'>
           {rootMessage && <p className='text-destructive text-xs'>{rootMessage}</p>}
         </div>

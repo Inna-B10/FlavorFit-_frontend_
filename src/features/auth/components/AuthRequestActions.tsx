@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
-import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
+import { TurnstileInstance } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast'
 import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
 import { isValidEmail } from '@/features/auth/utils/is-valid-check'
+import { TurnstileCaptcha } from '@/shared/components/TurnstileCaptcha'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
 import { AUTH_PAGES } from '@/shared/config/pages.config'
@@ -32,19 +33,10 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
   const [requestVerificationEmail, verifyState] = useMutation(RequestVerificationEmailDocument)
   const [requestPasswordReset, resetState] = useMutation(RequestPasswordResetDocument)
 
-  const [isMobile, setIsMobile] = useState(false)
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
   const ref = useRef<TurnstileInstance | null>(null)
 
   const loading = mode === 'verify-email' ? verifyState.loading : resetState.loading
-
-  useEffect(() => {
-    const checkMobile = async () => {
-      if (typeof window !== 'undefined' && window.matchMedia('(max-width: 390px)').matches)
-        setIsMobile(true)
-    }
-    checkMobile()
-  }, [])
 
   const onSubmit = async () => {
     if (loading || !isEmailValid) return
@@ -143,35 +135,10 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
         autoComplete='email'
       />
 
-      <div className='mx-auto w-full pt-2'>
-        {isMobile ? (
-          <Turnstile
-            ref={ref}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-            onSuccess={token => setCaptchaToken(token)}
-            onExpire={() => setCaptchaToken(null)}
-            className='mx-auto'
-            options={{
-              size: 'compact',
-              theme: 'light',
-              language: 'en'
-            }}
-          />
-        ) : (
-          <Turnstile
-            ref={ref}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-            onSuccess={token => setCaptchaToken(token)}
-            onExpire={() => setCaptchaToken(null)}
-            className='mx-auto'
-            options={{
-              size: 'flexible',
-              theme: 'light',
-              language: 'en'
-            }}
-          />
-        )}
-      </div>
+      <TurnstileCaptcha
+        ref={ref}
+        setCaptchaToken={setCaptchaToken}
+      />
 
       <div className='h-4!'>
         {showError && (
