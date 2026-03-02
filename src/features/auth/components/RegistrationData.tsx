@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
+import { TurnstileInstance } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { AUTH_PAGES } from '@/shared/config/pages.config'
@@ -17,6 +18,7 @@ export function RegistrationData() {
   const [serverMessage, setServerMessage] = useState('')
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const ref = useRef<TurnstileInstance | null>(null)
 
   const onSubmit = async (form: IAuthFormInput) => {
     if (!captchaToken) {
@@ -45,6 +47,7 @@ export function RegistrationData() {
       if (result.errorMessage) {
         setServerMessage(result.errorMessage)
       }
+      ref.current?.reset()
       return
     }
   }
@@ -94,6 +97,7 @@ export function RegistrationData() {
           onSubmit={onSubmit}
           serverMessage={serverMessage}
           setCaptchaToken={setCaptchaToken}
+          ref={ref}
         />
       )}
     </div>

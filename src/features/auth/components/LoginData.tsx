@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client/react'
+import { TurnstileInstance } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { USER_PAGES } from '@/shared/config/pages.config'
@@ -20,6 +21,7 @@ export function LoginData() {
   const apolloClient = useApolloClient()
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const ref = useRef<TurnstileInstance | null>(null)
 
   const onSubmit = async (form: IAuthFormInput) => {
     if (!captchaToken) {
@@ -46,6 +48,7 @@ export function LoginData() {
       if (result.errorMessage) {
         setServerMessage(result.errorMessage)
       }
+      ref.current?.reset()
       return
     }
 
@@ -72,6 +75,7 @@ export function LoginData() {
         onSubmit={onSubmit}
         serverMessage={serverMessage}
         setCaptchaToken={setCaptchaToken}
+        ref={ref}
       />
     </div>
   )

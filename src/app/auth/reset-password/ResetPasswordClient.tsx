@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Turnstile } from '@marsidev/react-turnstile'
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast'
 import { useResetPassword } from '@/features/auth/hooks/useResetPassword'
 import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
@@ -25,6 +25,7 @@ export function ResetPasswordClient() {
   const showError = touched && !isValidPass
 
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const ref = useRef<TurnstileInstance | null>(null)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export function ResetPasswordClient() {
     if (tokenStatus === 'missing' || tokenStatus === 'invalid') {
       const t = setTimeout(() => {
         router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
-      }, 6000)
+      }, 5000)
 
       return () => clearTimeout(t)
     }
@@ -65,6 +66,11 @@ export function ResetPasswordClient() {
     if (result.data?.resetPassword) {
       router.replace(AUTH_PAGES.LOGIN)
     }
+
+    if (result.errorMessage === 'Invalid or expired token!') {
+      router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
+    }
+    ref.current?.reset()
   }
 
   //** ----------------------------- Render ----------------------------- */
@@ -125,36 +131,38 @@ export function ResetPasswordClient() {
           {/* <li>Contains at least one special character</li> */}
         </ul>
       </>
-      <div className='h-4'>
-        {showError && <p className='text-destructive text-xs'>Invalid password format</p>}
-      </div>
-
-      <div className='mx-auto'>
+      <div className='mx-auto w-full pt-2'>
         {isMobile ? (
           <Turnstile
+            ref={ref}
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={captchaToken => setCaptchaToken(captchaToken)}
             onExpire={() => setCaptchaToken(null)}
             className='mx-auto'
             options={{
               size: 'compact',
-              theme: 'light'
+              theme: 'light',
+              language: 'en'
             }}
           />
         ) : (
           <Turnstile
+            ref={ref}
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={captchaToken => setCaptchaToken(captchaToken)}
             onExpire={() => setCaptchaToken(null)}
             className='mx-auto'
             options={{
               size: 'flexible',
-              theme: 'light'
+              theme: 'light',
+              language: 'en'
             }}
           />
         )}
       </div>
-
+      <div className='h-4!'>
+        {showError && <p className='text-destructive text-xs'>Invalid password format</p>}
+      </div>
       <AuthActionButton
         isValid={isValidPass}
         loading={mutateLoading}

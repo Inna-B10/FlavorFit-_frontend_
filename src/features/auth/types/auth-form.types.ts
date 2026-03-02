@@ -1,3 +1,5 @@
+import { TurnstileInstance } from '@marsidev/react-turnstile'
+
 export type Mode = 'login' | 'register'
 export interface IAuthFormInput {
   email: string
@@ -12,4 +14,5 @@ export type TAuthFormData = {
   onSubmit: (values: IAuthFormInput) => Promise<void>
   serverMessage?: string
   setCaptchaToken: (token: string | null) => void
+  ref: React.RefObject<TurnstileInstance | null>
 }

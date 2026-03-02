@@ -20,7 +20,7 @@ export function AuthActionButton({
       onClick={onSubmit}
       disabled={loading || !isValid}
       variant='outline'
-      className='bg-accent text-foreground text-md w-full max-w-2xs'
+      className='bg-accent text-foreground text-md mb-1 w-full max-w-2xs'
     >
       {loading ? loadingText : buttonText}
     </Button>

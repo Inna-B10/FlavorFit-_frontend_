@@ -13,9 +13,11 @@ export function AuthForm({
   loading,
   onSubmit,
   serverMessage,
-  setCaptchaToken
+  setCaptchaToken,
+  ref
 }: TAuthFormData) {
   const isLogin = mode === 'login'
+
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export function AuthForm({
       <form
         onSubmit={handleSubmit(handleAuth)}
         name='auth'
-        className='w-full space-y-1 sm:max-w-4/5'
+        className='w-full space-y-1 text-center sm:max-w-4/5'
       >
         <Field error={errors.email?.message}>
           <Input
@@ -126,41 +128,44 @@ export function AuthForm({
         <div className='mx-auto'>
           {isMobile ? (
             <Turnstile
+              ref={ref}
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
               onSuccess={token => setCaptchaToken(token)}
               onExpire={() => setCaptchaToken(null)}
               className='mx-auto'
               options={{
                 size: 'compact',
-                theme: 'light'
+                theme: 'light',
+                language: 'en'
               }}
             />
           ) : (
             <Turnstile
+              ref={ref}
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
               onSuccess={token => setCaptchaToken(token)}
               onExpire={() => setCaptchaToken(null)}
               className='mx-auto'
               options={{
                 size: 'flexible',
-                theme: 'light'
+                theme: 'light',
+                language: 'en'
               }}
             />
           )}
         </div>
-
+        <div className='h-9! place-content-center pt-2'>
+          {rootMessage && <p className='text-destructive text-xs'>{rootMessage}</p>}
+        </div>
         <Button
           type='submit'
           disabled={loading || isSubmitting || !isValid}
-          className='bg-accent text-foreground text-md mt-4 w-full'
+          className='bg-accent text-foreground text-md mb-2 w-full'
         >
           {loading ? 'Loading...' : isLogin ? 'Sign in' : 'Sign up'}
         </Button>
       </form>
       <div className='my-1 w-full text-center'>
-        <div className='h-9!'>
-          {rootMessage && <p className='text-destructive text-xs'>{rootMessage}</p>}
-        </div>
         <AuthChangeModeForm isLogin={isLogin} />
       </div>
     </>

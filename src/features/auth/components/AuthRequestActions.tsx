@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
-import { Turnstile } from '@marsidev/react-turnstile'
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast'
 import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
 import { isValidEmail } from '@/features/auth/utils/is-valid-check'
@@ -34,6 +34,7 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
 
   const [isMobile, setIsMobile] = useState(false)
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const ref = useRef<TurnstileInstance | null>(null)
 
   const loading = mode === 'verify-email' ? verifyState.loading : resetState.loading
 
@@ -104,10 +105,11 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
     if (result.data?.requestPasswordReset) {
       router.replace(AUTH_PAGES.LOGIN)
     }
+    ref.current?.reset()
   }
 
   return (
-    <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-6 rounded-2xl px-8 py-10 shadow-md sm:px-15'>
+    <div className='bg-white-pale relative m-auto flex min-h-60 w-full max-w-lg grow flex-col items-center justify-center gap-4 rounded-2xl px-8 py-10 shadow-md sm:px-15'>
       <Link
         href='/'
         title='Homepage'
@@ -121,54 +123,57 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
         {title}
       </h2>
 
-      <>
-        <p>
-          Please enter the email used during registration.
-          <br /> If an account exists for this email, we sent link.
-        </p>
+      <p>
+        Please enter the email used during registration.
+        <br /> If an account exists for this email, we sent link.
+      </p>
 
-        <Input
-          value={email}
-          name='email'
-          onChange={e => (setEmail(e.target.value), setTouched(true))}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              e.preventDefault()
-              onSubmit()
-            }
-          }}
-          placeholder='Enter your email'
-          type='email'
-          autoComplete='email'
-        />
-      </>
-      <div className='mx-auto'>
+      <Input
+        value={email}
+        name='email'
+        onChange={e => (setEmail(e.target.value), setTouched(true))}
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            e.preventDefault()
+            onSubmit()
+          }
+        }}
+        placeholder='Enter your email'
+        type='email'
+        autoComplete='email'
+      />
+
+      <div className='mx-auto w-full pt-2'>
         {isMobile ? (
           <Turnstile
+            ref={ref}
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={token => setCaptchaToken(token)}
             onExpire={() => setCaptchaToken(null)}
             className='mx-auto'
             options={{
               size: 'compact',
-              theme: 'light'
+              theme: 'light',
+              language: 'en'
             }}
           />
         ) : (
           <Turnstile
+            ref={ref}
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
             onSuccess={token => setCaptchaToken(token)}
             onExpire={() => setCaptchaToken(null)}
             className='mx-auto'
             options={{
               size: 'flexible',
-              theme: 'light'
+              theme: 'light',
+              language: 'en'
             }}
           />
         )}
       </div>
 
-      <div className='h-9'>
+      <div className='h-4!'>
         {showError && (
           <p className='text-destructive text-sm'>Please enter a valid email address.</p>
         )}
