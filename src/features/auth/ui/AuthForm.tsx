@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { useForm } from 'react-hook-form'
 import { Field } from '@/shared/components/ui-custom/Field'
 import { Button } from '@/shared/components/ui/button'
@@ -6,8 +8,23 @@ import { IAuthFormInput, TAuthFormData } from '../types/auth-form.types'
 import { isValidEmail } from '../utils/is-valid-check'
 import { AuthChangeModeForm } from './AuthChangeModeForm'
 
-export function AuthForm({ mode, loading, onSubmit, serverMessage }: TAuthFormData) {
+export function AuthForm({
+  mode,
+  loading,
+  onSubmit,
+  serverMessage,
+  setCaptchaToken
+}: TAuthFormData) {
   const isLogin = mode === 'login'
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = async () => {
+      if (typeof window !== 'undefined' && window.matchMedia('(max-width: 390px)').matches)
+        setIsMobile(true)
+    }
+    checkMobile()
+  }, [])
 
   const {
     register,
@@ -45,7 +62,7 @@ export function AuthForm({ mode, loading, onSubmit, serverMessage }: TAuthFormDa
       <form
         onSubmit={handleSubmit(handleAuth)}
         name='auth'
-        className='w-full space-y-1 sm:max-w-2/3'
+        className='w-full space-y-1 sm:max-w-4/5'
       >
         <Field error={errors.email?.message}>
           <Input
@@ -105,6 +122,33 @@ export function AuthForm({ mode, loading, onSubmit, serverMessage }: TAuthFormDa
             </Field>
           </>
         )}
+
+        <div className='mx-auto'>
+          {isMobile ? (
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+              onSuccess={token => setCaptchaToken(token)}
+              onExpire={() => setCaptchaToken(null)}
+              className='mx-auto'
+              options={{
+                size: 'compact',
+                theme: 'light'
+              }}
+            />
+          ) : (
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+              onSuccess={token => setCaptchaToken(token)}
+              onExpire={() => setCaptchaToken(null)}
+              className='mx-auto'
+              options={{
+                size: 'flexible',
+                theme: 'light'
+              }}
+            />
+          )}
+        </div>
+
         <Button
           type='submit'
           disabled={loading || isSubmitting || !isValid}

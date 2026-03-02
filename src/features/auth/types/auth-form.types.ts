@@ -11,4 +11,5 @@ export type TAuthFormData = {
   loading: boolean
   onSubmit: (values: IAuthFormInput) => Promise<void>
   serverMessage?: string
+  setCaptchaToken: (token: string | null) => void
 }

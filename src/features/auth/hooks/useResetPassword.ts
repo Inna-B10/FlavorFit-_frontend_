@@ -4,7 +4,7 @@ import { ResetPasswordDocument, ValidateResetTokenDocument } from '@/__generated
 
 export type TokenStatus = 'missing' | 'checking' | 'valid' | 'invalid'
 
-export function useResetPassword(token: string) {
+export function useResetPassword(token: string, captchaToken?: string) {
   //* ----------------------------- Validate Token ----------------------------- */
   const {
     data,
@@ -31,6 +31,11 @@ export function useResetPassword(token: string) {
     return resetPasswordMutation({
       variables: {
         data: { newPassword, token }
+      },
+      context: {
+        headers: {
+          'cf-turnstile-token': captchaToken
+        }
       }
     })
   }

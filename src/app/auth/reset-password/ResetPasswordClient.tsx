@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { Turnstile } from '@marsidev/react-turnstile'
+import toast from 'react-hot-toast'
 import { useResetPassword } from '@/features/auth/hooks/useResetPassword'
 import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
 import { isValidPassword } from '@/features/auth/utils/is-valid-check'
@@ -22,14 +24,25 @@ export function ResetPasswordClient() {
   const isValidPass = isValidPassword(newPassword)
   const showError = touched && !isValidPass
 
-  const { tokenStatus, resetPassword, mutateLoading } = useResetPassword(token)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = async () => {
+      if (typeof window !== 'undefined' && window.matchMedia('(max-width: 390px)').matches)
+        setIsMobile(true)
+    }
+    checkMobile()
+  }, [])
+
+  const { tokenStatus, resetPassword, mutateLoading } = useResetPassword(token, captchaToken ?? '')
 
   // redirect if invalid/missing
   useEffect(() => {
     if (tokenStatus === 'missing' || tokenStatus === 'invalid') {
       const t = setTimeout(() => {
         router.replace(AUTH_PAGES.REQUEST_RESET_PASSWORD)
-      }, 8000)
+      }, 6000)
 
       return () => clearTimeout(t)
     }
@@ -37,6 +50,10 @@ export function ResetPasswordClient() {
 
   // mutation handler
   const onSubmit = async () => {
+    if (!captchaToken) {
+      toast.error('Please complete reCAPTCHA', { id: 'captcha-error' })
+      return
+    }
     if (mutateLoading || !isValidPass || tokenStatus !== 'valid') return
 
     const result = await mutateWithToast(() => resetPassword(newPassword), {
@@ -110,6 +127,32 @@ export function ResetPasswordClient() {
       </>
       <div className='h-4'>
         {showError && <p className='text-destructive text-xs'>Invalid password format</p>}
+      </div>
+
+      <div className='mx-auto'>
+        {isMobile ? (
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+            onSuccess={captchaToken => setCaptchaToken(captchaToken)}
+            onExpire={() => setCaptchaToken(null)}
+            className='mx-auto'
+            options={{
+              size: 'compact',
+              theme: 'light'
+            }}
+          />
+        ) : (
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+            onSuccess={captchaToken => setCaptchaToken(captchaToken)}
+            onExpire={() => setCaptchaToken(null)}
+            className='mx-auto'
+            options={{
+              size: 'flexible',
+              theme: 'light'
+            }}
+          />
+        )}
       </div>
 
       <AuthActionButton

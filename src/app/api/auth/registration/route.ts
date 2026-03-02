@@ -6,15 +6,16 @@ export const runtime = 'nodejs'
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const { email, password, firstName } = body as {
+  const { email, password, firstName, captchaToken } = body as {
     email: string
     password: string
     firstName: string
+    captchaToken: string
   }
 
   const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'cf-turnstile-token': captchaToken ?? '' },
     cache: 'no-store',
     body: JSON.stringify({
       query: `

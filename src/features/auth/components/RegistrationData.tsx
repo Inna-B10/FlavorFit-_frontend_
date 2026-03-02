@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { AUTH_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
@@ -15,10 +16,17 @@ export function RegistrationData() {
   const [user, setUser] = useState<UserModel>()
   const [serverMessage, setServerMessage] = useState('')
 
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+
   const onSubmit = async (form: IAuthFormInput) => {
+    if (!captchaToken) {
+      toast.error('Please complete reCAPTCHA', { id: 'captcha-error' })
+      return
+    }
     setLoading(true)
+
     const result = await mutateWithToast(
-      () => authService.registration(form.email, form.password, form.firstName!),
+      () => authService.registration(form.email, form.password, form.firstName!, captchaToken),
       {
         loadingMessage: 'Processing...',
         loadingId: 'register-loading',
@@ -85,6 +93,7 @@ export function RegistrationData() {
           loading={loading}
           onSubmit={onSubmit}
           serverMessage={serverMessage}
+          setCaptchaToken={setCaptchaToken}
         />
       )}
     </div>

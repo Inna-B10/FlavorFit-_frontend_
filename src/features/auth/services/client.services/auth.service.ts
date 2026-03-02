@@ -6,12 +6,15 @@ class AuthService {
   private _AUTH = '/api/auth'
 
   //* ---------------------------------- Login --------------------------------- */
-  async login(email: string, password: string) {
+  async login(email: string, password: string, captchaToken?: string) {
     const res = await fetch(`${this._AUTH}/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'cf-turnstile-token': captchaToken ?? ''
+      },
       credentials: 'include',
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password, captchaToken })
     })
 
     const json = (await res.json()) as GraphQLResponse<{
@@ -64,11 +67,14 @@ class AuthService {
   }
 
   //* -------------------------------- Registration ---------------------------- */
-  async registration(email: string, password: string, firstName: string) {
+  async registration(email: string, password: string, firstName: string, captchaToken?: string) {
     const res = await fetch(`${this._AUTH}/registration`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, firstName })
+      headers: {
+        'Content-Type': 'application/json',
+        'cr-turnstile-token': captchaToken ?? ''
+      },
+      body: JSON.stringify({ email, password, firstName, captchaToken })
     })
 
     const json = (await res.json()) as GraphQLResponse<{
@@ -103,28 +109,6 @@ class AuthService {
     }
     if (json.errors?.length) {
       throw new Error(json.errors[0]?.message ?? 'Email verification failed')
-    }
-
-    return json
-  }
-
-  //* -------------------------------- Resend Verify Email ---------------------------- */
-  async resendVerifyEmail(email: string) {
-    const res = await fetch(`${this._AUTH}/resend-verification`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-      credentials: 'include'
-    })
-
-    const json = await res.json()
-
-    if (!res.ok) {
-      const msg = json?.errors?.[0]?.message ?? 'Resend verify email failed'
-      throw new Error(msg)
-    }
-    if (json.errors?.length) {
-      throw new Error(json.errors[0]?.message ?? 'Resend verify email failed')
     }
 
     return json

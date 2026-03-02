@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
+import { Turnstile } from '@marsidev/react-turnstile'
+import toast from 'react-hot-toast'
 import { AuthActionButton } from '@/features/auth/ui/AuthActionButton'
 import { isValidEmail } from '@/features/auth/utils/is-valid-check'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
@@ -30,15 +32,39 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
   const [requestVerificationEmail, verifyState] = useMutation(RequestVerificationEmailDocument)
   const [requestPasswordReset, resetState] = useMutation(RequestPasswordResetDocument)
 
+  const [isMobile, setIsMobile] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+
   const loading = mode === 'verify-email' ? verifyState.loading : resetState.loading
+
+  useEffect(() => {
+    const checkMobile = async () => {
+      if (typeof window !== 'undefined' && window.matchMedia('(max-width: 390px)').matches)
+        setIsMobile(true)
+    }
+    checkMobile()
+  }, [])
 
   const onSubmit = async () => {
     if (loading || !isEmailValid) return
 
+    if (!captchaToken) {
+      toast.error('Please complete reCAPTCHA', { id: 'captcha-error' })
+      return
+    }
+
     //# mode === 'verify-email'
     if (mode === 'verify-email') {
       const result = await mutateWithToast(
-        () => requestVerificationEmail({ variables: { data: { email } } }),
+        () =>
+          requestVerificationEmail({
+            variables: { data: { email } },
+            context: {
+              headers: {
+                'cf-turnstile-token': captchaToken ?? ''
+              }
+            }
+          }),
         {
           successMessage: 'The link has been sent.\nCheck your email.',
           successId: 'request-email-success',
@@ -57,7 +83,15 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
 
     //# mode === 'reset-password'
     const result = await mutateWithToast(
-      () => requestPasswordReset({ variables: { data: { email } } }),
+      () =>
+        requestPasswordReset({
+          variables: { data: { email } },
+          context: {
+            headers: {
+              'cf-turnstile-token': captchaToken ?? ''
+            }
+          }
+        }),
       {
         successMessage: 'The link has been sent.\nCheck your email.',
         successId: 'request-email-success',
@@ -108,6 +142,32 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
           autoComplete='email'
         />
       </>
+      <div className='mx-auto'>
+        {isMobile ? (
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+            onSuccess={token => setCaptchaToken(token)}
+            onExpire={() => setCaptchaToken(null)}
+            className='mx-auto'
+            options={{
+              size: 'compact',
+              theme: 'light'
+            }}
+          />
+        ) : (
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+            onSuccess={token => setCaptchaToken(token)}
+            onExpire={() => setCaptchaToken(null)}
+            className='mx-auto'
+            options={{
+              size: 'flexible',
+              theme: 'light'
+            }}
+          />
+        )}
+      </div>
+
       <div className='h-9'>
         {showError && (
           <p className='text-destructive text-sm'>Please enter a valid email address.</p>

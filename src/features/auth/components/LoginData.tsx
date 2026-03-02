@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client/react'
+import toast from 'react-hot-toast'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { USER_PAGES } from '@/shared/config/pages.config'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
@@ -18,14 +19,24 @@ export function LoginData() {
   const [serverMessage, setServerMessage] = useState('')
   const apolloClient = useApolloClient()
 
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
+
   const onSubmit = async (form: IAuthFormInput) => {
+    if (!captchaToken) {
+      toast.error('Please complete reCAPTCHA', { id: 'captcha-error' })
+      return
+    }
     setLoading(true)
-    const result = await mutateWithToast(() => authService.login(form.email, form.password), {
-      successMessage: 'Successfully signed in',
-      successId: 'login-success',
-      errorMessage: 'Login failed',
-      errorId: 'login-error'
-    })
+
+    const result = await mutateWithToast(
+      () => authService.login(form.email, form.password, captchaToken),
+      {
+        successMessage: 'Successfully signed in',
+        successId: 'login-success',
+        errorMessage: 'Login failed',
+        errorId: 'login-error'
+      }
+    )
 
     const user = result.data?.login?.user
 
@@ -60,6 +71,7 @@ export function LoginData() {
         loading={loading}
         onSubmit={onSubmit}
         serverMessage={serverMessage}
+        setCaptchaToken={setCaptchaToken}
       />
     </div>
   )

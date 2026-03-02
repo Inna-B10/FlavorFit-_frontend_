@@ -9,6 +9,7 @@ export async function POST(request: Request) {
   const authorization = request.headers.get('authorization') ?? ''
   const userAgent = request.headers.get('user-agent') ?? ''
   const xff = request.headers.get('x-forwarded-for') ?? ''
+  const captchaToken = request.headers.get('cf-turnstile-token') ?? ''
 
   const body = await request.text()
 
@@ -16,6 +17,7 @@ export async function POST(request: Request) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'cf-turnstile-token': captchaToken,
       cookie,
       ...(authorization ? { authorization } : {}),
       ...(userAgent ? { 'user-agent': userAgent } : {}),
