@@ -68,6 +68,7 @@ npm i react-hook-form
 npx shadcn@latest init
 npm i react-hot-toast
 npm i jose
+npm i @marsidev/react-turnstile
 
 
 # npx shadcn@latest add button
@@ -103,31 +104,35 @@ progress visualization and adaptive recommendations
 - [ ] page recipes (home):
 - [ ] page profile:
 - [ ] page account:
+- [ ] page orders:
+- [ ] page singel order:
+- [ ] shopping list:
+- [ ] cart:
 - [ ] **userMenu:**
-  - [x] links account, profile, orders
-  - [x] logout
   - [ ] ?shopping list, ?cart, ?notifications
-- [ ] captcha
-- [ ] ? middleware/proxy in case when front and backend on different domains
-- [ ] ? access to pages /auth/**request-verification-email** and auth/**verify-email**
-- [ ] **auth page:**
-  - [ ] ? reset password
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
+- [x] **userMenu:**
+  - [x] links account, profile, orders
+  - [x] logout
 - [x] user/default avatar
 - [x] header + responsiveness
 - [x] icons
 - [x] routes/pages
 - [x] 404 page
+- [x] captcha
 - [x] **middleware/proxy:**
+  - [x] middleware/proxy in case when front and backend on different domains
   - [x] secure user pages
   - [x] redirect from auth pages if authenticated
   - [x] redirect after login
   - [x] redirect after logout
 - [x] **auth page:**
+  - [x] reset password
   - [x] verification email
+  - [x] resent verification
   - [x] logout
   - [x] cookies
   - [x] errors

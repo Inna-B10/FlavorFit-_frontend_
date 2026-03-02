@@ -53,7 +53,7 @@ export function AuthForm({
       <form
         onSubmit={handleSubmit(handleAuth)}
         name='auth'
-        className='w-full space-y-1 text-center sm:max-w-4/5'
+        className='w-full space-y-1.5 sm:max-w-4/5'
       >
         <Field error={errors.email?.message}>
           <Input
@@ -119,12 +119,12 @@ export function AuthForm({
           setCaptchaToken={setCaptchaToken}
         />
         <div className='h-9! place-content-center pt-2'>
-          {rootMessage && <p className='text-destructive text-xs'>{rootMessage}</p>}
+          {rootMessage && <p className='text-destructive text-center text-xs'>{rootMessage}</p>}
         </div>
         <Button
           type='submit'
           disabled={loading || isSubmitting || !isValid}
-          className='bg-accent text-foreground text-md mb-2 w-full'
+          className='bg-accent text-foreground text-md my-2 w-full'
         >
           {loading ? 'Loading...' : isLogin ? 'Sign in' : 'Sign up'}
         </Button>
