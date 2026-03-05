@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { TurnstileCaptcha } from '@/shared/components/TurnstileCaptcha'
-import { Field } from '@/shared/components/ui-custom/Field'
+import { CustomField } from '@/shared/components/ui-custom/CustomField'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { IAuthFormInput, TAuthFormData } from '../types/auth-form.types'
@@ -55,7 +55,7 @@ export function AuthForm({
         name='auth'
         className='w-full space-y-1.5 sm:max-w-4/5'
       >
-        <Field error={errors.email?.message}>
+        <CustomField error={errors.email?.message}>
           <Input
             {...register('email', {
               required: 'Email is required!',
@@ -69,8 +69,8 @@ export function AuthForm({
             required
             autoFocus
           />
-        </Field>
-        <Field error={errors.password?.message}>
+        </CustomField>
+        <CustomField error={errors.password?.message}>
           <Input
             {...register('password', {
               required: 'Password is required',
@@ -84,10 +84,10 @@ export function AuthForm({
             placeholder='Password'
             required
           />
-        </Field>
+        </CustomField>
         {!isLogin && (
           <>
-            <Field error={errors.confirmPassword?.message}>
+            <CustomField error={errors.confirmPassword?.message}>
               <Input
                 {...register('confirmPassword', {
                   required: 'Password confirmation is required',
@@ -98,8 +98,8 @@ export function AuthForm({
                 name='confirmPassword'
                 required
               />
-            </Field>
-            <Field error={errors.firstName?.message}>
+            </CustomField>
+            <CustomField error={errors.firstName?.message}>
               <Input
                 {...register('firstName', {
                   required: 'First name is required',
@@ -110,7 +110,7 @@ export function AuthForm({
                 placeholder='First name'
                 required
               />
-            </Field>
+            </CustomField>
           </>
         )}
 

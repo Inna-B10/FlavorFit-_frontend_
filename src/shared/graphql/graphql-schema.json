@@ -1534,6 +1534,42 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "FullProfileModel",
+        "description": null,
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "fitnessProfile",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "FitnessProfileModel",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userProfile",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UserProfileModel",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "FullProfileUpdateInput",
         "description": null,
@@ -1553,7 +1589,7 @@
             "deprecationReason": null
           },
           {
-            "name": "profile",
+            "name": "userProfile",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -2619,7 +2655,7 @@
             "description": null,
             "args": [
               {
-                "name": "input",
+                "name": "data",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -2640,7 +2676,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "UserWithProfileModel",
+                "name": "FullProfileModel",
                 "ofType": null
               }
             },
@@ -2799,7 +2835,7 @@
             "description": null,
             "args": [
               {
-                "name": "input",
+                "name": "data",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -3945,7 +3981,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "UserWithProfileModel",
+                "name": "FullProfileModel",
                 "ofType": null
               }
             },
@@ -6458,42 +6494,6 @@
           }
         ],
         "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "UserWithProfileModel",
-        "description": null,
-        "isOneOf": null,
-        "fields": [
-          {
-            "name": "fitnessProfile",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "FitnessProfileModel",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "userProfile",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "UserProfileModel",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },

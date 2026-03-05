@@ -1,0 +1,22 @@
+mutation UpdateFullProfile($data: FullProfileUpdateInput!) {
+  updateFullProfile(data: $data) {
+    fitnessProfile {
+      activityLevel
+      nutritionGoal
+      currentWeight
+      targetWeight
+      armCm
+      chestCm
+      heightCm
+      thighCm
+      waistCm
+      updatedAt
+    }
+    userProfile {
+      fullName
+      gender
+      birthYear
+      bio
+    }
+  }
+}

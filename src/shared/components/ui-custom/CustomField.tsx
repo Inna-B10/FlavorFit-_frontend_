@@ -1,4 +1,4 @@
-export function Field({ error, children }: { error?: string; children: React.ReactNode }) {
+export function CustomField({ error, children }: { error?: string; children: React.ReactNode }) {
   return (
     <div className='w-full space-y-1.5'>
       {children}

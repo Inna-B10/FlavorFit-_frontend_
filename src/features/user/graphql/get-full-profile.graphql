@@ -1,0 +1,22 @@
+query GetFullProfile {
+  fullProfile {
+    fitnessProfile {
+      activityLevel
+      nutritionGoal
+      currentWeight
+      targetWeight
+      armCm
+      chestCm
+      heightCm
+      thighCm
+      waistCm
+      updatedAt
+    }
+    userProfile {
+      fullName
+      gender
+      birthYear
+      bio
+    }
+  }
+}

@@ -182,9 +182,15 @@ export type FitnessProfileUpdateInput = {
   waistCm?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type FullProfileModel = {
+  __typename?: 'FullProfileModel';
+  fitnessProfile?: Maybe<FitnessProfileModel>;
+  userProfile?: Maybe<UserProfileModel>;
+};
+
 export type FullProfileUpdateInput = {
   fitnessProfile?: InputMaybe<FitnessProfileUpdateInput>;
-  profile?: InputMaybe<UserProfileUpdateInput>;
+  userProfile?: InputMaybe<UserProfileUpdateInput>;
 };
 
 export const Gender = {
@@ -236,7 +242,7 @@ export type Mutation = {
   toggleLike: ToggleLikeResponse;
   updateCartItemPurchase: CartModel;
   updateComment: CommentModel;
-  updateFullProfile: UserWithProfileModel;
+  updateFullProfile: FullProfileModel;
   updateProduct: ProductModel;
   updateProductVariant: ProductVariantModel;
   updateRecipe: RecipeModel;
@@ -368,7 +374,7 @@ export type MutationUpdateCommentArgs = {
 
 
 export type MutationUpdateFullProfileArgs = {
-  input: FullProfileUpdateInput;
+  data: FullProfileUpdateInput;
 };
 
 
@@ -391,7 +397,7 @@ export type MutationUpdateRecipeArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  input: UserUpdateInput;
+  data: UserUpdateInput;
 };
 
 
@@ -493,7 +499,7 @@ export type Query = {
   allProducts: Array<ProductModel>;
   allRecipes: Array<RecipeModel>;
   allUsers: Array<UserModel>;
-  fullProfile: UserWithProfileModel;
+  fullProfile: FullProfileModel;
   getAllShoppingLists: Array<ShoppingListModel>;
   getCartByUserId: CartModel;
   me: UserModel;
@@ -801,12 +807,6 @@ export type UserUpdateInput = {
   firstName?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type UserWithProfileModel = {
-  __typename?: 'UserWithProfileModel';
-  fitnessProfile?: Maybe<FitnessProfileModel>;
-  userProfile?: Maybe<UserProfileModel>;
-};
-
 export type GetNewTokensQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -823,11 +823,6 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
-
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
@@ -870,6 +865,30 @@ export type VerifyEmailMutationVariables = Exact<{
 
 
 export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
+
+export type GetFullProfileQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFullProfileQuery = { __typename?: 'Query', fullProfile: { __typename?: 'FullProfileModel', fitnessProfile?: { __typename?: 'FitnessProfileModel', activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { __typename?: 'UserProfileModel', fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
+
+export type UpdateFullProfileMutationVariables = Exact<{
+  data: FullProfileUpdateInput;
+}>;
+
+
+export type UpdateFullProfileMutation = { __typename?: 'Mutation', updateFullProfile: { __typename?: 'FullProfileModel', fitnessProfile?: { __typename?: 'FitnessProfileModel', activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { __typename?: 'UserProfileModel', fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
+
+export type UpdateMeMutationVariables = Exact<{
+  data: UserUpdateInput;
+}>;
+
+
+export type UpdateMeMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'UserModel', avatarUrl?: string | null, firstName: string } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;
