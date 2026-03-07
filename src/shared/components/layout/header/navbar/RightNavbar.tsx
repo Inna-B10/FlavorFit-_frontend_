@@ -3,7 +3,7 @@ import { LuUserRound } from 'react-icons/lu'
 import { TfiHeadphoneAlt } from 'react-icons/tfi'
 import { AUTH_PAGES, PUBLIC_PAGES } from '@/shared/config/pages.config'
 import { UserModel } from '@/__generated__/graphql.types'
-import { UserBlock } from '../../../ui-custom/UserBlock'
+import { UserDropdownMenu } from '../../../user-menu/UserDropdownMenu'
 
 export function RightNavbar({ isLoggedIn, user }: { isLoggedIn: boolean; user: UserModel | null }) {
   return (
@@ -18,7 +18,7 @@ export function RightNavbar({ isLoggedIn, user }: { isLoggedIn: boolean; user: U
       </Link>
 
       {isLoggedIn && user ? (
-        <UserBlock user={user} />
+        <UserDropdownMenu user={user} />
       ) : (
         <Link
           href={AUTH_PAGES.LOGIN}

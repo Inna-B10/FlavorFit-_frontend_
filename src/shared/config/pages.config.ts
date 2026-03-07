@@ -24,8 +24,8 @@ class AuthPages {
 export const AUTH_PAGES = new AuthPages()
 
 class UserPages {
-  readonly PROFILE = '/user/profile'
   readonly ACCOUNT = '/user/account'
+  readonly PROFILE = '/user/profile'
   readonly MEAL_PLANS = '/user/meal-plans'
   readonly ANALYTICS = '/user/analytics'
   readonly ORDER_GROCERIES = '/user/order-groceries' //Cart?
@@ -36,7 +36,7 @@ class UserPages {
   ORDERS(path?: string) {
     return `/user/orders${path ? `/${path}` : ''}`
   }
-  readonly NOTIFICATION = '/user/notification'
+  readonly NOTIFICATIONS = '/user/notifications'
 }
 
 export const USER_PAGES = new UserPages()

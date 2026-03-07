@@ -1,31 +1,15 @@
 import Link from 'next/link'
 import cn from 'clsx'
-import type { IconType } from 'react-icons'
-import { BiHome } from 'react-icons/bi'
-import { FaNutritionix } from 'react-icons/fa'
-import { GiForkKnifeSpoon } from 'react-icons/gi'
-import { ImStatsBars } from 'react-icons/im'
-import { IoStorefrontOutline } from 'react-icons/io5'
-import { LuLayoutDashboard } from 'react-icons/lu'
-import { PiUsersFour } from 'react-icons/pi'
-import type { INavbarItem, TNavbarIcon } from '@/shared/types/navbar.types'
+import { NAVBAR_MENU_ICONS } from '@/shared/constants/menu.data'
+import type { INavbarItem } from '@/shared/types/navbar.types'
 
 interface IMenuItem {
   item: INavbarItem
   isActive: boolean
 }
 
-const ICONS: Record<TNavbarIcon, IconType> = {
-  home: BiHome,
-  nutrition: FaNutritionix,
-  forum: PiUsersFour,
-  mealPlans: GiForkKnifeSpoon,
-  analytics: ImStatsBars,
-  orderGroceries: IoStorefrontOutline,
-  dashboard: LuLayoutDashboard
-}
 export function MenuItem({ item, isActive }: IMenuItem) {
-  const Icon = ICONS[item.icon]
+  const Icon = NAVBAR_MENU_ICONS[item.icon]
   return (
     <li>
       <Link
@@ -33,7 +17,7 @@ export function MenuItem({ item, isActive }: IMenuItem) {
         title={item.label}
         aria-label={`Go to ${item.label} page`}
         className={cn(
-          'group flex items-center justify-center rounded-full p-2 text-sm shadow-sm lg:gap-0.5 lg:rounded-4xl lg:px-3 lg:py-1 xl:gap-1.5 xl:rounded-4xl xl:px-4 xl:py-2',
+          'group flex items-center justify-center rounded-full p-2 text-sm shadow-sm lg:gap-0.5 lg:rounded-4xl lg:px-3 lg:py-1 xl:gap-1 xl:rounded-4xl xl:px-4 xl:py-2 no-underline xl:text-base',
           {
             'bg-gradient-white-pale text-green-dark hover:bg-gradient-green-light hover:text-foreground transition-all duration-300 ease-in-out':
               !isActive,
