@@ -11,7 +11,12 @@ import { UserProfileForm } from './UserProfileForm'
 
 export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
   const { userProfile, fitnessProfile: fitnessProfileData } = data.fullProfile
-  const { updatedAt, ...fitnessProfile } = fitnessProfileData
+
+  const updatedAt = fitnessProfileData?.updatedAt ?? null
+
+  const fitnessProfile = fitnessProfileData
+    ? (({ updatedAt, ...rest }) => rest)(fitnessProfileData)
+    : undefined
 
   const form = useForm<IProfileForm>({
     mode: 'onChange',

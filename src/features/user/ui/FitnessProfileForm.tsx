@@ -23,13 +23,12 @@ export function FitnessProfileForm({
   updatedAt
 }: {
   form: UseFormReturn<IProfileForm, unknown, IProfileForm>
-  updatedAt: string
+  updatedAt?: string
 }) {
   const {
     register,
     formState: { errors }
   } = form
-  console.log('updatedAt: ', updatedAt)
 
   const gender = form.watch('userProfile.gender')
   const nutritionGoalOptions = enumToSelectOptions(NutritionGoal)
@@ -69,10 +68,12 @@ export function FitnessProfileForm({
               <FieldError>{errors?.fitnessProfile?.heightCm?.message}</FieldError>
             </label>
           </Field>
-          <span className='text-right text-sm'>
-            Last updated at: <br />
-            {updatedAt}
-          </span>
+          {updatedAt && (
+            <span className='text-right text-sm'>
+              Last updated at: <br />
+              {updatedAt}
+            </span>
+          )}
           <Field>
             <label htmlFor='currentWeight'>
               <InputGroup className='h-10'>

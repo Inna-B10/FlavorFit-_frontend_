@@ -1,4 +1,5 @@
 export function formatDate(date: string) {
+  if (!date) return
   return new Date(date).toLocaleString('en-GB', {
     day: '2-digit',
     month: 'short',
