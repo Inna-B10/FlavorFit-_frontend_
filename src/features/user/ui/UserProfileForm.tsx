@@ -34,12 +34,12 @@ export function UserProfileForm({
   const genderOptions = enumToSelectOptions(Gender)
 
   return (
-    <div className='bg-white-pale h-full rounded-xl p-6'>
-      <h2 className='mb-4 text-lg font-semibold'>General information</h2>
-      <div className='space-y-4'>
-        <Field className='group relative'>
+    <div className='space-y-8 rounded-xl border p-6 w-[40%]'>
+      <h2 className='text-lg font-semibold'>General information</h2>
+      <div className='space-y-8'>
+        <Field>
           <label htmlFor='fullName'>
-            <InputGroup>
+            <InputGroup className='h-10'>
               <InputGroupInput
                 id='fullName'
                 type='text'
@@ -57,9 +57,9 @@ export function UserProfileForm({
         </Field>
 
         <div className='grid grid-cols-2 gap-4'>
-          <Field className='group relative'>
+          <Field>
             <label htmlFor='birthYear'>
-              <InputGroup>
+              <InputGroup className='h-10'>
                 <InputGroupInput
                   id='birthYear'
                   type='number'
@@ -79,7 +79,7 @@ export function UserProfileForm({
               <FieldError>{errors?.userProfile?.birthYear?.message}</FieldError>
             </label>
           </Field>
-          <Field className='group relative'>
+          <Field>
             <Controller
               control={form.control}
               name='userProfile.gender'
@@ -135,11 +135,13 @@ export function UserProfileForm({
             <FieldError>{errors?.userProfile?.gender?.message}</FieldError>
           </Field>
         </div>
-        <Field className='group relative'>
+        <Field>
           <label htmlFor='bio'>
             <InputGroup>
               <InputGroupTextarea
                 id='bio'
+                rows={10}
+                className='min-h-52'
                 {...register('userProfile.bio', {
                   setValueAs: value => (value?.trim() === '' ? null : value?.trim())
                 })}

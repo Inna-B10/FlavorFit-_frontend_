@@ -36,7 +36,7 @@ export function UserDropdownMenu({ user }: { user: UserModel }) {
         align='end'
         className='from-green-light to-white-pale min-w-44 rounded-xl border-0 bg-linear-to-b to-20% p-0 pb-1'
       >
-        <div className='p-4 pb-2 font-semibold'>Hello {user.firstName}!</div>
+        <div className='p-4 pb-2 font-semibold font-sansita text-lg'>Hello {user.firstName}!</div>
         <DropdownMenuGroup>
           {USER_MENU_DATA.map((item, idx) => {
             const Icon = USER_MENU_ICONS[item.icon]

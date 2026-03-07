@@ -19,7 +19,7 @@ export function AuthActionButton({
     <Button
       onClick={onSubmit}
       disabled={loading || !isValid}
-      variant='outline'
+      variant='secondary'
       className='bg-accent text-foreground text-md mb-1 w-full max-w-2xs'
     >
       {loading ? loadingText : buttonText}

@@ -1,7 +1,9 @@
 import { useMutation } from '@apollo/client/react'
 import { useForm } from 'react-hook-form'
+import { ImProfile } from 'react-icons/im'
 import { Button } from '@/shared/components/ui/button'
 import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
+import { formatDate } from '@/shared/utils/date-format'
 import { GetFullProfileQuery, UpdateFullProfileDocument } from '@/__generated__/graphql'
 import { IProfileForm } from '../types/user.types'
 import { FitnessProfileForm } from './FitnessProfileForm'
@@ -16,23 +18,6 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
     defaultValues: {
       userProfile: userProfile ?? {},
       fitnessProfile: fitnessProfile ?? {}
-      // userProfile: {
-      //   fullName: data?.fullProfile?.userProfile?.fullName ?? undefined,
-      //   birthYear: data?.fullProfile?.userProfile?.birthYear ?? undefined,
-      //   gender: data?.fullProfile?.userProfile?.gender ?? undefined,
-      //   bio: data?.fullProfile?.userProfile?.bio ?? undefined
-      // },
-      // fitnessProfile: {
-      //   heightCm: data?.fullProfile?.fitnessProfile?.heightCm ?? undefined,
-      //   currentWeight: data?.fullProfile?.fitnessProfile?.currentWeight ?? undefined,
-      //   targetWeight: data?.fullProfile?.fitnessProfile?.targetWeight ?? undefined,
-      //   armCm: data?.fullProfile?.fitnessProfile?.armCm ?? undefined,
-      //   chestCm: data?.fullProfile?.fitnessProfile?.chestCm ?? undefined,
-      //   waistCm: data?.fullProfile?.fitnessProfile?.waistCm ?? undefined,
-      //   thighCm: data?.fullProfile?.fitnessProfile?.thighCm ?? undefined,
-      //   activityLevel: data?.fullProfile?.fitnessProfile?.activityLevel ?? undefined,
-      //   nutritionGoal: data?.fullProfile?.fitnessProfile?.nutritionGoal ?? undefined
-      // }
     }
   })
 
@@ -59,26 +44,35 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
     <form
       onSubmit={submit}
       name='update-profile'
-      className='space-y-6'
+      className='flex flex-col gap-10'
     >
-      <div className='flex justify-end gap-3'>
-        <Button
-          variant='outline'
-          type='button'
-        >
-          Cancel
-        </Button>
-        <Button
-          variant='default'
-          type='submit'
-          disabled={loading}
-        >
-          Save changes
-        </Button>
+      <div className='flex justify-between items-center gap-4 px-4'>
+        <h2 className='text-3xl font-semibold font-sansita text-green-dark'>
+          <ImProfile className='mr-2 inline' /> Personal information
+        </h2>
+        <div className='flex justify-end gap-3'>
+          <Button
+            variant='outline'
+            type='button'
+            className='min-w-36'
+          >
+            Cancel
+          </Button>
+          <Button
+            variant='accent'
+            type='submit'
+            disabled={loading}
+          >
+            Save changes
+          </Button>
+        </div>
       </div>
-      <div className='grid grid-cols-2 gap-8'>
+      <div className='flex flex-col gap-8 md:flex-row'>
         <UserProfileForm form={form} />
-        <FitnessProfileForm form={form} />
+        <FitnessProfileForm
+          form={form}
+          updatedAt={formatDate(updatedAt)}
+        />
       </div>
     </form>
   )

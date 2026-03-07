@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} ${poppins.variable} ${dmMono.variable} flex h-full min-h-screen w-full flex-col gap-8 px-3! py-6! antialiased sm:p-6!`}
+        className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} ${poppins.variable} ${dmMono.variable} flex h-full min-h-screen w-full flex-col gap-8 lg:gap-12 px-3! py-6! antialiased sm:p-6!`}
       >
         <Provider>{children}</Provider>
       </body>

@@ -23,7 +23,9 @@ export function UserMenuHeader({ firstName, avatarUrl, compact = false }: UserMe
         )}
       </Avatar>
 
-      {!compact && firstName && <div className='font-semibold'>Hello {firstName}!</div>}
+      {!compact && firstName && (
+        <div className='font-semibold font-sansita text-lg'>Hello {firstName}!</div>
+      )}
     </div>
   )
 }
