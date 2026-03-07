@@ -1,4 +1,4 @@
-export function SuitIcon({ className }: { className: string }) {
+export function SuitIcon({ className }: { className?: string }) {
   return (
     <svg
       version='1.1'

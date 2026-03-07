@@ -1,10 +1,18 @@
-export function enumToOptions<T extends Record<string, string>>(enumObj: T) {
-  return Object.values(enumObj)
+export function enumToSelectOptions<T extends Record<string, string>>(enumObj: T) {
+  return Object.values(enumObj).map(value => ({
+    label: value
+      .toLowerCase()
+      .replaceAll('_', ' ')
+      .replace(/^\w/, char => char.toUpperCase()),
+    value
+  }))
 }
 
-export function enumToSelectOptions<T extends Record<string, string>>(enumObj: T) {
-  return Object.entries(enumObj).map(([key, value]) => ({
-    label: value.replace('_', ' ') || value,
-    value: key
-  }))
+export function enumValueToLabel<T extends Record<string, string>>(enumObj: T, value?: T[keyof T]) {
+  if (!value) return undefined
+
+  return value
+    .toLowerCase()
+    .replaceAll('_', ' ')
+    .replace(/^\w/, char => char.toUpperCase())
 }

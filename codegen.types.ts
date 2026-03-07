@@ -23,8 +23,8 @@ const config: CodegenConfig = {
       },
       config: {
         useTypeImports: true,
-        enumsAsConst: true
-        // skipTypename: false,
+        enumsAsConst: true,
+        skipTypename: true
       }
     },
 
@@ -33,7 +33,7 @@ const config: CodegenConfig = {
       plugins: ['typescript', 'typescript-operations'],
       config: {
         enumsAsConst: true,
-        skipTypename: false,
+        skipTypename: true,
         useTypeImports: true
       }
     },

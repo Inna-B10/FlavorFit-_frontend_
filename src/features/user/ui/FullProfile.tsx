@@ -1,85 +1,46 @@
 'use client'
 
-import { useMutation, useQuery } from '@apollo/client/react'
-import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/components/ui/button'
-import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
-import { GetFullProfileDocument, UpdateFullProfileDocument } from '@/__generated__/graphql'
-import { IProfileForm } from '../types/user.types'
-import { FitnessProfileForm } from './FitnessProfileForm'
-import { UserProfileForm } from './UserProfileForm'
-
-//[TODO]
+import { useQuery } from '@apollo/client/react'
+import { SkeletonLoader } from '@/shared/components/ui-custom/SkeletonLoader'
+import { GetFullProfileDocument } from '@/__generated__/graphql'
+import { FullProfileForm } from './FullProfileForm'
 
 export function FullProfile() {
-  const form = useForm<IProfileForm>({
-    mode: 'onChange'
-  })
+  const { data, loading } = useQuery(GetFullProfileDocument)
 
-  const { data } = useQuery(GetFullProfileDocument)
-
-  const [updateProfile, { loading }] = useMutation(UpdateFullProfileDocument)
-
-  const submit = form.handleSubmit(async data => {
-    await mutateWithToast(
-      () =>
-        updateProfile({
-          variables: {
-            data: {
-              fitnessProfile: {
-                activityLevel: data.activityLevel,
-                nutritionGoal: data.nutritionGoal,
-                currentWeight: data.currentWeight,
-                targetWeight: data.targetWeight,
-                armCm: data.armCm,
-                chestCm: data.chestCm,
-                heightCm: data.heightCm,
-                thighCm: data.thighCm,
-                waistCm: data.waistCm
-              },
-              userProfile: {
-                fullName: data.fullName,
-                gender: data.gender,
-                birthYear: data.birthYear,
-                bio: data.bio
-              }
-            }
-          }
-        }),
-      {
-        successMessage: 'Profile successfully updated',
-        successId: 'profile-update-success',
-        errorMessage: 'Error updating profile',
-        errorId: 'profile-update-error'
-      }
+  if (loading || !data?.fullProfile)
+    //[TODO] style skeleton
+    // if (true)
+    return (
+      <div>
+        <div className='flex items-center justify-between mb-6'>
+          <SkeletonLoader
+            count={1}
+            className='w-xs'
+          />
+          <div className='flex items-center gap-2'>
+            <SkeletonLoader
+              count={2}
+              className='w-32 mb-0'
+            />
+          </div>
+        </div>
+        <div className='grid grid-cols-2 gap-8'>
+          <div>
+            <SkeletonLoader
+              count={4}
+              className='mb-4'
+            />
+          </div>
+          <div>
+            <SkeletonLoader
+              count={6}
+              className='mb-4'
+            />
+          </div>
+        </div>
+      </div>
     )
-  })
 
-  return (
-    <form
-      onSubmit={submit}
-      name='update-profile'
-      className='space-y-6'
-    >
-      <div className='flex justify-end gap-3'>
-        <Button
-          variant='outline'
-          type='button'
-        >
-          Cancel
-        </Button>
-        <Button
-          variant='default'
-          type='button'
-          disabled={loading}
-        >
-          Save changes
-        </Button>
-      </div>
-      <div className='grid grid-cols-2 gap-8'>
-        <UserProfileForm form={form} />
-        <FitnessProfileForm form={form} />
-      </div>
-    </form>
-  )
+  return <FullProfileForm data={data} />
 }

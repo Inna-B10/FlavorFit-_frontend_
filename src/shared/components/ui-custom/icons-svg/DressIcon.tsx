@@ -1,4 +1,4 @@
-export function DressIcon({ className }: { className: string }) {
+export function DressIcon({ className }: { className?: string }) {
   return (
     <svg
       version='1.1'
