@@ -1,21 +1,10 @@
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 import { finalizeResponse } from '@/shared/lib/auth/route-proxy/finalizeResponse'
+import { hasUnauthorizedGraphQLError } from '@/shared/lib/auth/route-proxy/hasUnauthorizedGQLError'
 import { refreshAuth } from '@/shared/lib/auth/route-proxy/refreshAuth'
 import { requestBackendGraphQL } from '@/shared/lib/auth/route-proxy/requestBackendGraphQL'
 
 export const runtime = 'nodejs'
-
-function hasUnauthorizedGraphQLError(text: string) {
-  try {
-    const json = JSON.parse(text) as {
-      errors?: Array<{ message?: string }>
-    }
-
-    return !!json.errors?.some(error => error.message === 'Unauthorized')
-  } catch {
-    return false
-  }
-}
 
 export async function POST(request: Request) {
   const cookie = request.headers.get('cookie') ?? ''
