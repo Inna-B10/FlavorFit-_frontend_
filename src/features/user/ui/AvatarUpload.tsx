@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import Image from 'next/image'
-import { Edit } from 'lucide-react'
-import { Button } from '@/shared/components/ui/button'
-import { Field, FieldDescription, FieldLabel } from '@/shared/components/ui/field'
+import { Loader } from 'lucide-react'
+import { Field, FieldLabel } from '@/shared/components/ui/field'
 import { Input } from '@/shared/components/ui/input'
+import { UserAvatar } from '@/shared/components/user-menu/UserAvatar'
 
 interface IAvatarUpload {
   value?: string
@@ -40,54 +39,33 @@ export function AvatarUpload({ value, onChange }: IAvatarUpload) {
 
   return (
     <div className='flex items-center gap-3'>
-      <Image
-        src={value || '/images/avatar-placeholder.png'}
-        alt='avatar'
-        width={48}
-        height={48}
-        className='rounded-full object-cover'
-      />
-      <label>
-        <input
-          type='file'
-          hidden
-          accept='image/*'
-          onChange={event => {
-            const file = event.target.files?.[0]
-            if (file) {
-              upload(file)
-            }
-          }}
-        />
-
-        <Button
-          variant='ghost'
-          size='sm'
-          type='button'
-          className='shadow-none cursor-pointer'
-          asChild
-          disabled={loading}
-        >
-          <span>
-            <Edit className={loading ? 'animate-spin' : ''} />
-          </span>
-        </Button>
-      </label>
       <Field>
-        <FieldLabel htmlFor='picture'>Picture</FieldLabel>
+        <FieldLabel htmlFor='picture'>Avatar:</FieldLabel>
         <Input
           id='picture'
           type='file'
-          accept='image/*'
+          accept='image/jpeg,,image/jpg,image/png,image/webp,image/gif,image/svg+xml'
           onChange={event => {
             const file = event.target.files?.[0]
             if (file) {
               upload(file)
             }
           }}
+          className='h-10'
         />
-        <FieldDescription>Select a picture to upload.</FieldDescription>
       </Field>
+      <div className='flex flex-col gap-2'>
+        <span className='text-sm relative'>
+          Preview{' '}
+          <Loader
+            size={16}
+            className={loading ? 'absolute top-0 -right-6 animate-spin' : 'hidden'}
+          />
+        </span>
+        <div className='flex items-center justify-center rounded-full bg-gradient-white-pale text-green-dark shadow-sm'>
+          <UserAvatar avatarUrl={value} />
+        </div>
+      </div>
     </div>
   )
 }

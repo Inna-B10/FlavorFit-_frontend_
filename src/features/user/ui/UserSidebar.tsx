@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { LogOutIcon } from 'lucide-react'
 import { LogoutButton } from '@/shared/components/ui-custom/LogoutButton'
-import { UserMenuHeader } from '@/shared/components/user-menu/UserMenuHeader'
+import { UserAvatar } from '@/shared/components/user-menu/UserAvatar'
 import { USER_MENU_DATA, USER_MENU_ICONS } from '@/shared/constants/menu.data'
 import { cn } from '@/shared/utils/utils'
 import { UserModel } from '@/__generated__/graphql'
@@ -9,12 +9,13 @@ import { UserModel } from '@/__generated__/graphql'
 export function UserSidebar({ user }: { user: UserModel }) {
   return (
     <aside className='bg-linear-to-b to-20% from-green-light to-white-pale flex flex-col w-2xs border-input border rounded-2xl'>
-      <span className='p-4'>
-        <UserMenuHeader
+      <div className='flex items-center gap-4 p-4'>
+        <UserAvatar
           firstName={user.firstName}
           avatarUrl={user.avatarUrl}
         />
-      </span>
+        <div className='font-semibold font-sansita text-lg'>Hello {user.firstName}!</div>
+      </div>
       {USER_MENU_DATA.map((item, idx) => {
         const Icon = USER_MENU_ICONS[item.icon]
         return (

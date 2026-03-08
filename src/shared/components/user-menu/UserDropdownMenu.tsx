@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
-import { UserMenuHeader } from './UserMenuHeader'
+import { UserAvatar } from './UserAvatar'
 
 export function UserDropdownMenu({ user }: { user: UserModel }) {
   return (
@@ -21,14 +21,13 @@ export function UserDropdownMenu({ user }: { user: UserModel }) {
         <Button
           variant='ghost'
           size='responsive'
-          className='bg-gradient-white-pale hover:bg-gradient-green-light text-green-dark hover:text-foreground rounded-full shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer hover:opacity-80'
+          className='rounded-full'
           aria-label='Open user menu'
           title='Open user menu'
         >
-          <UserMenuHeader
+          <UserAvatar
             firstName={user.firstName}
             avatarUrl={user.avatarUrl}
-            compact={true}
           />
         </Button>
       </DropdownMenuTrigger>
