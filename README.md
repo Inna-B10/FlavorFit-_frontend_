@@ -75,6 +75,10 @@ npm i @marsidev/react-turnstile
 # npx shadcn@latest add input
 # npx shadcn@latest add dropdown-menu
 # npx shadcn@latest add avatar
+# npx shadcn@latest add select
+# npx shadcn@latest add textarea
+# npx shadcn@latest add input-group
+# npx shadcn@latest add field
 
 ```
 
@@ -102,20 +106,33 @@ progress visualization and adaptive recommendations
 ### 📋 TODOs:
 
 - [ ] page recipes (home):
-- [ ] page profile:
-- [ ] page account:
+- [ ] **page profile:**
+  - [ ] user form
+  - [ ] fitness form
+  - [ ] icons
+  - [ ] labels
+  - [x] img depends on gender
+  - [ ] skeleton
+  - [x] view last updated at
+  - [ ] sidebar (? isActive)
+- [ ] **page account:**
+  - [ ] upload avatar + [review] + refresh
+  - [ ] change firstName
+  - [ ] icons + labels
+  - [ ] ? change password
+  - [ ] skeleton
+  - [x] sidebar
 - [ ] page orders:
 - [ ] page singel order:
 - [ ] shopping list:
 - [ ] cart:
-- [ ] **userMenu:**
-  - [ ] ?shopping list, ?cart, ?notifications
 
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
 - [x] **userMenu:**
   - [x] links account, profile, orders
+  - [x] shopping list, cart, notifications
   - [x] logout
 - [x] user/default avatar
 - [x] header + responsiveness
