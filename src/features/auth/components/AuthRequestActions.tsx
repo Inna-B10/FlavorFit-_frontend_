@@ -12,7 +12,7 @@ import { TurnstileCaptcha } from '@/shared/components/TurnstileCaptcha'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { Input } from '@/shared/components/ui/input'
 import { AUTH_PAGES } from '@/shared/config/pages.config'
-import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
+import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
 import {
   RequestPasswordResetDocument,
   RequestVerificationEmailDocument

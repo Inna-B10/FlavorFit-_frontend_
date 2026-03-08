@@ -8,7 +8,7 @@ import { authService } from '@/features/auth/services/client.services/auth.servi
 import { Overlay } from '@/shared/components/ui-custom/Overlay'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
 import { AUTH_PAGES, PUBLIC_PAGES } from '@/shared/config/pages.config'
-import { mutateWithToast } from '@/shared/lib/mutate-with-toast'
+import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
 import { MeDocument } from '@/__generated__/graphql'
 
 export function VerifyEmail() {

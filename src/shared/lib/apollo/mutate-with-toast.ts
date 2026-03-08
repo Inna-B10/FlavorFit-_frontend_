@@ -1,6 +1,6 @@
 import { ApolloLink } from '@apollo/client'
 import { toast } from 'react-hot-toast'
-import { getApolloErrorMessage } from './apollo/get-apollo-error-message'
+import { getApolloErrorMessage } from './get-apollo-error-message'
 
 type MutationResult<TData> = ApolloLink.Result<TData>
 type MutateFn<TData> = () => Promise<MutationResult<TData>>
