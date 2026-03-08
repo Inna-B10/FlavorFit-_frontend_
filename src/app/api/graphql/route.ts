@@ -1,8 +1,21 @@
-import { NextResponse } from 'next/server'
-import { applyBackendSetCookies } from '@/shared/lib/auth/cookies/apply-backend-set-cookies'
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
+import { finalizeResponse } from '@/shared/lib/auth/route-proxy/finalizeResponse'
+import { refreshAuth } from '@/shared/lib/auth/route-proxy/refreshAuth'
+import { requestBackendGraphQL } from '@/shared/lib/auth/route-proxy/requestBackendGraphQL'
 
 export const runtime = 'nodejs'
+
+function hasUnauthorizedGraphQLError(text: string) {
+  try {
+    const json = JSON.parse(text) as {
+      errors?: Array<{ message?: string }>
+    }
+
+    return !!json.errors?.some(error => error.message === 'Unauthorized')
+  } catch {
+    return false
+  }
+}
 
 export async function POST(request: Request) {
   const cookie = request.headers.get('cookie') ?? ''
@@ -13,26 +26,46 @@ export async function POST(request: Request) {
 
   const body = await request.text()
 
-  const backendRes = await fetch(process.env.BACKEND_GRAPHQL_URL!, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'cf-turnstile-token': captchaToken,
-      cookie,
-      ...(authorization ? { authorization } : {}),
-      ...(userAgent ? { 'user-agent': userAgent } : {}),
-      ...(xff ? { 'x-forwarded-for': xff } : {})
-    },
+  let refreshSetCookieHeader: string | null = null
+
+  let backendRes = await requestBackendGraphQL({
     body,
-    cache: 'no-store'
+    cookie,
+    authorization,
+    userAgent,
+    xff,
+    captchaToken
   })
 
-  const text = await backendRes.text()
+  let text = await backendRes.text()
+
+  const isUnauthorized = backendRes.status === 401 || hasUnauthorizedGraphQLError(text)
+
+  if (isUnauthorized) {
+    const refreshRes = await refreshAuth(cookie)
+
+    refreshSetCookieHeader = refreshRes.refreshSetCookieHeader
+
+    if (refreshRes.ok && refreshRes.refreshedCookieHeader) {
+      backendRes = await requestBackendGraphQL({
+        body,
+        cookie: refreshRes.refreshedCookieHeader,
+        authorization,
+        userAgent,
+        xff,
+        captchaToken
+      })
+
+      text = await backendRes.text()
+    }
+  }
 
   if (!backendRes.ok) {
-    return new NextResponse(text, {
+    return finalizeResponse({
+      body: text,
       status: backendRes.status,
-      headers: { 'Content-Type': 'application/json' }
+      refreshSetCookieHeader,
+      backendSetCookieHeader: backendRes.headers.get('set-cookie')
     })
   }
 
@@ -41,20 +74,20 @@ export async function POST(request: Request) {
   if (!normalized.ok) {
     // Important: keep GraphQL errors in body, but return 200
     // so Apollo treats it as GraphQL error, not network error
-    return NextResponse.json(
-      normalized.json ?? { errors: [{ message: normalized.message }], data: null },
-      {
-        status: 200
-      }
-    )
+    return finalizeResponse({
+      body: JSON.stringify(
+        normalized.json ?? { errors: [{ message: normalized.message }], data: null }
+      ),
+      status: 200,
+      refreshSetCookieHeader,
+      backendSetCookieHeader: backendRes.headers.get('set-cookie')
+    })
   }
 
-  const res = new NextResponse(text, {
+  return finalizeResponse({
+    body: text,
     status: backendRes.status,
-    headers: { 'Content-Type': 'application/json' }
+    refreshSetCookieHeader,
+    backendSetCookieHeader: backendRes.headers.get('set-cookie')
   })
-
-  applyBackendSetCookies(res, backendRes.headers.get('set-cookie'))
-
-  return res
 }

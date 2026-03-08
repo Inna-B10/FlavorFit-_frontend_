@@ -86,6 +86,18 @@ export function applyBackendSetCookies(res: NextResponse, backendSetCookieHeader
   }
 }
 
+export function buildCookieHeaderFromSetCookie(backendSetCookieHeader: string | null) {
+  if (!backendSetCookieHeader) return ''
+
+  const cookies = splitSetCookieHeader(backendSetCookieHeader)
+
+  return cookies
+    .map(cookie => parseCookieString(cookie))
+    .filter(Boolean)
+    .map(parsed => `${parsed!.name}=${parsed!.value}`)
+    .join('; ')
+}
+
 export function clearAuthCookies(res: NextResponse) {
   res.cookies.delete(EnumTokens.ACCESS_TOKEN)
   res.cookies.delete(EnumTokens.REFRESH_TOKEN)
