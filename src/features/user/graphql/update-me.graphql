@@ -1,6 +1,10 @@
 mutation UpdateMe($data: UserUpdateInput!) {
   updateUser(data: $data) {
-    avatarUrl
+    userId
+    email
     firstName
+    role
+    avatarUrl
+    verificationToken
   }
 }

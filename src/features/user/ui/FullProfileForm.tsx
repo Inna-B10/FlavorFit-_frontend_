@@ -39,6 +39,8 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
       {
         successMessage: 'Profile successfully updated',
         successId: 'profile-update-success',
+        loadingMessage: 'Updating profile...',
+        loadingId: 'profile-update-loading',
         errorMessage: 'Error updating profile',
         errorId: 'profile-update-error'
       }
