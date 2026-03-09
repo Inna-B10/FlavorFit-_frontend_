@@ -16,11 +16,11 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      // {
-      //   protocol: 'https',
-      //   hostname: 'framerusercontent.com',
-      //   port: ''
-      // },
+      {
+        protocol: 'https',
+        hostname: 'framerusercontent.com',
+        port: ''
+      },
       // {
       //   protocol: 'https',
       //   hostname: 'avatars.githubusercontent.com',
