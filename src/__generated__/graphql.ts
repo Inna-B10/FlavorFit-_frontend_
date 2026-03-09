@@ -38,12 +38,10 @@ export type AddOneItemToCartInput = {
 };
 
 export type AuthResponse = {
-  __typename?: 'AuthResponse';
   user: UserModel;
 };
 
 export type CartItemModel = {
-  __typename?: 'CartItemModel';
   cartItemId: Scalars['String']['output'];
   goodsCount?: Maybe<Scalars['Decimal']['output']>;
   product: ProductModel;
@@ -53,19 +51,16 @@ export type CartItemModel = {
 };
 
 export type CartItemRequiredAmountModel = {
-  __typename?: 'CartItemRequiredAmountModel';
   recipeUnit: RecipeUnit;
   requiredAmount: Scalars['Decimal']['output'];
 };
 
 export type CartItemRequirementModel = {
-  __typename?: 'CartItemRequirementModel';
   cartItemRequirementId: Scalars['String']['output'];
   listItem: ShoppingListItemForCartModel;
 };
 
 export type CartModel = {
-  __typename?: 'CartModel';
   cartId: Scalars['String']['output'];
   cartItems: Array<CartItemModel>;
   createdAt: Scalars['DateTime']['output'];
@@ -73,7 +68,6 @@ export type CartModel = {
 };
 
 export type CommentModel = {
-  __typename?: 'CommentModel';
   commentId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   message: Scalars['String']['output'];
@@ -83,7 +77,6 @@ export type CommentModel = {
 };
 
 export type CourierModel = {
-  __typename?: 'CourierModel';
   courierId: Scalars['String']['output'];
   name: Scalars['String']['output'];
   phoneNumber: Scalars['String']['output'];
@@ -161,7 +154,6 @@ export const DishType = {
 
 export type DishType = typeof DishType[keyof typeof DishType];
 export type FitnessProfileModel = {
-  __typename?: 'FitnessProfileModel';
   activityLevel?: Maybe<ActivityLevel>;
   armCm?: Maybe<Scalars['Int']['output']>;
   chestCm?: Maybe<Scalars['Int']['output']>;
@@ -187,7 +179,6 @@ export type FitnessProfileUpdateInput = {
 };
 
 export type FullProfileModel = {
-  __typename?: 'FullProfileModel';
   fitnessProfile?: Maybe<FitnessProfileModel>;
   userProfile?: Maybe<UserProfileModel>;
 };
@@ -204,7 +195,6 @@ export const Gender = {
 
 export type Gender = typeof Gender[keyof typeof Gender];
 export type IngredientModel = {
-  __typename?: 'IngredientModel';
   ingredientId: Scalars['String']['output'];
   ingredientNote?: Maybe<Scalars['String']['output']>;
   product: ProductModel;
@@ -219,7 +209,6 @@ export type LoginInput = {
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
   addManyItemsToCartInput: CartModel;
   addOneItemToCart: CartModel;
   createComment: CommentModel;
@@ -242,6 +231,7 @@ export type Mutation = {
   removeRecipeFromShoppingList: ShoppingListModel;
   requestPasswordReset: Scalars['Boolean']['output'];
   requestVerificationEmail: Scalars['Boolean']['output'];
+  resetAvatar: Scalars['Boolean']['output'];
   resetPassword: Scalars['Boolean']['output'];
   toggleLike: ToggleLikeResponse;
   updateCartItemPurchase: CartModel;
@@ -418,7 +408,6 @@ export type NutritionFactsInput = {
 };
 
 export type NutritionFactsModel = {
-  __typename?: 'NutritionFactsModel';
   carbohydrates?: Maybe<Scalars['Decimal']['output']>;
   factId: Scalars['String']['output'];
   fats?: Maybe<Scalars['Decimal']['output']>;
@@ -436,7 +425,6 @@ export const NutritionGoal = {
 
 export type NutritionGoal = typeof NutritionGoal[keyof typeof NutritionGoal];
 export type OrderItemModel = {
-  __typename?: 'OrderItemModel';
   goodsCount: Scalars['Decimal']['output'];
   lineTotalAtPurchase: Scalars['Decimal']['output'];
   orderItemId: Scalars['String']['output'];
@@ -450,7 +438,6 @@ export type OrderItemModel = {
 };
 
 export type OrderModel = {
-  __typename?: 'OrderModel';
   courier?: Maybe<CourierModel>;
   courierId?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
@@ -474,7 +461,6 @@ export const OrderStatus = {
 
 export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 export type ProductModel = {
-  __typename?: 'ProductModel';
   iconUrl?: Maybe<Scalars['String']['output']>;
   isActive: Scalars['Boolean']['output'];
   productId: Scalars['String']['output'];
@@ -484,7 +470,6 @@ export type ProductModel = {
 };
 
 export type ProductVariantModel = {
-  __typename?: 'ProductVariantModel';
   label: Scalars['String']['output'];
   price: Scalars['Decimal']['output'];
   pricingAmount: Scalars['Decimal']['output'];
@@ -494,7 +479,6 @@ export type ProductVariantModel = {
 };
 
 export type Query = {
-  __typename?: 'Query';
   adminAllRecipes: Array<RecipeModel>;
   adminRecipeById: RecipeModel;
   allOrders: Array<OrderModel>;
@@ -587,7 +571,6 @@ export type RecipeInShoppingListInput = {
 };
 
 export type RecipeModel = {
-  __typename?: 'RecipeModel';
   calories?: Maybe<Scalars['Int']['output']>;
   comments?: Maybe<Array<CommentModel>>;
   cookingTime?: Maybe<Scalars['Int']['output']>;
@@ -616,7 +599,6 @@ export const RecipeSort = {
 
 export type RecipeSort = typeof RecipeSort[keyof typeof RecipeSort];
 export type RecipeStepModel = {
-  __typename?: 'RecipeStepModel';
   content: Scalars['String']['output'];
   recipeId: Scalars['String']['output'];
   recipeStepId: Scalars['String']['output'];
@@ -625,7 +607,6 @@ export type RecipeStepModel = {
 };
 
 export type RecipeTagModel = {
-  __typename?: 'RecipeTagModel';
   tagId: Scalars['String']['output'];
   tagName: Scalars['String']['output'];
 };
@@ -690,14 +671,12 @@ export const SaleUnit = {
 
 export type SaleUnit = typeof SaleUnit[keyof typeof SaleUnit];
 export type ShoppingListItemForCartModel = {
-  __typename?: 'ShoppingListItemForCartModel';
   listItemId: Scalars['String']['output'];
   recipeUnit: RecipeUnit;
   requiredAmount: Scalars['Decimal']['output'];
 };
 
 export type ShoppingListItemModel = {
-  __typename?: 'ShoppingListItemModel';
   listItemId: Scalars['String']['output'];
   product: ProductModel;
   recipeUnit: RecipeUnit;
@@ -706,7 +685,6 @@ export type ShoppingListItemModel = {
 };
 
 export type ShoppingListItemSourceModel = {
-  __typename?: 'ShoppingListItemSourceModel';
   ingredientNote?: Maybe<Scalars['String']['output']>;
   ingredientsVersionUsed: Scalars['Int']['output'];
   quantity: Scalars['Decimal']['output'];
@@ -716,7 +694,6 @@ export type ShoppingListItemSourceModel = {
 };
 
 export type ShoppingListModel = {
-  __typename?: 'ShoppingListModel';
   createdAt: Scalars['DateTime']['output'];
   hasOutdatedRecipes: Scalars['Boolean']['output'];
   listId: Scalars['String']['output'];
@@ -725,7 +702,6 @@ export type ShoppingListModel = {
 };
 
 export type ToggleLikeResponse = {
-  __typename?: 'ToggleLikeResponse';
   isLiked: Scalars['Boolean']['output'];
 };
 
@@ -782,7 +758,6 @@ export type UpdateRecipeStepInput = {
 };
 
 export type UserModel = {
-  __typename?: 'UserModel';
   avatarUrl?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -792,7 +767,6 @@ export type UserModel = {
 };
 
 export type UserProfileModel = {
-  __typename?: 'UserProfileModel';
   bio?: Maybe<Scalars['String']['output']>;
   birthYear?: Maybe<Scalars['Int']['output']>;
   fullName?: Maybe<Scalars['String']['output']>;
@@ -814,92 +788,97 @@ export type UserUpdateInput = {
 export type GetNewTokensQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNewTokensQuery = { __typename?: 'Query', newTokens: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string } } };
+export type GetNewTokensQuery = { newTokens: { user: { userId: string } } };
 
 export type LoginMutationVariables = Exact<{
   data: LoginInput;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
+export type LoginMutation = { login: { user: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+export type LogoutMutation = { logout: boolean };
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
+export type RegisterMutation = { register: { user: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
 
 export type RequestPasswordResetMutationVariables = Exact<{
   data: RequestEmailActionsInput;
 }>;
 
 
-export type RequestPasswordResetMutation = { __typename?: 'Mutation', requestPasswordReset: boolean };
+export type RequestPasswordResetMutation = { requestPasswordReset: boolean };
 
 export type RequestVerificationEmailMutationVariables = Exact<{
   data: RequestEmailActionsInput;
 }>;
 
 
-export type RequestVerificationEmailMutation = { __typename?: 'Mutation', requestVerificationEmail: boolean };
+export type RequestVerificationEmailMutation = { requestVerificationEmail: boolean };
 
 export type ResetPasswordMutationVariables = Exact<{
   data: ResetPasswordInput;
 }>;
 
 
-export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword: boolean };
+export type ResetPasswordMutation = { resetPassword: boolean };
 
 export type ValidateResetTokenQueryVariables = Exact<{
   token: Scalars['String']['input'];
 }>;
 
 
-export type ValidateResetTokenQuery = { __typename?: 'Query', validateResetToken: boolean };
+export type ValidateResetTokenQuery = { validateResetToken: boolean };
 
 export type VerifyEmailMutationVariables = Exact<{
   token: Scalars['String']['input'];
 }>;
 
 
-export type VerifyEmailMutation = { __typename?: 'Mutation', verifyEmail: { __typename?: 'AuthResponse', user: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
+export type VerifyEmailMutation = { verifyEmail: { user: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
 
 export type GetFullProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetFullProfileQuery = { __typename?: 'Query', fullProfile: { __typename?: 'FullProfileModel', fitnessProfile?: { __typename?: 'FitnessProfileModel', activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { __typename?: 'UserProfileModel', fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
+export type GetFullProfileQuery = { fullProfile: { fitnessProfile?: { activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
+export type MeQuery = { me: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
+
+export type ResetAvatarMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ResetAvatarMutation = { resetAvatar: boolean };
 
 export type UpdateFullProfileMutationVariables = Exact<{
   data: FullProfileUpdateInput;
 }>;
 
 
-export type UpdateFullProfileMutation = { __typename?: 'Mutation', updateFullProfile: { __typename?: 'FullProfileModel', fitnessProfile?: { __typename?: 'FitnessProfileModel', activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { __typename?: 'UserProfileModel', fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
+export type UpdateFullProfileMutation = { updateFullProfile: { fitnessProfile?: { activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
 
 export type UpdateMeMutationVariables = Exact<{
   data: UserUpdateInput;
 }>;
 
 
-export type UpdateMeMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'UserModel', userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
+export type UpdateMeMutation = { updateUser: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;
 }>;
 
 
-export type GetAllRecipesQuery = { __typename?: 'Query', allRecipes: Array<{ __typename?: 'RecipeModel', calories?: number | null, cookingTime?: number | null, description: string, difficulty: Difficulty, dishType: DishType, ingredientsVersion: number, likesCount: number, recipeId: string, slug: string, title: string, userId: string, user?: { __typename?: 'UserModel', avatarUrl?: string | null, firstName: string } | null }> };
+export type GetAllRecipesQuery = { allRecipes: Array<{ calories?: number | null, cookingTime?: number | null, description: string, difficulty: Difficulty, dishType: DishType, ingredientsVersion: number, likesCount: number, recipeId: string, slug: string, title: string, userId: string, user?: { avatarUrl?: string | null, firstName: string } | null }> };
 
 
 export const GetNewTokensDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNewTokens"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"newTokens"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]}}]}}]} as unknown as DocumentNode<GetNewTokensQuery, GetNewTokensQueryVariables>;
@@ -913,6 +892,7 @@ export const ValidateResetTokenDocument = {"kind":"Document","definitions":[{"ki
 export const VerifyEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"VerifyEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"token"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifyEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"token"},"value":{"kind":"Variable","name":{"kind":"Name","value":"token"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"verificationToken"}}]}}]}}]}}]} as unknown as DocumentNode<VerifyEmailMutation, VerifyEmailMutationVariables>;
 export const GetFullProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFullProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fitnessProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activityLevel"}},{"kind":"Field","name":{"kind":"Name","value":"nutritionGoal"}},{"kind":"Field","name":{"kind":"Name","value":"currentWeight"}},{"kind":"Field","name":{"kind":"Name","value":"targetWeight"}},{"kind":"Field","name":{"kind":"Name","value":"armCm"}},{"kind":"Field","name":{"kind":"Name","value":"chestCm"}},{"kind":"Field","name":{"kind":"Name","value":"heightCm"}},{"kind":"Field","name":{"kind":"Name","value":"thighCm"}},{"kind":"Field","name":{"kind":"Name","value":"waistCm"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"userProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"birthYear"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}}]}}]}}]}}]} as unknown as DocumentNode<GetFullProfileQuery, GetFullProfileQueryVariables>;
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"verificationToken"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const ResetAvatarDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ResetAvatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resetAvatar"}}]}}]} as unknown as DocumentNode<ResetAvatarMutation, ResetAvatarMutationVariables>;
 export const UpdateFullProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateFullProfile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FullProfileUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateFullProfile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fitnessProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activityLevel"}},{"kind":"Field","name":{"kind":"Name","value":"nutritionGoal"}},{"kind":"Field","name":{"kind":"Name","value":"currentWeight"}},{"kind":"Field","name":{"kind":"Name","value":"targetWeight"}},{"kind":"Field","name":{"kind":"Name","value":"armCm"}},{"kind":"Field","name":{"kind":"Name","value":"chestCm"}},{"kind":"Field","name":{"kind":"Name","value":"heightCm"}},{"kind":"Field","name":{"kind":"Name","value":"thighCm"}},{"kind":"Field","name":{"kind":"Name","value":"waistCm"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}},{"kind":"Field","name":{"kind":"Name","value":"userProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}},{"kind":"Field","name":{"kind":"Name","value":"birthYear"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateFullProfileMutation, UpdateFullProfileMutationVariables>;
 export const UpdateMeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateMe"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"verificationToken"}}]}}]}}]} as unknown as DocumentNode<UpdateMeMutation, UpdateMeMutationVariables>;
 export const GetAllRecipesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllRecipes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RecipesQueryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allRecipes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"calories"}},{"kind":"Field","name":{"kind":"Name","value":"cookingTime"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"dishType"}},{"kind":"Field","name":{"kind":"Name","value":"ingredientsVersion"}},{"kind":"Field","name":{"kind":"Name","value":"likesCount"}},{"kind":"Field","name":{"kind":"Name","value":"recipeId"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllRecipesQuery, GetAllRecipesQueryVariables>;

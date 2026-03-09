@@ -21,7 +21,7 @@ export function UserDropdownMenu({ user }: { user: UserModel }) {
         <Button
           variant='ghost'
           size='responsive'
-          className='rounded-full'
+          className='rounded-full shadow-none'
           aria-label='Open user menu'
           title='Open user menu'
         >

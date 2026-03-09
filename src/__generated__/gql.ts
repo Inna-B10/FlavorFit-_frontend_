@@ -25,6 +25,7 @@ type Documents = {
     "mutation VerifyEmail($token: String!) {\n  verifyEmail(token: $token) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": typeof types.VerifyEmailDocument,
     "query GetFullProfile {\n  fullProfile {\n    fitnessProfile {\n      activityLevel\n      nutritionGoal\n      currentWeight\n      targetWeight\n      armCm\n      chestCm\n      heightCm\n      thighCm\n      waistCm\n      updatedAt\n    }\n    userProfile {\n      fullName\n      gender\n      birthYear\n      bio\n    }\n  }\n}": typeof types.GetFullProfileDocument,
     "query Me {\n  me {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}": typeof types.MeDocument,
+    "mutation ResetAvatar {\n  resetAvatar\n}": typeof types.ResetAvatarDocument,
     "mutation UpdateFullProfile($data: FullProfileUpdateInput!) {\n  updateFullProfile(data: $data) {\n    fitnessProfile {\n      activityLevel\n      nutritionGoal\n      currentWeight\n      targetWeight\n      armCm\n      chestCm\n      heightCm\n      thighCm\n      waistCm\n      updatedAt\n    }\n    userProfile {\n      fullName\n      gender\n      birthYear\n      bio\n    }\n  }\n}": typeof types.UpdateFullProfileDocument,
     "mutation UpdateMe($data: UserUpdateInput!) {\n  updateUser(data: $data) {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}": typeof types.UpdateMeDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": typeof types.GetAllRecipesDocument,
@@ -41,6 +42,7 @@ const documents: Documents = {
     "mutation VerifyEmail($token: String!) {\n  verifyEmail(token: $token) {\n    user {\n      userId\n      email\n      firstName\n      role\n      avatarUrl\n      verificationToken\n    }\n  }\n}": types.VerifyEmailDocument,
     "query GetFullProfile {\n  fullProfile {\n    fitnessProfile {\n      activityLevel\n      nutritionGoal\n      currentWeight\n      targetWeight\n      armCm\n      chestCm\n      heightCm\n      thighCm\n      waistCm\n      updatedAt\n    }\n    userProfile {\n      fullName\n      gender\n      birthYear\n      bio\n    }\n  }\n}": types.GetFullProfileDocument,
     "query Me {\n  me {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}": types.MeDocument,
+    "mutation ResetAvatar {\n  resetAvatar\n}": types.ResetAvatarDocument,
     "mutation UpdateFullProfile($data: FullProfileUpdateInput!) {\n  updateFullProfile(data: $data) {\n    fitnessProfile {\n      activityLevel\n      nutritionGoal\n      currentWeight\n      targetWeight\n      armCm\n      chestCm\n      heightCm\n      thighCm\n      waistCm\n      updatedAt\n    }\n    userProfile {\n      fullName\n      gender\n      birthYear\n      bio\n    }\n  }\n}": types.UpdateFullProfileDocument,
     "mutation UpdateMe($data: UserUpdateInput!) {\n  updateUser(data: $data) {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}": types.UpdateMeDocument,
     "query GetAllRecipes($input: RecipesQueryInput!) {\n  allRecipes(input: $input) {\n    calories\n    cookingTime\n    description\n    difficulty\n    dishType\n    ingredientsVersion\n    likesCount\n    recipeId\n    slug\n    title\n    userId\n    user {\n      avatarUrl\n      firstName\n    }\n  }\n}": types.GetAllRecipesDocument,
@@ -104,6 +106,10 @@ export function graphql(source: "query GetFullProfile {\n  fullProfile {\n    fi
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query Me {\n  me {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}"): (typeof documents)["query Me {\n  me {\n    userId\n    email\n    firstName\n    role\n    avatarUrl\n    verificationToken\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ResetAvatar {\n  resetAvatar\n}"): (typeof documents)["mutation ResetAvatar {\n  resetAvatar\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

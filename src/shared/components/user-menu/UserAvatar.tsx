@@ -1,14 +1,21 @@
+import { cn } from '@/shared/utils/utils'
 import { DefaultAvatar } from '../ui-custom/DefaultAvatar'
 import { Avatar, AvatarImage } from '../ui/avatar'
 
 type Props = {
   firstName?: string | null
   avatarUrl?: string | null
+  className?: string
 }
 
-export function UserAvatar({ firstName, avatarUrl }: Props) {
+export function UserAvatar({ firstName, avatarUrl, className }: Props) {
   return (
-    <Avatar className='w-full h-full max-w-12 flex items-center justify-center bg-gradient-white-pale text-green-dark hover:text-foreground rounded-full shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105 aspect-square'>
+    <Avatar
+      className={cn(
+        'w-full h-full max-w-12 flex items-center justify-center bg-gradient-white-pale text-green-dark hover:text-foreground rounded-full shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105',
+        className
+      )}
+    >
       {avatarUrl ? (
         <AvatarImage
           src={avatarUrl}
