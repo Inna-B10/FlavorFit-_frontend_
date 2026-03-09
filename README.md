@@ -105,23 +105,14 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
+- [ ] navbar menu responsiveness
 - [ ] page recipes (home):
 - [ ] **page profile:**
-  - [ ] user form
-  - [ ] fitness form
-  - [ ] icons
-  - [ ] labels
-  - [x] img depends on gender
   - [ ] skeleton
-  - [x] view last updated at
-  - [ ] sidebar (? isActive)
+  - [ ] ? submit/cancel buttons as component
 - [ ] **page account:**
-  - [ ] upload avatar + [review] + refresh
-  - [ ] change firstName
-  - [ ] icons + labels
   - [ ] ? change password
   - [ ] skeleton
-  - [x] sidebar
 - [ ] page orders:
 - [ ] page singel order:
 - [ ] shopping list:
@@ -130,6 +121,20 @@ progress visualization and adaptive recommendations
 <details style="border:1px solid #d4d4d4; border-radius:2px; padding:1rem;">
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
+- [x] **page account:**
+  - [x] upload avatar + [preview] + refresh
+  - [x] reset(delete) avatar
+  - [x] change firstName
+  - [x] icons + labels
+  - [x] sidebar
+- [x] **page profile:**
+  - [x] user form
+  - [x] fitness form
+  - [x] icons
+  - [x] labels
+  - [x] img depends on gender
+  - [x] view last updated at
+  - [x] sidebar (+ isActive)
 - [x] **userMenu:**
   - [x] links account, profile, orders
   - [x] shopping list, cart, notifications
