@@ -33,7 +33,7 @@ export function AccountForm({ data }: { data: MeQuery }) {
   })
 
   const submit = form.handleSubmit(async data => {
-    const result = await mutateWithToast(
+    await mutateWithToast(
       () =>
         updateUser({
           variables: {
@@ -59,7 +59,7 @@ export function AccountForm({ data }: { data: MeQuery }) {
         <h2 className='text-3xl font-semibold font-sansita text-green-dark'>
           <UserRoundPenIcon className='mr-2 inline lg:size-7 mb-1' /> Account information
         </h2>
-        <div className='flex justify-end gap-3'>
+        <div className='hidden md:flex justify-end gap-3'>
           <Button
             variant='outline'
             type='button'
@@ -76,8 +76,27 @@ export function AccountForm({ data }: { data: MeQuery }) {
           </Button>
         </div>
       </div>
-      <div className='flex flex-col gap-8 md:flex-row'>
+      <div className='flex flex-col gap-8 md:flex-row  rounded-xl border p-4 md:p-6 w-full'>
         <AccountFormData form={form} />
+        <div className='md:hidden flex justify-center gap-4 mb-4'>
+          <Button
+            variant='outline'
+            type='button'
+            size='sm'
+            className='rounded-2xl w-30'
+          >
+            Cancel
+          </Button>
+          <Button
+            variant='accent'
+            size='sm'
+            type='submit'
+            disabled={loading}
+            className='rounded-2xl w-30'
+          >
+            Save changes
+          </Button>
+        </div>
       </div>
     </form>
   )

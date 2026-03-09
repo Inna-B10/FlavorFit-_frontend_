@@ -114,6 +114,15 @@ function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>)
     />
   )
 }
+function CustomLabel({ className, ...props }: React.ComponentProps<typeof Label>) {
+  return (
+    <label
+      data-slot='field-label'
+      className={cn('', className)}
+      {...props}
+    />
+  )
+}
 
 function FieldTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -220,6 +229,7 @@ function FieldError({
 }
 
 export {
+  CustomLabel,
   Field,
   FieldContent,
   FieldDescription,

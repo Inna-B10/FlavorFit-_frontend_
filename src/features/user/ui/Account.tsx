@@ -48,7 +48,7 @@ export function Account() {
   return (
     <div className='flex gap-6'>
       <UserSidebar user={user} />
-      <div className='bg-white-pale rounded-2xl w-full p-6'>
+      <div className='bg-white-pale rounded-2xl w-full p-4 md:p-6'>
         <AccountForm data={data} />
       </div>
     </div>

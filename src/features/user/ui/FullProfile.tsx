@@ -46,7 +46,7 @@ export function FullProfile() {
     )
 
   return (
-    <div className='flex gap-6'>
+    <div className='flex gap-6 grow'>
       <UserSidebar user={user} />
       <div className='bg-white-pale rounded-2xl w-full p-6'>
         <FullProfileForm data={data} />
