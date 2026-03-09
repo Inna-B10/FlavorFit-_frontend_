@@ -2,7 +2,7 @@ import { BookUser, CalendarFold, IdCard, VenusAndMars } from 'lucide-react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { DressIcon } from '@/shared/components/ui-custom/icons-svg/DressIcon'
 import { SuitIcon } from '@/shared/components/ui-custom/icons-svg/SuitIcon'
-import { Field, FieldError } from '@/shared/components/ui/field'
+import { CustomLabel, Field, FieldError } from '@/shared/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -34,50 +34,62 @@ export function UserProfileForm({
   const genderOptions = enumToSelectOptions(Gender)
 
   return (
-    <div className='space-y-8 rounded-xl border p-6 w-[40%]'>
+    <div className='space-y-8 rounded-xl border p-4 lg:p-6 lg:w-[40%] md:w-1/2 w-full'>
       <h2 className='text-lg font-semibold'>General information</h2>
       <div className='space-y-8'>
-        <Field>
-          <label htmlFor='fullName'>
-            <InputGroup className='h-10'>
+        <Field
+          className='group relative'
+          orientation='horizontal'
+        >
+          <InputGroup>
+            <InputGroupInput
+              placeholder=' '
+              type='text'
+              {...register('userProfile.fullName', {
+                setValueAs: value => (value?.trim() === '' ? null : value?.trim())
+              })}
+            />
+            <InputGroupAddon align='inline-start'>
+              <IdCard size={16} />
+            </InputGroupAddon>
+          </InputGroup>
+          <CustomLabel
+            htmlFor='fullName'
+            className='floating-label'
+          >
+            Full Name:
+          </CustomLabel>
+          <FieldError>{errors?.userProfile?.fullName?.message}</FieldError>
+        </Field>
+
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-1'>
+          <Field
+            className='group relative'
+            orientation='horizontal'
+          >
+            <InputGroup>
               <InputGroupInput
-                id='fullName'
-                type='text'
-                {...register('userProfile.fullName', {
-                  setValueAs: value => (value?.trim() === '' ? null : value?.trim())
+                placeholder=' '
+                type='number'
+                {...register('userProfile.birthYear', {
+                  setValueAs: v => {
+                    if (v === '' || v === null || v === undefined) return null
+                    const n = Number(v)
+                    return Number.isNaN(n) ? null : n
+                  }
                 })}
               />
               <InputGroupAddon align='inline-start'>
-                <IdCard size={16} />
-                Full Name:
+                <CalendarFold size={16} />
               </InputGroupAddon>
             </InputGroup>
-            <FieldError>{errors?.userProfile?.fullName?.message}</FieldError>
-          </label>
-        </Field>
-
-        <div className='grid grid-cols-2 gap-4'>
-          <Field>
-            <label htmlFor='birthYear'>
-              <InputGroup className='h-10'>
-                <InputGroupInput
-                  id='birthYear'
-                  type='number'
-                  {...register('userProfile.birthYear', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <CalendarFold size={16} />
-                  Birth Year:
-                </InputGroupAddon>
-              </InputGroup>
-              <FieldError>{errors?.userProfile?.birthYear?.message}</FieldError>
-            </label>
+            <CustomLabel
+              htmlFor='birthYear'
+              className='floating-label'
+            >
+              Birth Year:
+            </CustomLabel>
+            <FieldError>{errors?.userProfile?.birthYear?.message}</FieldError>
           </Field>
           <Field>
             <Controller

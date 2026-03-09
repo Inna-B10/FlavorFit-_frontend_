@@ -57,7 +57,7 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
         <h2 className='text-3xl font-semibold font-sansita text-green-dark'>
           <ImProfile className='mr-2 inline' /> Personal information
         </h2>
-        <div className='flex justify-end gap-3'>
+        <div className='hidden md:flex justify-end gap-3'>
           <Button
             variant='outline'
             type='button'
@@ -74,12 +74,31 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
           </Button>
         </div>
       </div>
-      <div className='flex flex-col gap-8 md:flex-row'>
+      <div className='flex flex-col gap-6 md:gap-8 md:flex-row w-full'>
         <UserProfileForm form={form} />
         <FitnessProfileForm
           form={form}
           updatedAt={formatDate(updatedAt)}
         />
+        <div className='md:hidden flex justify-center gap-4 my-4'>
+          <Button
+            variant='outline'
+            type='button'
+            size='sm'
+            className='rounded-2xl w-30'
+          >
+            Cancel
+          </Button>
+          <Button
+            variant='accent'
+            size='sm'
+            type='submit'
+            disabled={loading}
+            className='rounded-2xl w-30'
+          >
+            Save changes
+          </Button>
+        </div>
       </div>
     </form>
   )

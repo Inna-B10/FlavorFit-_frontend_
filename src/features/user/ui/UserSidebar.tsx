@@ -11,7 +11,7 @@ import { UserModel } from '@/__generated__/graphql'
 export function UserSidebar({ user }: { user: UserModel }) {
   const pathname = usePathname()
   return (
-    <aside className='bg-linear-to-b to-20% from-green-light to-white-pale lg:flex flex-col w-2xs border-input border rounded-2xl hidden '>
+    <aside className='bg-linear-to-b to-20% from-green-light to-white-pale xl:flex flex-col w-2xs border-input border rounded-2xl hidden'>
       <div className='flex items-center gap-4 p-4'>
         <div className='w-full h-full max-w-12 aspect-square'>
           <UserAvatar

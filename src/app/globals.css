@@ -171,9 +171,9 @@
   .floating-label {
     @apply text-muted-foreground pointer-events-none absolute z-10 left-8 top-1/2 -translate-y-1/2 transition-all duration-400 text-sm font-normal text-nowrap border-x-transparent;
 
-    @apply group-focus-within:bg-linear-to-b text-nowrap group-focus-within:from-white-pale group-focus-within:to-white group-focus-within:-top-4 group-focus-within:left-full group-focus-within:translate-y-1/2 group-focus-within:text-xs group-focus-within:-translate-x-[120%] font-normal px-1 border-x-input;
+    @apply group-focus-within:bg-linear-to-b text-nowrap group-focus-within:from-white-pale group-focus-within:to-white group-focus-within:-top-4 group-focus-within:left-full group-focus-within:translate-y-1/2 group-focus-within:text-xs group-focus-within:-translate-x-[125%] font-normal px-1 border-x-input;
 
-    @apply group-has-[input:not(:placeholder-shown)]:bg-linear-to-b group-has-[input:not(:placeholder-shown)]:from-white-pale group-has-[input:not(:placeholder-shown)]:to-white group-has-[input:not(:placeholder-shown)]:-top-4 group-has-[input:not(:placeholder-shown)]:left-full group-has-[input:not(:placeholder-shown)]:translate-y-1/2 group-has-[input:not(:placeholder-shown)]:text-xs group-has-[input:not(:placeholder-shown)]:-translate-x-[120%] text-nowrap font-normal px-1 border-x-input;
+    @apply group-has-[input:not(:placeholder-shown)]:bg-linear-to-b group-has-[input:not(:placeholder-shown)]:from-white-pale group-has-[input:not(:placeholder-shown)]:to-white group-has-[input:not(:placeholder-shown)]:-top-4 group-has-[input:not(:placeholder-shown)]:left-full group-has-[input:not(:placeholder-shown)]:translate-y-1/2 group-has-[input:not(:placeholder-shown)]:text-xs group-has-[input:not(:placeholder-shown)]:-translate-x-[125%] text-nowrap font-normal px-1 border-x-input;
   }
 }
 

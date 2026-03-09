@@ -5,7 +5,7 @@ import { ActivityIcon } from '@/shared/components/ui-custom/icons-svg/ActivityIc
 import { HeightIcon } from '@/shared/components/ui-custom/icons-svg/HeightIcon'
 import { NutritionGoalIcon } from '@/shared/components/ui-custom/icons-svg/NutritionGoalIcon'
 import { RulerIcon } from '@/shared/components/ui-custom/icons-svg/RulerIcon'
-import { Field, FieldError } from '@/shared/components/ui/field'
+import { CustomLabel, Field, FieldError } from '@/shared/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/shared/components/ui/input-group'
 import {
   Select,
@@ -35,22 +35,31 @@ export function FitnessProfileForm({
   const activityLevelOptions = enumToSelectOptions(ActivityLevel)
 
   return (
-    <div className='rounded-xl border p-6 flex gap-4 w-[70%]'>
-      <Image
-        src={gender === 'MALE' ? '/bg-images/male.svg' : '/bg-images/female.svg'}
-        alt='auth-background'
-        width={200}
-        height={600}
-      />
-      <div className='flex flex-col gap-8'>
-        <h2 className='text-lg font-semibold pl-2'>Fitness Profile</h2>
-
-        <div className='grid grid-cols-2 gap-x-4 gap-y-8'>
-          <Field>
-            <label htmlFor='heightCm'>
-              <InputGroup className='h-10'>
+    <div className='rounded-xl border p-3 pb-8 lg:p-6 lg:pl-0 flex flex-col gap-8 lg:w-[70%] md:w-1/2 w-full'>
+      <h2 className='text-lg font-semibold pl-1 lg:pl-6'>Fitness Profile</h2>
+      <div className='flex gap-2'>
+        <Image
+          src={gender === 'MALE' ? '/bg-images/male.svg' : '/bg-images/female.svg'}
+          alt='auth-background'
+          width={200}
+          height={600}
+          className='hidden lg:block'
+        />
+        <div className='flex flex-col gap-8 w-full'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-8'>
+            {updatedAt && (
+              <span className='text-sm lg:text-end'>
+                Last updated at: <br />
+                {updatedAt}
+              </span>
+            )}
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='heightCm'
+                  placeholder=' '
                   type='number'
                   {...register('fitnessProfile.heightCm', {
                     setValueAs: v => {
@@ -62,23 +71,23 @@ export function FitnessProfileForm({
                 />
                 <InputGroupAddon align='inline-start'>
                   <HeightIcon />
-                  Height <span className='text-xs -ml-1 -mr-2'>[cm]</span>:
                 </InputGroupAddon>
               </InputGroup>
+              <CustomLabel
+                htmlFor='heightCm'
+                className='floating-label'
+              >
+                Height <span className='text-xs'>[cm]</span>:
+              </CustomLabel>
               <FieldError>{errors?.fitnessProfile?.heightCm?.message}</FieldError>
-            </label>
-          </Field>
-          {updatedAt && (
-            <span className='text-right text-sm'>
-              Last updated at: <br />
-              {updatedAt}
-            </span>
-          )}
-          <Field>
-            <label htmlFor='currentWeight'>
-              <InputGroup className='h-10'>
+            </Field>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='currentWeight'
+                  placeholder=' '
                   type='number'
                   {...register('fitnessProfile.currentWeight', {
                     setValueAs: v => {
@@ -90,17 +99,23 @@ export function FitnessProfileForm({
                 />
                 <InputGroupAddon align='inline-start'>
                   <Weight size={16} />
-                  Current weight<span className='text-xs -ml-1 -mr-2'>[kg]</span>:
                 </InputGroupAddon>
               </InputGroup>
+              <CustomLabel
+                htmlFor='currentWeight'
+                className='floating-label'
+              >
+                Current weight <span className='text-xs'>[kg]</span>:
+              </CustomLabel>
               <FieldError>{errors?.fitnessProfile?.currentWeight?.message}</FieldError>
-            </label>
-          </Field>
-          <Field>
-            <label htmlFor='targetWeight'>
-              <InputGroup className='h-10'>
+            </Field>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='targetWeight'
+                  placeholder=' '
                   type='number'
                   {...register('fitnessProfile.targetWeight', {
                     setValueAs: v => {
@@ -112,17 +127,23 @@ export function FitnessProfileForm({
                 />
                 <InputGroupAddon align='inline-start'>
                   <Weight size={16} />
-                  Target weight<span className='text-xs -ml-1 -mr-2'>[kg]</span>:
                 </InputGroupAddon>
               </InputGroup>
-            </label>
-            <FieldError>{errors?.fitnessProfile?.targetWeight?.message}</FieldError>
-          </Field>
-          <Field>
-            <label htmlFor='armCm'>
-              <InputGroup className='h-10'>
+              <CustomLabel
+                htmlFor='targetWeight'
+                className='floating-label'
+              >
+                Target weight <span className='text-xs'>[kg]</span>:
+              </CustomLabel>
+              <FieldError>{errors?.fitnessProfile?.targetWeight?.message}</FieldError>
+            </Field>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='armCm'
+                  placeholder=' '
                   type='number'
                   {...register('fitnessProfile.armCm', {
                     setValueAs: v => {
@@ -134,17 +155,23 @@ export function FitnessProfileForm({
                 />
                 <InputGroupAddon align='inline-start'>
                   <RulerIcon />
-                  Arm<span className='text-xs -ml-1 -mr-2'>[cm]</span>:
                 </InputGroupAddon>
               </InputGroup>
-            </label>
-            <FieldError>{errors?.fitnessProfile?.armCm?.message}</FieldError>
-          </Field>
-          <Field>
-            <label htmlFor='chestCm'>
-              <InputGroup className='h-10'>
+              <CustomLabel
+                htmlFor='armCm'
+                className='floating-label'
+              >
+                Arm <span className='text-xs'>[cm]</span>:
+              </CustomLabel>
+              <FieldError>{errors?.fitnessProfile?.armCm?.message}</FieldError>
+            </Field>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='chestCm'
+                  placeholder=' '
                   type='number'
                   {...register('fitnessProfile.chestCm', {
                     setValueAs: v => {
@@ -159,17 +186,23 @@ export function FitnessProfileForm({
                   className='text-xs whitespace-nowrap'
                 >
                   <RulerIcon />
-                  Chest <span className='text-xs -ml-1 -mr-2'>[cm]</span>:
                 </InputGroupAddon>
               </InputGroup>
-            </label>
-            <FieldError>{errors?.fitnessProfile?.chestCm?.message}</FieldError>
-          </Field>
-          <Field>
-            <label htmlFor='waistCm'>
-              <InputGroup className='h-10'>
+              <CustomLabel
+                htmlFor='chestCm'
+                className='floating-label'
+              >
+                Chest <span className='text-xs'>[cm]</span>:
+              </CustomLabel>
+              <FieldError>{errors?.fitnessProfile?.chestCm?.message}</FieldError>
+            </Field>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='waistCm'
+                  placeholder=' '
                   type='number'
                   {...register('fitnessProfile.waistCm', {
                     setValueAs: v => {
@@ -181,19 +214,24 @@ export function FitnessProfileForm({
                 />
                 <InputGroupAddon align='inline-start'>
                   <RulerIcon />
-                  Waist <span className='text-xs -ml-1 -mr-2'>[cm]</span>:
                 </InputGroupAddon>
               </InputGroup>
-            </label>
-            <FieldError>{errors?.fitnessProfile?.waistCm?.message}</FieldError>
-          </Field>
-          <Field>
-            <label htmlFor='thighCm'>
-              <InputGroup className='h-10'>
+              <CustomLabel
+                htmlFor='waistCm'
+                className='floating-label'
+              >
+                Waist <span className='text-xs'>[cm]</span>:
+              </CustomLabel>
+              <FieldError>{errors?.fitnessProfile?.waistCm?.message}</FieldError>
+            </Field>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
                 <InputGroupInput
-                  id='thighCm'
+                  placeholder=' '
                   type='number'
-                  placeholder=''
                   {...register('fitnessProfile.thighCm', {
                     setValueAs: v => {
                       if (v === '' || v === null || v === undefined) return null
@@ -204,82 +242,87 @@ export function FitnessProfileForm({
                 />
                 <InputGroupAddon align='inline-start'>
                   <RulerIcon />
-                  Thigh <span className='text-xs -ml-1 -mr-2'>[cm]</span>:
                 </InputGroupAddon>
               </InputGroup>
-            </label>
-            <FieldError>{errors?.fitnessProfile?.thighCm?.message}</FieldError>
-          </Field>
-        </div>
-        <div className='grid grid-cols-2 gap-4'>
-          <Field>
-            <Controller
-              control={form.control}
-              name='fitnessProfile.activityLevel'
-              render={({ field }) => (
-                <Select
-                  value={field.value ?? undefined}
-                  onValueChange={field.onChange}
-                >
-                  <SelectTrigger className='w-full'>
-                    <div className='flex items-center gap-2'>
-                      <ActivityIcon />
-                      {field.value
-                        ? enumValueToLabel(ActivityLevel, field.value)
-                        : 'Select your activity level'}
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent position='popper'>
-                    <SelectGroup>
-                      {activityLevelOptions.map(item => (
-                        <SelectItem
-                          key={item.value}
-                          value={item.value}
-                        >
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            <FieldError>{errors?.fitnessProfile?.activityLevel?.message}</FieldError>
-          </Field>
-          <Field>
-            <Controller
-              control={form.control}
-              name='fitnessProfile.nutritionGoal'
-              render={({ field }) => (
-                <Select
-                  value={field.value ?? undefined}
-                  onValueChange={field.onChange}
-                >
-                  <SelectTrigger className='w-full'>
-                    <div className='flex items-center gap-2'>
-                      <NutritionGoalIcon />
-                      {field.value
-                        ? enumValueToLabel(NutritionGoal, field.value)
-                        : 'Select your nutrition goal'}
-                    </div>
-                  </SelectTrigger>
-                  <SelectContent position='popper'>
-                    <SelectGroup>
-                      {nutritionGoalOptions.map(item => (
-                        <SelectItem
-                          key={item.value}
-                          value={item.value}
-                        >
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-            <FieldError>{errors?.fitnessProfile?.nutritionGoal?.message}</FieldError>
-          </Field>
+              <CustomLabel
+                htmlFor='thighCm'
+                className='floating-label'
+              >
+                Thigh <span className='text-xs'>[cm]</span>:
+              </CustomLabel>
+              <FieldError>{errors?.fitnessProfile?.thighCm?.message}</FieldError>
+            </Field>
+          </div>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+            <Field>
+              <Controller
+                control={form.control}
+                name='fitnessProfile.activityLevel'
+                render={({ field }) => (
+                  <Select
+                    value={field.value ?? undefined}
+                    onValueChange={field.onChange}
+                  >
+                    <SelectTrigger className='w-full'>
+                      <div className='flex items-center gap-2'>
+                        <ActivityIcon />
+                        {field.value
+                          ? enumValueToLabel(ActivityLevel, field.value)
+                          : 'Select your activity level'}
+                      </div>
+                    </SelectTrigger>
+                    <SelectContent position='popper'>
+                      <SelectGroup>
+                        {activityLevelOptions.map(item => (
+                          <SelectItem
+                            key={item.value}
+                            value={item.value}
+                          >
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              <FieldError>{errors?.fitnessProfile?.activityLevel?.message}</FieldError>
+            </Field>
+            <Field>
+              <Controller
+                control={form.control}
+                name='fitnessProfile.nutritionGoal'
+                render={({ field }) => (
+                  <Select
+                    value={field.value ?? undefined}
+                    onValueChange={field.onChange}
+                  >
+                    <SelectTrigger className='w-full'>
+                      <div className='flex items-center gap-2'>
+                        <NutritionGoalIcon />
+                        {field.value
+                          ? enumValueToLabel(NutritionGoal, field.value)
+                          : 'Select your nutrition goal'}
+                      </div>
+                    </SelectTrigger>
+                    <SelectContent position='popper'>
+                      <SelectGroup>
+                        {nutritionGoalOptions.map(item => (
+                          <SelectItem
+                            key={item.value}
+                            value={item.value}
+                          >
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              <FieldError>{errors?.fitnessProfile?.nutritionGoal?.message}</FieldError>
+            </Field>
+          </div>
         </div>
       </div>
     </div>
