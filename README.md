@@ -69,6 +69,7 @@ npx shadcn@latest init
 npm i react-hot-toast
 npm i jose
 npm i @marsidev/react-turnstile
+npm i @vercel/blob
 
 
 # npx shadcn@latest add button

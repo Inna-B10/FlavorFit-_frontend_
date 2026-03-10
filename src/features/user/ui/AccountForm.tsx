@@ -11,8 +11,7 @@ export function AccountForm({ data }: { data: MeQuery }) {
   const form = useForm<IAccountForm>({
     mode: 'onChange',
     defaultValues: {
-      firstName: data.me?.firstName ?? '',
-      avatarUrl: data.me?.avatarUrl ?? ''
+      firstName: data.me?.firstName ?? ''
       // password: '',
       // confirmPassword: ''
     }
@@ -77,7 +76,10 @@ export function AccountForm({ data }: { data: MeQuery }) {
         </div>
       </div>
       <div className='flex flex-col gap-8 md:flex-row  rounded-xl border p-4 md:p-6 w-full'>
-        <AccountFormData form={form} />
+        <AccountFormData
+          form={form}
+          avatarUrl={data.me?.avatarUrl ?? undefined}
+        />
         <div className='md:hidden flex justify-center gap-4 mb-4'>
           <Button
             variant='outline'

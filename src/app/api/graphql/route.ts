@@ -1,6 +1,6 @@
 import { normalizeGqlText } from '@/shared/lib/auth/gql-errors-to-html-status'
 import { finalizeResponse } from '@/shared/lib/auth/route-proxy/finalizeResponse'
-import { hasUnauthorizedGraphQLError } from '@/shared/lib/auth/route-proxy/hasUnauthorizedGQLError'
+import { hasUnauthorizedError } from '@/shared/lib/auth/route-proxy/hasUnauthorizedError'
 import { refreshAuth } from '@/shared/lib/auth/route-proxy/refreshAuth'
 import { requestBackendGraphQL } from '@/shared/lib/auth/route-proxy/requestBackendGraphQL'
 
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
   let text = await backendRes.text()
 
-  const isUnauthorized = backendRes.status === 401 || hasUnauthorizedGraphQLError(text)
+  const isUnauthorized = backendRes.status === 401 || hasUnauthorizedError(text)
 
   if (isUnauthorized) {
     const refreshRes = await refreshAuth(cookie)

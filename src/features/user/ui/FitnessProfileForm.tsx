@@ -46,7 +46,7 @@ export function FitnessProfileForm({
           className='hidden lg:block'
         />
         <div className='flex flex-col gap-8 w-full'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 gap-y-8'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-8'>
             {updatedAt && (
               <span className='text-sm lg:text-end'>
                 Last updated at: <br />
@@ -253,7 +253,7 @@ export function FitnessProfileForm({
               <FieldError>{errors?.fitnessProfile?.thighCm?.message}</FieldError>
             </Field>
           </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 2xl:gap-x-6'>
             <Field>
               <Controller
                 control={form.control}

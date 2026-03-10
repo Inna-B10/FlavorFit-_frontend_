@@ -22,8 +22,6 @@ export interface IProfileForm {
 
 export interface IAccountForm {
   firstName?: string
-  avatarUrl?: string
-  //
   //   password?: string
   //   confirmPassword?: string
 }

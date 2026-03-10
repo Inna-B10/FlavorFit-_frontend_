@@ -53,7 +53,7 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
       name='update-profile'
       className='flex flex-col gap-10'
     >
-      <div className='flex justify-between items-center gap-4 px-4'>
+      <div className='flex justify-between items-center gap-4 p-4 pb-0'>
         <h2 className='text-3xl font-semibold font-sansita text-green-dark'>
           <ImProfile className='mr-2 inline' /> Personal information
         </h2>

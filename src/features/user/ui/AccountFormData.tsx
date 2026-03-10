@@ -6,9 +6,11 @@ import { IAccountForm } from '../types/user.types'
 import { AvatarUpload } from './AvatarUpload'
 
 export function AccountFormData({
-  form
+  form,
+  avatarUrl
 }: {
   form: UseFormReturn<IAccountForm, unknown, IAccountForm>
+  avatarUrl?: string
 }) {
   const {
     register,
@@ -20,10 +22,7 @@ export function AccountFormData({
       <div className='flex flex-col gap-4 md:gap-8'>
         <h2 className='text-lg font-semibold pl-2'>Account</h2>
         <div className='space-y-8 pb-2'>
-          <AvatarUpload
-            value={form.watch('avatarUrl') || undefined}
-            onChange={url => form.setValue('avatarUrl', url)}
-          />
+          <AvatarUpload avatarUrl={avatarUrl ?? undefined} />
           <Field
             className='group relative'
             orientation='horizontal'

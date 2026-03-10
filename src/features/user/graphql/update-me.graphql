@@ -5,6 +5,7 @@ mutation UpdateMe($data: UserUpdateInput!) {
     firstName
     role
     avatarUrl
+    avatarBlobPath
     verificationToken
   }
 }

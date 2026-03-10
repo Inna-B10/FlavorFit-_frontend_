@@ -212,6 +212,7 @@ export type Mutation = {
   createProduct: ProductModel;
   createProductVariant: ProductVariantModel;
   createRecipe: RecipeModel;
+  deleteAvatar: Scalars['Boolean']['output'];
   deleteComment: CommentModel;
   deleteOrder: Scalars['Boolean']['output'];
   deleteProduct: ProductModel;
@@ -227,9 +228,9 @@ export type Mutation = {
   removeRecipeFromShoppingList: ShoppingListModel;
   requestPasswordReset: Scalars['Boolean']['output'];
   requestVerificationEmail: Scalars['Boolean']['output'];
-  resetAvatar: Scalars['Boolean']['output'];
   resetPassword: Scalars['Boolean']['output'];
   toggleLike: ToggleLikeResponse;
+  updateAvatar: UserModel;
   updateCartItemPurchase: CartModel;
   updateComment: CommentModel;
   updateFullProfile: FullProfileModel;
@@ -349,6 +350,11 @@ export type MutationResetPasswordArgs = {
 
 export type MutationToggleLikeArgs = {
   recipeId: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateAvatarArgs = {
+  data: UpdateAvatarInput;
 };
 
 
@@ -701,6 +707,11 @@ export type ToggleLikeResponse = {
   isLiked: Scalars['Boolean']['output'];
 };
 
+export type UpdateAvatarInput = {
+  avatarBlobPath: Scalars['String']['input'];
+  avatarUrl: Scalars['String']['input'];
+};
+
 export type UpdateCartItemPurchaseInput = {
   cartItemId: Scalars['String']['input'];
   goodsCount?: InputMaybe<Scalars['Decimal']['input']>;
@@ -754,6 +765,7 @@ export type UpdateRecipeStepInput = {
 };
 
 export type UserModel = {
+  avatarBlobPath?: Maybe<Scalars['String']['output']>;
   avatarUrl?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
@@ -777,7 +789,6 @@ export type UserProfileUpdateInput = {
 };
 
 export type UserUpdateInput = {
-  avatarUrl?: InputMaybe<Scalars['String']['input']>;
   firstName?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -848,12 +859,7 @@ export type GetFullProfileQuery = { fullProfile: { fitnessProfile?: { activityLe
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { me: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
-
-export type ResetAvatarMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ResetAvatarMutation = { resetAvatar: boolean };
+export type MeQuery = { me: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, avatarBlobPath?: string | null, verificationToken?: string | null } };
 
 export type UpdateFullProfileMutationVariables = Exact<{
   data: FullProfileUpdateInput;
@@ -867,7 +873,7 @@ export type UpdateMeMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMeMutation = { updateUser: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } };
+export type UpdateMeMutation = { updateUser: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, avatarBlobPath?: string | null, verificationToken?: string | null } };
 
 export type GetAllRecipesQueryVariables = Exact<{
   input: RecipesQueryInput;
