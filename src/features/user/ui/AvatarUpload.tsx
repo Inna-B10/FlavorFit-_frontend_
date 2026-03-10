@@ -156,7 +156,7 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
       >
         <UserAvatar
           avatarUrl={avatarUrl}
-          className='hover:scale-none'
+          className='cursor-pointer'
         />
       </div>
 
@@ -174,11 +174,11 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
           size='xs'
           className='bg-destructive/60 mx-auto rounded-2xl'
         >
-          Reset
+          Delete
         </Button>
         <Loader
           size={16}
-          className={isUploading || isDeleting ? 'block animate-spin' : 'hidden'}
+          className={isUploading || isDeleting ? 'animate-spin' : ''}
           color='black'
         />
       </span>

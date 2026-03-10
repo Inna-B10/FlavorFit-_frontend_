@@ -12,7 +12,7 @@ export function UserAvatar({ firstName, avatarUrl, className }: Props) {
   return (
     <Avatar
       className={cn(
-        'w-full h-full max-w-12 flex items-center justify-center bg-gradient-white-pale text-green-dark hover:text-foreground rounded-full shadow-sm transition-all duration-300 ease-in-out hover:cursor-pointer hover:scale-105',
+        'w-full h-full max-w-12 flex items-center justify-center bg-gradient-white-pale text-green-dark rounded-full shadow-sm transition-all duration-300 ease-in-out',
         className
       )}
     >

@@ -28,6 +28,7 @@ export function UserDropdownMenu({ user }: { user: UserModel }) {
           <UserAvatar
             firstName={user.firstName}
             avatarUrl={user.avatarUrl}
+            className='hover:cursor-pointer hover:scale-105'
           />
         </Button>
       </DropdownMenuTrigger>
