@@ -108,6 +108,7 @@ progress visualization and adaptive recommendations
 
 - [ ] navbar menu responsiveness
 - [ ] page recipes (home):
+- [ ] DELETE src\app\api\media-upload\avatar\route.ts
 - [ ] **page profile:**
   - [ ] skeleton
   - [ ] ? submit/cancel buttons as component

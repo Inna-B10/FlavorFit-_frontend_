@@ -35,7 +35,7 @@ export function FitnessProfileForm({
   const activityLevelOptions = enumToSelectOptions(ActivityLevel)
 
   return (
-    <div className='rounded-xl border p-3 pb-8 lg:p-6 lg:pl-0 flex flex-col gap-8 lg:w-[70%] md:w-1/2 w-full'>
+    <div className='rounded-xl border p-4 pb-8 lg:p-6 lg:pb-8 lg:pl-0 flex flex-col gap-6 lg:w-[70%] md:w-1/2 w-full'>
       <h2 className='text-lg font-semibold pl-1 lg:pl-6'>Fitness Profile</h2>
       <div className='flex gap-2'>
         <Image
@@ -253,7 +253,7 @@ export function FitnessProfileForm({
               <FieldError>{errors?.fitnessProfile?.thighCm?.message}</FieldError>
             </Field>
           </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 2xl:gap-x-6'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-4 2xl:gap-x-6'>
             <Field>
               <Controller
                 control={form.control}

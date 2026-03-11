@@ -51,13 +51,13 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
     <form
       onSubmit={submit}
       name='update-profile'
-      className='flex flex-col gap-10'
+      className='flex flex-col gap-6 lg:gap-10'
     >
-      <div className='flex justify-between items-center gap-4 p-4 pb-0'>
-        <h2 className='text-3xl font-semibold font-sansita text-green-dark'>
-          <ImProfile className='mr-2 inline' /> Personal information
+      <div className='flex justify-between items-center gap-4 p-2 pb-0'>
+        <h2 className='text-[clamp(1.5rem,5vw,2rem)] font-semibold font-sansita text-green-dark'>
+          <ImProfile className='mr-1 inline lg:size-7 mb-1' /> Personal information
         </h2>
-        <div className='hidden md:flex justify-end gap-3'>
+        <div className='hidden lg:flex justify-end gap-4'>
           <Button
             variant='outline'
             type='button'
@@ -80,25 +80,23 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
           form={form}
           updatedAt={formatDate(updatedAt)}
         />
-        <div className='md:hidden flex justify-center gap-4 my-4'>
-          <Button
-            variant='outline'
-            type='button'
-            size='sm'
-            className='rounded-2xl w-30'
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='accent'
-            size='sm'
-            type='submit'
-            disabled={loading}
-            className='rounded-2xl w-30'
-          >
-            Save changes
-          </Button>
-        </div>
+      </div>
+      <div className='lg:hidden flex justify-center gap-4 my-4'>
+        <Button
+          variant='outline'
+          type='button'
+          className='w-36'
+        >
+          Cancel
+        </Button>
+        <Button
+          variant='accent'
+          type='submit'
+          disabled={loading}
+          className='w-36'
+        >
+          Save changes
+        </Button>
       </div>
     </form>
   )

@@ -62,7 +62,7 @@ export function UserProfileForm({
           <FieldError>{errors?.userProfile?.fullName?.message}</FieldError>
         </Field>
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-1'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-4 md:grid-cols-1 md:gap-8'>
           <Field
             className='group relative'
             orientation='horizontal'

@@ -1,100 +1,126 @@
 import { IdCard } from 'lucide-react'
 import { UseFormReturn } from 'react-hook-form'
-import { CustomLabel, Field, FieldError } from '@/shared/components/ui/field'
+import { Button } from '@/shared/components/ui/button'
+import { CustomLabel, Field } from '@/shared/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/shared/components/ui/input-group'
 import { IAccountForm } from '../types/user.types'
-import { AvatarUpload } from './AvatarUpload'
 
 export function AccountFormData({
   form,
-  avatarUrl
+  loading
 }: {
   form: UseFormReturn<IAccountForm, unknown, IAccountForm>
-  avatarUrl?: string
+  loading: boolean
 }) {
   const {
     register,
-    formState: { errors }
+    formState: { errors, touchedFields }
   } = form
 
+  const commonErrors = [touchedFields.firstName && errors.firstName?.message].filter(Boolean)
+
   return (
-    <div className='flex gap-4'>
-      <div className='flex flex-col gap-4 md:gap-8'>
-        <h2 className='text-lg font-semibold pl-2'>Account</h2>
-        <div className='space-y-8 pb-2'>
-          <AvatarUpload avatarUrl={avatarUrl ?? undefined} />
-          <Field
-            className='group relative'
-            orientation='horizontal'
+    <div className='w-full flex flex-col gap-6 p-4 lg:p-6 border border-input rounded-xl'>
+      <h2 className='text-lg font-semibold pl-2'>Account</h2>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-8 pb-2'>
+        <Field
+          className='group relative sm:col-span-2 md:col-span-1 2xl:col-span-2'
+          orientation='horizontal'
+        >
+          <InputGroup>
+            <InputGroupInput
+              placeholder=' '
+              type='text'
+              {...register('firstName', {
+                setValueAs: value => (value?.trim() === '' ? null : value?.trim()),
+                validate: value => !!value || 'First name is required!'
+              })}
+            />
+            <InputGroupAddon align='inline-start'>
+              <IdCard size={16} />
+            </InputGroupAddon>
+          </InputGroup>
+          <CustomLabel
+            htmlFor='firstName'
+            className='floating-label'
           >
-            <InputGroup>
-              <InputGroupInput
-                placeholder=' '
-                type='text'
-                {...register('firstName', {
-                  setValueAs: value => (value?.trim() === '' ? null : value?.trim())
-                })}
-              />
-              <InputGroupAddon align='inline-start'>
-                <IdCard size={16} />
-              </InputGroupAddon>
-            </InputGroup>
-            <CustomLabel
-              htmlFor='firstName'
-              className='floating-label'
-            >
-              First Name:
-            </CustomLabel>
-            <FieldError>{errors?.firstName?.message}</FieldError>
-          </Field>
-          <Field
-            className='group relative'
-            orientation='horizontal'
+            First Name:
+          </CustomLabel>
+        </Field>
+        <Field
+          className='group relative'
+          orientation='horizontal'
+        >
+          <InputGroup>
+            <InputGroupInput
+              type='text'
+              placeholder=' '
+              // {...register('newPassword', {
+              //   setValueAs: value => (value?.trim() === '' ? null : value?.trim())
+              // })}
+            />
+            <InputGroupAddon align='inline-start'>
+              <IdCard size={16} />
+            </InputGroupAddon>
+          </InputGroup>
+          <CustomLabel
+            htmlFor='newPassword'
+            className='floating-label'
           >
-            <InputGroup>
-              <InputGroupInput
-                type='text'
-                placeholder=' '
-                // {...register('newPassword', {
-                //   setValueAs: value => (value?.trim() === '' ? null : value?.trim())
-                // })}
-              />
-              <InputGroupAddon align='inline-start'>
-                <IdCard size={16} />
-              </InputGroupAddon>
-            </InputGroup>
-            <CustomLabel
-              htmlFor='newPassword'
-              className='floating-label'
-            >
-              New Password:
-            </CustomLabel>
-            {/* <FieldError>{errors?.newPassword?.message}</FieldError> */}
-          </Field>
-          <Field
-            className='group relative'
-            orientation='horizontal'
+            New Password:
+          </CustomLabel>
+        </Field>
+        <Field
+          className='group relative'
+          orientation='horizontal'
+        >
+          <InputGroup>
+            <InputGroupInput
+              placeholder=' '
+              // {...register('confirmPassword', {
+              //   validate: value => value === form.getValues('newPassword') || 'Passwords don`t match!'
+              // })}
+            />
+            <InputGroupAddon align='inline-start'>
+              <IdCard size={16} />
+            </InputGroupAddon>
+          </InputGroup>
+          <CustomLabel
+            htmlFor='confirmPassword'
+            className='floating-label'
           >
-            <InputGroup>
-              <InputGroupInput
-                placeholder=' '
-                // {...register('confirmPassword', {
-                //   validate: value => value === form.getValues('newPassword') || 'Passwords don`t match!'
-                // })}
-              />
-              <InputGroupAddon align='inline-start'>
-                <IdCard size={16} />
-              </InputGroupAddon>
-            </InputGroup>
-            <CustomLabel
-              htmlFor='confirmPassword'
-              className='floating-label'
+            Confirm Password:
+          </CustomLabel>
+        </Field>
+      </div>
+      {commonErrors.length > 0 && (
+        <ul className='space-y-1 pl-2 text-sm'>
+          {commonErrors.map((error, idx) => (
+            <li
+              key={idx}
+              className='text-destructive'
             >
-              Confirm Password:
-            </CustomLabel>
-            {/* <FieldError>{errors?.confirmPassword?.message}</FieldError> */}
-          </Field>
-        </div>
+              {error}
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className='flex flex-col sm:flex-row justify-center items-center gap-4 mb-4 lg:mb-2'>
+        <Button
+          variant='outline'
+          type='button'
+          className='rounded-2xl w-40'
+        >
+          Cancel
+        </Button>
+        <Button
+          variant='accent'
+          type='submit'
+          disabled={loading}
+          className='rounded-2xl w-40'
+        >
+          Save changes
+        </Button>
       </div>
     </div>
   )

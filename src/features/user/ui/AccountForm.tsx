@@ -1,11 +1,11 @@
 import { useMutation } from '@apollo/client/react'
 import { UserRoundPenIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/components/ui/button'
 import { mutateWithToast } from '@/shared/lib/apollo/mutate-with-toast'
 import { MeDocument, MeQuery, UpdateMeDocument } from '@/__generated__/graphql'
 import { IAccountForm } from '../types/user.types'
 import { AccountFormData } from './AccountFormData'
+import { AvatarUpload } from './AvatarUpload'
 
 export function AccountForm({ data }: { data: MeQuery }) {
   const form = useForm<IAccountForm>({
@@ -52,53 +52,18 @@ export function AccountForm({ data }: { data: MeQuery }) {
     <form
       onSubmit={submit}
       name='update-profile'
-      className='flex flex-col gap-10'
+      className='flex flex-col gap-6 lg:gap-10'
     >
-      <div className='flex justify-between items-center gap-4 px-4'>
-        <h2 className='text-3xl font-semibold font-sansita text-green-dark'>
-          <UserRoundPenIcon className='mr-2 inline lg:size-7 mb-1' /> Account information
-        </h2>
-        <div className='hidden md:flex justify-end gap-3'>
-          <Button
-            variant='outline'
-            type='button'
-            className='min-w-36'
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='accent'
-            type='submit'
-            disabled={loading}
-          >
-            Save changes
-          </Button>
-        </div>
-      </div>
-      <div className='flex flex-col gap-8 md:flex-row  rounded-xl border p-4 md:p-6 w-full'>
+      <h1 className='text-[clamp(1.5rem,5vw,2rem)] font-semibold font-sansita text-green-dark pl-2'>
+        <UserRoundPenIcon className='mr-1 inline lg:size-7 mb-1' />
+        Account information
+      </h1>
+      <div className='flex flex-col md:flex-row gap-10'>
+        <AvatarUpload avatarUrl={data.me?.avatarUrl ?? undefined} />
         <AccountFormData
           form={form}
-          avatarUrl={data.me?.avatarUrl ?? undefined}
+          loading={loading}
         />
-        <div className='md:hidden flex justify-center gap-4 mb-4'>
-          <Button
-            variant='outline'
-            type='button'
-            size='sm'
-            className='rounded-2xl w-30'
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='accent'
-            size='sm'
-            type='submit'
-            disabled={loading}
-            className='rounded-2xl w-30'
-          >
-            Save changes
-          </Button>
-        </div>
       </div>
     </form>
   )
