@@ -73,9 +73,9 @@ export function VerifyEmail() {
       >
         <LogoIcon className='text-white-pale h-full w-auto' />
       </Link>
-      <h2 className='font-sansita my-4 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
+      <h1 className='font-sansita my-4 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
         Email verification
-      </h2>
+      </h1>
       <p className='text-muted-foreground mt-3 text-sm'>
         This link is invalid, expired or already used.
       </p>

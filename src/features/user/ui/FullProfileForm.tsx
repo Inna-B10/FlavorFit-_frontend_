@@ -54,9 +54,9 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
       className='flex flex-col gap-6 lg:gap-10'
     >
       <div className='flex justify-between items-center gap-4 p-2 pb-0'>
-        <h2 className='text-[clamp(1.5rem,5vw,2rem)] font-semibold font-sansita text-green-dark'>
+        <h1 className='text-[clamp(1.5rem,5vw,2rem)] font-semibold font-sansita text-green-dark'>
           <ImProfile className='mr-1 inline lg:size-7 mb-1' /> Personal information
-        </h2>
+        </h1>
         <div className='hidden lg:flex justify-end gap-4'>
           <Button
             variant='outline'

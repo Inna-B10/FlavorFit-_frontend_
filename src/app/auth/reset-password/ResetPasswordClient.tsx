@@ -94,9 +94,9 @@ export function ResetPasswordClient() {
         <LogoIcon className='text-white-pale h-full w-auto' />
       </Link>
 
-      <h2 className='font-sansita mb-2 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
+      <h1 className='font-sansita mb-2 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
         Set New Password
-      </h2>
+      </h1>
 
       <>
         <Input

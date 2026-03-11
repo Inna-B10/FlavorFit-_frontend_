@@ -64,9 +64,9 @@ export function RegistrationData() {
       </Link>
       {user ? (
         <>
-          <h2 className='font-sansita my-4 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
+          <h1 className='font-sansita my-4 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
             Email verification
-          </h2>
+          </h1>
           <div className='flex w-full grow-2 flex-col items-center justify-around gap-4 sm:p-2 sm:text-center'>
             <p>A verification link has been sent to</p>
             <p className='text-chart-2 text-center font-medium text-nowrap'>{user.email}</p>

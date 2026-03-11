@@ -75,9 +75,9 @@ export default function NotFoundPage() {
           </div>
           <span className='font-sonsie -ml-3'>4</span>
         </div>
-        <h2 className='font-poppins text-center text-[clamp(0.8rem,8vw,1.5rem)] italic'>
+        <h1 className='font-poppins text-center text-[clamp(0.8rem,8vw,1.5rem)] italic'>
           You&apos;ve trespassed into the no-produce zone.
-        </h2>
+        </h1>
       </div>
     </div>
   )

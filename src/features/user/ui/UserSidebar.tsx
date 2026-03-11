@@ -19,7 +19,7 @@ export function UserSidebar({ user }: { user: UserModel }) {
             avatarUrl={user.avatarUrl}
           />
         </div>
-        <div className='font-semibold font-sansita text-lg'>Hello {user.firstName}!</div>
+        <h3 className='font-semibold font-sansita text-lg'>Hello {user.firstName}!</h3>
       </div>
       {USER_MENU_DATA.map((item, idx) => {
         const isActive = !!match(item.link)(pathname)

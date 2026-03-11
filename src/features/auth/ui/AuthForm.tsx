@@ -47,9 +47,9 @@ export function AuthForm({
 
   return (
     <>
-      <h2 className='font-sansita my-4 text-center text-4xl font-bold italic'>
+      <h1 className='font-sansita my-4 text-center text-4xl font-bold italic'>
         {isLogin ? 'Sign in' : 'Sign up'}
-      </h2>
+      </h1>
       <form
         onSubmit={handleSubmit(handleAuth)}
         name='auth'
