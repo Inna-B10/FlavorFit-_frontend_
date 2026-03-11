@@ -1,18 +1,13 @@
 import { useRef, useState } from 'react'
 import { useApolloClient } from '@apollo/client/react'
-import { ImagePlus, Loader } from 'lucide-react'
+import { ImagePlus } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { Button } from '@/shared/components/ui/button'
 import { Field } from '@/shared/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/shared/components/ui/input-group'
 import { UserAvatar } from '@/shared/components/user-menu/UserAvatar'
 import { getApolloErrorMessage } from '@/shared/lib/apollo/get-apollo-error-message'
-
-interface AvatarUploadResponse {
-  message: string
-  avatarUrl: string
-  avatarBlobPath: string
-}
+import { avatarService } from '../services/client.services/avatar.service'
 
 export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
   const ref = useRef<HTMLInputElement>(null)
@@ -20,48 +15,13 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
 
   const apolloClient = useApolloClient()
-
-  async function deleteRequest() {
-    const response = await fetch('/api/media/avatar/delete', {
-      method: 'DELETE',
-      credentials: 'include'
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Avatar delete failed')
-    }
-
-    return data
-  }
-
-  async function upload(file: File): Promise<AvatarUploadResponse> {
-    const formData = new FormData()
-    formData.append('file', file)
-
-    const response = await fetch('/api/media/avatar/upload', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    })
-
-    const data: AvatarUploadResponse | { message?: string } = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.message || 'Upload failed')
-    }
-
-    return data as AvatarUploadResponse
-  }
-
   const handleUpload = async (file: File) => {
+    const toastId = toast.loading('Uploading...')
+
     try {
       setIsUploading(true)
 
-      const result = await upload(file)
-
-      toast.success('Avatar uploaded')
+      const result = await avatarService.uploadAvatar(file)
 
       apolloClient.cache.modify({
         id: 'ROOT_QUERY',
@@ -77,11 +37,11 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
           }
         }
       })
+      toast.success('Avatar uploaded', { id: toastId })
     } catch (error) {
-      toast.error(getApolloErrorMessage(error || 'Avatar upload failed'))
+      toast.error(getApolloErrorMessage(error || 'Avatar upload failed'), { id: toastId })
     } finally {
       setIsUploading(false)
-
       if (ref.current) {
         ref.current.value = ''
       }
@@ -89,11 +49,11 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
   }
 
   const handleDelete = async () => {
+    const toastId = toast.loading('Deleting...')
+
     try {
       setIsDeleting(true)
-      await deleteRequest()
-
-      toast.success('Avatar reset to default')
+      await avatarService.deleteAvatar()
 
       apolloClient.cache.modify({
         id: 'ROOT_QUERY',
@@ -113,75 +73,76 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
       if (ref.current) {
         ref.current.value = ''
       }
+      toast.success('Avatar reset to default', { id: toastId })
     } catch (error) {
-      toast.error(getApolloErrorMessage(error || 'Avatar delete failed'))
+      toast.error(getApolloErrorMessage(error || 'Avatar delete failed'), { id: toastId })
     } finally {
       setIsDeleting(false)
     }
   }
 
   return (
-    <div className='f-full grid grid-cols-[auto_1fr] items-end gap-3'>
-      <Field>
-        <InputGroup>
-          <InputGroupInput
-            id='avatar'
-            type='file'
-            accept='image/jpeg,image/png,image/webp'
-            ref={ref}
-            disabled={isUploading || isDeleting}
-            onChange={event => {
-              const file = event.target.files?.[0]
+    <div className='w-full flex flex-col gap-6 p-4 lg:p-6 border border-input rounded-xl pb-6'>
+      <h2 className='text-lg font-semibold pl-2'>Avatar</h2>
+      <div className='w-full flex flex-col-reverse gap-2 lg:gap-8 lg:flex-row lg:items-center'>
+        <Field className='lg:w-1/2'>
+          <InputGroup>
+            <InputGroupInput
+              id='avatar'
+              type='file'
+              accept='image/jpeg,image/png,image/webp'
+              ref={ref}
+              disabled={isUploading || isDeleting}
+              onChange={event => {
+                const file = event.target.files?.[0]
 
-              if (file) {
-                void handleUpload(file)
-              }
-            }}
-            className='mt-3 cursor-pointer place-content-center md:mt-2 2xl:mt-0'
-          />
-          <InputGroupAddon
-            align='inline-start'
-            className='cursor-pointer'
+                if (file) {
+                  void handleUpload(file)
+                }
+              }}
+              className='cursor-pointer place-content-center mt-3 md:mt-2'
+            />
+            <InputGroupAddon
+              align='inline-start'
+              className='cursor-pointer'
+              onClick={() => ref.current?.click()}
+            >
+              <ImagePlus size={16} />
+              File:
+            </InputGroupAddon>
+          </InputGroup>
+        </Field>
+        <div className='flex flex-col ml-2 lg:ml-0 lg:w-1/2'>
+          <span className='text-xs whitespace-nowrap text-nowrap'>Size: max 2MB</span>
+          <span className='text-xs whitespace-nowrap text-nowrap'>Format: .jpg, .png, .webp</span>
+        </div>
+      </div>
+      <div className='w-full flex flex-col lg:flex-row gap-8'>
+        <span className='flex flex-col items-center justify-center lg:w-1/2'>
+          <div
+            className='text-green-dark flex aspect-square h-auto w-full max-w-12 items-center justify-center rounded-full shadow-sm'
             onClick={() => ref.current?.click()}
           >
-            <ImagePlus size={16} />
-            File:
-          </InputGroupAddon>
-        </InputGroup>
-      </Field>
-
-      <div
-        className='text-green-dark flex aspect-square h-full w-full max-w-12 items-center justify-center rounded-full shadow-sm'
-        onClick={() => ref.current?.click()}
-      >
-        <UserAvatar
-          avatarUrl={avatarUrl}
-          className='cursor-pointer'
-        />
+            <UserAvatar
+              avatarUrl={avatarUrl}
+              className='cursor-pointer'
+            />
+          </div>
+        </span>
+        <span className='flex flex-col gap-3 text-xs lg:w-1/2 justify-center items-center lg:items-start'>
+          <span>To reset avatar to default, click delete</span>
+          <Button
+            type='button'
+            onClick={handleDelete}
+            disabled={!avatarUrl || isUploading || isDeleting}
+            variant='destructive'
+            size='xs'
+            className='bg-destructive/60 rounded-2xl'
+          >
+            Delete
+          </Button>
+        </span>
       </div>
-
-      <div className='ml-2 flex flex-col'>
-        <span className='text-xs text-muted-foreground'>Size: max 2MB</span>
-        <span className='text-xs text-muted-foreground'>Format: .jpg, .png, .webp</span>
-      </div>
-
-      <span className='flex gap-2 items-center'>
-        <Button
-          type='button'
-          onClick={handleDelete}
-          disabled={!avatarUrl || isUploading || isDeleting}
-          variant='destructive'
-          size='xs'
-          className='bg-destructive/60 mx-auto rounded-2xl'
-        >
-          Delete
-        </Button>
-        <Loader
-          size={16}
-          className={isUploading || isDeleting ? 'animate-spin' : ''}
-          color='black'
-        />
-      </span>
     </div>
   )
 }
