@@ -2,6 +2,7 @@ import { BookUser, CalendarFold, IdCard, VenusAndMars } from 'lucide-react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { optionalNumberValidation } from '@/features/auth/utils/is-valid-check'
 import { CustomField } from '@/shared/components/ui-custom/CustomField'
+import { CustomFieldNumber } from '@/shared/components/ui-custom/CustomFieldNumber'
 import { DressIcon } from '@/shared/components/ui-custom/icons-svg/DressIcon'
 import { SuitIcon } from '@/shared/components/ui-custom/icons-svg/SuitIcon'
 import { CustomLabel, Field } from '@/shared/components/ui/field'
@@ -66,32 +67,17 @@ export function UserProfileForm({
         </CustomField>
 
         <div className='grid grid-cols-1 gap-4 mb-10 sm:grid-cols-2 sm:mb-4 md:grid-cols-1 md:mb-10'>
-          <CustomField error={errors?.userProfile?.birthYear?.message}>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register(
-                    'userProfile.birthYear',
-                    optionalNumberValidation({ min: 1900, max: 2023, label: 'Birth year' })
-                  )}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <CalendarFold size={16} />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='birthYear'
-                className='floating-label'
-              >
-                Birth Year:
-              </CustomLabel>
-            </Field>
-          </CustomField>
+          <CustomFieldNumber
+            label='Birth year'
+            htmlFor='birthYear'
+            icon={<CalendarFold size={16} />}
+            isYear={true}
+            registration={register(
+              'userProfile.birthYear',
+              optionalNumberValidation({ min: 1900, max: 2023, label: 'Birth year' })
+            )}
+            error={errors?.userProfile?.birthYear?.message}
+          />
           <Field>
             <Controller
               control={form.control}

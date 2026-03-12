@@ -66,7 +66,6 @@ export function AuthForm({
             name='email'
             autoComplete='email'
             placeholder='Email'
-            required
             autoFocus
           />
         </CustomField>
@@ -82,7 +81,6 @@ export function AuthForm({
             type='password'
             name='password'
             placeholder='Password'
-            required
           />
         </CustomField>
         {!isLogin && (
@@ -96,7 +94,6 @@ export function AuthForm({
                 placeholder='Password confirmation'
                 type='password'
                 name='confirmPassword'
-                required
               />
             </CustomField>
             <CustomField error={errors.firstName?.message}>
@@ -108,7 +105,6 @@ export function AuthForm({
                 type='text'
                 name='firstName'
                 placeholder='First name'
-                required
               />
             </CustomField>
           </>
