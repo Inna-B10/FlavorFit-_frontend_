@@ -11,6 +11,7 @@ import {
   Sansita,
   Sonsie_One
 } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { SITE_NAME } from '@/shared/constants/seo.constants'
 import './globals.css'
 import { Provider } from './providers/Provider'
@@ -85,7 +86,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${sonsie.variable} ${oleo.variable} ${sansita.variable} ${inter.variable} ${interTight.variable} ${poppins.variable} ${dmMono.variable} flex h-full min-h-screen w-full flex-col gap-8 lg:gap-12 px-3! py-6! antialiased sm:p-6!`}
       >
-        <Provider>{children}</Provider>
+        <Provider>
+          {children}
+          <Analytics />
+        </Provider>
       </body>
     </html>
   )

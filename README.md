@@ -70,6 +70,7 @@ npm i react-hot-toast
 npm i jose
 npm i @marsidev/react-turnstile
 npm i @vercel/blob
+npm i @vercel/analytics
 
 
 # npx shadcn@latest add button
