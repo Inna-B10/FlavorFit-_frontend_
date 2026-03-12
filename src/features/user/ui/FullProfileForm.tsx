@@ -26,6 +26,9 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
     }
   })
 
+  const isTouched = Object.keys(form.formState.touchedFields).length > 0
+  const isValid = form.formState.isValid
+
   const [updateProfile, { loading }] = useMutation(UpdateFullProfileDocument)
 
   const submit = form.handleSubmit(async data => {
@@ -68,13 +71,13 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
           <Button
             variant='accent'
             type='submit'
-            disabled={loading}
+            disabled={loading || form.formState.isSubmitting || !isTouched || !isValid}
           >
             Save changes
           </Button>
         </div>
       </div>
-      <div className='flex flex-col gap-6 md:gap-8 md:flex-row w-full'>
+      <div className='flex flex-col gap-10 md:flex-row w-full'>
         <UserProfileForm form={form} />
         <FitnessProfileForm
           form={form}
@@ -92,7 +95,7 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
         <Button
           variant='accent'
           type='submit'
-          disabled={loading}
+          disabled={loading || form.formState.isSubmitting || !isTouched || !isValid}
           className='w-36'
         >
           Save changes

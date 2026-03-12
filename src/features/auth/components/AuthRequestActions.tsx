@@ -110,16 +110,13 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
       >
         <LogoIcon className='text-white-pale h-full w-auto' />
       </Link>
-
       <h1 className='font-sansita mb-2 text-center text-3xl font-bold italic [word-spacing:0.5rem]'>
         {title}
       </h1>
-
       <p>
         Please enter the email used during registration.
         <br /> If an account exists for this email, we sent link.
       </p>
-
       <Input
         value={email}
         name='email'
@@ -134,18 +131,15 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
         type='email'
         autoComplete='email'
       />
-
       <TurnstileCaptcha
         ref={ref}
         setCaptchaToken={setCaptchaToken}
       />
-
       <div className='h-4!'>
         {showError && (
           <p className='text-destructive text-sm'>Please enter a valid email address.</p>
         )}
       </div>
-
       <AuthActionButton
         isValid={isEmailValid}
         loading={loading}

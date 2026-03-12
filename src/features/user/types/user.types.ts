@@ -1,14 +1,14 @@
-import { ActivityLevel, NutritionGoal } from '@/__generated__/graphql'
+import { ActivityLevel, Gender, NutritionGoal } from '@/__generated__/graphql'
 
 export interface IProfileForm {
   userProfile: {
     fullName?: string | null
     birthYear?: number | null
     bio?: string | null
-    gender?: 'FEMALE' | 'MALE' | null
+    gender?: Gender | null
   }
   fitnessProfile: {
-    currentWeight?: string | null
+    currentWeight?: number | null
     targetWeight?: number | null
     heightCm?: number | null
     armCm?: number | null

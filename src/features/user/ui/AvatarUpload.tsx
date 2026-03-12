@@ -82,9 +82,9 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
   }
 
   return (
-    <div className='w-full flex flex-col gap-6 p-4 lg:p-6 border border-input rounded-xl pb-6'>
-      <h2 className='text-lg font-semibold pl-2'>Avatar</h2>
-      <div className='w-full flex flex-col-reverse gap-2 lg:gap-8 lg:flex-row lg:items-center'>
+    <div className='w-full flex flex-col gap-10 p-4 lg:p-6 border border-input rounded-xl pb-6'>
+      <h2 className='text-lg font-semibold pl-2 -mb-4'>Avatar</h2>
+      <div className='w-full flex flex-col-reverse gap-2 lg:gap-4 lg:flex-row lg:items-center'>
         <Field className='lg:w-1/2'>
           <InputGroup>
             <InputGroupInput
@@ -117,7 +117,7 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
           <span className='text-xs whitespace-nowrap text-nowrap'>Format: .jpg, .png, .webp</span>
         </div>
       </div>
-      <div className='w-full flex flex-col lg:flex-row gap-8'>
+      <div className='w-full flex flex-col lg:flex-row gap-4'>
         <span className='flex flex-col items-center justify-center lg:w-1/2'>
           <div
             className='text-green-dark flex aspect-square h-auto w-full max-w-12 items-center justify-center rounded-full shadow-sm'

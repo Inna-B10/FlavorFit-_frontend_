@@ -160,7 +160,7 @@ export type FitnessProfileModel = {
   currentWeight?: Maybe<Scalars['Decimal']['output']>;
   heightCm?: Maybe<Scalars['Int']['output']>;
   nutritionGoal?: Maybe<NutritionGoal>;
-  targetWeight?: Maybe<Scalars['Int']['output']>;
+  targetWeight?: Maybe<Scalars['Decimal']['output']>;
   thighCm?: Maybe<Scalars['Int']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   waistCm?: Maybe<Scalars['Int']['output']>;
@@ -173,7 +173,7 @@ export type FitnessProfileUpdateInput = {
   currentWeight?: InputMaybe<Scalars['Decimal']['input']>;
   heightCm?: InputMaybe<Scalars['Int']['input']>;
   nutritionGoal?: InputMaybe<NutritionGoal>;
-  targetWeight?: InputMaybe<Scalars['Int']['input']>;
+  targetWeight?: InputMaybe<Scalars['Decimal']['input']>;
   thighCm?: InputMaybe<Scalars['Int']['input']>;
   waistCm?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -858,7 +858,7 @@ export type VerifyEmailMutation = { verifyEmail: { user: { userId: string, email
 export type GetFullProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetFullProfileQuery = { fullProfile: { fitnessProfile?: { activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
+export type GetFullProfileQuery = { fullProfile: { fitnessProfile?: { activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: any | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -870,7 +870,7 @@ export type UpdateFullProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateFullProfileMutation = { updateFullProfile: { fitnessProfile?: { activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: number | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
+export type UpdateFullProfileMutation = { updateFullProfile: { fitnessProfile?: { activityLevel?: ActivityLevel | null, nutritionGoal?: NutritionGoal | null, currentWeight?: any | null, targetWeight?: any | null, armCm?: number | null, chestCm?: number | null, heightCm?: number | null, thighCm?: number | null, waistCm?: number | null, updatedAt: any } | null, userProfile?: { fullName?: string | null, gender?: Gender | null, birthYear?: number | null, bio?: string | null } | null } };
 
 export type UpdateMeMutationVariables = Exact<{
   data: UserUpdateInput;

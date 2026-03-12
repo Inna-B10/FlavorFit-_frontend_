@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import { Weight } from 'lucide-react'
 import { Controller, UseFormReturn } from 'react-hook-form'
+import { optionalNumberValidation } from '@/features/auth/utils/is-valid-check'
+import { CustomField } from '@/shared/components/ui-custom/CustomField'
 import { ActivityIcon } from '@/shared/components/ui-custom/icons-svg/ActivityIcon'
 import { HeightIcon } from '@/shared/components/ui-custom/icons-svg/HeightIcon'
 import { NutritionGoalIcon } from '@/shared/components/ui-custom/icons-svg/NutritionGoalIcon'
 import { RulerIcon } from '@/shared/components/ui-custom/icons-svg/RulerIcon'
-import { CustomLabel, Field, FieldError } from '@/shared/components/ui/field'
+import { CustomLabel, Field } from '@/shared/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/shared/components/ui/input-group'
 import {
   Select,
@@ -45,215 +47,213 @@ export function FitnessProfileForm({
           height={600}
           className='hidden lg:block'
         />
-        <div className='flex flex-col gap-8 w-full'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-8'>
+        <div className='flex flex-col gap-4 w-full'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-4'>
             {updatedAt && (
               <span className='text-sm lg:text-end'>
                 Last updated at: <br />
                 {updatedAt}
               </span>
             )}
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.heightCm', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <HeightIcon />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='heightCm'
-                className='floating-label'
+            <CustomField error={errors?.fitnessProfile?.heightCm?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
               >
-                Height <span className='text-xs'>[cm]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.heightCm?.message}</FieldError>
-            </Field>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.currentWeight', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <Weight size={16} />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='currentWeight'
-                className='floating-label'
-              >
-                Current weight <span className='text-xs'>[kg]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.currentWeight?.message}</FieldError>
-            </Field>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.targetWeight', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <Weight size={16} />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='targetWeight'
-                className='floating-label'
-              >
-                Target weight <span className='text-xs'>[kg]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.targetWeight?.message}</FieldError>
-            </Field>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.armCm', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <RulerIcon />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='armCm'
-                className='floating-label'
-              >
-                Arm <span className='text-xs'>[cm]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.armCm?.message}</FieldError>
-            </Field>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.chestCm', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon
-                  align='inline-start'
-                  className='text-xs whitespace-nowrap'
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    {...register(
+                      'fitnessProfile.heightCm',
+                      optionalNumberValidation({ min: 100, max: 250, label: 'Height' })
+                    )}
+                  />
+                  <InputGroupAddon align='inline-start'>
+                    <HeightIcon />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='heightCm'
+                  className='floating-label'
                 >
-                  <RulerIcon />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='chestCm'
-                className='floating-label'
+                  Height <span className='text-xs'>[cm]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
+            <CustomField error={errors?.fitnessProfile?.currentWeight?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
               >
-                Chest <span className='text-xs'>[cm]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.chestCm?.message}</FieldError>
-            </Field>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.waistCm', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <RulerIcon />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='waistCm'
-                className='floating-label'
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    step='0.1'
+                    {...register(
+                      'fitnessProfile.currentWeight',
+                      optionalNumberValidation({
+                        min: 30,
+                        max: 300,
+                        integer: false,
+                        label: 'Current weight'
+                      })
+                    )}
+                  />
+                  <InputGroupAddon align='inline-start'>
+                    <Weight size={16} />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='currentWeight'
+                  className='floating-label'
+                >
+                  Current weight <span className='text-xs'>[kg]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
+            <CustomField error={errors?.fitnessProfile?.targetWeight?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
               >
-                Waist <span className='text-xs'>[cm]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.waistCm?.message}</FieldError>
-            </Field>
-            <Field
-              className='group relative'
-              orientation='horizontal'
-            >
-              <InputGroup>
-                <InputGroupInput
-                  placeholder=' '
-                  type='number'
-                  {...register('fitnessProfile.thighCm', {
-                    setValueAs: v => {
-                      if (v === '' || v === null || v === undefined) return null
-                      const n = Number(v)
-                      return Number.isNaN(n) ? null : n
-                    }
-                  })}
-                />
-                <InputGroupAddon align='inline-start'>
-                  <RulerIcon />
-                </InputGroupAddon>
-              </InputGroup>
-              <CustomLabel
-                htmlFor='thighCm'
-                className='floating-label'
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    step='0.1'
+                    {...register(
+                      'fitnessProfile.targetWeight',
+                      optionalNumberValidation({
+                        min: 30,
+                        max: 300,
+                        integer: false,
+                        label: 'Target weight'
+                      })
+                    )}
+                  />
+                  <InputGroupAddon align='inline-start'>
+                    <Weight size={16} />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='targetWeight'
+                  className='floating-label'
+                >
+                  Target weight <span className='text-xs'>[kg]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
+            <CustomField error={errors?.fitnessProfile?.armCm?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
               >
-                Thigh <span className='text-xs'>[cm]</span>:
-              </CustomLabel>
-              <FieldError>{errors?.fitnessProfile?.thighCm?.message}</FieldError>
-            </Field>
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    {...register(
+                      'fitnessProfile.armCm',
+                      optionalNumberValidation({ min: 1, label: 'Arm circumference' })
+                    )}
+                  />
+                  <InputGroupAddon align='inline-start'>
+                    <RulerIcon />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='armCm'
+                  className='floating-label'
+                >
+                  Arm <span className='text-xs'>[cm]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
+            <CustomField error={errors?.fitnessProfile?.chestCm?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
+              >
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    {...register(
+                      'fitnessProfile.chestCm',
+                      optionalNumberValidation({ min: 1, label: 'Chest circumference' })
+                    )}
+                  />
+                  <InputGroupAddon
+                    align='inline-start'
+                    className='text-xs whitespace-nowrap'
+                  >
+                    <RulerIcon />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='chestCm'
+                  className='floating-label'
+                >
+                  Chest <span className='text-xs'>[cm]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
+            <CustomField error={errors?.fitnessProfile?.waistCm?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
+              >
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    {...register(
+                      'fitnessProfile.waistCm',
+                      optionalNumberValidation({ min: 1, label: 'Waist circumference' })
+                    )}
+                  />
+                  <InputGroupAddon align='inline-start'>
+                    <RulerIcon />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='waistCm'
+                  className='floating-label'
+                >
+                  Waist <span className='text-xs'>[cm]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
+            <CustomField error={errors?.fitnessProfile?.thighCm?.message}>
+              <Field
+                className='group relative'
+                orientation='horizontal'
+              >
+                <InputGroup>
+                  <InputGroupInput
+                    placeholder=' '
+                    type='number'
+                    {...register(
+                      'fitnessProfile.thighCm',
+                      optionalNumberValidation({ min: 1, label: 'Thigh circumference' })
+                    )}
+                  />
+                  <InputGroupAddon align='inline-start'>
+                    <RulerIcon />
+                  </InputGroupAddon>
+                </InputGroup>
+                <CustomLabel
+                  htmlFor='thighCm'
+                  className='floating-label'
+                >
+                  Thigh <span className='text-xs'>[cm]</span>:
+                </CustomLabel>
+              </Field>
+            </CustomField>
           </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-4 2xl:gap-x-6'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-4 2xl:gap-x-6'>
             <Field>
               <Controller
                 control={form.control}
@@ -286,7 +286,6 @@ export function FitnessProfileForm({
                   </Select>
                 )}
               />
-              <FieldError>{errors?.fitnessProfile?.activityLevel?.message}</FieldError>
             </Field>
             <Field>
               <Controller
@@ -320,7 +319,6 @@ export function FitnessProfileForm({
                   </Select>
                 )}
               />
-              <FieldError>{errors?.fitnessProfile?.nutritionGoal?.message}</FieldError>
             </Field>
           </div>
         </div>

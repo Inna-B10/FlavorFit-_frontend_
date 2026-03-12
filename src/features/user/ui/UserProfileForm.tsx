@@ -1,8 +1,10 @@
 import { BookUser, CalendarFold, IdCard, VenusAndMars } from 'lucide-react'
 import { Controller, UseFormReturn } from 'react-hook-form'
+import { optionalNumberValidation } from '@/features/auth/utils/is-valid-check'
+import { CustomField } from '@/shared/components/ui-custom/CustomField'
 import { DressIcon } from '@/shared/components/ui-custom/icons-svg/DressIcon'
 import { SuitIcon } from '@/shared/components/ui-custom/icons-svg/SuitIcon'
-import { CustomLabel, Field, FieldError } from '@/shared/components/ui/field'
+import { CustomLabel, Field } from '@/shared/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -36,33 +38,8 @@ export function UserProfileForm({
   return (
     <div className='space-y-8 rounded-xl border p-4 lg:p-6 lg:w-[40%] md:w-1/2 w-full'>
       <h2 className='text-lg font-semibold'>General information</h2>
-      <div className='space-y-8'>
-        <Field
-          className='group relative'
-          orientation='horizontal'
-        >
-          <InputGroup>
-            <InputGroupInput
-              placeholder=' '
-              type='text'
-              {...register('userProfile.fullName', {
-                setValueAs: value => (value?.trim() === '' ? null : value?.trim())
-              })}
-            />
-            <InputGroupAddon align='inline-start'>
-              <IdCard size={16} />
-            </InputGroupAddon>
-          </InputGroup>
-          <CustomLabel
-            htmlFor='fullName'
-            className='floating-label'
-          >
-            Full Name:
-          </CustomLabel>
-          <FieldError>{errors?.userProfile?.fullName?.message}</FieldError>
-        </Field>
-
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-4 md:grid-cols-1 md:gap-8'>
+      <div className='space-y-4'>
+        <CustomField error={errors?.userProfile?.fullName?.message}>
           <Field
             className='group relative'
             orientation='horizontal'
@@ -70,27 +47,51 @@ export function UserProfileForm({
             <InputGroup>
               <InputGroupInput
                 placeholder=' '
-                type='number'
-                {...register('userProfile.birthYear', {
-                  setValueAs: v => {
-                    if (v === '' || v === null || v === undefined) return null
-                    const n = Number(v)
-                    return Number.isNaN(n) ? null : n
-                  }
+                type='text'
+                {...register('userProfile.fullName', {
+                  setValueAs: value => (value?.trim() === '' ? null : value?.trim())
                 })}
               />
               <InputGroupAddon align='inline-start'>
-                <CalendarFold size={16} />
+                <IdCard size={16} />
               </InputGroupAddon>
             </InputGroup>
             <CustomLabel
-              htmlFor='birthYear'
+              htmlFor='fullName'
               className='floating-label'
             >
-              Birth Year:
+              Full Name:
             </CustomLabel>
-            <FieldError>{errors?.userProfile?.birthYear?.message}</FieldError>
           </Field>
+        </CustomField>
+
+        <div className='grid grid-cols-1 gap-4 mb-10 sm:grid-cols-2 sm:mb-4 md:grid-cols-1 md:mb-10'>
+          <CustomField error={errors?.userProfile?.birthYear?.message}>
+            <Field
+              className='group relative'
+              orientation='horizontal'
+            >
+              <InputGroup>
+                <InputGroupInput
+                  placeholder=' '
+                  type='number'
+                  {...register(
+                    'userProfile.birthYear',
+                    optionalNumberValidation({ min: 1900, max: 2023, label: 'Birth year' })
+                  )}
+                />
+                <InputGroupAddon align='inline-start'>
+                  <CalendarFold size={16} />
+                </InputGroupAddon>
+              </InputGroup>
+              <CustomLabel
+                htmlFor='birthYear'
+                className='floating-label'
+              >
+                Birth Year:
+              </CustomLabel>
+            </Field>
+          </CustomField>
           <Field>
             <Controller
               control={form.control}
@@ -144,7 +145,6 @@ export function UserProfileForm({
                 </Select>
               )}
             />
-            <FieldError>{errors?.userProfile?.gender?.message}</FieldError>
           </Field>
         </div>
         <Field>
@@ -164,7 +164,6 @@ export function UserProfileForm({
               </InputGroupAddon>
             </InputGroup>
           </label>
-          <FieldError>{errors?.userProfile?.bio?.message}</FieldError>
         </Field>
       </div>
     </div>
