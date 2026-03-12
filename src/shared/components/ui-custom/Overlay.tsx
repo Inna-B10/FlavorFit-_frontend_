@@ -1,4 +1,4 @@
-export function Overlay({ children }: { children: React.ReactNode }) {
+export function Overlay({ children }: { children?: React.ReactNode }) {
   return (
     <div className='fixed inset-0 z-50 grid place-items-center bg-white/30 backdrop-blur-md'>
       <div className='bg-white-pale flex min-h-60 w-[90%] max-w-sm flex-col items-center justify-center gap-4 rounded-2xl p-6 shadow-lg ring-1 ring-white/15'>

@@ -22,7 +22,7 @@ export function UserAvatar({ firstName, avatarUrl, className }: Props) {
           alt={firstName ?? 'User avatar'}
           width={40}
           height={40}
-          className='object-contain rounded-full'
+          className='object-cover rounded-full'
         />
       ) : (
         <DefaultAvatar className='size-7' />

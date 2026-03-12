@@ -100,7 +100,7 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
                   void handleUpload(file)
                 }
               }}
-              className='cursor-pointer place-content-center mt-3 md:mt-2'
+              className='cursor-pointer place-content-center'
             />
             <InputGroupAddon
               align='inline-start'

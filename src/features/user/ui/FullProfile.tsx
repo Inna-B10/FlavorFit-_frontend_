@@ -12,33 +12,13 @@ export function FullProfile() {
   const { user, isLoading } = useAuth()
 
   if (loading || !data?.fullProfile || isLoading || !user)
-    //[TODO] style skeleton
-    // if (true)
     return (
-      <div>
-        <div className='flex items-center justify-between mb-6'>
-          <SkeletonLoader
-            count={1}
-            className='w-xs'
-          />
-          <div className='flex items-center gap-2'>
+      <div className='flex grow'>
+        <div className='flex grow'>
+          <div className='w-full'>
             <SkeletonLoader
-              count={2}
-              className='w-32 mb-0'
-            />
-          </div>
-        </div>
-        <div className='grid grid-cols-2 gap-8'>
-          <div>
-            <SkeletonLoader
-              count={4}
-              className='mb-4'
-            />
-          </div>
-          <div>
-            <SkeletonLoader
-              count={6}
-              className='mb-4'
+              count={1}
+              className='h-full'
             />
           </div>
         </div>
@@ -46,7 +26,7 @@ export function FullProfile() {
     )
 
   return (
-    <div className='flex gap-6'>
+    <div className='flex gap-6 grow'>
       <UserSidebar user={user} />
       <div className='bg-white-pale rounded-2xl w-full p-6'>
         <FullProfileForm data={data} />

@@ -110,11 +110,9 @@ progress visualization and adaptive recommendations
 - [ ] page recipes (home):
 - [ ] DELETE src\app\api\media-upload\avatar\route.ts
 - [ ] **page profile:**
-  - [ ] skeleton
   - [ ] ? submit/cancel buttons as component
 - [ ] **page account:**
   - [ ] ? change password
-  - [ ] skeleton
 - [ ] page orders:
 - [ ] page singel order:
 - [ ] shopping list:
@@ -124,12 +122,14 @@ progress visualization and adaptive recommendations
 <summary><h4 style="display:inline; padding-left:6px;">✅ Done</h4></summary>
 
 - [x] **page account:**
-  - [x] upload avatar + [preview] + refresh
+  - [x] skeleton
+  - [x] upload avatar + [preview] + refresh cache
   - [x] reset(delete) avatar
   - [x] change firstName
   - [x] icons + labels
   - [x] sidebar
 - [x] **page profile:**
+  - [x] skeleton
   - [x] user form
   - [x] fitness form
   - [x] icons
