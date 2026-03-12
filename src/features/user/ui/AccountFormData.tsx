@@ -48,7 +48,9 @@ export function AccountFormData({
             </CustomLabel>
           </Field>
         </CustomField>
-        <CustomField error={errors?.newPassword?.message}>
+        <CustomField
+        // error={errors?.newPassword?.message}
+        >
           <Field
             className='group relative'
             orientation='horizontal'
@@ -73,7 +75,9 @@ export function AccountFormData({
             </CustomLabel>
           </Field>
         </CustomField>
-        <CustomField error={errors?.confirmPassword?.message}>
+        <CustomField
+        // error={errors?.confirmPassword?.message}
+        >
           <Field
             className='group relative'
             orientation='horizontal'
