@@ -102,6 +102,7 @@ export function ResetPasswordClient() {
         <Input
           value={newPassword}
           name='password'
+          type='password'
           onChange={e => (setNewPassword(e.target.value), setTouched(true))}
           onKeyDown={e => {
             if (e.key === 'Enter') {
@@ -110,7 +111,6 @@ export function ResetPasswordClient() {
             }
           }}
           placeholder='Enter your new password'
-          type='text'
         />
         <p className='w-[95%] text-sm'>
           Please note that your new password must meet the following requirements:

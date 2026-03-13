@@ -16,6 +16,7 @@ import {
   SelectTrigger
 } from '@/shared/components/ui/select'
 import { enumToSelectOptions, enumValueToLabel } from '@/shared/utils/enum-to-options'
+import { cn } from '@/shared/utils/utils'
 import { ActivityLevel, NutritionGoal } from '@/__generated__/graphql'
 import { IProfileForm } from '../types/user.types'
 
@@ -44,7 +45,7 @@ export function FitnessProfileForm({
           alt='auth-background'
           width={200}
           height={600}
-          className='hidden lg:block'
+          className={cn('hidden lg:block', gender === 'FEMALE' && 'pl-3')}
         />
         <div className='flex flex-col gap-4 w-full'>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-4'>
