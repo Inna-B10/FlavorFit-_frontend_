@@ -226,8 +226,8 @@ export type Mutation = {
   removeAllCartItems: CartModel;
   removeCartItem: CartModel;
   removeRecipeFromShoppingList: ShoppingListModel;
-  requestPasswordReset: Scalars['Boolean']['output'];
-  requestVerificationEmail: Scalars['Boolean']['output'];
+  requestPasswordReset?: Maybe<Scalars['String']['output']>;
+  requestVerificationEmail?: Maybe<Scalars['String']['output']>;
   resetPassword: Scalars['Boolean']['output'];
   toggleLike: ToggleLikeResponse;
   updateAvatar: UserModel;
@@ -821,14 +821,14 @@ export type RequestPasswordResetMutationVariables = Exact<{
 }>;
 
 
-export type RequestPasswordResetMutation = { requestPasswordReset: boolean };
+export type RequestPasswordResetMutation = { requestPasswordReset?: string | null };
 
 export type RequestVerificationEmailMutationVariables = Exact<{
   data: RequestEmailActionsInput;
 }>;
 
 
-export type RequestVerificationEmailMutation = { requestVerificationEmail: boolean };
+export type RequestVerificationEmailMutation = { requestVerificationEmail?: string | null };
 
 export type ResetPasswordMutationVariables = Exact<{
   data: ResetPasswordInput;

@@ -13,6 +13,7 @@ import {
 } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SITE_NAME } from '@/shared/constants/seo.constants'
+import { isDev } from '@/shared/utils/isDev'
 import './globals.css'
 import { Provider } from './providers/Provider'
 
@@ -88,7 +89,7 @@ export default function RootLayout({
       >
         <Provider>
           {children}
-          <Analytics />
+          {!isDev && <Analytics />}
         </Provider>
       </body>
     </html>

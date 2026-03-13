@@ -68,8 +68,26 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
       )
 
       if (result.data?.requestVerificationEmail) {
-        router.replace(AUTH_PAGES.LOGIN)
+        //NB![DEV]
+        if (result?.data?.requestVerificationEmail) {
+          console.log(
+            '%c🔐 Verification link:',
+            'font-weight:bold;background:#B2D480;font-size:14px',
+            result?.data?.requestVerificationEmail
+          )
+          toast.custom(
+            t => (
+              <div className='bg-white-pale p-6 rounded-xl border-2 border-destructive'>
+                <div className='text-destructive'>
+                  The site is a demo, see the console for the link.
+                </div>
+              </div>
+            ),
+            { duration: 8000 }
+          )
+        }
       }
+      router.replace(AUTH_PAGES.LOGIN)
 
       return
     }
@@ -95,6 +113,24 @@ export default function AuthRequestActions({ mode }: { mode: Mode }) {
     )
 
     if (result.data?.requestPasswordReset) {
+      //NB![DEV]
+      if (result?.data?.requestPasswordReset) {
+        console.log(
+          '%c🔐 Reset password link:',
+          'font-weight:bold;background:#B2D480;font-size:14px',
+          result?.data?.requestPasswordReset
+        )
+        toast.custom(
+          t => (
+            <div className='bg-white-pale p-6 rounded-xl border border-destructive'>
+              <div className='text-destructive'>
+                The site is a demo, see the console for the link.
+              </div>
+            </div>
+          ),
+          { duration: 8000 }
+        )
+      }
       router.replace(AUTH_PAGES.LOGIN)
     }
     ref.current?.reset()

@@ -41,11 +41,23 @@ export function RegistrationData() {
 
     setUser(result.data?.register?.user)
 
+    //NB![DEV]
+    const verificationLink = `${window.location.origin}/auth/verify-email?token=${result.data?.register?.user?.verificationToken}`
+    console.log(
+      '%c🔐 Verification link: ',
+      'font-weight:bold;background:#B2D480;font-size:14px',
+      verificationLink
+    )
+
     setLoading(false)
 
     if (!user) {
       if (result.errorMessage) {
-        setServerMessage(result.errorMessage)
+        setServerMessage(
+          result.errorMessage.includes('Mailgun error')
+            ? 'Could not send email'
+            : result.errorMessage
+        )
       }
       ref.current?.reset()
       return
@@ -88,6 +100,8 @@ export function RegistrationData() {
                 Click here!
               </Link>
             </p>
+            {/* //NB![DEV] */}
+            <p className='text-destructive'>The site is a demo, see the console for the link.</p>
           </div>
         </>
       ) : (
