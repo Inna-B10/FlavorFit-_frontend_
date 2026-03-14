@@ -31,6 +31,7 @@ export function ChangePasswordForm() {
 
     const timeoutId = window.setTimeout(async () => {
       await authService.logout()
+      router.refresh()
       router.replace(AUTH_PAGES.LOGIN)
     }, 5000)
 
