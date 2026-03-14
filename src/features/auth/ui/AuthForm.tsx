@@ -73,6 +73,8 @@ export function AuthForm({
           <Input
             {...register('password', {
               required: 'Password is required',
+              // validate: value => isValidPassword(value) ||
+              // 'Password must be at least 8 characters, one lowercase, one uppercase, one digit and at least one special character !@#$%^&*',
               minLength: {
                 value: 6,
                 message: 'Password must be at least 6 characters'

@@ -82,43 +82,26 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
   }
 
   return (
-    <div className='w-full flex flex-col gap-10 p-4 lg:p-6 border border-input rounded-xl pb-6'>
-      <h2 className='text-lg font-semibold pl-2 -mb-4'>Avatar</h2>
-      <div className='w-full flex flex-col-reverse gap-2 lg:gap-4 lg:flex-row lg:items-center'>
-        <Field className='lg:w-1/2'>
-          <InputGroup>
-            <InputGroupInput
-              id='avatar'
-              type='file'
-              accept='image/jpeg,image/png,image/webp'
-              ref={ref}
-              disabled={isUploading || isDeleting}
-              onChange={event => {
-                const file = event.target.files?.[0]
-
-                if (file) {
-                  void handleUpload(file)
-                }
-              }}
-              className='cursor-pointer place-content-center'
-            />
-            <InputGroupAddon
-              align='inline-start'
-              className='cursor-pointer'
-              onClick={() => ref.current?.click()}
-            >
-              <ImagePlus size={16} />
-              File:
-            </InputGroupAddon>
-          </InputGroup>
-        </Field>
-        <div className='flex flex-col ml-2 lg:ml-0 lg:w-1/2'>
+    <div className='w-full flex flex-col gap-8 p-4 lg:p-6 border border-input rounded-xl'>
+      <div className='w-full flex justify-between items-center gap-4'>
+        <h2 className='text-lg font-semibold pl-1'>Avatar</h2>
+        <Button
+          type='button'
+          onClick={handleDelete}
+          disabled={!avatarUrl || isUploading || isDeleting}
+          variant='destructive'
+          size='xs'
+          className='bg-destructive/60 rounded-2xl px-3'
+        >
+          Delete
+        </Button>
+      </div>
+      <div className='w-full flex items-center justify-between gap-4'>
+        <div className='flex flex-col ml-1 lg:ml-0'>
           <span className='text-xs whitespace-nowrap text-nowrap'>Size: max 2MB</span>
           <span className='text-xs whitespace-nowrap text-nowrap'>Format: .jpg, .png, .webp</span>
         </div>
-      </div>
-      <div className='w-full flex flex-col lg:flex-row gap-4'>
-        <span className='flex flex-col items-center justify-center lg:w-1/2'>
+        <span className='min-w-12'>
           <div
             className='text-green-dark flex aspect-square h-auto w-full max-w-12 items-center justify-center rounded-full shadow-sm'
             onClick={() => ref.current?.click()}
@@ -129,20 +112,34 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
             />
           </div>
         </span>
-        <span className='flex flex-col gap-3 text-xs lg:w-1/2 justify-center items-center lg:items-start'>
-          <span>To reset avatar to default, click delete</span>
-          <Button
-            type='button'
-            onClick={handleDelete}
-            disabled={!avatarUrl || isUploading || isDeleting}
-            variant='destructive'
-            size='xs'
-            className='bg-destructive/60 rounded-2xl'
-          >
-            Delete
-          </Button>
-        </span>
       </div>
+      <Field className='pb-6'>
+        <InputGroup>
+          <InputGroupInput
+            id='avatar'
+            type='file'
+            accept='image/jpeg,image/png,image/webp'
+            ref={ref}
+            disabled={isUploading || isDeleting}
+            onChange={event => {
+              const file = event.target.files?.[0]
+
+              if (file) {
+                void handleUpload(file)
+              }
+            }}
+            className='cursor-pointer place-content-center'
+          />
+          <InputGroupAddon
+            align='inline-start'
+            className='cursor-pointer'
+            onClick={() => ref.current?.click()}
+          >
+            <ImagePlus size={16} />
+            File:
+          </InputGroupAddon>
+        </InputGroup>
+      </Field>
     </div>
   )
 }

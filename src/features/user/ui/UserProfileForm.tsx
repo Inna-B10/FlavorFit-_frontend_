@@ -39,7 +39,7 @@ export function UserProfileForm({
   return (
     <div className='space-y-8 rounded-xl border p-4 lg:p-6 lg:w-[40%] md:w-1/2 w-full'>
       <h2 className='text-lg font-semibold'>General information</h2>
-      <div className='space-y-4'>
+      <div className='space-y-4 mb-6'>
         <CustomField error={errors?.userProfile?.fullName?.message}>
           <Field
             className='group relative'

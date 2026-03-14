@@ -37,17 +37,17 @@ export function FitnessProfileForm({
   const activityLevelOptions = enumToSelectOptions(ActivityLevel)
 
   return (
-    <div className='rounded-xl border p-4 pb-8 lg:p-6 lg:pb-8 lg:pl-0 flex flex-col gap-6 lg:w-[70%] md:w-1/2 w-full'>
-      <h2 className='text-lg font-semibold pl-1 lg:pl-6'>Fitness Profile</h2>
-      <div className='flex gap-2'>
+    <div className='rounded-xl border p-4 pb-10 lg:p-6 lg:pb-10 lg:pl-0 flex gap-6 lg:w-[60%] md:w-1/2 w-full'>
+      <div className='flex gap-6 w-full items-start'>
         <Image
           src={gender === 'MALE' ? '/bg-images/male.svg' : '/bg-images/female.svg'}
           alt='auth-background'
           width={200}
           height={600}
-          className={cn('hidden lg:block', gender === 'FEMALE' && 'pl-3')}
+          className={cn('hidden lg:block', gender === 'FEMALE' ? 'pl-5' : 'pl-2')}
         />
         <div className='flex flex-col gap-4 w-full'>
+          <h2 className='text-lg font-semibold'>Fitness Profile</h2>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-4'>
             {updatedAt && (
               <span className='text-sm lg:text-end'>

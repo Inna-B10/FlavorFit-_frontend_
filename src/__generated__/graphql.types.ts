@@ -63,6 +63,11 @@ export type CartModel = {
   updatedAt: Scalars['DateTime']['output'];
 };
 
+export type ChangePasswordInput = {
+  currentPassword: Scalars['String']['input'];
+  newPassword: Scalars['String']['input'];
+};
+
 export type CommentModel = {
   commentId: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
@@ -207,6 +212,7 @@ export type LoginInput = {
 export type Mutation = {
   addManyItemsToCartInput: CartModel;
   addOneItemToCart: CartModel;
+  changePassword: UserModel;
   createComment: CommentModel;
   createOrder: OrderModel;
   createProduct: ProductModel;
@@ -249,6 +255,11 @@ export type MutationAddManyItemsToCartInputArgs = {
 
 export type MutationAddOneItemToCartArgs = {
   input: AddOneItemToCartInput;
+};
+
+
+export type MutationChangePasswordArgs = {
+  data: ChangePasswordInput;
 };
 
 
@@ -850,6 +861,13 @@ export type VerifyEmailMutationVariables = Exact<{
 
 
 export type VerifyEmailMutation = { verifyEmail: { user: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, verificationToken?: string | null } } };
+
+export type ChangePasswordMutationVariables = Exact<{
+  data: ChangePasswordInput;
+}>;
+
+
+export type ChangePasswordMutation = { changePassword: { userId: string, email: string, firstName: string, role: Role, avatarUrl?: string | null, avatarBlobPath?: string | null, verificationToken?: string | null } };
 
 export type GetFullProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
