@@ -65,7 +65,9 @@ export function ChangePasswordFormData({
             Save
           </Button>
         </div>
-        <p className='pl-2 col-span-2'>After successful password change, you will be logged out</p>
+        <p className='pl-2 col-span-2 text-sm'>
+          After successful password change, you will be logged out
+        </p>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-6 gap-y-4 place-content-center'>
           <CustomField error={errors?.currentPassword?.message}>
             <Field

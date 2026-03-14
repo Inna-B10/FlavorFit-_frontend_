@@ -77,7 +77,7 @@ export function FullProfileForm({ data }: { data: GetFullProfileQuery }) {
           </Button>
         </div>
       </div>
-      <div className='flex flex-col gap-10 md:flex-row w-full'>
+      <div className='flex flex-col gap-6 xl:gap-8 md:flex-row w-full'>
         <UserProfileForm form={form} />
         <FitnessProfileForm
           form={form}

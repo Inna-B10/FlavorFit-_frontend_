@@ -50,10 +50,10 @@ export function FitnessProfileForm({
           <h2 className='text-lg font-semibold'>Fitness Profile</h2>
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-4 2xl:gap-x-6 gap-y-4'>
             {updatedAt && (
-              <span className='text-sm lg:text-end'>
-                Last updated at: <br />
-                {updatedAt}
-              </span>
+              <div className='flex gap-2 justify-between text-xs lg:text-end my-3'>
+                <span>Last updated at: </span>
+                <span>{updatedAt}</span>
+              </div>
             )}
             <CustomFieldNumber
               label='Height'
@@ -138,7 +138,7 @@ export function FitnessProfileForm({
               error={errors?.fitnessProfile?.thighCm?.message}
             />
           </div>
-          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-4 2xl:gap-x-6'>
+          <div className='grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-4 md:grid-cols-1 md:gap-10 2xl:grid-cols-2 2xl:gap-x-6'>
             <Field>
               <Controller
                 control={form.control}
