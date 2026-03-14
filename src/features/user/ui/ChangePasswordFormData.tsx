@@ -11,11 +11,13 @@ import { IChangePasswordForm } from '../types/user.types'
 export function ChangePasswordFormData({
   form,
   loading,
-  serverError
+  serverError,
+  setServerError
 }: {
   form: UseFormReturn<IChangePasswordForm, unknown, IChangePasswordForm>
   loading: boolean
   serverError?: string | null
+  setServerError: (error: string | null) => void
 }) {
   const {
     register,
@@ -63,7 +65,8 @@ export function ChangePasswordFormData({
             Save
           </Button>
         </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-6 gap-y-4 place-items-center'>
+        <p className='pl-2 col-span-2'>After successful password change, you will be logged out</p>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 2xl:grid-cols-2 gap-x-6 gap-y-4 place-content-center'>
           <CustomField error={errors?.currentPassword?.message}>
             <Field
               className='group relative'
@@ -74,6 +77,7 @@ export function ChangePasswordFormData({
                   type='password'
                   placeholder=' '
                   {...register('currentPassword', {
+                    onChange: () => setServerError(null),
                     required: 'Current password is required',
                     setValueAs: value => (value?.trim() === '' ? null : value?.trim()),
                     minLength: {
@@ -162,8 +166,8 @@ export function ChangePasswordFormData({
               </CustomLabel>
             </Field>
           </CustomField>
-          {serverError && <div className='text-destructive pl-3 text-xs'>{serverError}</div>}
         </div>
+        {serverError && <div className='text-destructive pl-2 text-xs -my-6'>{serverError}</div>}
       </div>
     </>
   )
