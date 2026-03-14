@@ -22,6 +22,10 @@ export interface IProfileForm {
 
 export interface IAccountForm {
   firstName?: string
-  //   password?: string
-  //   confirmPassword?: string
+}
+
+export interface IChangePasswordForm {
+  currentPassword: string
+  newPassword: string
+  confirmPassword: string
 }
