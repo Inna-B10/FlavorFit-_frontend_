@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@apollo/client/react'
 import { useForm } from 'react-hook-form'
@@ -26,8 +26,22 @@ export function ChangePasswordForm() {
 
   const [changePassword, { loading }] = useMutation(ChangePasswordDocument)
 
+  useEffect(() => {
+    if (!showLogoutOverlay) return
+
+    const timeoutId = window.setTimeout(async () => {
+      await authService.logout()
+      router.replace(AUTH_PAGES.LOGIN)
+    }, 5000)
+
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [showLogoutOverlay, router])
+
   const submit = form.handleSubmit(async data => {
     const { confirmPassword, ...rest } = data
+
     const result = await mutateWithToast(
       () =>
         changePassword({
@@ -45,16 +59,13 @@ export function ChangePasswordForm() {
 
     if (result?.data?.changePassword) {
       setShowLogoutOverlay(true)
-
-      setTimeout(async () => {
-        await authService.logout()
-        router.replace(AUTH_PAGES.LOGIN)
-      }, 5000)
+      form.reset()
+      return
     }
+
     if (result?.errorMessage) {
       setServerError(result?.errorMessage)
     }
-    form.reset()
   })
 
   return (
