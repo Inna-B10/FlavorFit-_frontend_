@@ -50,6 +50,7 @@ export function ChangePasswordFormData({
         alt='auth-background'
         width={200}
         height={600}
+        draggable={false}
         className={'hidden lg:block'}
       />
       <div className='flex flex-col gap-10 w-full'>

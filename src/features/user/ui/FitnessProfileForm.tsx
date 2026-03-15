@@ -44,6 +44,7 @@ export function FitnessProfileForm({
           alt='auth-background'
           width={200}
           height={600}
+          draggable={false}
           className={cn('hidden lg:block', gender === 'FEMALE' ? 'pl-5' : 'pl-2')}
         />
         <div className='flex flex-col gap-4 w-full'>
