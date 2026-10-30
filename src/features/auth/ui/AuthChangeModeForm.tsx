@@ -4,7 +4,7 @@ import { AUTH_PAGES } from '@/shared/config/pages.config'
 export function AuthChangeModeForm({ isLogin }: { isLogin: boolean }) {
   const link = isLogin ? AUTH_PAGES.REGISTRATION : AUTH_PAGES.LOGIN
   const linkText = isLogin ? 'Sign up' : 'Sign in'
-  const label = isLogin ? 'Already have an account?' : "Don't have an account?"
+  const label = isLogin ? "Don't have an account?" : 'Already have an account?'
 
   return (
     <>

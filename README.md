@@ -107,6 +107,14 @@ progress visualization and adaptive recommendations
 
 ### 📋 TODOs:
 
+- [ ] вынести страницы из USER_MENU в подпапку и если на странице /user/подпапка/... удалить клик на
+      иконке пользователя в меню
+- [ ] целесообразность полей имя и полное имя и их обязательность?
+- [ ] в Fitness Profile при фокусе на инпуте, соответствующая красная линия на силуэте
+- [ ] где показывает возраст?
+- [ ] удалить аккаунт
+- [ ] показать почту с какой регистрировались
+
 - [ ] navbar menu responsiveness
 - [ ] page recipes (home):
 - [ ] DELETE src\app\api\media-upload\avatar\route.ts

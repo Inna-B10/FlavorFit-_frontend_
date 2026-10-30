@@ -19,6 +19,7 @@ import {
   SelectItem,
   SelectTrigger
 } from '@/shared/components/ui/select'
+import { birthYearLimits, birthYearRange } from '@/shared/utils/birth-year-limits'
 import { enumToSelectOptions, enumValueToLabel } from '@/shared/utils/enum-to-options'
 import { cn } from '@/shared/utils/utils'
 import { Gender } from '@/__generated__/graphql'
@@ -74,9 +75,18 @@ export function UserProfileForm({
             isYear={true}
             registration={register(
               'userProfile.birthYear',
-              optionalNumberValidation({ min: 1900, max: 2023, label: 'Birth year' })
+              optionalNumberValidation({
+                min: birthYearLimits.min,
+                max: birthYearLimits.max,
+                label: 'Birth year'
+              })
             )}
-            error={errors?.userProfile?.birthYear?.message}
+            error={
+              errors?.userProfile?.birthYear?.message &&
+              errors?.userProfile?.birthYear?.message.includes('must be at')
+                ? 'Birth year: must be between ' + birthYearRange
+                : errors?.userProfile?.birthYear?.message
+            }
           />
           <Field>
             <Controller

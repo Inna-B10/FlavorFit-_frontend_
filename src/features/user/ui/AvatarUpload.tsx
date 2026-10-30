@@ -99,7 +99,9 @@ export function AvatarUpload({ avatarUrl }: { avatarUrl?: string }) {
       <div className='w-full flex items-center justify-between gap-4'>
         <div className='flex flex-col ml-1 lg:ml-0'>
           <span className='text-xs whitespace-nowrap text-nowrap'>Size: max 2MB</span>
-          <span className='text-xs whitespace-nowrap text-nowrap'>Format: .jpg, .png, .webp</span>
+          <span className='text-xs whitespace-nowrap text-nowrap'>
+            Allowed format: jpg, png, webp
+          </span>
         </div>
         <span className='min-w-12'>
           <div
