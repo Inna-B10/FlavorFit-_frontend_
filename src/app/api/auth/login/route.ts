@@ -13,12 +13,16 @@ export async function POST(request: Request) {
     captchaToken: string
   }
 
-  const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'cf-turnstile-token': captchaToken ?? '' },
-    cache: 'no-store',
-    body: JSON.stringify({
-      query: `
+  //# Send request to backend
+  let backendRes: Response
+
+  try {
+    backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'cf-turnstile-token': captchaToken ?? '' },
+      cache: 'no-store',
+      body: JSON.stringify({
+        query: `
         mutation Login($data: LoginInput!) {
           login(data: $data) {
             user { 
@@ -32,33 +36,37 @@ export async function POST(request: Request) {
           }
         }
       `,
-      variables: { data: { email, password } }
+        variables: { data: { email, password } }
+      })
     })
-  })
-
-  const text = await backendRes.text()
-
-  if (!backendRes.ok) {
-    return new NextResponse(text, {
-      status: backendRes.status,
-      headers: { 'Content-Type': 'application/json' }
-    })
+  } catch {
+    return NextResponse.json(
+      { errors: [{ message: 'Server is unavailable. Please try again later.' }] },
+      { status: 503 }
+    )
   }
 
-  const normalized = normalizeGqlText<any>(text)
+  //# Normalize backend response
+  const text = await backendRes.text()
+
+  const normalized = normalizeGqlText<unknown>(text, {
+    status: backendRes.status,
+    contentType: backendRes.headers.get('content-type') ?? ''
+  })
+
   if (!normalized.ok) {
     return NextResponse.json(normalized.json ?? { errors: [{ message: normalized.message }] }, {
       status: normalized.status
     })
   }
 
-  //return the same JSON body as backend (so UI can keep working with "data.login.user")
+  //# Return the same JSON body as backend (so UI can keep working with "data.login.user")
   const res = new NextResponse(text, {
     status: backendRes.status,
     headers: { 'Content-Type': 'application/json' }
   })
 
-  // Critical: move backend cookies onto the Vercel domain
+  //# Critical: Move backend cookies onto the Vercel domain
   applyBackendSetCookies(res, backendRes.headers.get('set-cookie'))
 
   return res

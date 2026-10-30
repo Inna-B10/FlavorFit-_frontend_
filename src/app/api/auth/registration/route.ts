@@ -13,12 +13,16 @@ export async function POST(request: Request) {
     captchaToken: string
   }
 
-  const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'cf-turnstile-token': captchaToken ?? '' },
-    cache: 'no-store',
-    body: JSON.stringify({
-      query: `
+  //# Send request to backend
+  let backendRes: Response
+
+  try {
+    backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'cf-turnstile-token': captchaToken ?? '' },
+      cache: 'no-store',
+      body: JSON.stringify({
+        query: `
         mutation Register($data: RegisterInput!) {
           register(data: $data) {
             user {
@@ -32,30 +36,33 @@ export async function POST(request: Request) {
           }
         }
       `,
-      variables: { data: { email, password, firstName } }
+        variables: { data: { email, password, firstName } }
+      })
     })
-  })
-
-  const text = await backendRes.text()
-
-  if (!backendRes.ok) {
-    return new NextResponse(text, {
-      status: backendRes.status,
-      headers: { 'Content-Type': 'application/json' }
-    })
+  } catch {
+    return NextResponse.json(
+      { errors: [{ message: 'Server is unavailable. Please try again later.' }] },
+      { status: 503 }
+    )
   }
 
-  const normalized = normalizeGqlText<any>(text)
+  //# Normalize backend response
+  const text = await backendRes.text()
+
+  const normalized = normalizeGqlText<unknown>(text, {
+    status: backendRes.status,
+    contentType: backendRes.headers.get('content-type') ?? ''
+  })
+
   if (!normalized.ok) {
     return NextResponse.json(normalized.json ?? { errors: [{ message: normalized.message }] }, {
       status: normalized.status
     })
   }
 
-  const res = new NextResponse(text, {
+  //# Return the same JSON body as backend
+  return new NextResponse(text, {
     status: backendRes.status,
     headers: { 'Content-Type': 'application/json' }
   })
-
-  return res
 }
