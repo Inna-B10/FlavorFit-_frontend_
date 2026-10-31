@@ -8,39 +8,48 @@ export const runtime = 'nodejs'
 export async function POST(request: Request) {
   const cookie = request.headers.get('cookie') ?? ''
 
-  const backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // forward Vercel-domain cookies to backend so it can read refreshToken
-      cookie
-    },
-    cache: 'no-store',
-    body: JSON.stringify({
-      query: `
+  //# Send request to backend
+  let backendRes: Response
+
+  try {
+    backendRes = await fetch(BACKEND_GRAPHQL_URL!, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // forward Vercel-domain cookies to backend so it can read refreshToken
+        cookie
+      },
+      cache: 'no-store',
+      body: JSON.stringify({
+        query: `
         query GetNewTokens {
           newTokens { user { userId } }
         }
       `
+      })
     })
-  })
-
-  const text = await backendRes.text()
-
-  if (!backendRes.ok) {
-    return new NextResponse(text, {
-      status: backendRes.status,
-      headers: { 'Content-Type': 'application/json' }
-    })
+  } catch {
+    return NextResponse.json(
+      { errors: [{ message: 'Server is unavailable. Please try again later.' }] },
+      { status: 503 }
+    )
   }
 
-  const normalized = normalizeGqlText<any>(text)
+  //# Normalize backend response
+  const text = await backendRes.text()
+
+  const normalized = normalizeGqlText<unknown>(text, {
+    status: backendRes.status,
+    contentType: backendRes.headers.get('content-type') ?? ''
+  })
+
   if (!normalized.ok) {
     return NextResponse.json(normalized.json ?? { errors: [{ message: normalized.message }] }, {
       status: normalized.status
     })
   }
 
+  //# Return backend response and update cookies
   const res = new NextResponse(text, {
     status: backendRes.status,
     headers: { 'Content-Type': 'application/json' }

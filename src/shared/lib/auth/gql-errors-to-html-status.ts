@@ -42,7 +42,7 @@ export function normalizeGqlText<T>(
   const contentType = options?.contentType
 
   //# Handle unavailable backend
-  if ([502, 503, 504].includes(httpStatus)) {
+  if ([500, 502, 503, 504].includes(httpStatus)) {
     return {
       ok: false,
       json: null,

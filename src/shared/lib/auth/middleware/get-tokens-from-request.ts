@@ -5,23 +5,38 @@ import { EnumTokens } from '@/features/auth/types/auth.types'
 import { getNewTokensByRefresh } from './get-new-tokens-by-refresh'
 
 export type TokensResult =
-  | { accessToken: string; refreshToken: string }
+  | { accessToken: string; refreshToken?: string }
   | { isRefreshedToken: true; setCookie: string | null }
+  | { refreshStatus: 'unavailable' }
   | null
 
 export async function getTokensFromRequest(request: NextRequest): Promise<TokensResult> {
   const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)?.value
   const accessToken = request.cookies.get(EnumTokens.ACCESS_TOKEN)?.value
 
-  // No refresh token → user is not authenticated
+  // Access token exists → return tokens
+  if (accessToken) {
+    return { accessToken, refreshToken }
+  }
+
+  // No access token and no refresh token → user is not authenticated
   if (!refreshToken) {
     return null
   }
 
   // No access token but refresh token exists → try to refresh
-  if (!accessToken) {
-    return await getNewTokensByRefresh(request)
+  const refreshResult = await getNewTokensByRefresh(request)
+
+  if (refreshResult.status === 'success') {
+    return {
+      isRefreshedToken: true,
+      setCookie: refreshResult.setCookie
+    }
   }
 
-  return { accessToken, refreshToken }
+  if (refreshResult.status === 'unauthorized') {
+    return null
+  }
+
+  return { refreshStatus: 'unavailable' }
 }

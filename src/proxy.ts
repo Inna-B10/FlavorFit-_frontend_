@@ -23,6 +23,10 @@ export async function proxy(request: NextRequest) {
   if (isUserRoute) {
     if (!tokens) return redirectToLogin(request)
 
+    if ('refreshStatus' in tokens) {
+      return NextResponse.next()
+    }
+
     // Access token was missing but refreshed
     if ('isRefreshedToken' in tokens) {
       return nextWithRefreshedCookies(tokens)
@@ -36,7 +40,17 @@ export async function proxy(request: NextRequest) {
     // If expired → try refresh
     if (verified.expired) {
       const refreshed = await getNewTokensByRefresh(request)
-      if (refreshed) return nextWithRefreshedCookies(refreshed)
+
+      if (refreshed.status === 'success') {
+        return nextWithRefreshedCookies({
+          isRefreshedToken: true,
+          setCookie: refreshed.setCookie
+        })
+      }
+
+      if (refreshed.status === 'unavailable') {
+        return NextResponse.next()
+      }
     }
 
     return redirectToLogin(request)
@@ -45,6 +59,10 @@ export async function proxy(request: NextRequest) {
   //# if user is authenticated -> redirect from auth pages to dashboard
   if (isAuthRoute) {
     if (!tokens) return NextResponse.next()
+
+    if ('refreshStatus' in tokens) {
+      return NextResponse.next()
+    }
 
     if ('isRefreshedToken' in tokens) {
       return redirectWithRefreshedCookies(request, tokens, USER_PAGES.DASHBOARD)
@@ -58,7 +76,17 @@ export async function proxy(request: NextRequest) {
 
     if (verified.expired) {
       const refreshed = await getNewTokensByRefresh(request)
-      if (refreshed) return redirectWithRefreshedCookies(request, refreshed, USER_PAGES.DASHBOARD)
+
+      if (refreshed.status === 'success') {
+        return redirectWithRefreshedCookies(
+          request,
+          {
+            isRefreshedToken: true,
+            setCookie: refreshed.setCookie
+          },
+          USER_PAGES.DASHBOARD
+        )
+      }
     }
 
     // Not authenticated → stay on auth pages

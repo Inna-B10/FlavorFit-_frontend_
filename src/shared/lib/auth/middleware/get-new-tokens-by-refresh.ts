@@ -1,11 +1,11 @@
 import { NextRequest } from 'next/server'
 
-export type RefreshedTokensResult = {
-  isRefreshedToken: true
-  setCookie: string | null
-}
+export type RefreshResult =
+  | { status: 'success'; setCookie: string | null }
+  | { status: 'unauthorized' }
+  | { status: 'unavailable' }
 
-export async function getNewTokensByRefresh(request: NextRequest) {
+export async function getNewTokensByRefresh(request: NextRequest): Promise<RefreshResult> {
   const refreshUrl = new URL('/api/auth/refresh', request.url)
 
   try {
@@ -18,14 +18,21 @@ export async function getNewTokensByRefresh(request: NextRequest) {
       cache: 'no-store'
     })
 
-    if (!refreshResponse.ok) return null
+    if (refreshResponse.status === 401 || refreshResponse.status === 403) {
+      return { status: 'unauthorized' }
+    }
+
+    if (!refreshResponse.ok) {
+      return { status: 'unavailable' }
+    }
 
     const setCookie = refreshResponse.headers.get('set-cookie')
+
     return {
-      isRefreshedToken: true as const,
+      status: 'success',
       setCookie
     }
   } catch {
-    return null
+    return { status: 'unavailable' }
   }
 }
