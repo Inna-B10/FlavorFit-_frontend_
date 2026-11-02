@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client/react'
 import { authService } from '@/features/auth/services/client.services/auth.service'

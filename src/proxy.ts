@@ -9,6 +9,17 @@ import {
   redirectWithRefreshedCookies
 } from './shared/lib/auth/middleware/proxy-helpers'
 
+function nextWithAuthStatus(request: NextRequest, status: 'unavailable') {
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-auth-status', status)
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders
+    }
+  })
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
@@ -24,7 +35,7 @@ export async function proxy(request: NextRequest) {
     if (!tokens) return redirectToLogin(request)
 
     if ('refreshStatus' in tokens) {
-      return NextResponse.next()
+      return nextWithAuthStatus(request, 'unavailable')
     }
 
     // Access token was missing but refreshed
@@ -49,7 +60,7 @@ export async function proxy(request: NextRequest) {
       }
 
       if (refreshed.status === 'unavailable') {
-        return NextResponse.next()
+        return nextWithAuthStatus(request, 'unavailable')
       }
     }
 

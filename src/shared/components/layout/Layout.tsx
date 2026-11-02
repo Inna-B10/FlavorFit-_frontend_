@@ -1,10 +1,13 @@
-import { PropsWithChildren } from 'react'
-import { Header } from './header/Header'
+import type { PropsWithChildren, ReactNode } from 'react'
 
-export function Layout({ children }: PropsWithChildren<unknown>) {
+type LayoutProps = PropsWithChildren<{
+  header: ReactNode
+}>
+
+export function Layout({ children, header }: LayoutProps) {
   return (
     <>
-      <Header />
+      {header}
       <main className='flex h-full w-full grow flex-col gap-8'>{children}</main>
     </>
   )

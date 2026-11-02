@@ -1,14 +1,15 @@
-'use client'
-
 import Link from 'next/link'
-import { useAuth } from '@/features/auth/hooks/useAuth'
 import { LogoIcon } from '@/shared/components/ui-custom/logo/LogoIcon'
+import type { UserModel } from '@/__generated__/graphql.types'
 import { LeftNavbar } from './navbar/LeftNavbar'
 import { RightNavbar } from './navbar/RightNavbar'
 
-export function Header() {
-  const { user, isLoggedIn } = useAuth()
+type HeaderProps = {
+  user: UserModel | null
+  isLoggedIn: boolean
+}
 
+export function Header({ user, isLoggedIn }: HeaderProps) {
   return (
     <header className='flex items-center justify-between gap-4 text-center'>
       <div className='flex items-center xl:gap-4'>
