@@ -28,7 +28,7 @@ export function AuthAvailabilityGate({ children }: PropsWithChildren<unknown>) {
       <div className='flex flex-1 items-center justify-center'>
         <p className='text-center'>
           Server is temporarily unavailable. <br />
-          Please refresh page or try again later.
+          Please try again later.
         </p>
       </div>
     )

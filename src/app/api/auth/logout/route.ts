@@ -7,24 +7,29 @@ export const runtime = 'nodejs'
 export async function POST(request: Request) {
   const cookie = request.headers.get('cookie') ?? ''
 
-  await fetch(BACKEND_GRAPHQL_URL!, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      // forward Vercel-domain cookies to backend so it can read refreshToken
-      cookie
-    },
-    cache: 'no-store',
-    body: JSON.stringify({
-      query: `
-            mutation Logout {
+  try {
+    await fetch(BACKEND_GRAPHQL_URL!, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Forward Vercel-domain cookies to backend so it can read refreshToken
+        cookie
+      },
+      cache: 'no-store',
+      body: JSON.stringify({
+        query: `
+          mutation Logout {
             logout
           }
         `
+      })
     })
-  })
+  } catch {
+    // Backend unavailable — local logout must still succeed
+  }
 
   const res = NextResponse.json({ ok: true })
   clearAuthCookies(res)
+
   return res
 }
