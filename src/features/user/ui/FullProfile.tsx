@@ -8,8 +8,19 @@ import { FullProfileForm } from './FullProfileForm'
 import { UserSidebar } from './UserSidebar'
 
 export function FullProfile() {
-  const { data, loading } = useQuery(GetFullProfileDocument)
+  const { data, loading, error } = useQuery(GetFullProfileDocument)
   const { user, isLoading } = useAuth()
+
+  if (error) {
+    return (
+      <div className='flex flex-1 items-center justify-center'>
+        <p className='text-center'>
+          Server is temporarily unavailable. <br />
+          Please try again later.
+        </p>
+      </div>
+    )
+  }
 
   if (loading || !data?.fullProfile || isLoading || !user)
     return (

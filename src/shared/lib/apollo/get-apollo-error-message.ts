@@ -29,7 +29,11 @@ export function getApolloErrorMessage(error: unknown): string {
 
   // 2) HTTP errors (if server response != 2xx)
   if (ServerError.is(error)) {
-    return `Server error (${error.statusCode})`
+    if (error.statusCode >= 500) {
+      return 'The server encountered an error. Please try again later.'
+    }
+
+    return `Request failed (${error.statusCode})`
   }
 
   // 3) Server returned a non-JSON (for example, HTML 502 from a proxy)

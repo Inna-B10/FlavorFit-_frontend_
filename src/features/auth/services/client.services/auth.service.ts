@@ -72,7 +72,7 @@ class AuthService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'cr-turnstile-token': captchaToken ?? ''
+        'cf-turnstile-token': captchaToken ?? ''
       },
       body: JSON.stringify({ email, password, firstName, captchaToken })
     })
